@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logrus — современный неон</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          void: '#0a0612',
+          ink: '#0f0a1e',
+          ink2: '#1a1130',
+          neon: '#b14dff',
+          neon2: '#7c3aff',
+          cyan: '#3df0ff',
+          pink: '#ff4d9d',
+          light: '#f0e8ff',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          sans: ['Manrope', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { background: #0a0612; }
+
+  /* Aurora gradient background */
+  .aurora {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  }
+  .aurora::before, .aurora::after {
+    content: ''; position: absolute; border-radius: 50%;
+    filter: blur(100px); opacity: .5;
+    animation: drift 18s ease-in-out infinite;
+  }
+  .aurora::before {
+    width: 50vw; height: 50vw; top: -10%; left: -10%;
+    background: radial-gradient(circle, #7c3aff, transparent 70%);
+  }
+  .aurora::after {
+    width: 45vw; height: 45vw; bottom: -10%; right: -10%;
+    background: radial-gradient(circle, #ff4d9d, transparent 70%);
+    animation-delay: -9s;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(8vw, 5vh) scale(1.15); }
+  }
+
+  /* Grid overlay */
+  .grid-bg {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(177,77,255,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(177,77,255,.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black, transparent 70%);
+  }
+
+  /* Glass */
+  .glass {
+    background: rgba(26, 17, 48, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(177, 77, 255, 0.15);
+  }
+  .glass-strong {
+    background: rgba(26, 17, 48, 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(177, 77, 255, 0.2);
+  }
+
+  /* Neon glow text */
+  .neon-text {
+    text-shadow:
+      0 0 10px rgba(177, 77, 255, .6),
+      0 0 30px rgba(177, 77, 255, .4),
+      0 0 60px rgba(177, 77, 255, .2);
+  }
+  .cyan-text {
+    text-shadow:
+      0 0 10px rgba(61, 240, 255, .6),
+      0 0 30px rgba(61, 240, 255, .3);
+  }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #b14dff 0%, #ff4d9d 50%, #3df0ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+
+  /* Show card */
+  .show-card {
+    position: relative;
+    transition: transform .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .show-card::before {
+    content: ''; position: absolute; inset: -1px; border-radius: 1.5rem;
+    background: linear-gradient(135deg, transparent, rgba(177,77,255,.4), transparent 60%);
+    opacity: 0; transition: opacity .5s;
+    z-index: -1;
+  }
+  .show-card:hover { transform: translateY(-8px); }
+  .show-card:hover::before { opacity: 1; }
+  .show-card:hover .poster { transform: scale(1.1); }
+  .poster { transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+
+  /* Button */
+  .btn-neon {
+    position: relative;
+    background: linear-gradient(135deg, #b14dff, #7c3aff);
+    box-shadow: 0 8px 32px rgba(177, 77, 255, .4), inset 0 1px 0 rgba(255,255,255,.2);
+    transition: transform .3s, box-shadow .3s;
+  }
+  .btn-neon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(177, 77, 255, .6), inset 0 1px 0 rgba(255,255,255,.3);
+  }
+  .btn-ghost {
+    border: 1px solid rgba(177, 77, 255, .4);
+    transition: all .3s;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(177, 77, 255, 1);
+    background: rgba(177, 77, 255, .1);
+    box-shadow: 0 0 20px rgba(177, 77, 255, .3);
+  }
+
+  /* Spotlight pulse for hero */
+  .spotlight {
+    position: absolute; width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(177,77,255,.3), transparent 60%);
+    filter: blur(60px);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: .6; }
+    50% { transform: scale(1.2); opacity: .9; }
+  }
+
+  /* Tag chip */
+  .chip {
+    background: rgba(177, 77, 255, .15);
+    border: 1px solid rgba(177, 77, 255, .3);
+    color: #d9b3ff;
+  }
+
+  /* Number counter */
+  .number-counter { font-variant-numeric: tabular-nums; }
+
+  /* Nav link */
+  .nav-link { position: relative; color: rgba(240,232,255,.7); transition: color .3s; }
+  .nav-link::after {
+    content:''; position:absolute; left:0; bottom:-6px; width:0; height:2px;
+    background: linear-gradient(90deg, #b14dff, #3df0ff);
+    transition: width .4s ease;
+  }
+  .nav-link:hover { color: #f0e8ff; }
+  .nav-link:hover::after { width: 100%; }
+
+  html { scroll-behavior: smooth; }
+  ::selection { background: #b14dff; color: #fff; }
+</style>
+</head>
+<body class="text-light font-sans overflow-x-hidden">
+
+  <div class="aurora"></div>
+  <div class="grid-bg"></div>
+
+  <!-- Nav -->
+  <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 glass-strong rounded-full px-3 w-[calc(100%-2rem)] max-w-4xl">
+    <div class="flex items-center justify-between h-14">
+      <a href="index.html" class="font-display text-xl font-bold tracking-tight gradient-text pl-3">◆ Logrus</a>
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="#afisha" class="nav-link">Афиша</a>
+        <a href="#about" class="nav-link">О театре</a>
+        <a href="#contacts" class="nav-link">Контакты</a>
+      </div>
+      <a href="#afisha" class="btn-neon text-white font-semibold text-sm px-5 py-2.5 rounded-full">Билеты</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center justify-center px-6 pt-24">
+    <div class="spotlight" style="top: 20%; left: 10%;"></div>
+    <div class="spotlight" style="bottom: 10%; right: 5%; background: radial-gradient(circle, rgba(61,240,255,.25), transparent 60%); animation-delay: -3s;"></div>
+
+    <div class="relative z-10 max-w-5xl text-center">
+      <div class="inline-flex items-center gap-2 chip rounded-full px-4 py-1.5 text-xs mb-8 reveal">
+        <span class="w-1.5 h-1.5 rounded-full bg-neon animate-pulse"></span>
+        Сезон 2026 · сейчас в прокате
+      </div>
+
+      <h1 class="font-display font-bold text-7xl sm:text-8xl md:text-[10rem] leading-[0.85] mb-8 reveal" style="letter-spacing: -0.04em;">
+        <span class="gradient-text neon-text">Logrus</span>
+      </h1>
+
+      <p class="font-display text-2xl sm:text-4xl font-light text-light/80 mb-4 reveal" style="letter-spacing: -0.02em;">
+        Театр, который <span class="cyan-text text-cyan">светится</span>
+      </p>
+      <p class="text-base sm:text-lg text-light/50 max-w-2xl mx-auto mb-12 reveal leading-relaxed">
+        Камерная сцена, современная драматургия и смелые эксперименты. Для тех, кто ищет в театре не представление, а столкновение.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+        <a href="#afisha" class="btn-neon text-white font-semibold px-8 py-4 rounded-full text-base flex items-center gap-2">
+          Купить билет
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#about" class="btn-ghost text-light px-8 py-4 rounded-full text-sm">О театре</a>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="mt-24 grid grid-cols-3 gap-4 max-w-2xl mx-auto reveal">
+        <div class="glass rounded-2xl p-5">
+          <div class="font-display text-3xl sm:text-4xl font-bold gradient-text number-counter" data-target="28">0</div>
+          <div class="text-xs text-light/50 uppercase tracking-wider mt-1">лет сцене</div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <div class="font-display text-3xl sm:text-4xl font-bold gradient-text number-counter" data-target="64">0</div>
+          <div class="text-xs text-light/50 uppercase tracking-wider mt-1">спектакля</div>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <div class="font-display text-3xl sm:text-4xl font-bold gradient-text number-counter" data-target="120">0</div>
+          <div class="text-xs text-light/50 uppercase tracking-wider mt-1">тыс. зрителей</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- АФИША -->
+  <section id="afisha" class="relative z-10 max-w-7xl mx-auto px-6 py-28 sm:py-36">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+      <div>
+        <div class="chip inline-block rounded-full px-3 py-1 text-xs mb-4 reveal">/ афиша</div>
+        <h2 class="font-display font-bold text-5xl sm:text-7xl reveal" style="letter-spacing: -0.03em;">
+          Ближайшие <span class="gradient-text">показы</span>
+        </h2>
+      </div>
+    </div>
+
+    <!-- FEATURED SHOW -->
+    <article class="reveal mb-10">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+        <!-- Left: poster + gallery -->
+        <div class="lg:col-span-5">
+          <div class="relative aspect-[3/4] overflow-hidden rounded-3xl mb-4">
+            <img src="https://picsum.photos/seed/neon-cherry-poster/700/900" alt="" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent"></div>
+            <div class="absolute top-4 left-4 chip rounded-full px-3 py-1 text-xs font-medium flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-neon animate-pulse"></span>
+              ПРЕМЬЕРА СЕЗОНА
+            </div>
+          </div>
+          <!-- Gallery -->
+          <div class="grid grid-cols-4 gap-2">
+            <div class="aspect-square overflow-hidden rounded-xl cursor-pointer group">
+              <img src="https://picsum.photos/seed/neon-shot1/200/200" alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
+            </div>
+            <div class="aspect-square overflow-hidden rounded-xl cursor-pointer group">
+              <img src="https://picsum.photos/seed/neon-shot2/200/200" alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
+            </div>
+            <div class="aspect-square overflow-hidden rounded-xl cursor-pointer group">
+              <img src="https://picsum.photos/seed/neon-shot3/200/200" alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
+            </div>
+            <div class="aspect-square overflow-hidden rounded-xl cursor-pointer group relative">
+              <img src="https://picsum.photos/seed/neon-shot4/200/200" alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
+              <div class="absolute inset-0 bg-ink/70 flex items-center justify-center text-light text-sm font-semibold">+12</div>
+            </div>
+          </div>
+          <p class="text-light/40 text-xs mt-3 tracking-wider uppercase">кадры со спектакля · 16 фото</p>
+        </div>
+
+        <!-- Right: details -->
+        <div class="lg:col-span-7">
+          <div class="flex items-center gap-2 text-cyan text-xs mb-3">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            12 ОКТЯБРЯ · ПН · 19:00 · БОЛЬШАЯ СЦЕНА
+          </div>
+          <h3 class="font-display font-bold text-5xl sm:text-6xl leading-[0.95] mb-2" style="letter-spacing: -0.03em;">Вишнёвый <span class="gradient-text">сад</span></h3>
+          <p class="text-light/60 text-lg mb-6">комедия в 4 действиях · по А. П. Чехову</p>
+
+          <!-- Pull quote -->
+          <blockquote class="glass rounded-2xl p-5 my-6 relative">
+            <span class="absolute -top-3 left-5 text-3xl gradient-text font-display">"</span>
+            <p class="text-lg text-light/85 leading-relaxed italic">Вся наша жизнь — как будто мы сидим в саду и ждём, что кто-то придёт и скажет: пора прощаться.</p>
+          </blockquote>
+
+          <p class="text-light/70 leading-relaxed mb-4">
+            Редкая, камерная редакция чеховского шедевра — без громких имён, без помпы. Семь актёров, один рояль и длинные паузы, в которых рождается то самое «подводное течение», о котором писал Станиславский.
+          </p>
+          <p class="text-light/50 leading-relaxed mb-8">
+            Раневская возвращается в детский сад, который продаётся за долги. Вокруг — прошлое, которое невозможно удержать, и будущее, которого никто не видит. Спектакль о прощании — нежном, неизбежном, чуть-чуть смешном.
+          </p>
+
+          <!-- Meta chips -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+            <div class="glass rounded-xl p-3 text-center">
+              <div class="font-display font-bold text-2xl gradient-text">2ч 40м</div>
+              <div class="text-light/40 text-[10px] uppercase tracking-wider mt-0.5">длительность</div>
+            </div>
+            <div class="glass rounded-xl p-3 text-center">
+              <div class="font-display font-bold text-2xl gradient-text">1</div>
+              <div class="text-light/40 text-[10px] uppercase tracking-wider mt-0.5">антракт</div>
+            </div>
+            <div class="glass rounded-xl p-3 text-center">
+              <div class="font-display font-bold text-2xl gradient-text">14+</div>
+              <div class="text-light/40 text-[10px] uppercase tracking-wider mt-0.5">возраст</div>
+            </div>
+            <div class="glass rounded-xl p-3 text-center">
+              <div class="font-display font-bold text-2xl gradient-text">120</div>
+              <div class="text-light/40 text-[10px] uppercase tracking-wider mt-0.5">мест</div>
+            </div>
+          </div>
+
+          <!-- Crew -->
+          <div class="mb-8 space-y-2 text-sm">
+            <div class="flex gap-4"><span class="text-neon/70 uppercase tracking-wider text-xs w-24 pt-0.5">режиссёр</span><span class="text-light/85">Анна Веденеева</span></div>
+            <div class="flex gap-4"><span class="text-neon/70 uppercase tracking-wider text-xs w-24 pt-0.5">художник</span><span class="text-light/85">Марк Левин</span></div>
+            <div class="flex gap-4"><span class="text-neon/70 uppercase tracking-wider text-xs w-24 pt-0.5">композитор</span><span class="text-light/85">Полина Розен</span></div>
+          </div>
+
+          <!-- CTA -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <button class="btn-neon text-white font-semibold px-8 py-4 rounded-full text-base flex items-center gap-2">
+              Купить билет · от 1200 ₽
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <a href="#" class="btn-ghost text-light px-6 py-4 rounded-full text-sm text-center">Подробнее →</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- SECOND SHOW (compact) -->
+    <article class="reveal glass rounded-3xl overflow-hidden grid sm:grid-cols-12 gap-0 items-center">
+      <div class="sm:col-span-4 relative aspect-[16/10] sm:aspect-auto sm:h-56 overflow-hidden">
+        <img src="https://picsum.photos/seed/neon-maya/600/400" alt="" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-ink/40"></div>
+      </div>
+      <div class="sm:col-span-5 p-6 sm:pr-0">
+        <div class="flex items-center gap-2 text-cyan text-xs mb-2">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          18 ОКТ · ВС · 20:00
+        </div>
+        <h3 class="font-display font-bold text-3xl mb-1">Майя и море</h3>
+        <p class="text-light/50 text-sm mb-3">современная драма · 1ч 50мин · малая сцена · 60 мест</p>
+        <p class="text-light/65 text-sm leading-relaxed">Женщина учится заново дышать после потери. Камерный моноспектакль с живой музыкой — на 60 мест, в нескольких метрах от зрителя.</p>
+      </div>
+      <div class="sm:col-span-3 p-6 sm:border-l border-neon/10 flex sm:flex-col items-center sm:items-end justify-between gap-3">
+        <div class="sm:text-right">
+          <p class="text-light/40 text-[10px] uppercase tracking-widest">от</p>
+          <p class="font-display font-bold text-2xl gradient-text">900 ₽</p>
+        </div>
+        <button class="btn-neon text-white text-sm font-semibold px-5 py-2.5 rounded-full whitespace-nowrap">Билеты</button>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- О ТЕАТРЕ -->
+  <section id="about" class="relative z-10 max-w-7xl mx-auto px-6 py-28 sm:py-36">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+      <div class="relative reveal">
+        <div class="absolute -inset-6 bg-gradient-to-tr from-neon/30 to-cyan/20 rounded-[2rem] blur-3xl opacity-60"></div>
+        <div class="relative glass-strong rounded-[2rem] p-2">
+          <img src="https://picsum.photos/seed/neon-stage/700/800" alt="" class="rounded-3xl w-full aspect-[4/5] object-cover">
+        </div>
+        <div class="absolute -bottom-6 -right-6 glass-strong rounded-2xl p-5 max-w-[15rem]">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-cyan">◆</span>
+            <span class="text-xs uppercase tracking-wider text-light/60">премия «Маска»</span>
+          </div>
+          <p class="text-sm text-light/80">Лучший камерный театр года, 2024</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="chip inline-block rounded-full px-3 py-1 text-xs mb-4">/ о театре</div>
+        <h2 class="font-display font-bold text-5xl sm:text-6xl leading-[0.95] mb-8" style="letter-spacing: -0.03em;">
+          Маленькая сцена.<br>
+          <span class="gradient-text">Большая жизнь.</span>
+        </h2>
+        <p class="text-lg text-light/70 leading-relaxed mb-6">
+          Logrus открылся в 1998 году труппой из семи человек и одним роялем на чердаке старого доходного дома. Сегодня — это 40 актёров, три площадки и более 200 спектаклей в сезон.
+        </p>
+        <p class="text-base text-light/50 leading-relaxed mb-10">
+          Мы верим, что театр — это разговор. Иногда громкий, чаще — шёпотом. Мы не играем на публику, мы разговариваем с каждым, кто сел в зрительный зал.
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-4 glass rounded-2xl p-4">
+            <div class="w-10 h-10 rounded-xl bg-neon/20 flex items-center justify-center text-neon flex-shrink-0">◆</div>
+            <div>
+              <h4 class="font-semibold text-light">Современная драматургия</h4>
+              <p class="text-sm text-light/50">Премьеры российских и европейских авторов каждый сезон</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 glass rounded-2xl p-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan/20 flex items-center justify-center text-cyan flex-shrink-0">◈</div>
+            <div>
+              <h4 class="font-semibold text-light">Камерный формат</h4>
+              <p class="text-sm text-light/50">Залы на 60–120 мест — зритель в нескольких метрах от сцены</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 glass rounded-2xl p-4">
+            <div class="w-10 h-10 rounded-xl bg-pink/20 flex items-center justify-center text-pink flex-shrink-0">✦</div>
+            <div>
+              <h4 class="font-semibold text-light">Лаборатория</h4>
+              <p class="text-sm text-light/50">Свои постановки от режиссёров-резидентов и молодых команд</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ -->
+  <section id="contacts" class="relative z-10 max-w-7xl mx-auto px-6 py-28 sm:py-36">
+    <div class="text-center mb-16">
+      <div class="chip inline-block rounded-full px-3 py-1 text-xs mb-4 reveal">/ контакты</div>
+      <h2 class="font-display font-bold text-5xl sm:text-7xl reveal" style="letter-spacing: -0.03em;">
+        До <span class="gradient-text">встречи</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-10">
+      <div class="glass rounded-3xl p-8 reveal">
+        <h3 class="font-display font-bold text-2xl mb-6">Касса и администрация</h3>
+        <div class="space-y-4 text-light/70">
+          <p class="flex items-start gap-3"><span class="text-neon mt-1">⌖</span> <span>ул. Малая Садовая, 12<br><span class="text-light/40 text-sm">м. Маяковская, 5 минут пешком</span></span></p>
+          <p class="flex items-center gap-3"><span class="text-neon">☎</span> +7 (812) 555-12-34</p>
+          <p class="flex items-center gap-3"><span class="text-neon">✉</span> box@logrus-theatre.ru</p>
+        </div>
+        <div class="mt-8 pt-6 border-t border-neon/10">
+          <p class="text-light/40 text-xs uppercase tracking-wider mb-3">Часы работы кассы</p>
+          <p class="text-light/70">Ежедневно 12:00 – 20:00<br>В дни спектаклей — до конца последнего акта</p>
+        </div>
+      </div>
+
+      <div class="rounded-3xl p-8 reveal relative overflow-hidden" style="background: linear-gradient(135deg, rgba(124,58,255,.25), rgba(61,240,255,.15));">
+        <div class="absolute inset-0 grid-bg opacity-30"></div>
+        <div class="relative">
+          <h3 class="font-display font-bold text-2xl mb-3">Рассылка сезона</h3>
+          <p class="text-light/70 mb-6">Премьеры, скидки для подписчиков и закулисье — раз в месяц, без спама.</p>
+          <form class="space-y-3" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Спасибо ✦';">
+            <input type="email" placeholder="ваш@email.ru" class="w-full glass rounded-full px-5 py-3.5 text-light placeholder-light/30 focus:outline-none focus:border-neon transition">
+            <button type="submit" class="btn-neon w-full text-white font-semibold py-3.5 rounded-full">Подписаться</button>
+          </form>
+          <div class="flex gap-3 mt-6">
+            <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-neon/30 transition text-neon">VK</a>
+            <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-neon/30 transition text-neon">TG</a>
+            <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-neon/30 transition text-neon">YT</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal rounded-3xl overflow-hidden glass h-72 sm:h-96 flex items-center justify-center text-light/30 italic">
+      здесь будет карта · вставьте iframe Яндекс.Карт
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 border-t border-neon/10 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="font-display text-xl font-bold gradient-text">◆ Logrus</div>
+      <p class="text-light/30 text-xs tracking-wider uppercase">© 2026 · Театр «Logrus»</p>
+      <a href="index.html" class="text-light/50 hover:text-neon text-xs tracking-wider uppercase">← все стили</a>
+    </div>
+  </footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target, target = +el.dataset.target, dur = 1800, start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        counterIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.number-counter').forEach(el => counterIO.observe(el));
+</script>
+</body>
+</html>

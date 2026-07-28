@@ -1,5 +1,5 @@
 {
-  "name": "site",
+  "name": "theater",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vercel": "^11.0.3",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.1.4",
     "tailwindcss": "^4.3.3"

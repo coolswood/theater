@@ -54,31 +54,6 @@
   .nav-link:hover { opacity: 1; }
   .nav-link:hover::after { width: 100%; }
 
-  /* ============ RIGHT DOT NAV ============ */
-  .dot-nav {
-    position: fixed; right: 2rem; top: 50%; transform: translateY(-50%);
-    z-index: 30;
-    display: flex; flex-direction: column; gap: 1.6rem;
-  }
-  @media (max-width: 1023px) { .dot-nav { display: none; } }
-  .dot-nav-item { display: flex; align-items: center; gap: .85rem; cursor: pointer; justify-content: flex-end; }
-  .dot-nav-item .dot {
-    width: 9px; height: 9px; border-radius: 50%;
-    border: 1.5px solid #c2c2c2; background: transparent;
-    transition: all .4s cubic-bezier(.2,.7,.2,1); flex-shrink: 0;
-  }
-  .dot-nav-item .lbl {
-    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
-    letter-spacing: .2em; text-transform: uppercase;
-    color: transparent; transition: color .4s; white-space: nowrap;
-  }
-  .dot-nav-item:hover .dot { border-color: #1c3fb0; }
-  .dot-nav-item:hover .lbl { color: #747474; }
-  .dot-nav-item.active .dot {
-    background: #1c3fb0; border-color: #1c3fb0;
-    box-shadow: 0 0 0 5px rgba(28,63,176,.12);
-  }
-  .dot-nav-item.active .lbl { color: #1c3fb0; }
 
   /* Drop cap */
   .dropcap::first-letter {
@@ -91,18 +66,6 @@
   .big-quote {
     font-family: 'Bodoni Moda', serif; font-style: italic; font-weight: 700;
     font-size: 6rem; line-height: .6; color: rgba(28,63,176,.18);
-  }
-
-  /* Hairline rule with label */
-  .rule-row { display: flex; align-items: center; gap: 1rem; }
-  .rule-row .line { flex: 1; height: 1px; background: #e8e8e8; }
-
-  /* Big issue watermark */
-  .watermark {
-    font-family: 'Bodoni Moda', serif; font-weight: 900; font-style: italic;
-    font-size: clamp(7rem, 18vw, 16rem);
-    line-height: .8; letter-spacing: -.02em;
-    color: #f4f4f4; user-select: none;
   }
 
   .poster { transition: transform 1.1s cubic-bezier(.2,.7,.2,1); }
@@ -130,23 +93,12 @@
     </div>
   </nav>
 
-  <!-- ============ RIGHT DOT NAV ============ -->
-  <nav class="dot-nav" aria-label="Разделы">
-    <a href="#top" class="dot-nav-item active" data-sec="top"><span class="lbl">Открытие</span><span class="dot"></span></a>
-    <a href="#afisha" class="dot-nav-item" data-sec="afisha"><span class="lbl">Афиша</span><span class="dot"></span></a>
-    <a href="#about" class="dot-nav-item" data-sec="about"><span class="lbl">О театре</span><span class="dot"></span></a>
-    <a href="#contacts" class="dot-nav-item" data-sec="contacts"><span class="lbl">Контакты</span><span class="dot"></span></a>
-  </nav>
 
   <!-- ============ HERO (no photo) ============ -->
   <section id="top" class="relative px-6 sm:px-10 pt-14 sm:pt-20 pb-20">
     <div class="max-w-[1400px] mx-auto relative">
 
       <div class="flex flex-wrap items-center justify-between gap-4 mb-10 reveal">
-        <div class="flex items-center gap-4">
-          <span class="w-8 h-px bg-blue"></span>
-          <span class="font-mono text-[11px] uppercase tracking-[0.3em] text-blue">№ 00 — открытие</span>
-        </div>
         <div class="font-mono text-[11px] uppercase tracking-[0.2em] text-mute flex gap-5">
           <span>сезон 2026</span>
           <span class="text-rule">/</span>
@@ -154,11 +106,9 @@
         </div>
       </div>
 
-      <div class="absolute -top-4 right-0 watermark pointer-events-none select-none hidden md:block reveal">XXVI</div>
-
-      <h1 class="font-display font-bold text-ink leading-[0.9] text-[15vw] sm:text-[12vw] lg:text-[11rem] relative reveal" style="letter-spacing: -0.02em;">
+      <h1 class="font-display font-medium text-ink leading-[1.08] text-[10vw] sm:text-[8.5vw] lg:text-[7.5rem] relative reveal" style="letter-spacing: -0.02em;">
         Театр,<br>
-        где <span class="italic font-medium text-blue">слышно</span><br>
+        где <span class="italic font-normal text-blue">слышно</span><br>
         тишину<span class="text-blue">.</span>
       </h1>
 
@@ -167,13 +117,7 @@
           <p class="text-lg sm:text-xl text-ink2 leading-relaxed max-w-xl">
             <span class="font-display italic text-ink text-2xl">Logrus</span> — камерная сцена в старом доходном доме. Современная драматургия, редкая классика и авторские лаборатории. Без помпы — только текст, актёр и зритель в нескольких метрах друг от друга.
           </p>
-          <div class="flex flex-col sm:flex-row gap-3 mt-9">
-            <a href="#afisha" class="btn-blue font-medium px-8 py-3.5 rounded-full inline-flex items-center justify-center gap-2">
-              Купить билет
-              <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a href="#about" class="btn-outline font-medium px-8 py-3.5 rounded-full inline-flex items-center justify-center">О театре</a>
-          </div>
+
         </div>
 
         <div class="lg:col-span-5 lg:col-start-8 lg:border-l lg:border-rule lg:pl-8">
@@ -204,12 +148,6 @@
   <!-- ============ АФИША ============ -->
   <section id="afisha" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-rule">
     <div class="max-w-[1400px] mx-auto">
-
-      <div class="rule-row reveal mb-12">
-        <span class="font-mono text-[11px] uppercase tracking-[0.3em] text-blue">№ 01 — афиша</span>
-        <span class="line"></span>
-        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-mute">октябрь '26</span>
-      </div>
 
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16 reveal">
         <h2 class="font-display font-bold text-ink leading-[0.9] text-5xl sm:text-7xl lg:text-8xl" style="letter-spacing: -0.02em;">
@@ -339,12 +277,6 @@
   <section id="about" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-rule bg-bluesoft/30">
     <div class="max-w-[1400px] mx-auto">
 
-      <div class="rule-row reveal mb-12">
-        <span class="font-mono text-[11px] uppercase tracking-[0.3em] text-blue">№ 02 — о театре</span>
-        <span class="line"></span>
-        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-mute">с 1998</span>
-      </div>
-
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 mb-20">
         <div class="lg:col-span-7 reveal">
           <h2 class="font-display font-bold text-ink leading-[0.9] text-5xl sm:text-7xl lg:text-8xl" style="letter-spacing: -0.02em;">
@@ -393,12 +325,6 @@
   <!-- ============ КОНТАКТЫ ============ -->
   <section id="contacts" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-rule">
     <div class="max-w-[1400px] mx-auto">
-
-      <div class="rule-row reveal mb-12">
-        <span class="font-mono text-[11px] uppercase tracking-[0.3em] text-blue">№ 03 — контакты</span>
-        <span class="line"></span>
-        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-mute">касса · рассылка</span>
-      </div>
 
       <h2 class="font-display font-bold text-ink leading-[0.9] text-5xl sm:text-7xl lg:text-8xl mb-16 reveal" style="letter-spacing: -0.02em;">
         До <span class="italic font-medium text-blue">встречи.</span>
@@ -464,21 +390,7 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // right dot nav active state
-  const navItems = document.querySelectorAll('.dot-nav-item');
-  const sections = document.querySelectorAll('section[id]');
-  const navMap = {};
-  navItems.forEach(n => navMap[n.dataset.sec] = n);
-  const navIO = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting && e.intersectionRatio > 0.25) {
-        navItems.forEach(n => n.classList.remove('active'));
-        const item = navMap[e.target.id];
-        if (item) item.classList.add('active');
-      }
-    });
-  }, { threshold: [0.25, 0.5] });
-  sections.forEach(s => navIO.observe(s));
+
 </script>
 </body>
 </html>

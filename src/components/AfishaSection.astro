@@ -15,7 +15,7 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
           Репертуар<span class="font-dramatic italic font-normal text-suomi">.</span>
         </h2>
       </div>
-      <p class="font-mono text-xs uppercase tracking-[0.2em] text-mute max-w-xs border-l-2 border-suomi pl-4 py-1">
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-mute max-w-xs border-l-2 border-suomi pl-4 py-1">
         Субтитры на финском языке (suomenkieliset тексты)
       </p>
     </div>
@@ -36,9 +36,9 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
 
         <div class="lg:col-span-7">
           <div class="flex flex-wrap items-center gap-3 mb-4">
-            <span class="font-mono text-xs tracking-[0.2em] uppercase text-suomi font-bold">{featuredShow.date} · {featuredShow.stage}</span>
+            <span class="font-sans text-xs tracking-[0.2em] uppercase text-suomi font-bold">{featuredShow.date} · {featuredShow.stage}</span>
             <span class="w-1.5 h-1.5 rounded-full bg-redru"></span>
-            <span class="font-mono text-xs uppercase tracking-[0.2em] text-mute">{featuredShow.time} · {featuredShow.capacity}</span>
+            <span class="font-sans text-xs uppercase tracking-[0.2em] text-mute">{featuredShow.time} · {featuredShow.capacity}</span>
           </div>
 
           <h3 class="font-nordic font-bold text-granite text-3xl sm:text-5xl lg:text-6xl mb-3 tracking-tight">
@@ -60,19 +60,19 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 py-5 border-y border-rule mb-8">
             <div>
-              <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-suomi mb-1">Время</p>
+              <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi mb-1">Время</p>
               <p class="font-nordic font-bold text-base sm:text-lg text-granite">{featuredShow.duration}</p>
             </div>
             <div>
-              <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-suomi mb-1">Субтитры</p>
+              <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi mb-1">Субтитры</p>
               <p class="font-nordic font-bold text-base sm:text-lg text-granite">{featuredShow.subtitles}</p>
             </div>
             <div>
-              <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-suomi mb-1">Возраст</p>
+              <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi mb-1">Возраст</p>
               <p class="font-nordic font-bold text-base sm:text-lg text-granite">{featuredShow.age}</p>
             </div>
             <div>
-              <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-suomi mb-1">Билеты</p>
+              <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi mb-1">Билеты</p>
               <p class="font-nordic font-bold text-base sm:text-lg text-suomi">{featuredShow.price}</p>
             </div>
           </div>
@@ -99,9 +99,9 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
           <div class="md:w-7/12 p-4 sm:p-12 flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-3 mb-3">
-                <span class="font-mono text-xs tracking-[0.2em] uppercase text-suomi font-bold">{show.date} · {show.time}</span>
+                <span class="font-sans text-xs tracking-[0.2em] uppercase text-suomi font-bold">{show.date} · {show.time}</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-rule"></span>
-                <span class="font-mono text-xs uppercase tracking-[0.2em] text-mute">{show.stage}</span>
+                <span class="font-sans text-xs uppercase tracking-[0.2em] text-mute">{show.stage}</span>
               </div>
               <h3 class="font-nordic font-bold text-granite text-2xl sm:text-4xl mb-2">{show.title}</h3>
               <p class="font-dramatic italic text-mute text-xl mb-4">{show.subtitle}</p>
@@ -111,7 +111,7 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
             </div>
             <div class="flex items-center justify-between border-t border-rule pt-6 mt-4">
               <div>
-                <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-mute">Цена</p>
+                <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-mute">Цена</p>
                 <p class="font-nordic font-bold text-xl text-granite">{show.price}</p>
               </div>
               <button class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-6 py-3 rounded-full inline-flex items-center gap-2 group">

@@ -15,7 +15,7 @@
   --font-nordic: 'Unbounded', sans-serif;
   --font-dramatic: 'Playfair Display', serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-mono: 'Plus Jakarta Sans', sans-serif;
 }
 
 html, body {
@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.5rem;
   border-left: 3px solid #003580;
   padding-left: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;

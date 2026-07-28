@@ -1,26 +1,26 @@
 ---
+import { translations } from '../data/translations';
+const t = translations.ru.contacts;
 ---
 
 <section id="contacts" class="px-3 sm:px-10 py-12 sm:py-32 border-t border-rule">
   <div class="max-w-[1400px] mx-auto">
 
-    <h2 class="font-nordic font-extrabold text-granite text-3xl sm:text-6xl lg:text-7xl mb-10 sm:mb-16 reveal">
-      Tervetuloa <span class="font-dramatic italic font-normal text-suomi">· Добро пожаловать.</span>
-    </h2>
+    <h2 class="font-nordic font-extrabold text-granite text-3xl sm:text-6xl lg:text-7xl mb-10 sm:mb-16 reveal" data-i18n-html="contacts.heading" set:html={t.heading} />
 
     <div class="grid md:grid-cols-12 gap-6 sm:gap-8 reveal">
       <!-- Contacts Card -->
       <div class="md:col-span-5 p-6 sm:p-10 rounded-2xl sm:rounded-3xl border border-rule bg-snow2/40 flex flex-col justify-between">
         <div>
-          <h3 class="font-nordic font-bold text-lg sm:text-xl text-granite mb-6 sm:mb-8">Контакты и Касса</h3>
+          <h3 class="font-nordic font-bold text-lg sm:text-xl text-granite mb-6 sm:mb-8" data-i18n="contacts.cardTitle">{t.cardTitle}</h3>
           <div class="grid sm:grid-cols-1 gap-6">
             <div>
-              <p class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi mb-1.5 font-bold">Особые данные / Адрес</p>
+              <p class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi mb-1.5 font-bold" data-i18n="contacts.addressTag">{t.addressTag}</p>
               <p class="text-base sm:text-lg text-granite font-medium">Urho Kekkosen katu 8</p>
               <p class="text-xs sm:text-sm text-mute mt-1">Helsinki, Kamppi · Finland</p>
             </div>
             <div>
-              <p class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi mb-1.5 font-bold">Связь</p>
+              <p class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi mb-1.5 font-bold" data-i18n="contacts.contactTag">{t.contactTag}</p>
               <p class="text-base sm:text-lg text-granite font-medium">+358 9 123 4567</p>
               <p class="text-sm sm:text-base text-mute">info@logrus.fi</p>
             </div>
@@ -28,15 +28,38 @@
         </div>
         <div>
           <div class="mt-8 sm:mt-10 pt-4 sm:pt-6 border-t border-rule">
-            <p class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi mb-1 font-bold">Время работы кассы</p>
-            <p class="text-sm sm:text-base text-granite/80">Ср – Вс: 14:00 – 19:00 (в дни показов — до 20:30)</p>
+            <p class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi mb-1 font-bold" data-i18n="contacts.boxOfficeTag">{t.boxOfficeTag}</p>
+            <p class="text-sm sm:text-base text-granite/80" data-i18n="contacts.boxOfficeHours">{t.boxOfficeHours}</p>
           </div>
-          <div class="flex gap-4 mt-6 pt-4 border-t border-rule/60 font-sans text-xs uppercase tracking-[0.15em] text-granite/70">
-            <a href="#" class="hover:text-suomi transition">VK</a>
-            <span>/</span>
-            <a href="#" class="hover:text-suomi transition">Telegram</a>
-            <span>/</span>
-            <a href="#" class="hover:text-suomi transition">Instagram</a>
+          <div class="mt-6 pt-5 border-t border-rule/60">
+            <p class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi mb-3 font-bold" data-i18n="contacts.socialsTag">{t.socialsTag}</p>
+            <div class="flex flex-wrap items-center gap-2">
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-rule text-granite hover:text-white hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-500 hover:border-transparent text-xs font-sans font-semibold transition-all shadow-sm hover:shadow-md group"
+              >
+                <svg class="w-4 h-4 text-suomi group-hover:text-white transition-colors shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <span>Instagram</span>
+              </a>
+
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-rule text-granite hover:text-white hover:bg-[#1877F2] hover:border-transparent text-xs font-sans font-semibold transition-all shadow-sm hover:shadow-md group"
+              >
+                <svg class="w-4 h-4 text-suomi group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                <span>Facebook</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -51,21 +74,21 @@
           <div>
             <div class="flex items-center gap-2 mb-1">
               <span class="inline-block w-2 h-2 rounded-full bg-suomi animate-pulse"></span>
-              <span class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi font-bold">Интерактивная карта</span>
+              <span class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi font-bold" data-i18n="contacts.mapTag">{t.mapTag}</span>
             </div>
-            <h3 class="font-nordic font-bold text-lg sm:text-xl text-granite">Как нас найти</h3>
+            <h3 class="font-nordic font-bold text-lg sm:text-xl text-granite" data-i18n="contacts.mapTitle">{t.mapTitle}</h3>
           </div>
           
           <!-- Presets / Quick Focus buttons -->
           <div class="flex items-center gap-1.5 bg-snow2 p-1 rounded-xl text-xs font-sans border border-rule">
-            <button id="map-btn-theater" class="px-2.5 py-1 rounded-lg bg-suomi text-white font-semibold transition cursor-pointer" title="Центрировать на театре">
-              🎭 Сцена
+            <button id="map-btn-theater" class="px-2.5 py-1 rounded-lg bg-suomi text-white font-semibold transition cursor-pointer" title="Logrus Teatteri" data-i18n="contacts.btnStage">
+              {t.btnStage}
             </button>
-            <button id="map-btn-kamppi" class="px-2.5 py-1 rounded-lg text-granite/70 hover:text-granite hover:bg-white transition cursor-pointer" title="Метро Kamppi">
-              🚇 Kamppi
+            <button id="map-btn-kamppi" class="px-2.5 py-1 rounded-lg text-granite/70 hover:text-granite hover:bg-white transition cursor-pointer" title="Kamppi Metro" data-i18n="contacts.btnKamppi">
+              {t.btnKamppi}
             </button>
-            <button id="map-btn-station" class="px-2.5 py-1 rounded-lg text-granite/70 hover:text-granite hover:bg-white transition cursor-pointer" title="Центральный вокзал">
-              🚉 Вокзал
+            <button id="map-btn-station" class="px-2.5 py-1 rounded-lg text-granite/70 hover:text-granite hover:bg-white transition cursor-pointer" title="Station" data-i18n="contacts.btnStation">
+              {t.btnStation}
             </button>
           </div>
         </div>
@@ -80,7 +103,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
-            <span>Urho Kekkosen katu 8, Helsinki · <strong class="text-suomi font-semibold">2 мин от метро Kamppi</strong></span>
+            <span data-i18n-html="contacts.locationText" set:html={t.locationText} />
           </div>
 
           <div class="flex items-center gap-2 w-full sm:w-auto">
@@ -99,7 +122,7 @@
               rel="noopener noreferrer"
               class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-snow2 hover:bg-rule text-granite text-xs font-nordic font-semibold px-4 py-2.5 rounded-full transition border border-rule"
             >
-              <span>🚆 HSL Маршрут</span>
+              <span data-i18n="contacts.hslRoute">{t.hslRoute}</span>
             </a>
           </div>
         </div>
@@ -140,7 +163,7 @@
         html: `
           <div style="position:relative; display:flex; align-items:center; justify-center; width:36px; height:36px;">
             <div style="position:absolute; width:36px; height:36px; border-radius:50%; background:rgba(0,53,128,0.3); animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite;"></div>
-            <div style="position:relative; width:36px; height:36px; border-radius:50%; background:#003580; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 15px -3px rgba(0,53,128,0.4); border:2px solid #fff; font-size:16px;">
+            <div style="position:relative; width:36px; height:36px; border-radius:50%; background:#003580; color:#fff; display:flex; align-items:center; justify-center; box-shadow:0 10px 15px -3px rgba(0,53,128,0.4); border:2px solid #fff; font-size:16px;">
               🎭
             </div>
           </div>
@@ -156,18 +179,18 @@
         <div style="font-family: sans-serif; padding: 4px; color: #16191d;">
           <div style="font-weight: 700; font-size: 14px; margin-bottom: 2px; color: #003580;">Logrus Teatteri</div>
           <div style="font-size: 12px; color: #626b73;">Urho Kekkosen katu 8, Helsinki</div>
-          <div style="font-size: 11px; margin-top: 4px; font-weight: 600; color: #003580;">🚇 2 мин от метро Kamppi</div>
+          <div style="font-size: 11px; margin-top: 4px; font-weight: 600; color: #003580;">🚇 Kamppi</div>
         </div>
       `;
       marker.bindPopup(popupContent).openPopup();
 
       const kamppiIcon = L.divIcon({
         className: 'custom-subway-pin',
-        html: `<div style="width:24px; height:24px; border-radius:50%; background:#f97316; color:#fff; font-size:11px; font-weight:bold; display:flex; align-items:center; justify-content:center; border:1px solid #fff; box-shadow:0 2px 4px rgba(0,0,0,0.2);">M</div>`,
+        html: `<div style="width:24px; height:24px; border-radius:50%; background:#f97316; color:#fff; font-size:11px; font-weight:bold; display:flex; align-items:center; justify-center; border:1px solid #fff; box-shadow:0 2px 4px rgba(0,0,0,0.2);">M</div>`,
         iconSize: [24, 24],
         iconAnchor: [12, 12]
       });
-      L.marker(kamppiCoords, { icon: kamppiIcon }).addTo(map).bindPopup('<b>Метро Kamppi</b><br>Выход к Urho Kekkosen katu');
+      L.marker(kamppiCoords, { icon: kamppiIcon }).addTo(map).bindPopup('<b>Kamppi Metro</b><br>Urho Kekkosen katu');
 
       const btnTheater = document.getElementById('map-btn-theater');
       const btnKamppi = document.getElementById('map-btn-kamppi');

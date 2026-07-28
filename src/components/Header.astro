@@ -1,21 +1,41 @@
 ---
+import { translations } from '../data/translations';
+const t = translations.ru;
 ---
 
 <nav class="sticky top-0 z-40 backdrop-blur-md bg-snow/85 border-b border-rule">
   <div class="max-w-[1400px] mx-auto px-3 sm:px-10 h-20 flex items-center justify-between">
-    <a href="#top" class="font-nordic text-lg sm:text-xl font-bold tracking-tight text-granite flex items-center gap-2">
+    <!-- Brand Logo -->
+    <a href="#top" class="font-nordic text-lg sm:text-xl font-bold tracking-tight text-granite flex items-center gap-2 shrink-0">
       <span class="w-3 h-3 sm:w-3.5 sm:h-3.5 bg-suomi rounded-sm transform rotate-45 inline-block"></span>
       Logrus <span class="font-sans text-xs text-mute font-normal uppercase tracking-widest hidden sm:inline">/ Teatteri</span>
     </a>
-    <div class="hidden md:flex items-center gap-10 text-xs font-nordic tracking-wider uppercase">
-      <a href="#afisha" class="nav-link">Афиша</a>
-      <a href="#courses" class="nav-link">Курсы</a>
-      <a href="#about" class="nav-link">О театре</a>
-      <a href="#contacts" class="nav-link">Контакты</a>
+
+    <!-- Central Nav Links -->
+    <div class="hidden md:flex items-center gap-8 lg:gap-10 text-xs font-nordic tracking-wider uppercase">
+      <a href="#afisha" class="nav-link" data-i18n="nav.afisha">{t.nav.afisha}</a>
+      <a href="#courses" class="nav-link" data-i18n="nav.courses">{t.nav.courses}</a>
+      <a href="#about" class="nav-link" data-i18n="nav.about">{t.nav.about}</a>
+      <a href="#contacts" class="nav-link" data-i18n="nav.contacts">{t.nav.contacts}</a>
     </div>
-    <div class="flex items-center gap-2 sm:gap-3">
-      <span class="font-sans text-[10px] uppercase text-mute tracking-widest border border-rule px-3 py-1.5 rounded-full hidden sm:inline">Helsinki · FI</span>
-      <a href="#afisha" class="btn-suomi font-nordic text-xs font-semibold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full uppercase tracking-wider">Купить билет</a>
+
+    <!-- Right Controls: Fixed Position Language Switcher & Action Button -->
+    <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+      <!-- Stationary Language Switcher (Fixed-width buttons) -->
+      <div class="flex items-center bg-snow2/90 p-1 rounded-full border border-rule font-nordic text-[11px] font-semibold tracking-wider shrink-0">
+        <button data-lang="ru" class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer bg-suomi text-white font-bold shadow-sm">RU</button>
+        <button data-lang="fi" class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer text-mute hover:text-granite hover:bg-snow2">FI</button>
+        <button data-lang="en" class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer text-mute hover:text-granite hover:bg-snow2">EN</button>
+      </div>
+
+      <!-- Action Button (Fixed Width so header size never shifts) -->
+      <a 
+        href="#afisha" 
+        class="btn-suomi font-nordic text-xs font-semibold w-[125px] sm:w-[150px] py-2 sm:py-2.5 rounded-full uppercase tracking-wider inline-flex items-center justify-center text-center shrink-0" 
+        data-i18n="nav.buyTicket"
+      >
+        {t.nav.buyTicket}
+      </a>
     </div>
   </div>
 </nav>

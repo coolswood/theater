@@ -28,6 +28,9 @@ const {
   <slot />
 
   <script>
+    import { initClientI18n } from '../utils/i18n';
+
+    // Initialize Intersection Observer for smooth reveal animations
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -38,6 +41,13 @@ const {
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Initialize real-time i18n localization
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initClientI18n);
+    } else {
+      initClientI18n();
+    }
   </script>
 </body>
 </html>

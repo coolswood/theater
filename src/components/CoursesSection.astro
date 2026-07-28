@@ -1,5 +1,10 @@
 ---
-import { centralCourse, courseSlides } from '../data/courses';
+import { getCentralCourse, getCourseSlides } from '../data/courses';
+import { translations } from '../data/translations';
+
+const t = translations.ru.courses;
+const centralCourse = getCentralCourse('ru');
+const courseSlides = getCourseSlides('ru');
 ---
 
 <section id="courses" class="px-3 sm:px-10 py-12 sm:py-32 border-t border-rule bg-birch/40 relative overflow-hidden">
@@ -11,19 +16,19 @@ import { centralCourse, courseSlides } from '../data/courses';
     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-12 sm:mb-16 reveal">
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <span class="suomi-tag">{centralCourse.badge}</span>
+          <span class="suomi-tag" data-i18n="courses.centralCourse.badge">{centralCourse.badge}</span>
           <span class="w-2 h-2 rounded-full bg-redru animate-pulse"></span>
         </div>
         <h2 class="font-nordic font-extrabold text-granite text-3xl sm:text-5xl lg:text-7xl leading-tight">
-          Курс актерского мастерства<br />
-          <span class="font-dramatic italic font-normal text-suomi">{centralCourse.studioName}.</span>
+          <span data-i18n="courses.centralCourse.title">{centralCourse.title}</span><br />
+          <span class="font-dramatic italic font-normal text-suomi" data-i18n="courses.centralCourse.studioName">{centralCourse.studioName}.</span>
         </h2>
       </div>
       <div class="max-w-lg lg:pb-2">
         <p class="font-dramatic italic text-xl sm:text-3xl text-granite leading-snug mb-3">
-          «{centralCourse.headline}»
+          «<span data-i18n="courses.centralCourse.headline">{centralCourse.headline}</span>»
         </p>
-        <p class="text-sm text-mute font-light leading-relaxed">
+        <p class="text-sm text-mute font-light leading-relaxed" data-i18n="courses.centralCourse.description">
           {centralCourse.description}
         </p>
       </div>
@@ -34,7 +39,7 @@ import { centralCourse, courseSlides } from '../data/courses';
       <div class="flex items-center justify-between mb-4 sm:mb-6">
         <div class="flex items-center gap-3">
           <span class="w-2.5 h-2.5 rounded-full bg-suomi"></span>
-          <span class="font-sans text-xs text-suomi uppercase tracking-[0.2em] font-bold">Обучение и репетиции // Фотогалерея</span>
+          <span class="font-sans text-xs text-suomi uppercase tracking-[0.2em] font-bold" data-i18n="courses.tag">{t.tag}</span>
         </div>
         <div class="flex items-center gap-2 font-sans text-xs text-mute tracking-widest">
           <span id="slider-current-num" class="text-granite font-bold">01</span>
@@ -98,7 +103,7 @@ import { centralCourse, courseSlides } from '../data/courses';
           <!-- CONTROLS & THUMBNAILS CONTAINER -->
           <div class="pt-3 sm:pt-4 border-t border-rule space-y-3 sm:space-y-4">
             <div class="flex items-center justify-between">
-              <span class="font-sans text-[10px] sm:text-[11px] text-mute uppercase tracking-widest">Выберите этап</span>
+              <span class="font-sans text-[10px] sm:text-[11px] text-mute uppercase tracking-widest" data-i18n="courses.swipeNote">{t.swipeNote}</span>
               <div class="flex items-center gap-2">
                 <button
                   id="slider-prev"
@@ -148,7 +153,7 @@ import { centralCourse, courseSlides } from '../data/courses';
     <div class="reveal p-0 sm:p-14 rounded-none sm:rounded-3xl bg-transparent sm:bg-snow border-0 sm:border-2 border-suomi/30 shadow-none sm:shadow-xl relative overflow-hidden max-w-full">
       <!-- Decorative Tag -->
       <div class="hidden sm:block absolute top-0 right-0 bg-suomi text-white font-nordic text-[10px] uppercase tracking-[0.25em] px-6 py-2.5 rounded-bl-2xl font-bold shadow-md">
-        Официальный курс Logrus Teatteri
+        Logrus Teatteri
       </div>
 
       <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start sm:mt-4 max-w-full">
@@ -156,14 +161,14 @@ import { centralCourse, courseSlides } from '../data/courses';
         <!-- LEFT: WHAT YOU GET -->
         <div class="lg:col-span-7 space-y-6 sm:space-y-8 max-w-full overflow-hidden">
           <div>
-            <span class="font-sans text-[11px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.25em] text-suomi font-bold block mb-2 break-words">{centralCourse.subtitle}</span>
+            <span class="font-sans text-[11px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.25em] text-suomi font-bold block mb-2 break-words" data-i18n="courses.centralCourse.subtitle">{centralCourse.subtitle}</span>
             <h3 class="font-nordic font-extrabold text-granite text-xl sm:text-4xl lg:text-5xl leading-tight mb-3 break-words">
-              Курс актерского мастерства <span class="text-suomi block sm:inline">{centralCourse.studioName}</span>
+              <span data-i18n="courses.centralCourse.title">{centralCourse.title}</span> <span class="text-suomi block sm:inline" data-i18n="courses.centralCourse.studioName">{centralCourse.studioName}</span>
             </h3>
             <p class="font-dramatic italic text-base sm:text-xl text-mute leading-relaxed mb-4 break-words">
-              «{centralCourse.headline}»
+              «<span data-i18n="courses.centralCourse.headline">{centralCourse.headline}</span>»
             </p>
-            <p class="dropcap text-granite/85 text-sm sm:text-lg leading-relaxed font-light break-words">
+            <p class="dropcap text-granite/85 text-sm sm:text-lg leading-relaxed font-light break-words" data-i18n="courses.centralCourse.description">
               {centralCourse.description}
             </p>
           </div>
@@ -173,19 +178,19 @@ import { centralCourse, courseSlides } from '../data/courses';
             <div class="flex items-center justify-between mb-3">
               <h4 class="font-nordic font-bold text-sm sm:text-lg text-granite flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-suomi inline-block"></span>
-                Что дает обучение на курсе:
+                <span data-i18n="courses.detailsBtn">{t.detailsBtn}</span>
               </h4>
-              <span class="font-sans text-[10px] text-mute uppercase tracking-widest sm:hidden">Свайп →</span>
+              <span class="font-sans text-[10px] text-mute uppercase tracking-widest sm:hidden" data-i18n="courses.swipeNote">{t.swipeNote}</span>
             </div>
             
             <div class="flex md:grid md:grid-cols-2 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none pb-2 max-w-full">
-              {centralCourse.pillars.map((pillar) => (
+              {centralCourse.pillars.map((pillar, idx) => (
                 <div class="w-[260px] sm:w-[320px] md:w-full md:max-w-none shrink-0 md:shrink snap-center p-5 md:p-7 rounded-xl md:rounded-2xl bg-snow border border-rule shadow-sm md:shadow-none flex flex-col justify-between">
                   <div>
-                    <span class="font-sans text-xs text-suomi font-bold tracking-widest">{pillar.num} // ЭТАП</span>
-                    <h5 class="font-nordic font-bold text-granite text-base md:text-lg lg:text-xl mt-2 mb-1.5 break-words">{pillar.title}</h5>
+                    <span class="font-sans text-xs text-suomi font-bold tracking-widest">{pillar.num} // STAGE</span>
+                    <h5 class="font-nordic font-bold text-granite text-base md:text-lg lg:text-xl mt-2 mb-1.5 break-words" data-i18n={`courses.centralCourse.pillars.${idx}.title`}>{pillar.title}</h5>
                   </div>
-                  <p class="text-xs md:text-sm lg:text-base text-mute leading-relaxed font-light mt-1">{pillar.desc}</p>
+                  <p class="text-xs md:text-sm lg:text-base text-mute leading-relaxed font-light mt-1" data-i18n={`courses.centralCourse.pillars.${idx}.desc`}>{pillar.desc}</p>
                 </div>
               ))}
             </div>
@@ -193,15 +198,15 @@ import { centralCourse, courseSlides } from '../data/courses';
 
           <!-- TARGET AUDIENCE -->
           <div class="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-suomisoft/40 border border-rule max-w-full">
-            <p class="font-sans text-[11px] uppercase tracking-[0.2em] text-suomi font-bold mb-1">Кому подходит этот курс?</p>
-            <p class="text-xs sm:text-base text-granite/90 font-light leading-relaxed">
+            <p class="font-sans text-[11px] uppercase tracking-[0.2em] text-suomi font-bold mb-1">Target Audience</p>
+            <p class="text-xs sm:text-base text-granite/90 font-light leading-relaxed" data-i18n="courses.centralCourse.targetAudience">
               {centralCourse.targetAudience}
             </p>
           </div>
 
           <!-- CLOSING MOTTO BANNER -->
           <div class="pt-3 border-t border-rule flex items-center justify-between">
-            <span class="font-dramatic italic text-lg sm:text-2xl text-suomi font-semibold">{centralCourse.closingQuote}</span>
+            <span class="font-dramatic italic text-lg sm:text-2xl text-suomi font-semibold" data-i18n="courses.centralCourse.closingQuote">{centralCourse.closingQuote}</span>
             <span class="font-sans text-xs uppercase tracking-widest text-mute hidden sm:inline">Helsinki · 2026</span>
           </div>
 
@@ -217,17 +222,16 @@ import { centralCourse, courseSlides } from '../data/courses';
             <!-- Spotlight badge -->
             <div class="inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-suomisoft border border-suomi/20 text-[10px] sm:text-xs font-sans uppercase tracking-widest text-suomi font-bold mb-4 sm:mb-6 max-w-full overflow-hidden">
               <span class="w-2 h-2 rounded-full bg-redru animate-ping shrink-0"></span>
-              <span class="truncate">{centralCourse.badge}</span>
+              <span class="truncate" data-i18n="courses.centralCourse.badge">{centralCourse.badge}</span>
             </div>
 
             <!-- Free Trial Highlight Box (Vibrant Suomi Blue on Light Background) -->
             <div class="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-suomi text-white shadow-lg mb-6 sm:mb-8 text-center sm:text-left relative overflow-hidden group/trial">
               <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
-              <span class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomisoft block mb-1 font-semibold">Специальное предложение</span>
-              <p class="font-nordic font-extrabold text-lg sm:text-3xl text-white leading-tight break-words">
+              <span class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomisoft block mb-1 font-semibold">Special Offer</span>
+              <p class="font-nordic font-extrabold text-lg sm:text-3xl text-white leading-tight break-words" data-i18n="courses.centralCourse.trialInfo">
                 {centralCourse.trialInfo}
               </p>
-              <p class="text-xs text-white/90 font-light mt-1.5">Приди и попробуй сценическое взаимодействие без обязательств.</p>
             </div>
 
             <!-- Contact & Venue Details -->
@@ -240,20 +244,20 @@ import { centralCourse, courseSlides } from '../data/courses';
               </div>
 
               <div class="border-b border-rule pb-3 sm:pb-4">
-                <span class="text-suomi uppercase tracking-[0.2em] block mb-1 font-bold">Электронная почта</span>
+                <span class="text-suomi uppercase tracking-[0.2em] block mb-1 font-bold">Email</span>
                 <a href={`mailto:${centralCourse.email}`} class="font-nordic font-bold text-sm sm:text-lg text-granite hover:text-suomi transition block break-all">
                   {centralCourse.email}
                 </a>
               </div>
 
               <div class="border-b border-rule pb-3 sm:pb-4">
-                <span class="text-suomi uppercase tracking-[0.2em] block mb-1 font-bold">Локация</span>
-                <p class="text-xs sm:text-sm text-granite font-sans font-medium break-words">{centralCourse.location}</p>
+                <span class="text-suomi uppercase tracking-[0.2em] block mb-1 font-bold">Location</span>
+                <p class="text-xs sm:text-sm text-granite font-sans font-medium break-words" data-i18n="courses.centralCourse.location">{centralCourse.location}</p>
               </div>
 
               <div>
-                <span class="text-suomi uppercase tracking-[0.2em] block mb-1 font-bold">Формат занятий</span>
-                <p class="text-xs text-mute font-sans font-light break-words">{centralCourse.schedule}</p>
+                <span class="text-suomi uppercase tracking-[0.2em] block mb-1 font-bold">Schedule</span>
+                <p class="text-xs text-mute font-sans font-light break-words" data-i18n="courses.centralCourse.schedule">{centralCourse.schedule}</p>
               </div>
             </div>
           </div>
@@ -264,10 +268,9 @@ import { centralCourse, courseSlides } from '../data/courses';
               class="enroll-trigger-btn w-full btn-suomi font-nordic text-[11px] sm:text-xs tracking-wider uppercase font-semibold py-3.5 sm:py-4 px-3 rounded-full inline-flex items-center justify-center gap-2 sm:gap-3 group shadow-lg break-words text-center"
               data-course={`Курс актерского мастерства ${centralCourse.studioName}`}
             >
-              Записаться на бесплатное занятие
+              <span data-i18n="courses.enrollBtn">{t.enrollBtn}</span>
               <svg class="arrow shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </button>
-            <p class="font-sans text-[10px] text-mute text-center mt-2">Количество мест в группе ограничено (до 15 человек)</p>
           </div>
 
         </div>
@@ -283,19 +286,19 @@ import { centralCourse, courseSlides } from '../data/courses';
           ✕
         </button>
 
-        <span class="suomi-tag block mb-3">Запись в студию // 2026</span>
-        <h3 class="font-nordic font-bold text-2xl text-granite mb-1">Бесплатное пробное занятие</h3>
-        <p id="modal-course-name" class="font-dramatic italic text-suomi text-lg mb-6">Курс актерского мастерства «Лампарельс»</p>
+        <span class="suomi-tag block mb-3" data-i18n="courses.centralCourse.badge">{centralCourse.badge}</span>
+        <h3 class="font-nordic font-bold text-2xl text-granite mb-1" data-i18n="courses.centralCourse.trialInfo">{centralCourse.trialInfo}</h3>
+        <p id="modal-course-name" class="font-dramatic italic text-suomi text-lg mb-6">{centralCourse.title}</p>
 
         <form id="enrollment-form" class="space-y-4" onsubmit="event.preventDefault(); handleFormSubmit();">
           <div>
-            <label class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1">Ваше Имя и Фамилия</label>
-            <input type="text" required placeholder="Анна Иванова" class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm" />
+            <label class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1">Name</label>
+            <input type="text" required placeholder="Name" class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm" />
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1">Телефон / WhatsApp</label>
+              <label class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1">Phone / WhatsApp</label>
               <input type="text" required placeholder="+358..." class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm" />
             </div>
             <div>
@@ -305,23 +308,21 @@ import { centralCourse, courseSlides } from '../data/courses';
           </div>
 
           <div>
-            <label class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1">Вопрос или комментарий (опционально)</label>
-            <textarea rows="3" placeholder="Расскажите о своем опыте или пожеланиях..." class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm"></textarea>
+            <label class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1">Comment</label>
+            <textarea rows="3" placeholder="..." class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm"></textarea>
           </div>
 
           <div class="pt-2">
-            <button type="submit" class="w-full btn-suomi font-nordic text-xs uppercase tracking-wider font-semibold py-4 rounded-full shadow-lg">
-              Забронировать бесплатное место
+            <button type="submit" class="w-full btn-suomi font-nordic text-xs uppercase tracking-wider font-semibold py-4 rounded-full shadow-lg" data-i18n="courses.enrollBtn">
+              {t.enrollBtn}
             </button>
           </div>
-          <p class="font-sans text-[10px] text-mute text-center">Или позвоните нам напрямую: <a href="tel:+358452656332" class="text-suomi font-bold underline">+358 45 2656332</a></p>
         </form>
 
         <div id="form-success-message" class="hidden text-center py-8">
           <span class="w-16 h-16 bg-suomisoft text-suomi rounded-full inline-flex items-center justify-center text-3xl font-bold mb-4">✓</span>
-          <h4 class="font-nordic font-bold text-2xl text-granite mb-2">Заявка успешно отправлена!</h4>
-          <p class="text-sm text-mute max-w-xs mx-auto mb-6">Ждем вас на первом пробном занятии курса «Лампарельс». Администратор Logrus связался с вами в течение 24 часов.</p>
-          <button id="success-close" class="btn-outline font-nordic text-xs uppercase tracking-wider px-6 py-2.5 rounded-full">Отлично</button>
+          <h4 class="font-nordic font-bold text-2xl text-granite mb-2">OK!</h4>
+          <button id="success-close" class="btn-outline font-nordic text-xs uppercase tracking-wider px-6 py-2.5 rounded-full mt-4">Close</button>
         </div>
 
       </div>
@@ -341,11 +342,13 @@ import { centralCourse, courseSlides } from '../data/courses';
 
 <!-- CAROUSEL SCRIPT -->
 <script>
-  import { courseSlides } from '../data/courses';
+  import { getCourseSlides } from '../data/courses';
+  import { translations, type Language } from '../data/translations';
 
   function initCoursesCarousel() {
+    let currentLang: Language = (localStorage.getItem('logrus_lang') as Language) || 'ru';
+    let currentSlides = getCourseSlides(currentLang);
     let currentIndex = 0;
-    const totalSlides = courseSlides.length;
 
     const showcaseImg = document.getElementById('showcase-img') as HTMLImageElement;
     const showcaseTag = document.getElementById('showcase-tag');
@@ -364,10 +367,11 @@ import { centralCourse, courseSlides } from '../data/courses';
     if (!showcaseImg) return;
 
     function goToSlide(index: number) {
+      currentSlides = getCourseSlides(currentLang);
+      const totalSlides = currentSlides.length;
       currentIndex = (index + totalSlides) % totalSlides;
-      const data = courseSlides[currentIndex];
+      const data = currentSlides[currentIndex];
 
-      // Smooth Crossfade effect
       showcaseImg.style.opacity = '0.3';
       showcaseImg.style.transform = 'scale(0.98)';
 
@@ -386,7 +390,6 @@ import { centralCourse, courseSlides } from '../data/courses';
         showcaseImg.style.transform = 'scale(1)';
       }, 180);
 
-      // Update thumbnails active border
       thumbItems.forEach((item, idx) => {
         if (idx === currentIndex) {
           item.classList.add('border-suomi', 'scale-105');
@@ -397,6 +400,11 @@ import { centralCourse, courseSlides } from '../data/courses';
         }
       });
     }
+
+    window.addEventListener('languageChange', ((e: CustomEvent) => {
+      currentLang = e.detail.lang;
+      goToSlide(currentIndex);
+    }) as EventListener);
 
     prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
     nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
@@ -432,7 +440,7 @@ import { centralCourse, courseSlides } from '../data/courses';
     const lightboxClose = document.getElementById('lightbox-close');
 
     showcaseZoomBtn?.addEventListener('click', () => {
-      const data = courseSlides[currentIndex];
+      const data = currentSlides[currentIndex];
       if (lightbox && lightboxImg) {
         lightboxImg.src = data.image;
         if (lightboxCaption) lightboxCaption.textContent = `${data.tag} — ${data.title}`;
@@ -464,7 +472,7 @@ import { centralCourse, courseSlides } from '../data/courses';
 
     enrollBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const courseName = btn.getAttribute('data-course') || 'Курс актерского мастерства «Лампарельс»';
+        const courseName = btn.getAttribute('data-course') || 'Курс актерского мастерства';
         if (courseNameEl) courseNameEl.textContent = courseName;
         if (form) form.classList.remove('hidden');
         if (successMsg) successMsg.classList.add('hidden');
@@ -490,7 +498,6 @@ import { centralCourse, courseSlides } from '../data/courses';
       }
     });
 
-    // Initial slide
     goToSlide(0);
   }
 

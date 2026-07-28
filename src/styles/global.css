@@ -133,3 +133,16 @@ html {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+/* Smooth i18n language transition styling */
+main {
+  transition: opacity 220ms ease-in-out, transform 220ms ease-in-out, filter 220ms ease-in-out;
+  will-change: opacity, filter;
+}
+
+main.i18n-fade-out {
+  opacity: 0.15;
+  filter: blur(6px);
+  transform: translateY(4px);
+  pointer-events: none;
+}

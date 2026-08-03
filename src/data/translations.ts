@@ -119,6 +119,28 @@ export interface TranslationSchema {
     copyright: string;
     toTop: string;
   };
+  showPage: {
+    backToAfisha: string;
+    galleryTag: string;
+    galleryTitle: string;
+    gallerySub: string;
+    allPhotos: string;
+    stagePhotos: string;
+    backstagePhotos: string;
+    rehearsalPhotos: string;
+    zoomPhoto: string;
+    closeLightbox: string;
+    directorSectionTitle: string;
+    castSectionTitle: string;
+    factsSectionTitle: string;
+    venueSectionTitle: string;
+    mapHeading: string;
+    bookSeatBtn: string;
+    modalTitle: string;
+    modalDesc: string;
+    modalConfirmBtn: string;
+    modalCloseBtn: string;
+  };
 }
 
 export const translations: Record<Language, TranslationSchema> = {
@@ -133,21 +155,21 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Финляндия · Хельсинки',
       stageTag: 'Русскоязычная камерная сцена',
-      title: 'Русская драма<br />в северной <span class="font-dramatic italic font-normal text-suomi">тишине</span><span class="text-redru">.</span>',
-      description: '<span class="font-dramatic italic text-suomi text-2xl sm:text-3xl font-semibold">Logrus Teatteri</span> — прохладная скандинавская эстетика пространства в центре Хельсинки и глубокое уважение к русской драматической традиции.',
+      title: 'Русская драма<br />в северной <span class="text-suomi font-semibold">тишине</span><span class="text-redru">.</span>',
+      description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — прохладная скандинавская эстетика пространства в центре Хельсинки и глубокое уважение к русской драматической традиции.',
       locationLabel: '— Наша локация —',
       locationName: 'Helsinki · Kamppi',
       locationDesc: 'Камерный зал на 90 мест в районе Камппи',
       langLabel: 'Язык спектаклей',
-      langValue: 'Русский (с финскими субтитрами)'
+      langValue: 'Русский'
     },
     afisha: {
       tag: 'Ожидаемые показы // Октябрь 2026',
-      title: 'Репертуар<span class="font-dramatic italic font-normal text-suomi">.</span>',
-      subtitlesNote: 'Субтитры на финском языке (suomenkieliset тексты)',
+      title: 'Репертуар<span class="text-suomi font-bold">.</span>',
+      subtitlesNote: 'Камерная сцена в центре Хельсинки',
       premiereTag: 'Премьера в Хельсинки',
       durationLabel: 'Время',
-      subtitlesLabel: 'Субтитры',
+      subtitlesLabel: 'Язык',
       ageLabel: 'Возраст',
       ticketsLabel: 'Билеты',
       bookTicketBtn: 'Забронировать билет',
@@ -155,6 +177,19 @@ export const translations: Record<Language, TranslationSchema> = {
       secondaryPriceLabel: 'Цена',
       secondaryBuyBtn: 'Билеты',
       shows: {
+        'novecento': {
+          title: 'Новеченто',
+          subtitle: 'Алессандро Барикко · Режиссер Аквиле Рузгите',
+          date: '13 Августа / 13.08',
+          stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
+          price: 'от 20 €',
+          duration: '1ч 45мин',
+          subtitles: 'Русский',
+          age: '12+',
+          capacity: '80 мест',
+          quote: '«Бесконечное пианино, как бескрайний океан, и человек, нашедший музыку, но не нашедший берег…»',
+          description: 'Одинокий рояль. Бескрайний океан. Судьба человека, никогда не ступавшего на берег. История пианиста, родившегося и прожившего всю жизнь на борту океанского лайнера — музыканта, который видел мир сквозь звуки океана и мелодии, не покидая своего инструмента. Моноспектакль о свободе, страхе, музыке и бесконечности между морем и небом.'
+        },
         'cherry-orchard': {
           title: 'Вишнёвый сад',
           subtitle: 'А. П. Чехов · Постановка Анны Веденеевой',
@@ -162,11 +197,11 @@ export const translations: Record<Language, TranslationSchema> = {
           stage: 'Kamppi Main Stage',
           price: 'от 25 €',
           duration: '2ч 40мин',
-          subtitles: 'Suomi (FI)',
+          subtitles: 'Русский',
           age: '14+',
           capacity: '90 мест',
           quote: '«О моё детство, чистота моя! В этой спальне я спала, отсюда смотрела на сад, счастье просыпалось вместе со мною каждое утро...»',
-          description: 'Чеховская классика в скандинавской трактовке — строгая, прозрачная, с тихими паузами и глубокой акцентировкой на человеческом одиночестве. Спектакль идет на русском языке с финскими синхронными субтитрами.'
+          description: 'Чеховская классика в скандинавской трактовке — строгая, прозрачная, с тихими паузами и глубокой акцентировкой на человеческом одиночестве.'
         },
         'maya-sea': {
           title: 'Майя и море',
@@ -175,7 +210,7 @@ export const translations: Record<Language, TranslationSchema> = {
           stage: 'Камерная сцена',
           price: 'от 20 €',
           duration: '1ч 50мин',
-          subtitles: 'Suomi (FI)',
+          subtitles: 'Русский',
           age: '16+',
           capacity: '60 мест',
           description: 'История адаптации и памяти, сыгранная на русском языке. Уникальный моноспектакль в камерной атмосфере на 60 мест.'
@@ -184,7 +219,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     courses: {
       tag: 'Сценическая лаборатория // Набор 2026',
-      title: 'Актерские курсы<span class="font-dramatic italic font-normal text-suomi">.</span>',
+      title: 'Актерские курсы<span class="text-suomi font-extrabold">.</span>',
       subtitle: 'Раскройте свой сценический потенциал, голос и харизму под руководством профессиональных режиссеров в центре Хельсинки.',
       swipeNote: 'Свайп слайдов →',
       enrollBtn: 'Записаться на курс',
@@ -192,86 +227,86 @@ export const translations: Record<Language, TranslationSchema> = {
       slides: [
         {
           id: 'slide-1',
-          title: 'Природный талант и эмоциональная свобода',
-          subtitle: 'Раскрепощение, снятие телесных и психологических блоков',
+          title: 'Эмоциональная свобода и раскованность',
+          subtitle: 'Снятие телесных зажимов, принятие себя и импровизация',
           location: 'Камерный зал · Kamppi',
           tag: '01 // ЭМОЦИИ И СВОБОДА',
-          quote: '«Представьте: вы выходите на сцену или в кадр, и все взгляды прикованы к вам...»'
+          quote: '«Здесь царит атмосфера доверия: вы учитесь наслаждаться процессом и перестаете бояться ошибок»'
         },
         {
           id: 'slide-2',
-          title: 'Постановка голоса, речи и пластики',
-          subtitle: 'Полетное звучание, идеальная дикция и выразительное тело',
+          title: 'Партнерство и отзеркаливание эмоций',
+          subtitle: 'Этюды на сценическое внимание, контрасты состояний и эмпатию',
           location: 'Репетиционный зал Logrus',
-          tag: '02 // ГОЛОС И ПЛАСТИКА',
-          quote: '«Голос звучит уверенно, а страх публичных выступлений исчезает навсегда»'
+          tag: '02 // ВНИМАНИЕ И ПАРТНЕРСТВО',
+          quote: '«Учимся тонко чувствовать человека напротив, подстраиваться к настроению и понимать реакцию без слов»'
         },
         {
           id: 'slide-3',
-          title: 'Уверенность, харизма и внимание',
-          subtitle: 'Умение держать аудиторию и быть убедительным в жизни',
+          title: 'Уверенность, харизма и преодоление стресса',
+          subtitle: 'Умение держать аудиторию и чувствовать себя свободно в жизни',
           location: 'Сценическое пространство',
-          tag: '03 // ХАРИЗМА И ВНИМАНИЕ',
-          quote: '«Курс подходит и тем, кто мечтает о сцене, и тем, кто хочет стать ярче в жизни»'
+          tag: '03 // ХАРИЗМА И УВЕРЕННОСТЬ',
+          quote: '«В жизни мы часто под стрессом доказываем свою ценность, а на сцене — раскрываем свободу и харизму»'
         },
         {
           id: 'slide-4',
-          title: 'Первые роли и работа с режиссером',
-          subtitle: 'Проработка драматургии, партнерство и репетиции этюдов',
+          title: 'Работа с режиссером и перевоплощение',
+          subtitle: 'Проработка драматургии, разбор характеров и репетиции этюдов',
           location: 'Гримерная & Сцена',
           tag: '04 // ЭТЮДЫ И РОЛИ',
-          quote: '«Сыграйте свои первые настоящие роли под руководством опытного режиссера»'
+          quote: '«Каждый этюд раскрывает неожиданные стороны вашей личности и учит живому перевоплощению»'
         },
         {
           id: 'slide-5',
-          title: 'Выпускной показ перед зрителями',
-          subtitle: 'Полноценный театральный выход на профессиональной сцене Хельсинки',
+          title: 'Выпускной показ на сцене Хельсинки',
+          subtitle: 'Полноценный театральный выход перед зрителями в центре столицы',
           location: 'Главная сцена Logrus',
           tag: '05 // ВЫХОД НА СЦЕНУ',
-          quote: '«Хватит играть чужие роли в жизни. Пора сыграть свою — ярко и по-настоящему!»'
+          quote: '«Жить так, как будто всё вокруг — сцена, а ты — актёр, который сам выбирает, каким будет следующий акт»'
         }
       ],
       centralCourse: {
         title: 'Курс актерского мастерства',
         studioName: '«Лампарельс»',
         badge: 'Набор в группу открыт // Сезон 2026',
-        headline: 'Хватит играть чужие роли в жизни. Пора сыграть свою — ярко и по-настоящему!',
+        headline: 'Импровизация — это про сцену и про жизнь. Выбирайте, каким будет ваш следующий акт.',
         subtitle: 'Актерская студия Logrus Teatteri в Хельсинки',
-        description: 'Представьте: вы выходите на сцену или в кадр, и все взгляды прикованы к вам. Голос звучит уверенно, эмоции бьют через край, а страх сцены исчезает навсегда.',
-        targetAudience: 'Курс одинаково идеально подходит и тем, кто мечтает о сцене или профессиональных съёмках, и тем, кто просто хочет стать ярче, убедительнее и увереннее в повседневной жизни.',
+        description: 'Живое пространство для людей всех возрастов. Учимся работать с партнером, выходить из зоны комфорта и свободно владеть импровизацией.',
+        targetAudience: 'Для тех, кто мечтает о сцене, и всех, кто хочет общаться раскрепощенно, без стресса и зажимов.',
         trialInfo: 'Первое пробное занятие — БЕСПЛАТНО',
         phone: '+358 45 2656332',
         email: 'info@logrus.fi',
         location: 'Helsinki · Kamppi (Urho Kekkosen katu 8)',
-        schedule: 'Очные занятия по вечерам · Набор до 15 человек',
-        closingQuote: 'Твоя лучшая роль ещё впереди ✨',
+        schedule: 'Очные вечерние занятия · Группы до 15 человек',
+        closingQuote: 'Каким будет твой следующий акт — выбираешь ты ✨',
         pillars: [
           {
             num: '01',
-            title: 'Природный талант & Свобода',
-            desc: 'Раскроете свой внутренний потенциал, научитесь сбрасывать физические зажимы и свободно выражать настоящие живые эмоции.'
+            title: 'Раскованность & Свобода',
+            desc: 'Снятие телесных зажимов, страха сцены и абсолютное принятие себя.'
           },
           {
             num: '02',
-            title: 'Уверенность & Харизма',
-            desc: 'Развитие сценического обаяния, преодоление страха публичности и умение удерживать внимание любого зрительного зала или собеседника.'
+            title: 'Партнерство & Эмпатия',
+            desc: 'Подстройка, отзеркаливание эмоциональных состояний и тонкое чувствование человека.'
           },
           {
             num: '03',
-            title: 'Голос, Речь & Ткань пластики',
-            desc: 'Профессиональная постановка диафрагмального дыхания, глубокого грудного тембра, четкой дикции и выразительного языка тела.'
+            title: 'Импровизация & Гибкость',
+            desc: 'Навык действовать без страха ошибиться и получать кайф от процесса.'
           },
           {
             num: '04',
-            title: 'Первые роли & Актерские этюды',
-            desc: 'Погружение в разбор текстов, создание глубоких сценических образов и работа над первыми настоящими ролями под руководством режиссера.'
+            title: 'Роли & Выход на сцену',
+            desc: 'Актерские этюды, живые персонажи и полноценный выпускной показ в центре Хельсинки.'
           }
         ]
       }
     },
     about: {
       tag: 'Наша миссия',
-      title: 'Два мира.<br />Одна драма.<br /><span class="font-dramatic italic font-normal text-suomi">Общий диалог.</span>',
+      title: 'Два мира.<br />Одна драма.<br /><span class="text-suomi font-semibold">Общий диалог.</span>',
       italicQuote: 'Мы объединяем финскую эстетику пространства с глубинным русским психологическим театром.',
       text: 'Театр «Logrus» — это живое пространство для русскоязычной диаспоры Финляндии и всех, кто ценит европейский подход к классическому и современному драматическому искусству.',
       mobileFeaturesTitle: 'Особенности театра',
@@ -279,15 +314,15 @@ export const translations: Record<Language, TranslationSchema> = {
       feature1Tag: '01 // ЯЗЫК',
       feature1Title: 'Русская речь',
       feature1Desc: 'Сохранение лучшей школы произношения и актерского мастерства.',
-      feature2Tag: '02 // ДОСТУПНОСТЬ',
-      feature2Title: 'Финские субтитры',
-      feature2Desc: 'Синхронный перевод на финский язык для местных зрителей и гостей.',
+      feature2Tag: '02 // АТМОСФЕРА',
+      feature2Title: 'Камерный формат',
+      feature2Desc: 'Всего 90 мест в зале для глубокого погружения и искренней эмоции.',
       feature3Tag: '03 // ФОРМАТ',
       feature3Title: 'Скандинавский зал',
       feature3Desc: 'Лаконичное пространство в центре Хельсинки без помпезности.'
     },
     contacts: {
-      heading: 'Tervetuloa <span class="font-dramatic italic font-normal text-suomi">· Добро пожаловать.</span>',
+      heading: 'Tervetuloa <span class="text-suomi font-semibold">· Добро пожаловать.</span>',
       cardTitle: 'Контакты и Касса',
       addressTag: 'Особые данные / Адрес',
       contactTag: 'Связь',
@@ -305,6 +340,28 @@ export const translations: Record<Language, TranslationSchema> = {
     footer: {
       copyright: '© 2026 · Logrus Teatteri Helsinki · Финско-русская сцена',
       toTop: '↑ Наверх'
+    },
+    showPage: {
+      backToAfisha: 'Все спектакли',
+      galleryTag: 'Фотохроника постановки',
+      galleryTitle: 'Снимки со спектакля<span class="text-suomi font-extrabold">.</span>',
+      gallerySub: 'Моменты живого действия, атмосфера репетиций и закулисная магия камерной сцены.',
+      allPhotos: 'Все снимки',
+      stagePhotos: 'На сцене',
+      backstagePhotos: 'За кулисами',
+      rehearsalPhotos: 'Репетиции',
+      zoomPhoto: 'Увеличить',
+      closeLightbox: 'Закрыть Esc',
+      directorSectionTitle: 'Замысел постановки',
+      castSectionTitle: 'В ролях и команда',
+      factsSectionTitle: 'Детали показа',
+      venueSectionTitle: 'Место проведения',
+      mapHeading: 'Локация спектакля на карте Хельсинки',
+      bookSeatBtn: 'Забронировать билет',
+      modalTitle: 'Быстрое бронирование билета',
+      modalDesc: 'Выберите удобное время или свяжитесь с кассой театра для выбора конкретных мест в зале.',
+      modalConfirmBtn: 'Перейти к выбору мест',
+      modalCloseBtn: 'Закрыть'
     }
   },
   fi: {
@@ -318,21 +375,21 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Suomi · Helsinki',
       stageTag: 'Venäjänkielinen kämmernäyttämö',
-      title: 'Venäläinen draama<br />pohjoisessa <span class="font-dramatic italic font-normal text-suomi">hiljaisuudessa</span><span class="text-redru">.</span>',
-      description: '<span class="font-dramatic italic text-suomi text-2xl sm:text-3xl font-semibold">Logrus Teatteri</span> — viileä skandinaavinen tilan estetiikka Helsingin keskustassa ja syvä kunnioitus venäläistä draamaperinnettä kohtaan.',
+      title: 'Venäläinen draama<br />pohjoisessa <span class="text-suomi font-semibold">hiljaisuudessa</span><span class="text-redru">.</span>',
+      description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — viileä skandinaavinen tilan estetiikka Helsingin keskustassa ja syvä kunnioitus venäläistä draamaperinnettä kohtaan.',
       locationLabel: '— Sijaintimme —',
       locationName: 'Helsinki · Kamppi',
       locationDesc: '90-paikkainen kammersali Kampin alueella',
       langLabel: 'Esityskieli',
-      langValue: 'Venäjä (suomenkieliset tekstit)'
+      langValue: 'Venäjä'
     },
     afisha: {
       tag: 'Tulevat esitykset // Lokakuu 2026',
-      title: 'Ohjelmisto<span class="font-dramatic italic font-normal text-suomi">.</span>',
-      subtitlesNote: 'Suomenkieliset tekstit (tekstitys suomeksi)',
+      title: 'Ohjelmisto<span class="text-suomi font-bold">.</span>',
+      subtitlesNote: 'Kamarinäyttämö Helsingin keskustassa',
       premiereTag: 'Ensi-ilta Helsingissä',
       durationLabel: 'Kesto',
-      subtitlesLabel: 'Tekstitys',
+      subtitlesLabel: 'Kieli',
       ageLabel: 'Ikäraja',
       ticketsLabel: 'Liput',
       bookTicketBtn: 'Varaa lippu',
@@ -340,6 +397,19 @@ export const translations: Record<Language, TranslationSchema> = {
       secondaryPriceLabel: 'Hinta',
       secondaryBuyBtn: 'Liput',
       shows: {
+        'novecento': {
+          title: 'Novecento',
+          subtitle: 'Alessandro Baricco · Ohjaus Akvile Ruzgyte',
+          date: '13. Elokuuta / 13.08',
+          stage: 'Narri näyttämö',
+          price: 'alk. 20 €',
+          duration: '1t 45min',
+          subtitles: 'Venäjä',
+          age: '12+',
+          capacity: '80 paikkaa',
+          quote: '«Loputon piano kuin ääretön valtameri, ja ihminen joka löysi musiikin mutta ei rantaa…»',
+          description: 'Tarina pianistista, joka syntyi ja eli koko elämänsä valtamerilaivalla. Monodraama vapaudesta, pelosta, musiikista ja äärettömyydestä meren ja taivaan välillä.'
+        },
         'cherry-orchard': {
           title: 'Kirsikkapuutarha',
           subtitle: 'A. Tšehov · Ohjaus Anna Vedenejeva',
@@ -347,11 +417,11 @@ export const translations: Record<Language, TranslationSchema> = {
           stage: 'Kamppi Main Stage',
           price: 'alk. 25 €',
           duration: '2t 40min',
-          subtitles: 'Suomi (FI)',
+          subtitles: 'Venäjä',
           age: '14+',
           capacity: '90 paikkaa',
           quote: '«Voi minun lapsuuteni, minun puhtauteni! Tässä huoneessa nukuin, täältä katselin puutarhaan, onni heräsi kanssani joka aamu...»',
-          description: 'Tšehovin klassikko skandinaavisena tulkintana — kirkas, kuulas ja ihmisen yksinäisyyttä syvästi luotaava. Esitys on venäjäksi suomenkielisellä tekstityksellä.'
+          description: 'Tšehovin klassikko skandinaavisena tulkintana — kirkas, kuulas ja ihmisen yksinäisyyttä syvästi luotaava.'
         },
         'maya-sea': {
           title: 'Maija ja meri',
@@ -360,7 +430,7 @@ export const translations: Record<Language, TranslationSchema> = {
           stage: 'Kammersali',
           price: 'alk. 20 €',
           duration: '1t 50min',
-          subtitles: 'Suomi (FI)',
+          subtitles: 'Venäjä',
           age: '16+',
           capacity: '60 paikkaa',
           description: 'Sopeutumisen ja muiston tarina venäjän kielellä. Ainutlaatuinen monosoolo 60 paikan intimiympäristössä.'
@@ -369,7 +439,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     courses: {
       tag: 'Näyttämölaboratorio // Haku 2026',
-      title: 'Näyttelijänkurssit<span class="font-dramatic italic font-normal text-suomi">.</span>',
+      title: 'Näyttelijänkurssit<span class="text-suomi font-semibold">.</span>',
       subtitle: 'Vapauta näyttämöpotentiaalisi, äänesi ja karismasi ammattiohjaajien opastuksella Helsingin keskustassa.',
       swipeNote: 'Pyyhkäise kuvaa →',
       enrollBtn: 'Ilmoittaudu kurssille',
@@ -464,9 +534,9 @@ export const translations: Record<Language, TranslationSchema> = {
       feature1Tag: '01 // KIELI',
       feature1Title: 'Venäjän kieli',
       feature1Desc: 'Parhaan lausunta- ja näyttelijäkoulun vaaliminen.',
-      feature2Tag: '02 // SAAVUTETTAVUUS',
-      feature2Title: 'Suomenkieliset tekstit',
-      feature2Desc: 'Samanaikainen käännös suomeksi paikallisille katsojille ja vieraille.',
+      feature2Tag: '02 // TUNNELMA',
+      feature2Title: 'Kamarimuoto',
+      feature2Desc: 'Vain 90 paikkaa katsomossa syvää elämystä ja aitoa vuorovaikutusta varten.',
       feature3Tag: '03 // FORMAATTI',
       feature3Title: 'Skandinaavinen sali',
       feature3Desc: 'Pelkistetty, tyylikäs tila Helsingin keskustassa ilman mahtipontisuutta.'
@@ -490,6 +560,28 @@ export const translations: Record<Language, TranslationSchema> = {
     footer: {
       copyright: '© 2026 · Logrus Teatteri Helsinki · Suomalais-venäläinen näyttämö',
       toTop: '↑ Takaisin ylös'
+    },
+    showPage: {
+      backToAfisha: 'Kaikki esitykset',
+      galleryTag: 'Esityksen valokuvakronikka',
+      galleryTitle: 'Valokuvat esityksestä<span class="text-suomi font-extrabold">.</span>',
+      gallerySub: 'Elävän toiminnan hetkiä, harjoitusten tunnelmaa ja kamarinäyttämön taikaa.',
+      allPhotos: 'Kaikki kuva',
+      stagePhotos: 'Näyttämöllä',
+      backstagePhotos: 'Kulisseissa',
+      rehearsalPhotos: 'Harjoitukset',
+      zoomPhoto: 'Suurenna',
+      closeLightbox: 'Sulje Esc',
+      directorSectionTitle: 'Ohjaajan näkemys',
+      castSectionTitle: 'Rooleissa ja työryhmä',
+      factsSectionTitle: 'Esitystiedot',
+      venueSectionTitle: 'Tapahtumapaikka',
+      mapHeading: 'Esityksen sijainti Helsingin kartalla',
+      bookSeatBtn: 'Varaa lippu',
+      modalTitle: 'Pikavaraus',
+      modalDesc: 'Valitse sopiva aika tai ota yhteyttä teatterin kassaan valitaksesi paikat salista.',
+      modalConfirmBtn: 'Siirry paikkavalintaan',
+      modalCloseBtn: 'Sulje'
     }
   },
   en: {
@@ -509,15 +601,15 @@ export const translations: Record<Language, TranslationSchema> = {
       locationName: 'Helsinki · Kamppi',
       locationDesc: '90-seat chamber hall in Kamppi district',
       langLabel: 'Show language',
-      langValue: 'Russian (with Finnish subtitles)'
+      langValue: 'Russian'
     },
     afisha: {
       tag: 'Upcoming Shows // October 2026',
       title: 'Repertoire<span class="font-dramatic italic font-normal text-suomi">.</span>',
-      subtitlesNote: 'Finnish subtitles available (suomenkieliset text)',
+      subtitlesNote: 'Chamber stage in central Helsinki',
       premiereTag: 'Helsinki Premiere',
       durationLabel: 'Duration',
-      subtitlesLabel: 'Subtitles',
+      subtitlesLabel: 'Language',
       ageLabel: 'Age',
       ticketsLabel: 'Tickets',
       bookTicketBtn: 'Book Ticket',
@@ -525,6 +617,19 @@ export const translations: Record<Language, TranslationSchema> = {
       secondaryPriceLabel: 'Price',
       secondaryBuyBtn: 'Tickets',
       shows: {
+        'novecento': {
+          title: 'Novecento',
+          subtitle: 'Alessandro Baricco · Directed by Akvile Ruzgyte',
+          date: '13 August / 13.08',
+          stage: 'Narri näyttämö',
+          price: 'from 20 €',
+          duration: '1h 45min',
+          subtitles: 'Russian',
+          age: '12+',
+          capacity: '80 seats',
+          quote: '«An endless piano like the boundless ocean, and a man who found music but never found the shore…»',
+          description: 'The story of a pianist born and raised aboard an ocean liner — a musician who saw the world through ocean sounds and melodies. A monodrama about freedom, fear, music, and infinity between sea and sky.'
+        },
         'cherry-orchard': {
           title: 'The Cherry Orchard',
           subtitle: 'Anton Chekhov · Directed by Anna Vedeneeva',
@@ -532,11 +637,11 @@ export const translations: Record<Language, TranslationSchema> = {
           stage: 'Kamppi Main Stage',
           price: 'from 25 €',
           duration: '2h 40min',
-          subtitles: 'Suomi (FI)',
+          subtitles: 'Russian',
           age: '14+',
           capacity: '90 seats',
           quote: '«Oh, my childhood, my purity! In this room I slept, from here I looked out at the garden...»',
-          description: "Chekhov's classic in a Nordic interpretation — clean, transparent, with quiet pauses and a deep focus on human solitude. Performed in Russian with synchronous Finnish subtitles."
+          description: "Chekhov's classic in a Nordic interpretation — clean, transparent, with quiet pauses and a deep focus on human solitude."
         },
         'maya-sea': {
           title: 'Maya and the Sea',
@@ -545,7 +650,7 @@ export const translations: Record<Language, TranslationSchema> = {
           stage: 'Chamber Stage',
           price: 'from 20 €',
           duration: '1h 50min',
-          subtitles: 'Suomi (FI)',
+          subtitles: 'Russian',
           age: '16+',
           capacity: '60 seats',
           description: 'A story of adaptation and memory performed in Russian. A unique solo performance in an intimate 60-seat setting.'
@@ -641,7 +746,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     about: {
       tag: 'Our Mission',
-      title: 'Two worlds.<br />One drama.<br /><span class="font-dramatic italic font-normal text-suomi">Shared dialogue.</span>',
+      title: 'Two worlds.<br />One drama.<br /><span class="text-suomi font-semibold">Shared dialogue.</span>',
       italicQuote: 'We combine Finnish spatial aesthetics with deep Russian psychological theater.',
       text: 'Logrus Theater is a vibrant space for the Russian-speaking community in Finland and all who appreciate a European approach to classical and modern drama.',
       mobileFeaturesTitle: 'Theater Highlights',
@@ -649,15 +754,15 @@ export const translations: Record<Language, TranslationSchema> = {
       feature1Tag: '01 // LANGUAGE',
       feature1Title: 'Russian Language',
       feature1Desc: 'Preserving the finest tradition of pronunciation and acting.',
-      feature2Tag: '02 // ACCESSIBILITY',
-      feature2Title: 'Finnish Subtitles',
-      feature2Desc: 'Synchronous Finnish subtitles for local audiences and guests.',
+      feature2Tag: '02 // ATMOSPHERE',
+      feature2Title: 'Chamber Stage',
+      feature2Desc: 'Intimate 90-seat hall for deep immersion and genuine emotion.',
       feature3Tag: '03 // VENUE',
       feature3Title: 'Nordic Hall',
       feature3Desc: 'An elegant, streamlined venue in central Helsinki.'
     },
     contacts: {
-      heading: 'Tervetuloa <span class="font-dramatic italic font-normal text-suomi">· Welcome.</span>',
+      heading: 'Tervetuloa <span class="text-suomi font-semibold">· Welcome.</span>',
       cardTitle: 'Contacts & Box Office',
       addressTag: 'Address',
       contactTag: 'Contact',
@@ -675,6 +780,28 @@ export const translations: Record<Language, TranslationSchema> = {
     footer: {
       copyright: '© 2026 · Logrus Teatteri Helsinki · Finnish-Russian Stage',
       toTop: '↑ Back to top'
+    },
+    showPage: {
+      backToAfisha: 'All Shows',
+      galleryTag: 'Production Photo Chronicle',
+      galleryTitle: 'Show Photography<span class="text-suomi font-extrabold">.</span>',
+      gallerySub: 'Live action moments, rehearsal atmosphere and backstage magic of our chamber stage.',
+      allPhotos: 'All Photos',
+      stagePhotos: 'On Stage',
+      backstagePhotos: 'Backstage',
+      rehearsalPhotos: 'Rehearsals',
+      zoomPhoto: 'Enlarge',
+      closeLightbox: 'Close Esc',
+      directorSectionTitle: 'Director Vision',
+      castSectionTitle: 'Cast & Crew',
+      factsSectionTitle: 'Show Details',
+      venueSectionTitle: 'Venue Location',
+      mapHeading: 'Show Location on Helsinki Map',
+      bookSeatBtn: 'Book Ticket',
+      modalTitle: 'Quick Seat Booking',
+      modalDesc: 'Select preferred showtime or contact box office for specific seat choices.',
+      modalConfirmBtn: 'Proceed to Seat Selection',
+      modalCloseBtn: 'Close'
     }
   }
 };

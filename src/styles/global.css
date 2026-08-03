@@ -13,7 +13,7 @@
   --color-birch: #f7f3ed;
 
   --font-nordic: 'Unbounded', sans-serif;
-  --font-dramatic: 'Playfair Display', serif;
+  --font-dramatic: 'Plus Jakarta Sans', sans-serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'Plus Jakarta Sans', sans-serif;
 }
@@ -57,10 +57,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dropcap::first-letter {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900;
-  font-size: 4.8rem;
-  line-height: .75;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 800;
+  font-size: 3.8rem;
+  line-height: .8;
   float: left;
   margin: .2rem .6rem 0 0;
   color: #003580;
@@ -137,7 +137,6 @@ html {
 /* Smooth i18n language transition styling */
 main {
   transition: opacity 220ms ease-in-out, transform 220ms ease-in-out, filter 220ms ease-in-out;
-  will-change: opacity, filter;
 }
 
 main.i18n-fade-out {

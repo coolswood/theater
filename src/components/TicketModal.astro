@@ -1,0 +1,140 @@
+---
+import type { Show } from '../data/shows';
+import { translations } from '../data/translations';
+
+interface Props {
+  show: Show;
+}
+
+const { show } = Astro.props;
+const t = translations.ru.showPage;
+---
+
+<div id="ticket-modal" class="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen z-50 bg-granite/80 backdrop-blur-md hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+  <div class="bg-white rounded-3xl border border-rule max-w-lg w-full p-6 sm:p-10 shadow-2xl relative transform scale-95 transition-transform duration-300">
+    
+    <button id="modal-close-btn" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-snow2 hover:bg-rule text-granite flex items-center justify-center transition cursor-pointer">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+
+    <div class="mb-6">
+      <span class="suomi-tag mb-2">Бронирование</span>
+      <h3 class="font-nordic font-extrabold text-granite text-2xl sm:text-3xl mt-1" data-i18n="showPage.modalTitle">
+        {t.modalTitle}
+      </h3>
+      <p class="font-sans text-sm text-mute mt-2" data-i18n="showPage.modalDesc">
+        {t.modalDesc}
+      </p>
+    </div>
+
+    <!-- Show Card Info Summary -->
+    <div class="p-4 rounded-2xl bg-snow2/70 border border-rule mb-6">
+      <div class="flex items-center justify-between font-nordic text-sm font-bold text-granite mb-1">
+        <span data-i18n={`afisha.shows.${show.id}.title`}>{show.title}</span>
+        <span class="text-suomi" data-i18n={`afisha.shows.${show.id}.price`}>{show.price}</span>
+      </div>
+      <p class="font-sans text-xs text-mute">
+        <span data-i18n={`afisha.shows.${show.id}.date`}>{show.date}</span> · {show.time} · {show.stage}
+      </p>
+    </div>
+
+    <!-- Quick Contact / Checkout Form -->
+    <form id="ticket-form" class="space-y-4">
+      <div>
+        <label class="block font-nordic text-[11px] uppercase tracking-wider text-mute mb-1 font-semibold">Ваше имя</label>
+        <input type="text" required placeholder="Анна Смирнова" class="w-full px-4 py-3 rounded-xl bg-snow border border-rule focus:border-suomi focus:outline-none text-sm text-granite" />
+      </div>
+      <div>
+        <label class="block font-nordic text-[11px] uppercase tracking-wider text-mute mb-1 font-semibold">Телефон или Email</label>
+        <input type="text" required placeholder="+358 40 123 4567" class="w-full px-4 py-3 rounded-xl bg-snow border border-rule focus:border-suomi focus:outline-none text-sm text-granite" />
+      </div>
+      <div>
+        <label class="block font-nordic text-[11px] uppercase tracking-wider text-mute mb-1 font-semibold">Количество билетов</label>
+        <select class="w-full px-4 py-3 rounded-xl bg-snow border border-rule focus:border-suomi focus:outline-none text-sm text-granite">
+          <option>1 билет</option>
+          <option selected>2 билета</option>
+          <option>3 билета</option>
+          <option>4 билета</option>
+        </select>
+      </div>
+
+      <div class="pt-2">
+        <button type="submit" class="w-full btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold py-4 rounded-xl text-center cursor-pointer shadow-md" data-i18n="showPage.modalConfirmBtn">
+          {t.modalConfirmBtn}
+        </button>
+      </div>
+    </form>
+
+    <div id="booking-success" class="hidden text-center py-6">
+      <div class="w-12 h-12 rounded-full bg-suomisoft text-suomi font-bold text-xl flex items-center justify-center mx-auto mb-4">✓</div>
+      <h4 class="font-nordic font-bold text-lg text-granite mb-2">Заявка принята!</h4>
+      <p class="font-sans text-xs text-mute">Администратор кассы свяжется с вами в течение 15 минут для подтверждения мест.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function initTicketModalScript() {
+    const modal = document.getElementById('ticket-modal');
+    if (modal && modal.parentElement !== document.body) {
+      document.body.appendChild(modal);
+    }
+
+    const closeBtn = document.getElementById('modal-close-btn');
+    const heroBtn = document.getElementById('hero-book-btn');
+    const form = document.getElementById('ticket-form');
+    const successMsg = document.getElementById('booking-success');
+
+    function openModal() {
+      if (!modal) return;
+      if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+      }
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.querySelector('.transform')?.classList.remove('scale-95');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.add('opacity-0');
+      modal.querySelector('.transform')?.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    heroBtn?.addEventListener('click', openModal);
+    closeBtn?.addEventListener('click', closeModal);
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (form && successMsg) {
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+        setTimeout(() => {
+          closeModal();
+          setTimeout(() => {
+            form.classList.remove('hidden');
+            successMsg.classList.add('hidden');
+          }, 350);
+        }, 2500);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTicketModalScript);
+  } else {
+    initTicketModalScript();
+  }
+</script>

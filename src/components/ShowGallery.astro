@@ -1,0 +1,202 @@
+---
+import type { GalleryItem } from '../data/shows';
+import { translations } from '../data/translations';
+
+interface Props {
+  gallery: GalleryItem[];
+}
+
+const { gallery = [] } = Astro.props;
+const t = translations.ru.showPage;
+
+// Assigning visually dynamic aspect ratios for a rich mosaic flow if needed
+const mosaicAspects = [
+  'aspect-[4/3]',
+  'aspect-[3/4]',
+  'aspect-[16/11]',
+  'aspect-[1/1]',
+  'aspect-[4/5]'
+];
+---
+
+<section id="gallery" class="px-3 sm:px-10 py-16 sm:py-28 border-t border-rule bg-snow/50">
+  <div class="max-w-[1400px] mx-auto">
+
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 reveal">
+      <div>
+        <span class="suomi-tag mb-3" data-i18n="showPage.galleryTag">{t.galleryTag}</span>
+        <h2 class="font-nordic font-extrabold text-granite text-3xl sm:text-6xl leading-none mt-2" data-i18n-html="showPage.galleryTitle" set:html={t.galleryTitle} />
+      </div>
+      <p class="font-sans text-sm text-mute max-w-md border-l-2 border-suomi pl-4 py-1" data-i18n="showPage.gallerySub">
+        {t.gallerySub}
+      </p>
+    </div>
+
+    <!-- Elegant Mosaic Gallery Layout (CSS Columns Masonry) -->
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 sm:gap-6 reveal" id="show-gallery-grid">
+      {gallery.map((item, idx) => {
+        const aspectClass = mosaicAspects[idx % mosaicAspects.length];
+        return (
+          <div 
+            class="gallery-card break-inside-avoid group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-rule bg-white shadow-xs hover:shadow-2xl transition-all duration-500 cursor-pointer mb-5 sm:mb-6"
+            data-index={idx}
+            data-src={item.src}
+          >
+            <!-- Natural Aspect Ratio Mosaic Box -->
+            <div class="w-full overflow-hidden relative bg-granite/5">
+              <img 
+                src={item.src} 
+                alt={`Кадр со спектакля #${idx + 1}`} 
+                class="w-full h-auto object-cover block transition-transform duration-700 ease-out group-hover:scale-104" 
+                loading="lazy"
+              />
+              
+              <!-- Subtle Dark Hover Glass -->
+              <div class="absolute inset-0 bg-granite/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                <div class="px-5 py-2.5 rounded-full bg-white/95 text-granite text-xs font-nordic font-bold uppercase tracking-wider shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300 flex items-center gap-2">
+                  <svg class="w-4 h-4 text-suomi" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                  </svg>
+                  <span data-i18n="showPage.zoomPhoto">{t.zoomPhoto}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX MODAL -->
+<div id="gallery-lightbox" class="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen z-50 bg-granite/95 backdrop-blur-md hidden flex flex-col justify-between p-4 sm:p-8 opacity-0 transition-opacity duration-300">
+  
+  <!-- Lightbox Header Controls -->
+  <div class="flex items-center justify-between z-10 w-full max-w-7xl mx-auto">
+    <div class="flex items-center gap-3">
+      <span class="w-2.5 h-2.5 rounded-full bg-redru animate-pulse"></span>
+      <span id="lightbox-counter" class="font-nordic text-xs font-semibold tracking-widest text-snow/80 uppercase">01 / 05</span>
+    </div>
+    
+    <button id="lightbox-close" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white font-nordic text-xs tracking-wider uppercase transition flex items-center gap-2 border border-white/15 cursor-pointer">
+      <span data-i18n="showPage.closeLightbox">{t.closeLightbox}</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <!-- Main Image Display & Navigation Arrows -->
+  <div class="relative flex-1 flex items-center justify-center my-2 overflow-hidden w-full max-w-7xl mx-auto">
+    <button id="lightbox-prev" class="absolute left-2 sm:left-4 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-suomi text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all duration-200 hover:scale-110 cursor-pointer">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+    </button>
+
+    <div class="w-full h-full p-2 flex items-center justify-center">
+      <img id="lightbox-img" src="" alt="" class="max-w-[88vw] max-h-[82vh] object-contain rounded-2xl shadow-2xl transition-all duration-300 transform scale-95" />
+    </div>
+
+    <button id="lightbox-next" class="absolute right-2 sm:right-4 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-suomi text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all duration-200 hover:scale-110 cursor-pointer">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <!-- Minimal Footer Spacer -->
+  <div class="h-4"></div>
+</div>
+
+<script>
+  function initGalleryScript() {
+    const grid = document.getElementById('show-gallery-grid');
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.gallery-card'));
+
+    // Lightbox Logic
+    const lightbox = document.getElementById('gallery-lightbox');
+    if (lightbox && lightbox.parentElement !== document.body) {
+      document.body.appendChild(lightbox);
+    }
+
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+
+    let currentIndex = 0;
+
+    function openLightbox(index: number) {
+      if (!lightbox || !cards[index]) return;
+      if (lightbox.parentElement !== document.body) {
+        document.body.appendChild(lightbox);
+      }
+      currentIndex = index;
+      updateLightboxContent();
+
+      lightbox.classList.remove('hidden');
+      setTimeout(() => {
+        lightbox.classList.remove('opacity-0');
+        if (lightboxImg) lightboxImg.classList.remove('scale-95');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.classList.add('opacity-0');
+      if (lightboxImg) lightboxImg.classList.add('scale-95');
+      setTimeout(() => {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    function updateLightboxContent() {
+      const card = cards[currentIndex];
+      if (!card) return;
+
+      const src = card.getAttribute('data-src') || '';
+
+      if (lightboxImg) {
+        lightboxImg.src = src;
+      }
+      if (lightboxCounter) {
+        const currentStr = String(currentIndex + 1).padStart(2, '0');
+        const totalStr = String(cards.length).padStart(2, '0');
+        lightboxCounter.textContent = `${currentStr} / ${totalStr}`;
+      }
+    }
+
+    cards.forEach((card, idx) => {
+      card.addEventListener('click', () => openLightbox(idx));
+    });
+
+    closeBtn?.addEventListener('click', closeLightbox);
+
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      updateLightboxContent();
+    });
+
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % cards.length;
+      updateLightboxContent();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox || lightbox.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevBtn?.click();
+      if (e.key === 'ArrowRight') nextBtn?.click();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGalleryScript);
+  } else {
+    initGalleryScript();
+  }
+</script>

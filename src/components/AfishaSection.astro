@@ -25,14 +25,8 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
     <article class="reveal mb-12 sm:mb-20 p-4 sm:p-12 rounded-2xl sm:rounded-3xl bg-snow2/60 border border-rule">
       <div class="grid lg:grid-cols-12 gap-10 items-center">
 
-        <div class="lg:col-span-5 relative group overflow-hidden rounded-2xl">
-          <div class="aspect-[3/4] overflow-hidden">
-            <img src={featuredShow.poster} alt={featuredShow.title} class="poster w-full h-full object-cover" />
-          </div>
-          <div class="absolute top-4 left-4 bg-suomi text-white font-nordic text-[10px] uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full font-semibold" data-i18n="afisha.premiereTag">
-            {t.premiereTag}
-          </div>
-          <div class="absolute top-4 right-4 bg-redru text-white w-2.5 h-2.5 rounded-full"></div>
+        <div class="lg:col-span-5 relative group overflow-hidden rounded-2xl flex items-center justify-center bg-granite/5 p-2 sm:p-4">
+          <img src={featuredShow.poster} alt={featuredShow.title} class="poster w-full h-auto max-h-[75vh] object-contain rounded-xl shadow-sm" />
         </div>
 
         <div class="lg:col-span-7">
@@ -49,13 +43,16 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
           <h3 class="font-nordic font-bold text-granite text-3xl sm:text-5xl lg:text-6xl mb-3 tracking-tight" data-i18n={`afisha.shows.${featuredShow.id}.title`}>
             {featuredShow.title}
           </h3>
-          <p class="font-dramatic italic text-mute text-xl sm:text-2xl mb-6 sm:mb-8" data-i18n={`afisha.shows.${featuredShow.id}.subtitle`}>{featuredShow.subtitle}</p>
+          <p class="font-sans font-medium text-mute text-lg sm:text-xl mb-6 sm:mb-8" data-i18n={`afisha.shows.${featuredShow.id}.subtitle`}>{featuredShow.subtitle}</p>
 
           {featuredShow.quote && (
-            <blockquote class="pl-4 sm:pl-6 my-6 border-l-2 border-redru py-1 bg-white/60 p-4 rounded-r-xl">
-              <p class="font-dramatic italic text-xl sm:text-2xl text-granite leading-snug" data-i18n={`afisha.shows.${featuredShow.id}.quote`}>
-                {featuredShow.quote}
-              </p>
+            <blockquote class="relative my-7 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-suomisoft/70 via-white to-snow2/50 border border-rule/80 shadow-xs overflow-hidden group transition-all duration-300 hover:border-suomi/30">
+              <div class="absolute -top-3 -left-2 text-6xl sm:text-7xl font-nordic text-suomi/10 font-black select-none pointer-events-none leading-none">“</div>
+              <div class="relative z-10">
+                <p class="font-sans font-medium italic text-base sm:text-xl text-granite leading-relaxed tracking-tight" data-i18n={`afisha.shows.${featuredShow.id}.quote`}>
+                  {featuredShow.quote}
+                </p>
+              </div>
             </blockquote>
           )}
 
@@ -87,48 +84,50 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
               <span data-i18n="afisha.bookTicketBtn">{t.bookTicketBtn}</span> (<span data-i18n={`afisha.shows.${featuredShow.id}.price`}>{featuredShow.price}</span>)
               <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </button>
-            <a href="#" class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-5 sm:px-7 py-3.5 sm:py-4 rounded-full text-center" data-i18n="afisha.aboutShowBtn">{t.aboutShowBtn}</a>
+            <a href={`/shows/${featuredShow.id}`} class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-5 sm:px-7 py-3.5 sm:py-4 rounded-full text-center" data-i18n="afisha.aboutShowBtn">{t.aboutShowBtn}</a>
           </div>
         </div>
 
       </div>
     </article>
 
-    <!-- SECONDARY SHOWS -->
-    <div class="space-y-8">
-      {secondaryShows.map((show) => (
-        <article class="reveal rounded-3xl border border-rule overflow-hidden bg-snow flex flex-col md:flex-row items-stretch">
-          <div class="md:w-5/12 relative aspect-[16/10] md:aspect-auto overflow-hidden">
-            <img src={show.poster} alt={show.title} class="poster absolute inset-0 w-full h-full object-cover" />
-          </div>
-          <div class="md:w-7/12 p-4 sm:p-12 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-3 mb-3">
-                <span class="font-sans text-xs tracking-[0.2em] uppercase text-suomi font-bold">
-                  <span data-i18n={`afisha.shows.${show.id}.date`}>{show.date}</span> · {show.time}
-                </span>
-                <span class="w-1.5 h-1.5 rounded-full bg-rule"></span>
-                <span class="font-sans text-xs uppercase tracking-[0.2em] text-mute" data-i18n={`afisha.shows.${show.id}.stage`}>{show.stage}</span>
-              </div>
-              <h3 class="font-nordic font-bold text-granite text-2xl sm:text-4xl mb-2" data-i18n={`afisha.shows.${show.id}.title`}>{show.title}</h3>
-              <p class="font-dramatic italic text-mute text-xl mb-4" data-i18n={`afisha.shows.${show.id}.subtitle`}>{show.subtitle}</p>
-              <p class="text-granite/80 text-base leading-relaxed max-w-xl font-light mb-6" data-i18n={`afisha.shows.${show.id}.description`}>
-                {show.description}
-              </p>
+    <!-- SECONDARY SHOWS (Hidden for now) -->
+    {false && secondaryShows.length > 0 && (
+      <div class="space-y-8">
+        {secondaryShows.map((show) => (
+          <article class="reveal rounded-3xl border border-rule overflow-hidden bg-snow flex flex-col md:flex-row items-stretch">
+            <div class="md:w-5/12 relative flex items-center justify-center p-3 bg-granite/5 min-h-[260px]">
+              <img src={show.poster} alt={show.title} class="poster w-full h-auto max-h-[400px] object-contain rounded-xl" />
             </div>
-            <div class="flex items-center justify-between border-t border-rule pt-6 mt-4">
+            <div class="md:w-7/12 p-4 sm:p-12 flex flex-col justify-between">
               <div>
-                <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-mute" data-i18n="afisha.secondaryPriceLabel">{t.secondaryPriceLabel}</p>
-                <p class="font-nordic font-bold text-xl text-granite" data-i18n={`afisha.shows.${show.id}.price`}>{show.price}</p>
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="font-sans text-xs tracking-[0.2em] uppercase text-suomi font-bold">
+                    <span data-i18n={`afisha.shows.${show.id}.date`}>{show.date}</span> · {show.time}
+                  </span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-rule"></span>
+                  <span class="font-sans text-xs uppercase tracking-[0.2em] text-mute" data-i18n={`afisha.shows.${show.id}.stage`}>{show.stage}</span>
+                </div>
+                <h3 class="font-nordic font-bold text-granite text-2xl sm:text-4xl mb-2" data-i18n={`afisha.shows.${show.id}.title`}>{show.title}</h3>
+                <p class="font-sans font-medium text-mute text-base sm:text-lg mb-4" data-i18n={`afisha.shows.${show.id}.subtitle`}>{show.subtitle}</p>
+                <p class="text-granite/80 text-base leading-relaxed max-w-xl font-light mb-6" data-i18n={`afisha.shows.${show.id}.description`}>
+                  {show.description}
+                </p>
               </div>
-              <button class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-6 py-3 rounded-full inline-flex items-center gap-2 group">
-                <span data-i18n="afisha.secondaryBuyBtn">{t.secondaryBuyBtn}</span> <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </button>
+              <div class="flex items-center justify-between border-t border-rule pt-6 mt-4">
+                <div>
+                  <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-mute" data-i18n="afisha.secondaryPriceLabel">{t.secondaryPriceLabel}</p>
+                  <p class="font-nordic font-bold text-xl text-granite" data-i18n={`afisha.shows.${show.id}.price`}>{show.price}</p>
+                </div>
+                <button class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-6 py-3 rounded-full inline-flex items-center gap-2 group">
+                  <span data-i18n="afisha.secondaryBuyBtn">{t.secondaryBuyBtn}</span> <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </button>
+              </div>
             </div>
-          </div>
-        </article>
-      ))}
-    </div>
+          </article>
+        ))}
+      </div>
+    )}
 
   </div>
 </section>

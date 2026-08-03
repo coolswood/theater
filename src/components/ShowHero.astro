@@ -1,0 +1,118 @@
+---
+import type { Show } from '../data/shows';
+import { translations } from '../data/translations';
+
+interface Props {
+  show: Show;
+}
+
+const { show } = Astro.props;
+const t = translations.ru.showPage;
+const afishaT = translations.ru.afisha;
+---
+
+<section class="relative px-3 sm:px-10 pt-8 pb-16 sm:pb-28 bg-gradient-to-b from-snow2/70 via-snow to-snow border-b border-rule overflow-hidden">
+  
+  <!-- Back navigation bar -->
+  <div class="max-w-[1400px] mx-auto mb-8 sm:mb-12">
+    <a href="/#afisha" class="inline-flex items-center gap-2 font-nordic text-xs tracking-wider uppercase font-semibold text-suomi hover:text-suomidark transition-colors group">
+      <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span data-i18n="showPage.backToAfisha">{t.backToAfisha}</span>
+    </a>
+  </div>
+
+  <div class="max-w-[1400px] mx-auto">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      
+      <!-- Left Info Column -->
+      <div class="lg:col-span-7 reveal">
+        
+        <!-- Metadata Badges -->
+        <div class="flex flex-wrap items-center gap-2.5 mb-6">
+          <span class="px-3.5 py-1 rounded-full bg-suomi text-white font-nordic text-[11px] font-bold uppercase tracking-wider shadow-xs">
+            <span data-i18n={`afisha.shows.${show.id}.date`}>{show.date}</span> · {show.time}
+          </span>
+          <span class="px-3.5 py-1 rounded-full bg-snow2 text-granite font-sans text-xs font-semibold border border-rule">
+            <span data-i18n={`afisha.shows.${show.id}.stage`}>{show.stage}</span>
+          </span>
+          <span class="px-3 py-1 rounded-full bg-redru/10 text-redru font-nordic text-[11px] font-bold">
+            <span data-i18n={`afisha.shows.${show.id}.age`}>{show.age}</span>
+          </span>
+        </div>
+
+        <!-- Title & Subtitle -->
+        <h1 class="font-nordic font-extrabold text-granite text-4xl sm:text-6xl lg:text-7xl mb-4 tracking-tight leading-none" data-i18n={`afisha.shows.${show.id}.title`}>
+          {show.title}
+        </h1>
+        <p class="font-sans font-medium text-mute text-lg sm:text-2xl mb-8" data-i18n={`afisha.shows.${show.id}.subtitle`}>
+          {show.subtitle}
+        </p>
+
+        <!-- Quote Block -->
+        {show.quote && (
+          <blockquote class="relative my-6 p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-rule shadow-sm overflow-hidden group hover:border-suomi/30 transition-all">
+            <div class="absolute -top-3 -left-2 text-6xl font-nordic text-suomi/10 font-black select-none pointer-events-none">“</div>
+            <p class="relative z-10 font-sans italic text-base sm:text-xl text-granite leading-relaxed" data-i18n={`afisha.shows.${show.id}.quote`}>
+              {show.quote}
+            </p>
+          </blockquote>
+        )}
+
+        <!-- Quick Facts Summary Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-5 border-y border-rule my-8">
+          <div>
+            <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi font-bold mb-1" data-i18n="afisha.durationLabel">{afishaT.durationLabel}</p>
+            <p class="font-nordic font-bold text-base sm:text-lg text-granite" data-i18n={`afisha.shows.${show.id}.duration`}>{show.duration}</p>
+          </div>
+          <div>
+            <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi font-bold mb-1" data-i18n="afisha.subtitlesLabel">{afishaT.subtitlesLabel}</p>
+            <p class="font-nordic font-bold text-base sm:text-lg text-granite" data-i18n={`afisha.shows.${show.id}.subtitles`}>{show.subtitles}</p>
+          </div>
+          <div>
+            <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi font-bold mb-1" data-i18n="afisha.ticketsLabel">{afishaT.ticketsLabel}</p>
+            <p class="font-nordic font-bold text-base sm:text-lg text-suomi" data-i18n={`afisha.shows.${show.id}.price`}>{show.price}</p>
+          </div>
+          <div>
+            <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi font-bold mb-1">Места</p>
+            <p class="font-nordic font-bold text-base sm:text-lg text-granite" data-i18n={`afisha.shows.${show.id}.capacity`}>{show.capacity}</p>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <button 
+            id="hero-book-btn"
+            class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-8 py-4 rounded-full inline-flex items-center justify-center gap-3 group cursor-pointer shadow-md"
+          >
+            <span data-i18n="showPage.bookSeatBtn">{t.bookSeatBtn}</span> (<span data-i18n={`afisha.shows.${show.id}.price`}>{show.price}</span>)
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <a href="#gallery" class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-7 py-4 rounded-full text-center inline-flex items-center justify-center gap-2">
+            <span>Галерея снимков ↓</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Poster Column -->
+      <div class="lg:col-span-5 reveal flex items-center justify-center">
+        <div class="relative w-full max-w-md group rounded-3xl overflow-hidden bg-white p-3 border border-rule shadow-xl">
+          <div class="overflow-hidden rounded-2xl bg-granite/5">
+            <img 
+              src={show.poster} 
+              alt={show.title} 
+              class="w-full h-auto max-h-[65vh] object-contain rounded-xl transform transition-transform duration-700 group-hover:scale-102" 
+            />
+          </div>
+          <div class="p-4 bg-white/90 backdrop-blur-md flex items-center justify-between text-xs font-nordic">
+            <span class="text-suomi font-bold">Logrus Teatteri</span>
+            <span class="text-mute uppercase tracking-widest">Premieeri 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

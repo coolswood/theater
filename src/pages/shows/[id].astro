@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ShowHero from '../../components/ShowHero.astro';
+import ShowGallery from '../../components/ShowGallery.astro';
+import ShowDetails from '../../components/ShowDetails.astro';
+import FullWidthMap from '../../components/FullWidthMap.astro';
+import TicketModal from '../../components/TicketModal.astro';
+import Footer from '../../components/Footer.astro';
+import { shows, getShowById } from '../../data/shows';
+
+export function getStaticPaths() {
+  return shows.map((show) => ({
+    params: { id: show.id },
+  }));
+}
+
+const { id } = Astro.params;
+const show = getShowById(id as string) || shows[0];
+---
+
+<Layout title={`${show.title} — Logrus Teatteri Helsinki`} description={show.description}>
+  <Header />
+  <main>
+    <ShowHero show={show} />
+    <ShowGallery gallery={show.gallery || []} />
+    <ShowDetails show={show} />
+    <FullWidthMap />
+    <TicketModal show={show} />
+  </main>
+  <Footer />
+</Layout>

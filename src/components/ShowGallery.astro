@@ -9,7 +9,7 @@ interface Props {
 const { gallery = [] } = Astro.props;
 const t = translations.ru.showPage;
 
-// Assigning visually dynamic aspect ratios for a rich mosaic flow if needed
+// Dynamic aspect ratio classes for mosaic layout
 const mosaicAspects = [
   'aspect-[4/3]',
   'aspect-[3/4]',
@@ -17,54 +17,116 @@ const mosaicAspects = [
   'aspect-[1/1]',
   'aspect-[4/5]'
 ];
+
+// Duplicating items for mobile continuous loop
+const row1Items = [...gallery, ...gallery, ...gallery, ...gallery];
+const row2Items = [...gallery.slice(2), ...gallery.slice(0, 2), ...gallery, ...gallery];
 ---
 
-<section id="gallery" class="px-3 sm:px-10 py-16 sm:py-28 border-t border-rule bg-snow/50">
+<section id="gallery" class="px-3 sm:px-10 py-12 sm:py-28 border-t border-rule bg-snow/50 overflow-hidden">
   <div class="max-w-[1400px] mx-auto">
 
     <!-- Section Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 reveal">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-16 reveal">
       <div>
-        <span class="suomi-tag mb-3" data-i18n="showPage.galleryTag">{t.galleryTag}</span>
-        <h2 class="font-nordic font-extrabold text-granite text-3xl sm:text-6xl leading-none mt-2" data-i18n-html="showPage.galleryTitle" set:html={t.galleryTitle} />
+        <span class="suomi-tag mb-2 sm:mb-3" data-i18n="showPage.galleryTag">{t.galleryTag}</span>
+        <h2 class="font-nordic font-extrabold text-granite text-3xl sm:text-6xl leading-none mt-1 sm:mt-2" data-i18n-html="showPage.galleryTitle" set:html={t.galleryTitle} />
       </div>
-      <p class="font-sans text-sm text-mute max-w-md border-l-2 border-suomi pl-4 py-1" data-i18n="showPage.gallerySub">
+      <p class="font-sans text-xs sm:text-sm text-mute max-w-md border-l-2 border-suomi pl-3 py-0.5 sm:py-1" data-i18n="showPage.gallerySub">
         {t.gallerySub}
       </p>
     </div>
 
-    <!-- Elegant Mosaic Gallery Layout (CSS Columns Masonry) -->
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 sm:gap-6 reveal" id="show-gallery-grid">
-      {gallery.map((item, idx) => {
-        const aspectClass = mosaicAspects[idx % mosaicAspects.length];
-        return (
-          <div 
-            class="gallery-card break-inside-avoid group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-rule bg-white shadow-xs hover:shadow-2xl transition-all duration-500 cursor-pointer mb-5 sm:mb-6"
-            data-index={idx}
-            data-src={item.src}
-          >
-            <!-- Natural Aspect Ratio Mosaic Box -->
-            <div class="w-full overflow-hidden relative bg-granite/5">
-              <img 
-                src={item.src} 
-                alt={`Кадр со спектакля #${idx + 1}`} 
-                class="w-full h-auto object-cover block transition-transform duration-700 ease-out group-hover:scale-104" 
-                loading="lazy"
-              />
-              
-              <!-- Subtle Dark Hover Glass -->
-              <div class="absolute inset-0 bg-granite/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                <div class="px-5 py-2.5 rounded-full bg-white/95 text-granite text-xs font-nordic font-bold uppercase tracking-wider shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300 flex items-center gap-2">
-                  <svg class="w-4 h-4 text-suomi" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-                  </svg>
-                  <span data-i18n="showPage.zoomPhoto">{t.zoomPhoto}</span>
+    <!-- Mobile-Only Continuous Moving Marquee Ticker (sm:hidden) -->
+    <div class="sm:hidden w-full overflow-hidden space-y-3.5 py-2 select-none reveal" id="mosaic-marquee-container">
+      <!-- Row 1: Smooth Slow Drift (Left) -->
+      <div id="marquee-track-1" class="flex gap-3.5 items-center w-max cursor-grab">
+        {row1Items.map((item, idx) => {
+          const aspectClass = mosaicAspects[idx % mosaicAspects.length];
+          const uniqueIndex = idx % gallery.length;
+          return (
+            <div 
+              class="gallery-card shrink-0 group relative overflow-hidden rounded-2xl border border-rule bg-white shadow-xs active:scale-98 transition-all cursor-pointer"
+              data-index={uniqueIndex}
+              data-src={item.src}
+            >
+              <div class={`h-32 ${aspectClass} overflow-hidden relative bg-granite/5`}>
+                <img 
+                  src={item.src} 
+                  alt={`Кадр со спектакля #${uniqueIndex + 1}`} 
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
+                  loading="lazy"
+                  draggable="false"
+                />
+                <div class="absolute inset-0 bg-granite/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[1px]">
+                  <div class="w-8 h-8 rounded-full bg-white/95 text-granite flex items-center justify-center shadow-lg">
+                    <svg class="w-4 h-4 text-suomi" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                  </div>
                 </div>
               </div>
             </div>
+          );
+        })}
+      </div>
+
+      <!-- Row 2: Smooth Slow Drift (Right) -->
+      <div id="marquee-track-2" class="flex gap-3.5 items-center w-max cursor-grab">
+        {row2Items.map((item, idx) => {
+          const aspectClass = mosaicAspects[(idx + 2) % mosaicAspects.length];
+          const uniqueIndex = (idx + 2) % gallery.length;
+          return (
+            <div 
+              class="gallery-card shrink-0 group relative overflow-hidden rounded-2xl border border-rule bg-white shadow-xs active:scale-98 transition-all cursor-pointer"
+              data-index={uniqueIndex}
+              data-src={item.src}
+            >
+              <div class={`h-28 ${aspectClass} overflow-hidden relative bg-granite/5`}>
+                <img 
+                  src={item.src} 
+                  alt={`Кадр со спектакля #${uniqueIndex + 1}`} 
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
+                  loading="lazy"
+                  draggable="false"
+                />
+                <div class="absolute inset-0 bg-granite/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[1px]">
+                  <div class="w-8 h-8 rounded-full bg-white/95 text-granite flex items-center justify-center shadow-lg">
+                    <svg class="w-4 h-4 text-suomi" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Desktop Multi-Column Masonry Grid (hidden sm:block sm:columns-2 lg:columns-3) -->
+    <div class="hidden sm:block sm:columns-2 lg:columns-3 gap-5 sm:gap-6 reveal" id="show-gallery-grid">
+      {gallery.map((item, idx) => (
+        <div 
+          class="gallery-card break-inside-avoid group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-rule bg-white shadow-xs hover:shadow-2xl transition-all duration-500 cursor-pointer mb-5 sm:mb-6"
+          data-index={idx}
+          data-src={item.src}
+        >
+          <div class="w-full overflow-hidden relative bg-granite/5">
+            <img 
+              src={item.src} 
+              alt={`Кадр со спектакля #${idx + 1}`} 
+              class="w-full h-auto object-cover block transition-transform duration-700 ease-out group-hover:scale-104" 
+              loading="lazy"
+            />
+            
+            <div class="absolute inset-0 bg-granite/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+              <div class="px-5 py-2.5 rounded-full bg-white/95 text-granite text-xs font-nordic font-bold uppercase tracking-wider shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300 flex items-center gap-2">
+                <svg class="w-4 h-4 text-suomi" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                <span data-i18n="showPage.zoomPhoto">{t.zoomPhoto}</span>
+              </div>
+            </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
 
   </div>
@@ -107,12 +169,68 @@ const mosaicAspects = [
 
 <script>
   function initGalleryScript() {
-    const grid = document.getElementById('show-gallery-grid');
-    if (!grid) return;
+    const track1 = document.getElementById('marquee-track-1');
+    const track2 = document.getElementById('marquee-track-2');
+    const container = document.getElementById('mosaic-marquee-container');
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.gallery-card'));
 
-    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.gallery-card'));
+    if (cards.length === 0) return;
 
-    // Lightbox Logic
+    // --- 1. MOBILE RAF MARQUEE TICKER (Only runs on small screens) ---
+    let pos1 = 0;
+    let pos2 = 0;
+    const slowSpeed = 0.35;
+    let currentSpeed = slowSpeed;
+    let targetSpeed = slowSpeed;
+    let animId: number;
+
+    if (container) {
+      container.addEventListener('mouseenter', () => { targetSpeed = 0; });
+      container.addEventListener('mouseleave', () => { targetSpeed = slowSpeed; });
+      container.addEventListener('touchstart', () => { targetSpeed = 0; }, { passive: true });
+      container.addEventListener('touchend', () => { targetSpeed = slowSpeed; }, { passive: true });
+    }
+
+    function step() {
+      // Only animate on screens under 640px where track is visible
+      if (window.innerWidth < 640) {
+        currentSpeed += (targetSpeed - currentSpeed) * 0.1;
+
+        if (track1) {
+          const halfWidth1 = track1.scrollWidth / 2;
+          if (halfWidth1 > 0) {
+            pos1 -= currentSpeed;
+            if (pos1 <= -halfWidth1) {
+              pos1 += halfWidth1;
+            }
+            track1.style.transform = `translate3d(${pos1.toFixed(2)}px, 0, 0)`;
+          }
+        }
+
+        if (track2) {
+          const halfWidth2 = track2.scrollWidth / 2;
+          if (halfWidth2 > 0) {
+            if (pos2 === 0) pos2 = -halfWidth2 / 2;
+            pos2 += currentSpeed * 0.85;
+            if (pos2 >= 0) {
+              pos2 -= halfWidth2;
+            }
+            track2.style.transform = `translate3d(${pos2.toFixed(2)}px, 0, 0)`;
+          }
+        }
+      }
+
+      animId = requestAnimationFrame(step);
+    }
+
+    animId = requestAnimationFrame(step);
+
+    document.addEventListener('astro:before-swap', () => {
+      cancelAnimationFrame(animId);
+    }, { once: true });
+
+
+    // --- 2. LIGHTBOX MODAL LOGIC (Shared for Mobile & Desktop) ---
     const lightbox = document.getElementById('gallery-lightbox');
     if (lightbox && lightbox.parentElement !== document.body) {
       document.body.appendChild(lightbox);
@@ -125,13 +243,14 @@ const mosaicAspects = [
     const nextBtn = document.getElementById('lightbox-next');
 
     let currentIndex = 0;
+    const uniquePhotos = 5;
 
     function openLightbox(index: number) {
-      if (!lightbox || !cards[index]) return;
+      if (!lightbox) return;
       if (lightbox.parentElement !== document.body) {
         document.body.appendChild(lightbox);
       }
-      currentIndex = index;
+      currentIndex = index % uniquePhotos;
       updateLightboxContent();
 
       lightbox.classList.remove('hidden');
@@ -153,7 +272,7 @@ const mosaicAspects = [
     }
 
     function updateLightboxContent() {
-      const card = cards[currentIndex];
+      const card = cards.find(c => parseInt(c.getAttribute('data-index') || '0', 10) === currentIndex) || cards[0];
       if (!card) return;
 
       const src = card.getAttribute('data-src') || '';
@@ -163,12 +282,14 @@ const mosaicAspects = [
       }
       if (lightboxCounter) {
         const currentStr = String(currentIndex + 1).padStart(2, '0');
-        const totalStr = String(cards.length).padStart(2, '0');
+        const totalStr = String(uniquePhotos).padStart(2, '0');
         lightboxCounter.textContent = `${currentStr} / ${totalStr}`;
       }
     }
 
-    cards.forEach((card, idx) => {
+    cards.forEach((card) => {
+      const idxStr = card.getAttribute('data-index');
+      const idx = idxStr !== null ? parseInt(idxStr, 10) : 0;
       card.addEventListener('click', () => openLightbox(idx));
     });
 
@@ -176,13 +297,13 @@ const mosaicAspects = [
 
     prevBtn?.addEventListener('click', (e) => {
       e.stopPropagation();
-      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      currentIndex = (currentIndex - 1 + uniquePhotos) % uniquePhotos;
       updateLightboxContent();
     });
 
     nextBtn?.addEventListener('click', (e) => {
       e.stopPropagation();
-      currentIndex = (currentIndex + 1) % cards.length;
+      currentIndex = (currentIndex + 1) % uniquePhotos;
       updateLightboxContent();
     });
 

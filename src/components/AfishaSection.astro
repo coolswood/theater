@@ -80,10 +80,15 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
           </div>
 
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-            <button class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-5 sm:px-8 py-3.5 sm:py-4 rounded-full inline-flex items-center justify-center gap-3 group">
-              <span data-i18n="afisha.bookTicketBtn">{t.bookTicketBtn}</span> (<span data-i18n={`afisha.shows.${featuredShow.id}.price`}>{featuredShow.price}</span>)
+            <a 
+              href={featuredShow.fientaUrl || 'https://fienta.com/ru/spektakl-novechento-chetverg-13-avgusta-19-00-21-00'}
+              target="_blank"
+              rel="noopener"
+              class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-5 sm:px-8 py-3.5 sm:py-4 rounded-full inline-flex items-center justify-center gap-3 group"
+            >
+              <span data-i18n="afisha.bookTicketBtn">{t.bookTicketBtn}</span>
               <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </button>
+            </a>
             <a href={`/shows/${featuredShow.id}`} class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-5 sm:px-7 py-3.5 sm:py-4 rounded-full text-center" data-i18n="afisha.aboutShowBtn">{t.aboutShowBtn}</a>
           </div>
         </div>
@@ -119,9 +124,14 @@ const secondaryShows = shows.filter(s => !s.isFeatured);
                   <p class="font-sans text-[10px] uppercase tracking-[0.2em] text-mute" data-i18n="afisha.secondaryPriceLabel">{t.secondaryPriceLabel}</p>
                   <p class="font-nordic font-bold text-xl text-granite" data-i18n={`afisha.shows.${show.id}.price`}>{show.price}</p>
                 </div>
-                <button class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-6 py-3 rounded-full inline-flex items-center gap-2 group">
+                <a 
+                  href={show.fientaUrl || 'https://fienta.com/ru/spektakl-novechento-chetverg-13-avgusta-19-00-21-00'} 
+                  target="_blank" 
+                  rel="noopener" 
+                  class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-6 py-3 rounded-full inline-flex items-center gap-2 group"
+                >
                   <span data-i18n="afisha.secondaryBuyBtn">{t.secondaryBuyBtn}</span> <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                </button>
+                </a>
               </div>
             </div>
           </article>

@@ -82,13 +82,16 @@ const afishaT = translations.ru.afisha;
 
         <!-- Action CTAs -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-          <button 
+          <a 
             id="hero-book-btn"
+            href={show.fientaUrl || 'https://fienta.com/ru/spektakl-novechento-chetverg-13-avgusta-19-00-21-00'}
+            target="_blank"
+            rel="noopener"
             class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-8 py-4 rounded-full inline-flex items-center justify-center gap-3 group cursor-pointer shadow-md"
           >
-            <span data-i18n="showPage.bookSeatBtn">{t.bookSeatBtn}</span> (<span data-i18n={`afisha.shows.${show.id}.price`}>{show.price}</span>)
+            <span data-i18n="showPage.bookSeatBtn">{t.bookSeatBtn}</span>
             <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
+          </a>
           <a href="#gallery" class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-7 py-4 rounded-full text-center inline-flex items-center justify-center gap-2">
             <span>Галерея снимков ↓</span>
           </a>

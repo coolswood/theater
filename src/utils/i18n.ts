@@ -48,6 +48,11 @@ export function initClientI18n() {
       }
     });
 
+    // Update Fienta links locale parameter dynamically
+    document.querySelectorAll<HTMLAnchorElement>('a[href*="fienta.com"]').forEach((a) => {
+      a.href = a.href.replace(/fienta\.com\/(ru|fi|en)\//, `fienta.com/${lang}/`);
+    });
+
     // Dispatch custom event for dynamic components (e.g. Courses carousel)
     window.dispatchEvent(new CustomEvent('languageChange', { detail: { lang, langData } }));
   }

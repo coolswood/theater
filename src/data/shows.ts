@@ -27,6 +27,7 @@ export interface Show {
   age: string;
   capacity: string;
   poster: string;
+  fientaUrl?: string;
   isFeatured?: boolean;
   quote?: string;
   description: string;
@@ -39,12 +40,13 @@ export interface Show {
   gallery?: GalleryItem[];
 }
 
-const showPosters: Record<string, { poster: string; isFeatured: boolean; number: string; time: string }> = {
+const showPosters: Record<string, { poster: string; isFeatured: boolean; number: string; time: string; fientaUrl?: string }> = {
   'novecento': {
     poster: 'https://teatterilogrus.fi/wp-content/uploads/2026/07/fienta.jpg',
     isFeatured: true,
     number: '01',
-    time: '19:00'
+    time: '19:00',
+    fientaUrl: 'https://fienta.com/ru/spektakl-novechento-chetverg-13-avgusta-19-00-21-00'
   },
   'cherry-orchard': {
     poster: 'https://picsum.photos/seed/suomi-cherry/700/900',
@@ -181,6 +183,7 @@ export function getShows(lang: Language = 'ru'): Show[] {
     number: showPosters[id]?.number || '01',
     time: showPosters[id]?.time || '19:00',
     poster: showPosters[id]?.poster || '',
+    fientaUrl: showPosters[id]?.fientaUrl,
     isFeatured: showPosters[id]?.isFeatured || false,
     gallery: showGalleries[id] || showGalleries['novecento'],
     director: showDirectors[id] || showDirectors['novecento'],

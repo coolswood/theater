@@ -18,6 +18,10 @@ export interface TranslationSchema {
     locationDesc: string;
     langLabel: string;
     langValue: string;
+    afishaBtn?: string;
+    aboutBtn?: string;
+    nextShowLabel?: string;
+    nextShowValue?: string;
   };
   afisha: {
     tag: string;
@@ -172,13 +176,17 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Финляндия · Хельсинки',
       stageTag: 'Русскоязычная камерная сцена',
-      title: 'Русскоязычная<br />драма<br />в&nbsp;северной<br /><span class="text-suomi font-semibold">тишине</span><span class="text-redru">.</span>',
+      title: 'Русскоязычная драма<br class="hidden sm:inline" /> в&nbsp;северной <span class="text-suomi font-semibold">тишине</span><span class="text-redru">.</span>',
       description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — прохладная скандинавская эстетика пространства в центре Хельсинки и глубокое уважение к русскоязычной драматической традиции.',
       locationLabel: '— Наша локация —',
       locationName: 'Helsinki · Sörnäinen',
       locationDesc: 'Сцена Narri näyttämö (Sörnäisten rantatie 31)',
       langLabel: 'Язык спектаклей',
-      langValue: 'Русский'
+      langValue: 'Русский',
+      afishaBtn: 'Смотреть афишу',
+      aboutBtn: 'О театре',
+      nextShowLabel: 'Ближайший показ',
+      nextShowValue: '«Новеченто» · 13 Августа'
     },
     afisha: {
       tag: 'Ожидаемые показы // Октябрь 2026',
@@ -409,13 +417,17 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Suomi · Helsinki',
       stageTag: 'Venäjänkielinen kämmernäyttämö',
-      title: 'Venäläinen<br />draama<br />pohjoisessa<br /><span class="text-suomi font-semibold">hiljaisuudessa</span><span class="text-redru">.</span>',
+      title: 'Venäläinen draama<br class="hidden sm:inline" /> pohjoisessa <span class="text-suomi font-semibold">hiljaisuudessa</span><span class="text-redru">.</span>',
       description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — viileä skandinaavinen tilan estetiikka Helsingin keskustassa ja syvä kunnioitus venäläistä draamaperinnettä kohtaan.',
       locationLabel: '— Sijaintimme —',
       locationName: 'Helsinki · Sörnäinen',
       locationDesc: 'Narri näyttämö -näyttämö (Sörnäisten rantatie 31)',
       langLabel: 'Esityskieli',
-      langValue: 'Venäjä'
+      langValue: 'Venäjä',
+      afishaBtn: 'Katso ohjelmisto',
+      aboutBtn: 'Teatterista',
+      nextShowLabel: 'Seuraava esitys',
+      nextShowValue: '«Novecento» · 13. Elokuuta'
     },
     afisha: {
       tag: 'Tulevat esitykset // Lokakuu 2026',
@@ -646,13 +658,17 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Finland · Helsinki',
       stageTag: 'Russian-language chamber stage',
-      title: 'Russian<br />drama<br />in&nbsp;northern<br /><span class="font-dramatic italic font-normal text-suomi">silence</span><span class="text-redru">.</span>',
+      title: 'Russian drama<br class="hidden sm:inline" /> in&nbsp;northern <span class="font-dramatic italic font-normal text-suomi">silence</span><span class="text-redru">.</span>',
       description: '<span class="font-dramatic italic text-suomi text-2xl sm:text-3xl font-semibold">Logrus Teatteri</span> — cool Nordic spatial aesthetics in central Helsinki and deep respect for the Russian dramatic tradition.',
       locationLabel: '— Our Location —',
       locationName: 'Helsinki · Sörnäinen',
       locationDesc: 'Narri näyttämö stage at Sörnäisten rantatie 31',
       langLabel: 'Show language',
-      langValue: 'Russian'
+      langValue: 'Russian',
+      afishaBtn: 'View Repertoire',
+      aboutBtn: 'About Theater',
+      nextShowLabel: 'Next Show',
+      nextShowValue: '«Novecento» · August 13'
     },
     afisha: {
       tag: 'Upcoming Shows // October 2026',

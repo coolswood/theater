@@ -32,11 +32,11 @@ export interface CentralCourse {
 }
 
 const slideImages: Record<string, string> = {
-  'slide-1': '/images/courses/rehearsal-1.jpg',
-  'slide-2': '/images/courses/speech-workshop.jpg',
-  'slide-3': '/images/courses/youth-stage.jpg',
-  'slide-4': '/images/courses/backstage-moments.jpg',
-  'slide-5': '/images/courses/final-performance.jpg'
+  'slide-1': '/images/courses/lamparel-1.jpg',
+  'slide-2': '/images/courses/lamparel-2.jpg',
+  'slide-3': '/images/courses/lamparel-3.jpg',
+  'slide-4': '/images/courses/lamparel-4.jpg',
+  'slide-5': '/images/courses/lamparel-5.jpg'
 };
 
 export function getCourseSlides(lang: Language = 'ru'): CourseSlide[] {

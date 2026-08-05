@@ -21,7 +21,7 @@ export interface Show {
   date: string;
   time: string;
   stage: string;
-  price: string;
+  price?: string;
   duration: string;
   subtitles: string;
   age: string;
@@ -95,6 +95,48 @@ export const showGalleries: Record<string, GalleryItem[]> = {
     {
       id: 'nov-5',
       src: '/images/shows/novecento/novecento-5.jpg',
+      caption: '',
+      category: 'stage',
+      categoryLabel: ''
+    },
+    {
+      id: 'nov-6',
+      src: '/images/shows/novecento/novecento-6.jpg',
+      caption: '',
+      category: 'stage',
+      categoryLabel: ''
+    },
+    {
+      id: 'nov-7',
+      src: '/images/shows/novecento/novecento-7.jpg',
+      caption: '',
+      category: 'stage',
+      categoryLabel: ''
+    },
+    {
+      id: 'nov-8',
+      src: '/images/shows/novecento/novecento-8.jpg',
+      caption: '',
+      category: 'stage',
+      categoryLabel: ''
+    },
+    {
+      id: 'nov-9',
+      src: '/images/shows/novecento/novecento-9.jpg',
+      caption: '',
+      category: 'stage',
+      categoryLabel: ''
+    },
+    {
+      id: 'nov-10',
+      src: '/images/shows/novecento/novecento-10.jpg',
+      caption: '',
+      category: 'stage',
+      categoryLabel: ''
+    },
+    {
+      id: 'nov-11',
+      src: '/images/shows/novecento/novecento-11.jpg',
       caption: '',
       category: 'stage',
       categoryLabel: ''

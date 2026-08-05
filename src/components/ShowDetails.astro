@@ -1,6 +1,6 @@
 ---
-import type { Show } from '../data/shows';
-import { translations } from '../data/translations';
+import type { Show } from "../data/shows";
+import { translations } from "../data/translations";
 
 interface Props {
   show: Show;
@@ -10,92 +10,127 @@ const { show } = Astro.props;
 const t = translations.ru.showPage;
 ---
 
-<section id="details" class="px-3 sm:px-10 py-16 sm:py-28 border-t border-rule bg-snow">
+<section
+  id="details"
+  class="px-3 sm:px-10 py-16 sm:py-28 border-t border-rule bg-snow"
+>
   <div class="max-w-[1400px] mx-auto">
-
     <div class="grid lg:grid-cols-12 gap-10 sm:gap-16">
-      
       <!-- Left Main Description Column -->
       <div class="lg:col-span-7 reveal space-y-10">
         <div>
-          <span class="suomi-tag mb-3">О сюжете и замысле</span>
-          <h2 class="font-nordic font-extrabold text-granite text-3xl sm:text-5xl mb-6">
-            Драматургия и концепция<span class="text-suomi font-bold">.</span>
+          <span class="suomi-tag mb-3" data-i18n="showPage.aboutPlotTag">{t.aboutPlotTag}</span>
+          <h2
+            class="font-nordic font-extrabold text-granite text-3xl sm:text-5xl mb-6"
+            data-i18n-html="showPage.dramaturgyTitle"
+          >
+            {t.dramaturgyTitle}<span class="text-suomi font-bold">.</span>
           </h2>
-          <p class="dropcap text-granite/90 text-base sm:text-lg leading-relaxed font-light mb-6" data-i18n={`afisha.shows.${show.id}.description`}>
+          <p
+            class="dropcap text-granite/90 text-base sm:text-lg leading-relaxed font-light mb-6"
+            data-i18n={`afisha.shows.${show.id}.description`}
+          >
             {show.description}
           </p>
-          <p class="text-granite/80 text-base sm:text-lg leading-relaxed font-light">
-            Постановка выполнена в характерной скандинавской эстетике — с выверенным световым решением, чистым акустическим пространством и бережным отношением к психологическому театру.
+          <p
+            class="text-granite/80 text-base sm:text-lg leading-relaxed font-light"
+            data-i18n="showPage.scandinavianAestheticText"
+          >
+            {t.scandinavianAestheticText}
           </p>
         </div>
 
         <!-- Director's Quote Card -->
-        {show.director && (
-          <div class="p-6 sm:p-8 rounded-3xl bg-snow2/60 border border-rule relative overflow-hidden">
-            <span class="font-sans text-[10px] font-bold uppercase tracking-[0.25em] text-suomi block mb-3" data-i18n="showPage.directorSectionTitle">
-              {t.directorSectionTitle}
-            </span>
-            <blockquote class="font-sans italic text-base sm:text-lg text-granite leading-relaxed mb-4">
-              {show.director.quote}
-            </blockquote>
-            <div class="flex items-center gap-3 border-t border-rule/60 pt-4">
-              <div class="w-10 h-10 rounded-full bg-suomi text-white font-nordic font-bold flex items-center justify-center text-sm">
-                {show.director.name.charAt(0)}
-              </div>
-              <div>
-                <p class="font-nordic font-bold text-sm text-granite">{show.director.name}</p>
-                <p class="font-sans text-xs text-mute">{show.director.role}</p>
+        {
+          show.director && (
+            <div class="p-6 sm:p-8 rounded-3xl bg-snow2/60 border border-rule relative overflow-hidden">
+              <span
+                class="font-sans text-[10px] font-bold uppercase tracking-[0.25em] text-suomi block mb-3"
+                data-i18n="showPage.directorSectionTitle"
+              >
+                {t.directorSectionTitle}
+              </span>
+              <blockquote class="font-sans italic text-base sm:text-lg text-granite leading-relaxed mb-4">
+                {show.director.quote}
+              </blockquote>
+              <div class="flex items-center gap-3 border-t border-rule/60 pt-4">
+                <div class="w-10 h-10 rounded-full bg-suomi text-white font-nordic font-bold flex items-center justify-center text-sm">
+                  {show.director.name.charAt(0)}
+                </div>
+                <div>
+                  <p class="font-nordic font-bold text-sm text-granite">
+                    {show.director.name}
+                  </p>
+                  <p class="font-sans text-xs text-mute">
+                    {show.director.role}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )
+        }
       </div>
 
       <!-- Right Cast & Production Team Sidebar -->
       <div class="lg:col-span-5 reveal">
-        <div class="p-6 sm:p-10 rounded-3xl bg-white border border-rule shadow-sm space-y-8 sticky top-28">
+        <div
+          class="p-6 sm:p-10 rounded-3xl bg-white border border-rule shadow-sm space-y-8 sticky top-28"
+        >
           <div>
-            <h3 class="font-nordic font-bold text-xl text-granite mb-6 flex items-center justify-between" data-i18n="showPage.castSectionTitle">
+            <h3
+              class="font-nordic font-bold text-xl text-granite mb-6 flex items-center justify-between"
+              data-i18n="showPage.castSectionTitle"
+            >
               <span>{t.castSectionTitle}</span>
               <span class="w-2 h-2 rounded-full bg-suomi"></span>
             </h3>
 
-            {show.cast && show.cast.length > 0 ? (
-              <ul class="divide-y divide-rule/70">
-                {show.cast.map(member => (
-                  <li class="py-3.5 flex items-center justify-between text-sm">
-                    <span class="font-nordic font-semibold text-granite">{member.name}</span>
-                    <span class="font-sans text-xs text-mute text-right">{member.role}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p class="text-sm text-mute font-sans">Информация о составе обновляется.</p>
-            )}
+            {
+              show.cast && show.cast.length > 0 ? (
+                <ul class="divide-y divide-rule/70">
+                  {show.cast.map((member) => (
+                    <li class="py-4 flex items-start justify-between gap-4 text-sm">
+                      <span class="font-nordic font-semibold text-granite shrink-0 max-w-[55%]">
+                        {member.name}
+                      </span>
+                      <span class="font-sans text-xs sm:text-sm text-mute text-right leading-relaxed">
+                        {member.role}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="text-sm text-mute font-sans">
+                  Информация о составе обновляется.
+                </p>
+              )
+            }
           </div>
 
           <div class="pt-6 border-t border-rule">
-            <h4 class="font-nordic font-bold text-base text-granite mb-3" data-i18n="showPage.factsSectionTitle">{t.factsSectionTitle}</h4>
-            <div class="space-y-2 text-xs font-sans text-mute">
-              <div class="flex justify-between py-1">
-                <span>Язык постановки:</span>
-                <span class="font-semibold text-granite">Русский</span>
+            <h4
+              class="font-nordic font-bold text-base text-granite mb-4"
+              data-i18n="showPage.factsSectionTitle"
+            >
+              {t.factsSectionTitle}
+            </h4>
+            <div class="space-y-3 text-xs sm:text-sm font-sans text-mute">
+              <div class="flex items-center justify-between gap-4 py-1">
+                <span class="shrink-0" data-i18n="showPage.factLangLabel">{t.factLangLabel}</span>
+                <span class="font-semibold text-granite text-right" data-i18n="showPage.factLangValue">{t.factLangValue}</span>
               </div>
-              <div class="flex justify-between py-1">
-                <span>Формат:</span>
-                <span class="font-semibold text-suomi">Камерный театр</span>
+              <div class="flex items-center justify-between gap-4 py-1">
+                <span class="shrink-0" data-i18n="showPage.factFormatLabel">{t.factFormatLabel}</span>
+                <span class="font-semibold text-suomi text-right" data-i18n="showPage.factFormatValue">{t.factFormatValue}</span>
               </div>
-              <div class="flex justify-between py-1">
-                <span>Площадка:</span>
-                <span class="font-semibold text-granite">{show.stage}</span>
+              <div class="flex items-start justify-between gap-4 py-1">
+                <span class="shrink-0" data-i18n="showPage.factVenueLabel">{t.factVenueLabel}</span>
+                <span class="font-semibold text-granite text-right" data-i18n={`afisha.shows.${show.id}.stage`}>{show.stage}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </section>

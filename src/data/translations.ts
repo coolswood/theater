@@ -30,14 +30,14 @@ export interface TranslationSchema {
     ticketsLabel: string;
     bookTicketBtn: string;
     aboutShowBtn: string;
-    secondaryPriceLabel: string;
+    secondaryPriceLabel?: string;
     secondaryBuyBtn: string;
     shows: Record<string, {
       title: string;
       subtitle: string;
       date: string;
       stage: string;
-      price: string;
+      price?: string;
       duration: string;
       subtitles: string;
       age: string;
@@ -104,13 +104,11 @@ export interface TranslationSchema {
     cardTitle: string;
     addressTag: string;
     contactTag: string;
-    boxOfficeTag: string;
-    boxOfficeHours: string;
     socialsTag: string;
     mapTag: string;
     mapTitle: string;
     btnStage: string;
-    btnKamppi: string;
+    btnSornainen: string;
     btnStation: string;
     locationText: string;
     hslRoute: string;
@@ -140,6 +138,25 @@ export interface TranslationSchema {
     modalDesc: string;
     modalConfirmBtn: string;
     modalCloseBtn: string;
+    aboutPlotTag: string;
+    dramaturgyTitle: string;
+    scandinavianAestheticText: string;
+    factLangLabel: string;
+    factLangValue: string;
+    factFormatLabel: string;
+    factFormatValue: string;
+    factVenueLabel: string;
+    galleryBtn: string;
+    modalBookingTag: string;
+    modalNameLabel: string;
+    modalContactLabel: string;
+    modalTicketsLabel: string;
+    modalTicket1: string;
+    modalTicket2: string;
+    modalTicket3: string;
+    modalTicket4: string;
+    modalSuccessTitle: string;
+    modalSuccessDesc: string;
   };
 }
 
@@ -155,18 +172,18 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Финляндия · Хельсинки',
       stageTag: 'Русскоязычная камерная сцена',
-      title: 'Русская драма<br />в северной <span class="text-suomi font-semibold">тишине</span><span class="text-redru">.</span>',
-      description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — прохладная скандинавская эстетика пространства в центре Хельсинки и глубокое уважение к русской драматической традиции.',
+      title: 'Русскоязычная<br />драма<br />в&nbsp;северной<br /><span class="text-suomi font-semibold">тишине</span><span class="text-redru">.</span>',
+      description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — прохладная скандинавская эстетика пространства в центре Хельсинки и глубокое уважение к русскоязычной драматической традиции.',
       locationLabel: '— Наша локация —',
-      locationName: 'Helsinki · Kamppi',
-      locationDesc: 'Камерный зал на 90 мест в районе Камппи',
+      locationName: 'Helsinki · Sörnäinen',
+      locationDesc: 'Сцена Narri näyttämö (Sörnäisten rantatie 31)',
       langLabel: 'Язык спектаклей',
       langValue: 'Русский'
     },
     afisha: {
       tag: 'Ожидаемые показы // Октябрь 2026',
       title: 'Репертуар<span class="text-suomi font-bold">.</span>',
-      subtitlesNote: 'Камерная сцена в центре Хельсинки',
+      subtitlesNote: 'Сцена Narri näyttämö в Хельсинки',
       premiereTag: 'Премьера в Хельсинки',
       durationLabel: 'Время',
       subtitlesLabel: 'Язык',
@@ -194,7 +211,7 @@ export const translations: Record<Language, TranslationSchema> = {
           title: 'Вишнёвый сад',
           subtitle: 'А. П. Чехов · Постановка Анны Веденеевой',
           date: '12 Октября / 12.10',
-          stage: 'Kamppi Main Stage',
+          stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
           price: 'от 25 €',
           duration: '2ч 40мин',
           subtitles: 'Русский',
@@ -213,7 +230,7 @@ export const translations: Record<Language, TranslationSchema> = {
           subtitles: 'Русский',
           age: '16+',
           capacity: '60 мест',
-          description: 'История адаптации и памяти, сыгранная на русском языке. Уникальный моноспектакль в камерной атмосфере на 60 мест.'
+          description: 'История адаптации и памяти, сыгранная на русскоязычной сцене. Уникальный моноспектакль в камерной атмосфере на 60 мест.'
         }
       }
     },
@@ -229,7 +246,7 @@ export const translations: Record<Language, TranslationSchema> = {
           id: 'slide-1',
           title: 'Эмоциональная свобода и раскованность',
           subtitle: 'Снятие телесных зажимов, принятие себя и импровизация',
-          location: 'Камерный зал · Kamppi',
+          location: 'Сцена Narri näyttämö · Sörnäinen',
           tag: '01 // ЭМОЦИИ И СВОБОДА',
           quote: '«Здесь царит атмосфера доверия: вы учитесь наслаждаться процессом и перестаете бояться ошибок»'
         },
@@ -270,14 +287,14 @@ export const translations: Record<Language, TranslationSchema> = {
         title: 'Курс актерского мастерства',
         studioName: '«Лампарельс»',
         badge: 'Набор в группу открыт // Сезон 2026',
-        headline: 'Импровизация — это про сцену и про жизнь. Выбирайте, каким будет ваш следующий акт.',
+        headline: 'Импровизация — это про сцену и про жизнь. Выбирайте, каким будет ваш следующий акт',
         subtitle: 'Актерская студия Logrus Teatteri в Хельсинки',
         description: 'Живое пространство для людей всех возрастов. Учимся работать с партнером, выходить из зоны комфорта и свободно владеть импровизацией.',
         targetAudience: 'Для тех, кто мечтает о сцене, и всех, кто хочет общаться раскрепощенно, без стресса и зажимов.',
         trialInfo: 'Первое пробное занятие — БЕСПЛАТНО',
         phone: '+358 45 2656332',
         email: 'info@logrus.fi',
-        location: 'Helsinki · Kamppi (Urho Kekkosen katu 8)',
+        location: 'Helsinki · Sörnäinen (Sörnäisten rantatie 31)',
         schedule: 'Очные вечерние занятия · Группы до 15 человек',
         closingQuote: 'Каким будет твой следующий акт — выбираешь ты ✨',
         pillars: [
@@ -307,12 +324,12 @@ export const translations: Record<Language, TranslationSchema> = {
     about: {
       tag: 'Наша миссия',
       title: 'Два мира.<br />Одна драма.<br /><span class="text-suomi font-semibold">Общий диалог.</span>',
-      italicQuote: 'Мы объединяем финскую эстетику пространства с глубинным русским психологическим театром.',
+      italicQuote: 'Мы объединяем финскую эстетику пространства с глубинным русскоязычным психологическим театром.',
       text: 'Театр «Logrus» — это живое пространство для русскоязычной диаспоры Финляндии и всех, кто ценит европейский подход к классическому и современному драматическому искусству.',
       mobileFeaturesTitle: 'Особенности театра',
       swipeLabel: 'Свайп →',
       feature1Tag: '01 // ЯЗЫК',
-      feature1Title: 'Русская речь',
+      feature1Title: 'Русскоязычная речь',
       feature1Desc: 'Сохранение лучшей школы произношения и актерского мастерства.',
       feature2Tag: '02 // АТМОСФЕРА',
       feature2Title: 'Камерный формат',
@@ -323,22 +340,20 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     contacts: {
       heading: 'Tervetuloa <span class="text-suomi font-semibold">· Добро пожаловать.</span>',
-      cardTitle: 'Контакты и Касса',
+      cardTitle: 'Контакты',
       addressTag: 'Особые данные / Адрес',
       contactTag: 'Связь',
-      boxOfficeTag: 'Время работы кассы',
-      boxOfficeHours: 'Ср – Вс: 14:00 – 19:00 (в дни показов — до 20:30)',
       socialsTag: 'Социальные сети',
       mapTag: 'Интерактивная карта',
       mapTitle: 'Как нас найти',
       btnStage: '🎭 Сцена',
-      btnKamppi: '🚇 Kamppi',
+      btnSornainen: '🚇 Sörnäinen',
       btnStation: '🚉 Вокзал',
-      locationText: 'Urho Kekkosen katu 8, Helsinki · <strong class="text-suomi font-semibold">2 мин от метро Kamppi</strong>',
-      hslRoute: '<ctrl42> HSL Маршрут'
+      locationText: 'Sörnäisten rantatie 31, Narri näyttämö, Helsinki · <strong class="text-suomi font-semibold">5 мин от метро Sörnäinen</strong>',
+      hslRoute: '🚆 HSL Маршрут'
     },
     footer: {
-      copyright: '© 2026 · Logrus Teatteri Helsinki · Финско-русская сцена',
+      copyright: '© 2026 · Logrus Teatteri Helsinki · Финско-русскоязычная сцена',
       toTop: '↑ Наверх'
     },
     showPage: {
@@ -361,7 +376,26 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTitle: 'Быстрое бронирование билета',
       modalDesc: 'Выберите удобное время или свяжитесь с кассой театра для выбора конкретных мест в зале.',
       modalConfirmBtn: 'Перейти к выбору мест',
-      modalCloseBtn: 'Закрыть'
+      modalCloseBtn: 'Закрыть',
+      aboutPlotTag: 'О сюжете и замысле',
+      dramaturgyTitle: 'Драматургия и концепция',
+      scandinavianAestheticText: 'Постановка выполнена в характерной скандинавской эстетике — с выверенным световым решением, чистым акустическим пространством и бережным отношением к психологическому театру.',
+      factLangLabel: 'Язык постановки:',
+      factLangValue: 'Русский',
+      factFormatLabel: 'Формат:',
+      factFormatValue: 'Камерный театр',
+      factVenueLabel: 'Площадка:',
+      galleryBtn: 'Галерея снимков',
+      modalBookingTag: 'Бронирование',
+      modalNameLabel: 'Ваше имя',
+      modalContactLabel: 'Телефон или Email',
+      modalTicketsLabel: 'Количество билетов',
+      modalTicket1: '1 билет',
+      modalTicket2: '2 билета',
+      modalTicket3: '3 билета',
+      modalTicket4: '4 билета',
+      modalSuccessTitle: 'Заявка принята!',
+      modalSuccessDesc: 'Администратор кассы свяжется с вами в течение 15 минут для подтверждения мест.'
     }
   },
   fi: {
@@ -375,18 +409,18 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Suomi · Helsinki',
       stageTag: 'Venäjänkielinen kämmernäyttämö',
-      title: 'Venäläinen draama<br />pohjoisessa <span class="text-suomi font-semibold">hiljaisuudessa</span><span class="text-redru">.</span>',
+      title: 'Venäläinen<br />draama<br />pohjoisessa<br /><span class="text-suomi font-semibold">hiljaisuudessa</span><span class="text-redru">.</span>',
       description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — viileä skandinaavinen tilan estetiikka Helsingin keskustassa ja syvä kunnioitus venäläistä draamaperinnettä kohtaan.',
       locationLabel: '— Sijaintimme —',
-      locationName: 'Helsinki · Kamppi',
-      locationDesc: '90-paikkainen kammersali Kampin alueella',
+      locationName: 'Helsinki · Sörnäinen',
+      locationDesc: 'Narri näyttämö -näyttämö (Sörnäisten rantatie 31)',
       langLabel: 'Esityskieli',
       langValue: 'Venäjä'
     },
     afisha: {
       tag: 'Tulevat esitykset // Lokakuu 2026',
       title: 'Ohjelmisto<span class="text-suomi font-bold">.</span>',
-      subtitlesNote: 'Kamarinäyttämö Helsingin keskustassa',
+      subtitlesNote: 'Narri näyttämö -näyttämö Helsingissä',
       premiereTag: 'Ensi-ilta Helsingissä',
       durationLabel: 'Kesto',
       subtitlesLabel: 'Kieli',
@@ -414,7 +448,7 @@ export const translations: Record<Language, TranslationSchema> = {
           title: 'Kirsikkapuutarha',
           subtitle: 'A. Tšehov · Ohjaus Anna Vedenejeva',
           date: '12. Lokakuuta / 12.10',
-          stage: 'Kamppi Main Stage',
+          stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
           price: 'alk. 25 €',
           duration: '2t 40min',
           subtitles: 'Venäjä',
@@ -449,7 +483,7 @@ export const translations: Record<Language, TranslationSchema> = {
           id: 'slide-1',
           title: 'Luontainen lahjakkuus ja emotionaalinen vapaus',
           subtitle: 'Kehollisten ja henkisten lukkojen purkaminen',
-          location: 'Kammersali · Kamppi',
+          location: 'Narri näyttämö · Sörnäinen',
           tag: '01 // TUNTEET JA VAPAUS',
           quote: '«Kuvittele: astut näyttämölle tai kameran eteen, ja kaikkien katseet kiinnittyvät sinuun...»'
         },
@@ -497,7 +531,7 @@ export const translations: Record<Language, TranslationSchema> = {
         trialInfo: 'Ensimmäinen kokeilukerta — ILMAINEN',
         phone: '+358 45 2656332',
         email: 'info@logrus.fi',
-        location: 'Helsinki · Kamppi (Urho Kekkosen katu 8)',
+        location: 'Helsinki · Sörnäinen (Sörnäisten rantatie 31)',
         schedule: 'Lähitunnit iltaisin · Enintään 15 henkilön ryhmä',
         closingQuote: 'Paras roolisi on vasta edessä ✨',
         pillars: [
@@ -542,19 +576,17 @@ export const translations: Record<Language, TranslationSchema> = {
       feature3Desc: 'Pelkistetty, tyylikäs tila Helsingin keskustassa ilman mahtipontisuutta.'
     },
     contacts: {
-      heading: 'Tervetuloa <span class="font-dramatic italic font-normal text-suomi">· Tervetuloa.</span>',
-      cardTitle: 'Yhteystiedot ja Lipunmyynti',
+      heading: 'Tervetuloa<span class="text-suomi font-semibold">.</span>',
+      cardTitle: 'Yhteystiedot',
       addressTag: 'Osoite',
       contactTag: 'Yhteydenotot',
-      boxOfficeTag: 'Lipunmyynnin aukioloajat',
-      boxOfficeHours: 'Ke – Su: 14:00 – 19:00 (esityspäivinä klo 20:30 asti)',
       socialsTag: 'Sosiaalinen media',
       mapTag: 'Interaktiivinen kartta',
       mapTitle: 'Kuinka löydät meidät',
       btnStage: '🎭 Näyttämö',
-      btnKamppi: '🚇 Kamppi',
-      btnStation: '<ctrl42> Asema',
-      locationText: 'Urho Kekkosen katu 8, Helsinki · <strong class="text-suomi font-semibold">2 min Kamppi metrosta</strong>',
+      btnSornainen: '🚇 Sörnäinen',
+      btnStation: '🚉 Asema',
+      locationText: 'Sörnäisten rantatie 31, Narri näyttämö, Helsinki · <strong class="text-suomi font-semibold">5 min Sörnäisten metroasemalta</strong>',
       hslRoute: '🚆 HSL-reitti'
     },
     footer: {
@@ -581,7 +613,26 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTitle: 'Pikavaraus',
       modalDesc: 'Valitse sopiva aika tai ota yhteyttä teatterin kassaan valitaksesi paikat salista.',
       modalConfirmBtn: 'Siirry paikkavalintaan',
-      modalCloseBtn: 'Sulje'
+      modalCloseBtn: 'Sulje',
+      aboutPlotTag: 'Juonesta ja konseptista',
+      dramaturgyTitle: 'Dramaturgia ja konsepti',
+      scandinavianAestheticText: 'Esitys on toteutettu leimallisessa skandinaavisessa estetiikassa — tarkasti hiotulla valosuunnittelulla, puhtaalla akustisella tilalla ja huolellisella otteella psykologiseen teatteriin.',
+      factLangLabel: 'Esityskieli:',
+      factLangValue: 'Venäjä',
+      factFormatLabel: 'Muoto:',
+      factFormatValue: 'Kamariteatteri',
+      factVenueLabel: 'Näyttämö:',
+      galleryBtn: 'Kuvagalleria',
+      modalBookingTag: 'Varaus',
+      modalNameLabel: 'Nimesi',
+      modalContactLabel: 'Puhelin tai sähköposti',
+      modalTicketsLabel: 'Lippujen määrä',
+      modalTicket1: '1 lippu',
+      modalTicket2: '2 lippua',
+      modalTicket3: '3 lippua',
+      modalTicket4: '4 lippua',
+      modalSuccessTitle: 'Varaus vastaanotettu!',
+      modalSuccessDesc: 'Lippukassan ylläpitäjä ottaa sinuun yhteyttä 15 minuutin kuluessa paikkojen vahvistamiseksi.'
     }
   },
   en: {
@@ -595,18 +646,18 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Finland · Helsinki',
       stageTag: 'Russian-language chamber stage',
-      title: 'Russian drama<br />in northern <span class="font-dramatic italic font-normal text-suomi">silence</span><span class="text-redru">.</span>',
+      title: 'Russian<br />drama<br />in&nbsp;northern<br /><span class="font-dramatic italic font-normal text-suomi">silence</span><span class="text-redru">.</span>',
       description: '<span class="font-dramatic italic text-suomi text-2xl sm:text-3xl font-semibold">Logrus Teatteri</span> — cool Nordic spatial aesthetics in central Helsinki and deep respect for the Russian dramatic tradition.',
       locationLabel: '— Our Location —',
-      locationName: 'Helsinki · Kamppi',
-      locationDesc: '90-seat chamber hall in Kamppi district',
+      locationName: 'Helsinki · Sörnäinen',
+      locationDesc: 'Narri näyttämö stage at Sörnäisten rantatie 31',
       langLabel: 'Show language',
       langValue: 'Russian'
     },
     afisha: {
       tag: 'Upcoming Shows // October 2026',
       title: 'Repertoire<span class="font-dramatic italic font-normal text-suomi">.</span>',
-      subtitlesNote: 'Chamber stage in central Helsinki',
+      subtitlesNote: 'Narri näyttämö stage in Helsinki',
       premiereTag: 'Helsinki Premiere',
       durationLabel: 'Duration',
       subtitlesLabel: 'Language',
@@ -634,7 +685,7 @@ export const translations: Record<Language, TranslationSchema> = {
           title: 'The Cherry Orchard',
           subtitle: 'Anton Chekhov · Directed by Anna Vedeneeva',
           date: '12 October / 12.10',
-          stage: 'Kamppi Main Stage',
+          stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
           price: 'from 25 €',
           duration: '2h 40min',
           subtitles: 'Russian',
@@ -669,7 +720,7 @@ export const translations: Record<Language, TranslationSchema> = {
           id: 'slide-1',
           title: 'Natural Talent & Emotional Freedom',
           subtitle: 'Release physical and psychological blocks',
-          location: 'Chamber Hall · Kamppi',
+          location: 'Narri näyttämö · Sörnäinen',
           tag: '01 // EMOTION & FREEDOM',
           quote: '«Imagine stepping onto stage and having all eyes on you...»'
         },
@@ -717,7 +768,7 @@ export const translations: Record<Language, TranslationSchema> = {
         trialInfo: 'First Trial Class — FREE',
         phone: '+358 45 2656332',
         email: 'info@logrus.fi',
-        location: 'Helsinki · Kamppi (Urho Kekkosen katu 8)',
+        location: 'Helsinki · Sörnäinen (Sörnäisten rantatie 31)',
         schedule: 'In-person evening classes · Up to 15 students',
         closingQuote: 'Your best role is yet to come ✨',
         pillars: [
@@ -763,18 +814,16 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     contacts: {
       heading: 'Tervetuloa <span class="text-suomi font-semibold">· Welcome.</span>',
-      cardTitle: 'Contacts & Box Office',
+      cardTitle: 'Contacts',
       addressTag: 'Address',
       contactTag: 'Contact',
-      boxOfficeTag: 'Box Office Hours',
-      boxOfficeHours: 'Wed – Sun: 14:00 – 19:00 (show days until 20:30)',
       socialsTag: 'Social Media',
       mapTag: 'Interactive Map',
       mapTitle: 'How to Find Us',
       btnStage: '🎭 Stage',
-      btnKamppi: '🚇 Kamppi',
+      btnSornainen: '🚇 Sörnäinen',
       btnStation: '🚉 Station',
-      locationText: 'Urho Kekkosen katu 8, Helsinki · <strong class="text-suomi font-semibold">2 min from Kamppi metro</strong>',
+      locationText: 'Sörnäisten rantatie 31, Narri näyttämö, Helsinki · <strong class="text-suomi font-semibold">5 min from Sörnäinen metro</strong>',
       hslRoute: '🚆 HSL Route'
     },
     footer: {
@@ -801,7 +850,26 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTitle: 'Quick Seat Booking',
       modalDesc: 'Select preferred showtime or contact box office for specific seat choices.',
       modalConfirmBtn: 'Proceed to Seat Selection',
-      modalCloseBtn: 'Close'
+      modalCloseBtn: 'Close',
+      aboutPlotTag: 'About Plot & Concept',
+      dramaturgyTitle: 'Dramaturgy & Concept',
+      scandinavianAestheticText: 'The production is executed in a distinctive Scandinavian aesthetic — with precise light design, clean acoustic space, and a thoughtful approach to psychological theater.',
+      factLangLabel: 'Language:',
+      factLangValue: 'Russian',
+      factFormatLabel: 'Format:',
+      factFormatValue: 'Chamber Theater',
+      factVenueLabel: 'Venue:',
+      galleryBtn: 'Photo Gallery',
+      modalBookingTag: 'Booking',
+      modalNameLabel: 'Your Name',
+      modalContactLabel: 'Phone or Email',
+      modalTicketsLabel: 'Number of Tickets',
+      modalTicket1: '1 ticket',
+      modalTicket2: '2 tickets',
+      modalTicket3: '3 tickets',
+      modalTicket4: '4 tickets',
+      modalSuccessTitle: 'Request Received!',
+      modalSuccessDesc: 'The box office administrator will contact you within 15 minutes to confirm your seats.'
     }
   }
 };

@@ -21,7 +21,7 @@ const show = getShowById(id as string) || shows[0];
 
 <Layout title={`${show.title} — Logrus Teatteri Helsinki`} description={show.description}>
   <Header />
-  <main>
+  <main transition:animate="fade">
     <ShowHero show={show} />
     <ShowGallery gallery={show.gallery || []} />
     <ShowDetails show={show} />

@@ -1,64 +1,75 @@
 ---
-import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { 
+const {
   title = "Logrus Teatteri — Скандинавская сцена · Финский синий (Хельсинки)",
-  description = "Русскоязычный камерный театр в центре Хельсинки (Kamppi). Финская лаконичная эстетика и русская драматическая традиция."
+  description = "Русскоязычный камерный театр в Хельсинки на сцене Narri näyttämö (Sörnäisten rantatie 31). Финская лаконичная эстетика и русскоязычная драматическая традиция.",
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  
-  <link rel="icon" type="image/png" href="/logo.png" />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <ClientRouter />
 
-  <!-- Fienta Ticketing Embed Script -->
-  <script is:inline>
-    window.fientaSettings = {
-      background: 'rgba(15, 23, 42, 0.65)',
-      border_radius: '16px',
-    };
-  </script>
-  <script src="https://fienta.com/embed.js" is:inline></script>
-</head>
-<body>
-  <slot />
+    <link rel="icon" type="image/png" href="/logo.png" />
 
-  <script>
-    import { initClientI18n } from '../utils/i18n';
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    // Initialize Intersection Observer for smooth reveal animations
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    <!-- Fienta Ticketing Embed Script -->
+    <script is:inline>
+      window.fientaSettings = {
+        background: "rgba(15, 23, 42, 0.65)",
+        border_radius: "16px",
+      };
+    </script>
+    <script src="https://fienta.com/embed.js" is:inline></script>
+  </head>
+  <body>
+    <slot />
 
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    <script>
+      import { initClientI18n } from "../utils/i18n";
 
-    // Initialize real-time i18n localization
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initClientI18n);
-    } else {
-      initClientI18n();
-    }
-  </script>
-</body>
+      function setupPage() {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.05 },
+        );
+
+        document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+        initClientI18n();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupPage);
+      } else {
+        setupPage();
+      }
+
+      document.addEventListener("astro:page-load", setupPage);
+    </script>
+  </body>
 </html>

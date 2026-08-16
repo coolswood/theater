@@ -1,0 +1,473 @@
+---
+import { translations } from "../data/translations";
+
+const t = translations.ru.afisha.rehearsal!;
+const banner = translations.ru.afisha.pastShowsBanner!;
+---
+
+<div class="reveal space-y-6 sm:space-y-8">
+  {/* Minimalist Section Header */}
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-2.5 mb-2 sm:mb-3">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-suomi opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-suomi"></span>
+        </span>
+        <span class="suomi-tag" data-i18n="afisha.rehearsal.liveBadge">
+          {t.liveBadge}
+        </span>
+      </div>
+      <h3
+        class="font-nordic font-extrabold text-granite text-2xl sm:text-4xl lg:text-5xl leading-tight"
+        data-i18n-html="afisha.rehearsal.title"
+        set:html={t.title}
+      />
+    </div>
+    <p
+      class="font-sans text-xs sm:text-sm text-mute max-w-md border-l-2 border-suomi pl-3 py-1 font-light"
+      data-i18n="afisha.rehearsal.subtitle"
+    >
+      {t.subtitle}
+    </p>
+  </div>
+
+  {/* ==================== NORDIC MATTE DRAPERY THEATER STAGE ==================== */}
+  <div
+    id="curtain-stage-container"
+    class="relative w-full min-h-[480px] sm:min-h-[560px] lg:min-h-[600px] rounded-3xl overflow-hidden bg-[#090f1d] border border-rule/80 shadow-xl select-none group cursor-pointer transition-all duration-500 hover:border-suomi/40 hover:shadow-2xl"
+    title="Нажмите, чтобы открыть или закрыть занавес"
+  >
+    {/* Architectural Grid Texture Behind Scene */}
+    <div class="absolute inset-0 bg-[radial-gradient(#003580_0.8px,transparent_0.8px)] [background-size:24px_24px] opacity-[0.08] pointer-events-none"></div>
+
+    {/* ==================== ATMOSPHERIC STAGE (BEHIND CURTAIN) ==================== */}
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Deep Nordic Twilight Backdrop */}
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0c162c] via-[#081022] to-[#040813]"></div>
+
+      {/* Volumetric Spotlights (Soft, Natural, Atmospheric) */}
+      <div id="spot-cone-1" class="absolute -top-16 left-1/4 w-72 sm:w-96 h-[140%] bg-gradient-to-b from-amber-100/20 via-amber-200/5 to-transparent blur-3xl transform -rotate-14 origin-top animate-spotlight-left"></div>
+      <div id="spot-cone-2" class="absolute -top-16 right-1/4 w-72 sm:w-96 h-[140%] bg-gradient-to-b from-suomisoft/30 via-suomi/10 to-transparent blur-3xl transform rotate-14 origin-top animate-spotlight-right"></div>
+      <div id="spot-center-glow" class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-[450px] h-80 sm:h-[450px] bg-suomi/15 rounded-full blur-[80px] animate-pulse"></div>
+
+      {/* Backstage Ghost Light / Rehearsal Lamp (Nordic Architectural Minimalist - Steady Warm Glow) */}
+      <div class="absolute bottom-[24%] left-1/2 -translate-x-1/2 flex flex-col items-center z-0 transition-transform duration-700 group-[.curtain-opened]:scale-105">
+        <div class="absolute -top-6 w-20 h-20 bg-amber-300/15 rounded-full blur-lg"></div>
+        <svg class="w-12 h-32 text-amber-100/90 drop-shadow-[0_0_20px_rgba(252,211,77,0.5)]" viewBox="0 0 40 110" fill="none" stroke="currentColor">
+          <circle cx="20" cy="18" r="7" fill="#FEF08A" stroke="#D97706" stroke-width="1.2" />
+          <circle cx="20" cy="18" r="14" fill="rgba(254, 240, 138, 0.12)" stroke="none" />
+          {/* Wire Cage */}
+          <path d="M14 13 C14 6, 26 6, 26 13 L26 23 C26 28, 14 28, 14 23 Z" stroke="#CBD5E1" stroke-width="1.2" fill="none" opacity="0.8" />
+          {/* Stand */}
+          <rect x="18" y="25" width="4" height="6" fill="#475569" rx="0.5" />
+          <line x1="20" y1="31" x2="20" y2="88" stroke="#64748B" stroke-width="2" stroke-linecap="round" />
+          {/* Tripod Legs */}
+          <line x1="20" y1="88" x2="8" y2="106" stroke="#64748B" stroke-width="2" stroke-linecap="round" />
+          <line x1="20" y1="88" x2="32" y2="106" stroke="#64748B" stroke-width="2" stroke-linecap="round" />
+          <line x1="20" y1="88" x2="20" y2="106" stroke="#64748B" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      {/* Atmospheric Stage Reveal Content */}
+      <div class="absolute top-[20%] sm:top-[23%] left-1/2 -translate-x-1/2 w-[88%] max-w-md text-center z-1 opacity-0 translate-y-4 transition-all duration-1000 ease-out group-[.curtain-opened]:opacity-100 group-[.curtain-opened]:translate-y-0">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-suomisoft text-[11px] font-mono tracking-widest uppercase mb-3 shadow-md">
+          <span class="w-1.5 h-1.5 rounded-full bg-suomisoft"></span>
+          <span>Narri näyttämö · Helsinki</span>
+        </div>
+        <p
+          class="font-sans italic text-white/95 text-base sm:text-xl font-normal leading-relaxed tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
+          data-i18n="afisha.rehearsal.backstageQuote"
+        >
+          {t.backstageQuote || "«На сцене рождается магия новой постановки…»"}
+        </p>
+        <p
+          class="font-mono text-[11px] text-white/60 tracking-wider uppercase mt-3"
+          data-i18n="afisha.rehearsal.backstageSub"
+        >
+          {t.backstageSub || "Teatteri Logrus · Репетиционный сезон 2026"}
+        </p>
+      </div>
+
+      {/* Floating Luminescent Dust Motes */}
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <span class="absolute top-1/4 left-1/3 w-1.5 h-1.5 bg-amber-200/70 rounded-full blur-[0.3px] animate-float-p1"></span>
+        <span class="absolute top-1/2 right-1/3 w-2 h-2 bg-sky-200/60 rounded-full blur-[0.3px] animate-float-p2"></span>
+        <span class="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-amber-100/80 rounded-full blur-[0.3px] animate-float-p3"></span>
+      </div>
+
+      {/* Wooden Stage Floor with Perspective Planks & Rehearsal Spike Marks */}
+      <div class="absolute bottom-0 left-0 right-0 h-[26%] bg-gradient-to-t from-[#15120e] via-[#201b15] to-transparent border-t border-white/10">
+        <div class="absolute inset-0 opacity-20 bg-[linear-gradient(90deg,transparent_0%,rgba(225,230,237,0.15)_50%,transparent_100%)]"></div>
+        
+        {/* Authentic Stage Tape Spike Marks (Marking Blocking on Floor) */}
+        <div class="absolute bottom-4 left-1/4 flex items-center gap-1 opacity-60">
+          <span class="text-[10px] font-mono font-bold text-amber-300 select-none">✕</span>
+        </div>
+        <div class="absolute bottom-6 right-1/4 flex items-center gap-1 opacity-50">
+          <span class="text-[10px] font-mono font-bold text-sky-300 select-none">┼</span>
+        </div>
+        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1 opacity-50">
+          <span class="text-[10px] font-mono font-bold text-amber-400 select-none">T</span>
+        </div>
+
+        {/* Soft Stage Edge Glow */}
+        <div class="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-t from-suomi/20 to-transparent"></div>
+      </div>
+    </div>
+
+    {/* ==================== MATTE NORDIC THEATER DRAPES ==================== */}
+
+    {/* LEFT CURTAIN WING */}
+    <div
+      id="curtain-wing-left"
+      class="curtain-wing curtain-wing-left absolute top-0 bottom-0 left-0 w-[53%] z-10 origin-top-left transition-all duration-[1100ms] cubic-bezier(0.25, 1, 0.35, 1) pointer-events-none"
+    >
+      <div class="relative w-full h-full flex overflow-hidden shadow-[16px_0_35px_rgba(0,0,0,0.5)]">
+        {/* 6 Elegant Fluted Pleats */}
+        <div class="pleat pleat-1 w-[16%] h-full"></div>
+        <div class="pleat pleat-2 w-[16%] h-full"></div>
+        <div class="pleat pleat-3 w-[16%] h-full"></div>
+        <div class="pleat pleat-4 w-[18%] h-full"></div>
+        <div class="pleat pleat-5 w-[18%] h-full"></div>
+        <div class="pleat pleat-6 w-[16%] h-full relative">
+          {/* Subtle Suomi Indigo Ribbon on Leading Edge */}
+          <div class="absolute top-0 bottom-0 right-0 w-[3px] bg-gradient-to-b from-suomisoft via-suomi to-suomidark opacity-90 shadow-sm"></div>
+          <div class="absolute top-0 bottom-0 right-[3px] w-[1px] bg-white/25"></div>
+        </div>
+
+        {/* Muted Nordic Geometric Border along Bottom Hem */}
+        <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#040e1f] to-transparent flex flex-col justify-end">
+          <div class="h-4 w-full flex items-center justify-around border-t border-b border-white/10 bg-suomi/15 px-2">
+            <span class="text-[9px] text-white/50 tracking-[0.35em] font-sans select-none">··· ❖ ··· ❖ ··· ❖ ···</span>
+          </div>
+          {/* Refined Matte Fringe */}
+          <div class="h-2 w-full bg-[repeating-linear-gradient(90deg,rgba(232,240,254,0.4),rgba(232,240,254,0.4)_1.5px,transparent_1.5px,transparent_4px)] opacity-70"></div>
+        </div>
+
+        {/* Soft Ambient Shading */}
+        <div class="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/15 pointer-events-none"></div>
+      </div>
+
+      {/* Minimalist Nordic Tieback (Left) */}
+      <div id="tieback-left" class="absolute top-1/2 -left-1 -translate-y-1/2 z-20 transition-transform duration-700 ease-out origin-top-left">
+        <div class="relative flex flex-col items-center">
+          <svg class="w-10 h-12 text-suomisoft/80 drop-shadow-md" viewBox="0 0 40 50" fill="none">
+            <path d="M4 8 C 18 30, 35 30, 38 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.85" />
+          </svg>
+          <div class="tassel-bob -mt-5 flex flex-col items-center animate-tassel-left">
+            <div class="w-3.5 h-3.5 rounded-full bg-suomi border border-suomisoft/40 shadow-sm"></div>
+            <div class="w-4 h-6 -mt-0.5 rounded-b-sm bg-gradient-to-b from-suomidark to-[#061226] border-t border-suomisoft/20 shadow-md flex justify-around px-0.5 pt-0.5">
+              <span class="w-[1px] h-full bg-suomisoft/40"></span>
+              <span class="w-[1px] h-full bg-suomisoft/60"></span>
+              <span class="w-[1px] h-full bg-suomisoft/40"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* RIGHT CURTAIN WING */}
+    <div
+      id="curtain-wing-right"
+      class="curtain-wing curtain-wing-right absolute top-0 bottom-0 right-0 w-[53%] z-10 origin-top-right transition-all duration-[1100ms] cubic-bezier(0.25, 1, 0.35, 1) pointer-events-none"
+    >
+      <div class="relative w-full h-full flex overflow-hidden shadow-[-16px_0_35px_rgba(0,0,0,0.5)]">
+        <div class="pleat pleat-6 w-[16%] h-full relative">
+          {/* Subtle Suomi Indigo Ribbon on Leading Edge */}
+          <div class="absolute top-0 bottom-0 left-0 w-[3px] bg-gradient-to-b from-suomisoft via-suomi to-suomidark opacity-90 shadow-sm"></div>
+          <div class="absolute top-0 bottom-0 left-[3px] w-[1px] bg-white/25"></div>
+        </div>
+        <div class="pleat pleat-5 w-[18%] h-full"></div>
+        <div class="pleat pleat-4 w-[18%] h-full"></div>
+        <div class="pleat pleat-3 w-[16%] h-full"></div>
+        <div class="pleat pleat-2 w-[16%] h-full"></div>
+        <div class="pleat pleat-1 w-[16%] h-full"></div>
+
+        {/* Muted Nordic Geometric Border along Bottom Hem */}
+        <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#040e1f] to-transparent flex flex-col justify-end">
+          <div class="h-4 w-full flex items-center justify-around border-t border-b border-white/10 bg-suomi/15 px-2">
+            <span class="text-[9px] text-white/50 tracking-[0.35em] font-sans select-none">··· ❖ ··· ❖ ··· ❖ ···</span>
+          </div>
+          <div class="h-2 w-full bg-[repeating-linear-gradient(90deg,rgba(232,240,254,0.4),rgba(232,240,254,0.4)_1.5px,transparent_1.5px,transparent_4px)] opacity-70"></div>
+        </div>
+
+        {/* Soft Ambient Shading */}
+        <div class="absolute inset-0 bg-gradient-to-l from-black/35 via-transparent to-black/15 pointer-events-none"></div>
+      </div>
+
+      {/* Minimalist Nordic Tieback (Right) */}
+      <div id="tieback-right" class="absolute top-1/2 -right-1 -translate-y-1/2 z-20 transition-transform duration-700 ease-out origin-top-right">
+        <div class="relative flex flex-col items-center">
+          <svg class="w-10 h-12 text-suomisoft/80 drop-shadow-md" viewBox="0 0 40 50" fill="none">
+            <path d="M36 8 C 22 30, 5 30, 2 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.85" />
+          </svg>
+          <div class="tassel-bob -mt-5 flex flex-col items-center animate-tassel-right">
+            <div class="w-3.5 h-3.5 rounded-full bg-suomi border border-suomisoft/40 shadow-sm"></div>
+            <div class="w-4 h-6 -mt-0.5 rounded-b-sm bg-gradient-to-b from-suomidark to-[#061226] border-t border-suomisoft/20 shadow-md flex justify-around px-0.5 pt-0.5">
+              <span class="w-[1px] h-full bg-suomisoft/40"></span>
+              <span class="w-[1px] h-full bg-suomisoft/60"></span>
+              <span class="w-[1px] h-full bg-suomisoft/40"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* ==================== MATTE NORDIC SCALLOPED VALANCE (ЛАМБРЕКЕН) ==================== */}
+    <div class="absolute top-0 left-0 right-0 z-30 pointer-events-none select-none">
+      <div class="relative w-full h-14 sm:h-16 flex justify-between items-start drop-shadow-[0_8px_12px_rgba(0,0,0,0.4)]">
+        {/* Scalloped Swags in Deep Suomi Navy */}
+        <svg class="w-full h-full" viewBox="0 0 1000 70" preserveAspectRatio="none" fill="none">
+          <defs>
+            <linearGradient id="valanceNordic" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#020e24" />
+              <stop offset="50%" stop-color="#00245a" />
+              <stop offset="100%" stop-color="#00183d" />
+            </linearGradient>
+          </defs>
+
+          {/* 5 Scalloped Swags */}
+          <path d="M 0,0 L 0,30 Q 100,62 200,30 Q 300,62 400,30 Q 500,62 600,30 Q 700,62 800,30 Q 900,62 1000,30 L 1000,0 Z" fill="url(#valanceNordic)" />
+          
+          {/* Subtle Crease Lines */}
+          <path d="M 0,8 Q 100,46 200,8 Q 300,46 400,8 Q 500,46 600,8 Q 700,46 800,8 Q 900,46 1000,8" stroke="rgba(0, 10, 30, 0.6)" stroke-width="4" fill="none" />
+          
+          {/* Clean Nordic Hem Cord in Suomisoft / Rule */}
+          <path d="M 0,30 Q 100,62 200,30 Q 300,62 400,30 Q 500,62 600,30 Q 700,62 800,30 Q 900,62 1000,30" stroke="rgba(232, 240, 254, 0.45)" stroke-width="2" fill="none" />
+        </svg>
+
+        {/* Minimalist Top Border Rail */}
+        <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-suomidark via-suomi to-suomidark border-b border-white/15"></div>
+
+        {/* Center Nordic Badge */}
+        <div class="absolute top-1 left-1/2 -translate-x-1/2 flex flex-col items-center">
+          <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-suomidark border border-suomisoft/40 shadow-md flex items-center justify-center">
+            <span class="text-[11px] font-nordic text-suomisoft font-bold">L</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* ==================== FOREGROUND BADGES & HINTS ==================== */}
+    {/* Rehearsal Status Badge */}
+    <div class="absolute top-4 left-4 sm:top-6 sm:left-7 flex items-center gap-2 bg-[#050b17]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-white text-xs font-mono z-30 shadow-md">
+      <span class="w-2 h-2 rounded-full bg-suomi animate-pulse"></span>
+      <span data-i18n="afisha.rehearsal.stageNotice">{t.stageNotice}</span>
+    </div>
+
+    {/* Center Click Hint Pill */}
+    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#050b17]/85 backdrop-blur-md px-4.5 py-2 rounded-full border border-white/20 text-white text-xs font-sans font-medium z-30 shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:border-suomi/50">
+      <span class="text-suomisoft text-sm">🎭</span>
+      <span id="curtain-hint-text" data-i18n="afisha.rehearsal.hintOpen">
+        {t.hintOpen || "Нажмите, чтобы открыть занавес"}
+      </span>
+    </div>
+  </div>
+
+  {/* ==================== PAST SHOWS ARCHIVE BANNER ==================== */}
+  <a
+    href="/shows/archive"
+    class="block group p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-snow2/90 via-white to-snow2/70 border border-rule hover:border-suomi/40 transition-all duration-300 shadow-xs hover:shadow-md"
+  >
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
+      <div class="flex items-start sm:items-center gap-4">
+        {/* Theatrical Archive Icon */}
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-snow2 border border-rule flex items-center justify-center text-xl sm:text-2xl shrink-0">
+          📜
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-suomi font-semibold" data-i18n="afisha.pastShowsBanner.tag">
+              {banner.tag}
+            </span>
+          </div>
+          <h4
+            class="font-nordic font-bold text-granite text-base sm:text-xl group-hover:text-suomi transition-colors"
+            data-i18n="afisha.pastShowsBanner.title"
+          >
+            {banner.title}
+          </h4>
+          <p
+            class="font-sans text-xs sm:text-sm text-mute font-light max-w-xl mt-0.5"
+            data-i18n="afisha.pastShowsBanner.desc"
+          >
+            {banner.desc}
+          </p>
+        </div>
+      </div>
+
+      {/* Button Action Link */}
+      <div class="flex items-center gap-3 self-end md:self-center shrink-0">
+        <span class="font-nordic text-xs tracking-wider uppercase font-semibold text-suomi group-hover:translate-x-1 transition-transform inline-flex items-center gap-2" data-i18n="afisha.pastShowsBanner.btn">
+          <span>{banner.btn}</span>
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </a>
+</div>
+
+<style>
+  /* ==================== MATTE DRAPERY PLEATS ==================== */
+  .pleat {
+    height: 100%;
+    position: relative;
+    box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.35), inset -4px 0 10px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Deep Matte Suomi Indigo Cylinders */
+  .pleat-1 {
+    background: linear-gradient(90deg, #010d20 0%, #002660 38%, #003785 55%, #001c4a 100%);
+  }
+  .pleat-2 {
+    background: linear-gradient(90deg, #001433 0%, #002d73 38%, #00429e 55%, #002157 100%);
+  }
+  .pleat-3 {
+    background: linear-gradient(90deg, #010f26 0%, #002866 38%, #003a8c 55%, #001d4f 100%);
+  }
+  .pleat-4 {
+    background: linear-gradient(90deg, #001435 0%, #002e75 38%, #0045a3 55%, #00235c 100%);
+  }
+  .pleat-5 {
+    background: linear-gradient(90deg, #011029 0%, #002a6b 38%, #003d91 55%, #001f52 100%);
+  }
+  .pleat-6 {
+    background: linear-gradient(90deg, #00163b 0%, #003382 38%, #004dae 55%, #002766 100%);
+  }
+
+  /* Subtle Soft Matte Sheen */
+  .pleat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 45%;
+    width: 12%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+    pointer-events: none;
+  }
+
+  /* ==================== REALISTIC GATHERING / ACCORDION MOTION ==================== */
+  #curtain-stage-container.curtain-opened .curtain-wing-left {
+    transform: translateX(-86%) scaleX(0.26) skewY(-2deg);
+    filter: brightness(0.88);
+  }
+
+  #curtain-stage-container.curtain-opened .curtain-wing-right {
+    transform: translateX(86%) scaleX(0.26) skewY(2deg);
+    filter: brightness(0.88);
+  }
+
+  /* Tiebacks Movement when Opened */
+  #curtain-stage-container.curtain-opened #tieback-left {
+    transform: translateY(-50%) scale(1.1) rotate(-10deg);
+  }
+  #curtain-stage-container.curtain-opened #tieback-right {
+    transform: translateY(-50%) scale(1.1) rotate(10deg);
+  }
+
+  /* Gentle Curtain Breathing Ripple on Container Hover */
+  #curtain-stage-container:not(.curtain-opened):hover .curtain-wing-left {
+    transform: translateX(-1.2%);
+  }
+  #curtain-stage-container:not(.curtain-opened):hover .curtain-wing-right {
+    transform: translateX(1.2%);
+  }
+
+  /* ==================== TASSELS & SPOTLIGHT ANIMATIONS ==================== */
+  @keyframes tasselSwingLeft {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-4deg); }
+  }
+  @keyframes tasselSwingRight {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(4deg); }
+  }
+  .animate-tassel-left { animation: tasselSwingLeft 4.5s ease-in-out infinite; }
+  .animate-tassel-right { animation: tasselSwingRight 4.5s ease-in-out infinite 0.5s; }
+
+  /* Backstage Lights */
+  @keyframes spotLeftMove {
+    0%, 100% { transform: rotate(-16deg) scaleX(1); opacity: 0.65; }
+    50% { transform: rotate(-5deg) scaleX(1.1); opacity: 0.9; }
+  }
+  @keyframes spotRightMove {
+    0%, 100% { transform: rotate(16deg) scaleX(1); opacity: 0.6; }
+    50% { transform: rotate(5deg) scaleX(1.15); opacity: 0.85; }
+  }
+  .animate-spotlight-left { animation: spotLeftMove 8.5s ease-in-out infinite; }
+  .animate-spotlight-right { animation: spotRightMove 7.5s ease-in-out infinite 1s; }
+
+  /* Floating Dust Particles */
+  @keyframes floatP1 {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.35; }
+    50% { transform: translateY(-20px) translateX(8px); opacity: 0.8; }
+  }
+  @keyframes floatP2 {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.7; }
+    50% { transform: translateY(-25px) translateX(-10px); opacity: 0.25; }
+  }
+  @keyframes floatP3 {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.25; }
+    50% { transform: translateY(-14px) translateX(6px); opacity: 0.75; }
+  }
+  .animate-float-p1 { animation: floatP1 5.5s ease-in-out infinite; }
+  .animate-float-p2 { animation: floatP2 7s ease-in-out infinite 0.6s; }
+  .animate-float-p3 { animation: floatP3 5s ease-in-out infinite 1.2s; }
+</style>
+
+<script>
+  import { translations, type Language } from "../data/translations";
+
+  let isCurtainOpen = false;
+
+  function initGrandCurtain() {
+    const stage = document.getElementById("curtain-stage-container");
+    const curtainHintText = document.getElementById("curtain-hint-text");
+
+    function getCurrentLang(): Language {
+      return (localStorage.getItem("logrus_lang") as Language) || "ru";
+    }
+
+    function updateLabels() {
+      const lang = getCurrentLang();
+      const r = translations[lang]?.afisha?.rehearsal || translations.ru.afisha.rehearsal!;
+
+      if (isCurtainOpen) {
+        if (curtainHintText) curtainHintText.textContent = r.hintClose || "Нажмите, чтобы закрыть занавес";
+      } else {
+        if (curtainHintText) curtainHintText.textContent = r.hintOpen || "Нажмите, чтобы открыть занавес";
+      }
+    }
+
+    function setCurtainState(open: boolean) {
+      isCurtainOpen = open;
+      if (stage) {
+        if (isCurtainOpen) {
+          stage.classList.add("curtain-opened");
+        } else {
+          stage.classList.remove("curtain-opened");
+        }
+      }
+      updateLabels();
+    }
+
+    stage?.addEventListener("click", () => setCurtainState(!isCurtainOpen));
+
+    window.addEventListener("languageChange", () => {
+      updateLabels();
+    });
+
+    updateLabels();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initGrandCurtain);
+  } else {
+    initGrandCurtain();
+  }
+</script>

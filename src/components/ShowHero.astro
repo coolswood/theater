@@ -1,5 +1,6 @@
 ---
 import type { Show } from "../data/shows";
+import { isShowActive } from "../data/shows";
 import { translations } from "../data/translations";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 const { show } = Astro.props;
 const t = translations.ru.showPage;
 const afishaT = translations.ru.afisha;
+const isActive = isShowActive(show);
 ---
 
 <section
@@ -39,20 +41,38 @@ const afishaT = translations.ru.afisha;
       <div class="lg:col-span-7 order-2 lg:order-1 reveal">
         <!-- Metadata Badges -->
         <div class="flex flex-wrap items-center gap-2.5 mb-6">
+          {
+            !isActive ? (
+              <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-granite/10 text-granite font-sans text-xs font-semibold border border-granite/20">
+                <span class="w-2 h-2 rounded-full bg-granite/40 inline-block"></span>
+                <span data-i18n="showPage.expiredBadge">{t.expiredBadge || "Показ завершен"}</span>
+              </span>
+            ) : (
+              <span
+                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-suomi text-white font-sans text-xs font-semibold shadow-xs"
+              >
+                <svg class="w-3.5 h-3.5 text-white/90 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span data-i18n={`afisha.shows.${show.id}.date`}>{show.date}</span> · {show.time}
+              </span>
+            )
+          }
+          {
+            isActive && (
+              <span
+                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-granite font-sans text-xs font-semibold border border-rule shadow-xs"
+              >
+                <svg class="w-3.5 h-3.5 text-redru shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span data-i18n={`afisha.shows.${show.id}.stage`}>{show.stage}</span>
+              </span>
+            )
+          }
           <span
-            class="px-3.5 py-1 rounded-full bg-suomi text-white font-nordic text-[11px] font-bold uppercase tracking-wider shadow-xs"
-          >
-            <span data-i18n={`afisha.shows.${show.id}.date`}>{show.date}</span> ·
-            {show.time}
-          </span>
-          <span
-            class="px-3.5 py-1 rounded-full bg-snow2 text-granite font-sans text-xs font-semibold border border-rule"
-          >
-            <span data-i18n={`afisha.shows.${show.id}.stage`}>{show.stage}</span
-            >
-          </span>
-          <span
-            class="px-3 py-1 rounded-full bg-redru/10 text-redru font-nordic text-[11px] font-bold"
+            class="px-3 py-1.5 rounded-full bg-redru/10 text-redru font-sans text-xs font-semibold border border-redru/20"
           >
             <span data-i18n={`afisha.shows.${show.id}.age`}>{show.age}</span>
           </span>
@@ -75,16 +95,18 @@ const afishaT = translations.ru.afisha;
         <!-- Quote Block -->
         {
           show.quote && (
-            <blockquote class="relative my-6 p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-rule shadow-sm overflow-hidden group hover:border-suomi/30 transition-all">
-              <div class="absolute -top-3 -left-2 text-6xl font-nordic text-suomi/10 font-black select-none pointer-events-none">
+            <blockquote class="relative my-7 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-suomisoft/70 via-white to-snow2/50 border border-rule/80 shadow-xs overflow-hidden group transition-all duration-300 hover:border-suomi/30">
+              <div class="absolute -top-3 -left-2 text-6xl sm:text-7xl font-nordic text-suomi/10 font-black select-none pointer-events-none leading-none">
                 “
               </div>
-              <p
-                class="relative z-10 font-sans italic text-base sm:text-xl text-granite leading-relaxed"
-                data-i18n={`afisha.shows.${show.id}.quote`}
-              >
-                {show.quote}
-              </p>
+              <div class="relative z-10">
+                <p
+                  class="font-sans font-medium italic text-base sm:text-xl text-granite leading-relaxed tracking-tight"
+                  data-i18n={`afisha.shows.${show.id}.quote`}
+                >
+                  {show.quote}
+                </p>
+              </div>
             </blockquote>
           )
         }
@@ -138,25 +160,45 @@ const afishaT = translations.ru.afisha;
         <div
           class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
         >
-          <a
-            id="hero-book-btn"
-            href={show.fientaUrl ||
-              "https://fienta.com/ru/spektakl-novechento-chetverg-13-avgusta-19-00-21-00"}
-            target="_blank"
-            rel="noopener"
-            class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-8 py-4 rounded-full inline-flex items-center justify-center gap-3 group cursor-pointer shadow-md"
-          >
-            <span data-i18n="showPage.bookSeatBtn">{t.bookSeatBtn}</span>
-            <svg
-              class="arrow"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
-            >
-          </a>
+          {
+            isActive ? (
+              <a
+                id="hero-book-btn"
+                href={show.fientaUrl ||
+                  "https://fienta.com/ru/spektakl-novechento-chetverg-13-avgusta-19-00-21-00"}
+                target="_blank"
+                rel="noopener"
+                class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-8 py-4 rounded-full inline-flex items-center justify-center gap-3 group cursor-pointer shadow-md"
+              >
+                <span data-i18n="showPage.bookSeatBtn">{t.bookSeatBtn}</span>
+                <svg
+                  class="arrow"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+                >
+              </a>
+            ) : (
+              <a
+                href="/#afisha"
+                class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-8 py-4 rounded-full inline-flex items-center justify-center gap-3 group cursor-pointer shadow-md"
+              >
+                <span data-i18n="showPage.backToAfisha">{t.backToAfisha}</span>
+                <svg
+                  class="arrow"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+                >
+              </a>
+            )
+          }
           <a
             href="#gallery"
             class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-7 py-4 rounded-full text-center inline-flex items-center justify-center gap-2"

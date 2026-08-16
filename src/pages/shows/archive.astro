@@ -1,0 +1,158 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getPastShows, getShows } from '../../data/shows';
+import { translations } from '../../data/translations';
+
+const t = translations.ru.archive!;
+const allPastShows = getPastShows('ru');
+// If no shows are expired, show all shows as archive portfolio
+const archiveShowsList = allPastShows.length > 0 ? allPastShows : getShows('ru');
+---
+
+<Layout
+  title="Архив спектаклей — Teatteri Logrus Helsinki"
+  description="Архив прошлых театральных постановок, премьер и фотохроника спектаклей Teatteri Logrus на сцене Narri näyttämö в Хельсинки."
+>
+  <Header />
+
+  <main class="min-h-screen pb-24 sm:pb-36">
+    {/* Page Header */}
+    <section class="pt-12 sm:pt-20 pb-10 sm:pb-16 px-4 sm:px-10 border-b border-rule bg-gradient-to-b from-snow via-snow2/40 to-snow">
+      <div class="max-w-[1400px] mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+          <a
+            href="/#afisha"
+            class="inline-flex items-center gap-2 text-xs font-nordic tracking-wider uppercase font-semibold text-mute hover:text-suomi transition-colors"
+          >
+            <svg class="w-4 h-4 transform rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+            <span data-i18n="archive.backToMain">{t.backToMain}</span>
+          </a>
+
+          <span class="suomi-tag" data-i18n="archive.tag">
+            {t.tag}
+          </span>
+        </div>
+
+        <h1
+          class="font-nordic font-extrabold text-granite text-3xl sm:text-6xl lg:text-7xl leading-none tracking-tight mb-4"
+          data-i18n-html="archive.title"
+          set:html={t.title}
+        />
+        <p
+          class="font-sans text-sm sm:text-lg text-mute max-w-2xl font-light leading-relaxed"
+          data-i18n="archive.subtitle"
+        >
+          {t.subtitle}
+        </p>
+      </div>
+    </section>
+
+    {/* Archive Shows List */}
+    <section class="px-4 sm:px-10 py-12 sm:py-20">
+      <div class="max-w-[1400px] mx-auto space-y-12 sm:space-y-16">
+        {archiveShowsList.map((show) => (
+          <article class="reveal p-5 sm:p-10 lg:p-12 rounded-3xl bg-snow2/70 border border-rule shadow-xs hover:border-suomi/30 transition-all duration-300">
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Poster Column */}
+              <div class="lg:col-span-4 relative group overflow-hidden rounded-2xl flex items-center justify-center bg-granite/5 p-3 sm:p-5">
+                <img
+                  src={show.poster}
+                  alt={show.title}
+                  class="w-full h-auto max-h-[480px] object-contain rounded-xl shadow-md transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              </div>
+
+              {/* Information Column */}
+              <div class="lg:col-span-8 flex flex-col justify-between space-y-6">
+                <div>
+                  {/* Badges (Without time or venue) */}
+                  <div class="flex flex-wrap items-center gap-2.5 mb-4">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-suomi text-white font-sans text-xs sm:text-sm font-semibold shadow-xs">
+                      <span data-i18n="archive.archiveBadge">{t.archiveBadge}</span>
+                    </span>
+
+                    {show.duration && (
+                      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-granite font-sans text-xs font-medium border border-rule shadow-xs">
+                        <span data-i18n={`afisha.shows.${show.id}.duration`}>{show.duration}</span>
+                      </span>
+                    )}
+
+                    {show.subtitles && (
+                      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-granite font-sans text-xs font-medium border border-rule shadow-xs">
+                        <span data-i18n={`afisha.shows.${show.id}.subtitles`}>{show.subtitles}</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <h2
+                    class="font-nordic font-bold text-granite text-2xl sm:text-4xl lg:text-5xl mb-2 tracking-tight"
+                    data-i18n={`afisha.shows.${show.id}.title`}
+                  >
+                    {show.title}
+                  </h2>
+                  <p
+                    class="font-sans font-medium text-mute text-base sm:text-lg mb-4"
+                    data-i18n={`afisha.shows.${show.id}.subtitle`}
+                  >
+                    {show.subtitle}
+                  </p>
+
+                  {show.quote && (
+                    <blockquote class="my-5 p-5 sm:p-6 rounded-2xl bg-white border border-rule/80 shadow-xs italic text-granite font-serif text-sm sm:text-base leading-relaxed">
+                      <span data-i18n={`afisha.shows.${show.id}.quote`}>{show.quote}</span>
+                    </blockquote>
+                  )}
+
+                  <p
+                    class="text-granite/80 text-sm sm:text-base leading-relaxed font-light mb-6 line-clamp-3"
+                    data-i18n={`afisha.shows.${show.id}.description`}
+                  >
+                    {show.description}
+                  </p>
+
+                  {/* Photo Preview Strip */}
+                  {show.gallery && show.gallery.length > 0 && (
+                    <div class="mb-6">
+                      <div class="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
+                        {show.gallery.slice(0, 4).map((photo) => (
+                          <div class="w-20 h-16 sm:w-28 sm:h-20 rounded-xl overflow-hidden shrink-0 border border-rule bg-granite/5">
+                            <img src={photo.src} alt={show.title} class="w-full h-full object-cover" loading="lazy" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Bottom Actions */}
+                <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-rule">
+                  <a
+                    href={`/shows/${show.id}`}
+                    class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-6 py-3.5 rounded-full inline-flex items-center gap-2 group shadow-sm"
+                  >
+                    <span data-i18n="archive.aboutShow">{t.aboutShow}</span>
+                    <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 12h14M13 6l6 6-6 6"></path>
+                    </svg>
+                  </a>
+                  <a
+                    href={`/shows/${show.id}#gallery`}
+                    class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-5 py-3.5 rounded-full"
+                  >
+                    Фотогалерея
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

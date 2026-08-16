@@ -1,5 +1,6 @@
 ---
 import type { Show } from "../data/shows";
+import { isShowActive } from "../data/shows";
 import { translations } from "../data/translations";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 
 const { show } = Astro.props;
 const t = translations.ru.showPage;
+const isActive = isShowActive(show);
 ---
 
 <section
@@ -123,10 +125,12 @@ const t = translations.ru.showPage;
                 <span class="shrink-0" data-i18n="showPage.factFormatLabel">{t.factFormatLabel}</span>
                 <span class="font-semibold text-suomi text-right" data-i18n="showPage.factFormatValue">{t.factFormatValue}</span>
               </div>
-              <div class="flex items-start justify-between gap-4 py-1">
-                <span class="shrink-0" data-i18n="showPage.factVenueLabel">{t.factVenueLabel}</span>
-                <span class="font-semibold text-granite text-right" data-i18n={`afisha.shows.${show.id}.stage`}>{show.stage}</span>
-              </div>
+              {isActive && (
+                <div class="flex items-start justify-between gap-4 py-1">
+                  <span class="shrink-0" data-i18n="showPage.factVenueLabel">{t.factVenueLabel}</span>
+                  <span class="font-semibold text-granite text-right" data-i18n={`afisha.shows.${show.id}.stage`}>{show.stage}</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -22,6 +22,8 @@ export interface TranslationSchema {
     aboutBtn?: string;
     nextShowLabel?: string;
     nextShowValue?: string;
+    noUpcomingBadge?: string;
+    noUpcomingShows?: string;
   };
   afisha: {
     tag: string;
@@ -36,6 +38,30 @@ export interface TranslationSchema {
     aboutShowBtn: string;
     secondaryPriceLabel?: string;
     secondaryBuyBtn: string;
+    noShowsTag?: string;
+    noShowsTitle?: string;
+    noShowsDesc?: string;
+    noShowsCta?: string;
+    rehearsal?: {
+      liveBadge: string;
+      title: string;
+      subtitle: string;
+      stageNotice: string;
+      coursesBtn: string;
+      openCurtain?: string;
+      closeCurtain?: string;
+      hintOpen?: string;
+      hintClose?: string;
+      lightsBtn?: string;
+      backstageQuote?: string;
+      backstageSub?: string;
+    };
+    pastShowsBanner?: {
+      tag: string;
+      title: string;
+      desc: string;
+      btn: string;
+    };
     shows: Record<string, {
       title: string;
       subtitle: string;
@@ -161,6 +187,17 @@ export interface TranslationSchema {
     modalTicket4: string;
     modalSuccessTitle: string;
     modalSuccessDesc: string;
+    expiredBadge?: string;
+    expiredTitle?: string;
+    expiredDesc?: string;
+  };
+  archive?: {
+    tag: string;
+    title: string;
+    subtitle: string;
+    backToMain: string;
+    aboutShow: string;
+    archiveBadge: string;
   };
 }
 
@@ -186,7 +223,9 @@ export const translations: Record<Language, TranslationSchema> = {
       afishaBtn: 'Смотреть афишу',
       aboutBtn: 'О театре',
       nextShowLabel: 'Ближайший показ',
-      nextShowValue: '«Новеченто» · 13 Августа'
+      nextShowValue: '«Новеченто» · 13 Августа',
+      noUpcomingBadge: 'Репертуар формируется',
+      noUpcomingShows: 'Скоро новые анонсы'
     },
     afisha: {
       tag: 'Ожидаемые показы // Октябрь 2026',
@@ -201,11 +240,35 @@ export const translations: Record<Language, TranslationSchema> = {
       aboutShowBtn: 'О спектакле',
       secondaryPriceLabel: 'Цена',
       secondaryBuyBtn: 'Билеты',
+      noShowsTag: 'Сезон 2026 // Скоро новые даты',
+      noShowsTitle: 'Скоро новые премьеры<span class="text-suomi font-bold">.</span>',
+      noShowsDesc: 'В данный момент все запланированные показы завершены. Мы готовим новые постановки и откроем бронирование в ближайшее время — следите за анонсами!',
+      noShowsCta: 'Узнать об актерских курсах',
+      rehearsal: {
+        liveBadge: 'За кулисами // Narri näyttämö',
+        title: 'За занавесом рождается новый спектакль<span class="text-suomi font-extrabold">.</span>',
+        subtitle: 'Сцена закрыта на репетиции — мы готовим премьеры сезона 2026 в Хельсинки',
+        stageNotice: 'Камерная сцена Narri · Репетиции',
+        coursesBtn: 'Актерские курсы студии',
+        openCurtain: 'Открыть занавес',
+        closeCurtain: 'Закрыть занавес',
+        hintOpen: 'Нажмите, чтобы открыть занавес',
+        hintClose: 'Нажмите, чтобы закрыть занавес',
+        lightsBtn: 'Свет софитов',
+        backstageQuote: '«На сцене рождается магия новой постановки…»',
+        backstageSub: 'Teatteri Logrus · Репетиционный сезон 2026'
+      },
+      pastShowsBanner: {
+        tag: 'Архив постановок // 2026',
+        title: 'Прошлые спектакли театра',
+        desc: 'Погрузитесь в историю постановок, фотохронику и архив спектаклей Teatteri Logrus в Хельсинки',
+        btn: 'Смотреть архив спектаклей'
+      },
       shows: {
         'novecento': {
           title: 'Новеченто',
           subtitle: 'Алессандро Барикко · Режиссер Аквиле Рузгите',
-          date: '13 Августа / 13.08',
+          date: '13 Августа',
           stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
           price: 'от 20 €',
           duration: '1ч 45мин',
@@ -214,31 +277,6 @@ export const translations: Record<Language, TranslationSchema> = {
           capacity: '80 мест',
           quote: '«Бесконечное пианино, как бескрайний океан, и человек, нашедший музыку, но не нашедший берег…»',
           description: 'Одинокий рояль. Бескрайний океан. Судьба человека, никогда не ступавшего на берег. История пианиста, родившегося и прожившего всю жизнь на борту океанского лайнера — музыканта, который видел мир сквозь звуки океана и мелодии, не покидая своего инструмента. Моноспектакль о свободе, страхе, музыке и бесконечности между морем и небом.'
-        },
-        'cherry-orchard': {
-          title: 'Вишнёвый сад',
-          subtitle: 'А. П. Чехов · Постановка Анны Веденеевой',
-          date: '12 Октября / 12.10',
-          stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
-          price: 'от 25 €',
-          duration: '2ч 40мин',
-          subtitles: 'Русский',
-          age: '14+',
-          capacity: '90 мест',
-          quote: '«О моё детство, чистота моя! В этой спальне я спала, отсюда смотрела на сад, счастье просыпалось вместе со мною каждое утро...»',
-          description: 'Чеховская классика в скандинавской трактовке — строгая, прозрачная, с тихими паузами и глубокой акцентировкой на человеческом одиночестве.'
-        },
-        'maya-sea': {
-          title: 'Майя и море',
-          subtitle: 'Современная монодрама с живой виолончелью',
-          date: '18 Октября / 18.10',
-          stage: 'Камерная сцена',
-          price: 'от 20 €',
-          duration: '1ч 50мин',
-          subtitles: 'Русский',
-          age: '16+',
-          capacity: '60 мест',
-          description: 'История адаптации и памяти, сыгранная на русскоязычной сцене. Уникальный моноспектакль в камерной атмосфере на 60 мест.'
         }
       }
     },
@@ -403,7 +441,18 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket3: '3 билета',
       modalTicket4: '4 билета',
       modalSuccessTitle: 'Заявка принята!',
-      modalSuccessDesc: 'Администратор кассы свяжется с вами в течение 15 минут для подтверждения мест.'
+      modalSuccessDesc: 'Администратор кассы свяжется с вами в течение 15 минут для подтверждения мест.',
+      expiredBadge: 'Показ завершен',
+      expiredTitle: 'Этот спектакль уже состоялся',
+      expiredDesc: 'Показ завершен. Следите за обновлениями афиши, чтобы не пропустить следующие даты.'
+    },
+    archive: {
+      tag: 'История постановок // Logrus Teatteri',
+      title: 'Прошлые спектакли<span class="text-suomi font-extrabold">.</span>',
+      subtitle: 'Архив театральных постановок, премьер и фотохроника спектаклей нашего театра в Хельсинки',
+      backToMain: 'На главную',
+      aboutShow: 'О спектакле',
+      archiveBadge: 'Архивная постановка'
     }
   },
   fi: {
@@ -427,7 +476,9 @@ export const translations: Record<Language, TranslationSchema> = {
       afishaBtn: 'Katso ohjelmisto',
       aboutBtn: 'Teatterista',
       nextShowLabel: 'Seuraava esitys',
-      nextShowValue: '«Novecento» · 13. Elokuuta'
+      nextShowValue: '«Novecento» · 13. Elokuuta',
+      noUpcomingBadge: 'Ohjelmistoa valmistellaan',
+      noUpcomingShows: 'Uusia esityksiä tulossa pian'
     },
     afisha: {
       tag: 'Tulevat esitykset // Lokakuu 2026',
@@ -442,11 +493,35 @@ export const translations: Record<Language, TranslationSchema> = {
       aboutShowBtn: 'Esityksestä',
       secondaryPriceLabel: 'Hinta',
       secondaryBuyBtn: 'Liput',
+      noShowsTag: 'Kausi 2026 // Uusia päiviä tulossa',
+      noShowsTitle: 'Uusia ensi-iltoja tulossa<span class="text-suomi font-bold">.</span>',
+      noShowsDesc: 'Tällä hetkellä kaikki suunnitellut esitykset on pidetty. Valmistelemme uusia tuotantoja ja avaamme lipunmyynnin pian — seuraa ilmoituksia!',
+      noShowsCta: 'Tutustu kursseihin',
+      rehearsal: {
+        liveBadge: 'Esiriipun takana // Narri näyttämö',
+        title: 'Esiriipun takana syntyy uusi näytelmä<span class="text-suomi font-extrabold">.</span>',
+        subtitle: 'Näyttämö on suljettu harjoituksia varten — valmistelemme kauden 2026 ensi-iltoja Helsingissä',
+        stageNotice: 'Narri näyttämö · Harjoitukset',
+        coursesBtn: 'Teatterin näyttelijänkurssit',
+        openCurtain: 'Avaa esirippu',
+        closeCurtain: 'Sulje esirippu',
+        hintOpen: 'Klikkaa avataksesi esirippu',
+        hintClose: 'Klikkaa sulkeaksesi esirippu',
+        lightsBtn: 'Kohdevalot',
+        backstageQuote: '«Näyttämöllä syntyy uuden teoksen taika…»',
+        backstageSub: 'Teatteri Logrus · Harjoituskausi 2026'
+      },
+      pastShowsBanner: {
+        tag: 'Esitysarkisto // 2026',
+        title: 'Teatterin menneet esitykset',
+        desc: 'Tutustu Teatteri Logruksen menneisiin tuotantoihin, valokuvadokumentteihin ja esityshistoriaan Helsingissä',
+        btn: 'Katso esitysarkisto'
+      },
       shows: {
         'novecento': {
           title: 'Novecento',
           subtitle: 'Alessandro Baricco · Ohjaus Akvile Ruzgyte',
-          date: '13. Elokuuta / 13.08',
+          date: '13. Elokuuta',
           stage: 'Narri näyttämö',
           price: 'alk. 20 €',
           duration: '1t 45min',
@@ -455,31 +530,6 @@ export const translations: Record<Language, TranslationSchema> = {
           capacity: '80 paikkaa',
           quote: '«Loputon piano kuin ääretön valtameri, ja ihminen joka löysi musiikin mutta ei rantaa…»',
           description: 'Tarina pianistista, joka syntyi ja eli koko elämänsä valtamerilaivalla. Monodraama vapaudesta, pelosta, musiikista ja äärettömyydestä meren ja taivaan välillä.'
-        },
-        'cherry-orchard': {
-          title: 'Kirsikkapuutarha',
-          subtitle: 'A. Tšehov · Ohjaus Anna Vedenejeva',
-          date: '12. Lokakuuta / 12.10',
-          stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
-          price: 'alk. 25 €',
-          duration: '2t 40min',
-          subtitles: 'Venäjä',
-          age: '14+',
-          capacity: '90 paikkaa',
-          quote: '«Voi minun lapsuuteni, minun puhtauteni! Tässä huoneessa nukuin, täältä katselin puutarhaan, onni heräsi kanssani joka aamu...»',
-          description: 'Tšehovin klassikko skandinaavisena tulkintana — kirkas, kuulas ja ihmisen yksinäisyyttä syvästi luotaava.'
-        },
-        'maya-sea': {
-          title: 'Maija ja meri',
-          subtitle: 'Nykyaikainen monodraama elävän sellomusiikin kera',
-          date: '18. Lokakuuta / 18.10',
-          stage: 'Kammersali',
-          price: 'alk. 20 €',
-          duration: '1t 50min',
-          subtitles: 'Venäjä',
-          age: '16+',
-          capacity: '60 paikkaa',
-          description: 'Sopeutumisen ja muiston tarina venäjän kielellä. Ainutlaatuinen monosoolo 60 paikan intimiympäristössä.'
         }
       }
     },
@@ -644,7 +694,18 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket3: '3 lippua',
       modalTicket4: '4 lippua',
       modalSuccessTitle: 'Varaus vastaanotettu!',
-      modalSuccessDesc: 'Lippukassan ylläpitäjä ottaa sinuun yhteyttä 15 minuutin kuluessa paikkojen vahvistamiseksi.'
+      modalSuccessDesc: 'Lippukassan ylläpitäjä ottaa sinuun yhteyttä 15 minuutin kuluessa paikkojen vahvistamiseksi.',
+      expiredBadge: 'Esitys on päättynyt',
+      expiredTitle: 'Tämä esitys on jo pidetty',
+      expiredDesc: 'Esitys on päättynyt. Seuraa ohjelmistoa tulevia esityspäiviä varten.'
+    },
+    archive: {
+      tag: 'Esityshistoria // Logrus Teatteri',
+      title: 'Menneet esitykset<span class="text-suomi font-extrabold">.</span>',
+      subtitle: 'Teatterin esitysarkisto, ensi-illat ja valokuvadokumentit Helsingissä',
+      backToMain: 'Etusivulle',
+      aboutShow: 'Esityksestä',
+      archiveBadge: 'Arkistoesitys'
     }
   },
   en: {
@@ -668,7 +729,9 @@ export const translations: Record<Language, TranslationSchema> = {
       afishaBtn: 'View Repertoire',
       aboutBtn: 'About Theater',
       nextShowLabel: 'Next Show',
-      nextShowValue: '«Novecento» · August 13'
+      nextShowValue: '«Novecento» · August 13',
+      noUpcomingBadge: 'Repertoire in preparation',
+      noUpcomingShows: 'New shows coming soon'
     },
     afisha: {
       tag: 'Upcoming Shows // October 2026',
@@ -683,11 +746,35 @@ export const translations: Record<Language, TranslationSchema> = {
       aboutShowBtn: 'About Show',
       secondaryPriceLabel: 'Price',
       secondaryBuyBtn: 'Tickets',
+      noShowsTag: 'Season 2026 // New dates coming soon',
+      noShowsTitle: 'New premieres coming soon<span class="text-suomi font-bold">.</span>',
+      noShowsDesc: 'All scheduled performances have ended for now. We are preparing new productions and will open ticket booking soon — stay tuned!',
+      noShowsCta: 'Explore acting courses',
+      rehearsal: {
+        liveBadge: 'Behind the Curtain // Narri näyttämö',
+        title: 'A New Production is Born Behind the Curtain<span class="text-suomi font-extrabold">.</span>',
+        subtitle: 'The stage is in rehearsal — preparing our 2026 season premieres in Helsinki',
+        stageNotice: 'Narri Stage · Rehearsal in progress',
+        coursesBtn: 'Explore Acting Courses',
+        openCurtain: 'Open Curtain',
+        closeCurtain: 'Close Curtain',
+        hintOpen: 'Click to open curtain',
+        hintClose: 'Click to close curtain',
+        lightsBtn: 'Stage Lights',
+        backstageQuote: '«The magic of a new production is coming to life on stage…»',
+        backstageSub: 'Teatteri Logrus · Rehearsal Season 2026'
+      },
+      pastShowsBanner: {
+        tag: 'Production Archive // 2026',
+        title: 'Past Theatre Productions',
+        desc: 'Explore the history of past productions, photo chronicles, and archives of Teatteri Logrus in Helsinki',
+        btn: 'Explore Past Shows'
+      },
       shows: {
         'novecento': {
           title: 'Novecento',
           subtitle: 'Alessandro Baricco · Directed by Akvile Ruzgyte',
-          date: '13 August / 13.08',
+          date: '13 August',
           stage: 'Narri näyttämö',
           price: 'from 20 €',
           duration: '1h 45min',
@@ -696,31 +783,6 @@ export const translations: Record<Language, TranslationSchema> = {
           capacity: '80 seats',
           quote: '«An endless piano like the boundless ocean, and a man who found music but never found the shore…»',
           description: 'The story of a pianist born and raised aboard an ocean liner — a musician who saw the world through ocean sounds and melodies. A monodrama about freedom, fear, music, and infinity between sea and sky.'
-        },
-        'cherry-orchard': {
-          title: 'The Cherry Orchard',
-          subtitle: 'Anton Chekhov · Directed by Anna Vedeneeva',
-          date: '12 October / 12.10',
-          stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
-          price: 'from 25 €',
-          duration: '2h 40min',
-          subtitles: 'Russian',
-          age: '14+',
-          capacity: '90 seats',
-          quote: '«Oh, my childhood, my purity! In this room I slept, from here I looked out at the garden...»',
-          description: "Chekhov's classic in a Nordic interpretation — clean, transparent, with quiet pauses and a deep focus on human solitude."
-        },
-        'maya-sea': {
-          title: 'Maya and the Sea',
-          subtitle: 'Modern monodrama with live cello',
-          date: '18 October / 18.10',
-          stage: 'Chamber Stage',
-          price: 'from 20 €',
-          duration: '1h 50min',
-          subtitles: 'Russian',
-          age: '16+',
-          capacity: '60 seats',
-          description: 'A story of adaptation and memory performed in Russian. A unique solo performance in an intimate 60-seat setting.'
         }
       }
     },
@@ -885,7 +947,18 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket3: '3 tickets',
       modalTicket4: '4 tickets',
       modalSuccessTitle: 'Request Received!',
-      modalSuccessDesc: 'The box office administrator will contact you within 15 minutes to confirm your seats.'
+      modalSuccessDesc: 'The box office administrator will contact you within 15 minutes to confirm your seats.',
+      expiredBadge: 'Performance ended',
+      expiredTitle: 'This performance has already taken place',
+      expiredDesc: 'The scheduled performance has ended. Follow our repertoire to catch upcoming dates.'
+    },
+    archive: {
+      tag: 'Production History // Logrus Teatteri',
+      title: 'Past Productions<span class="text-suomi font-extrabold">.</span>',
+      subtitle: 'Archive of theatrical productions, premieres, and photo chronicles in Helsinki',
+      backToMain: 'Back to Home',
+      aboutShow: 'About Show',
+      archiveBadge: 'Past Production'
     }
   }
 };

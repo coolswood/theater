@@ -267,46 +267,26 @@ const courseSlides = getCourseSlides("ru");
             </div>
           </div>
 
-          <!-- FREE TRIAL & PRICE HIGHLIGHT BANNER (VERTICAL) -->
+          <!-- FREE TRIAL HIGHLIGHT BANNER -->
           <div
-            class="p-5 sm:p-6 rounded-2xl bg-suomi text-white shadow-xl relative overflow-hidden group/trial flex flex-col gap-2"
+            class="p-5 sm:p-7 rounded-2xl bg-suomi text-white shadow-xl relative overflow-hidden group/trial flex items-center justify-between gap-4"
           >
             <div
               class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"
             >
             </div>
-            
-            <span
-              class="font-sans text-xs uppercase tracking-[0.2em] text-suomisoft block font-semibold"
-              >Special Offer</span
-            >
-            
-            <p
-              class="font-nordic font-extrabold text-2xl sm:text-3xl text-white leading-tight"
-              data-i18n="courses.centralCourse.trialInfo"
-            >
-              {centralCourse.trialInfo}
-            </p>
-
-            <div class="pt-2 flex items-baseline gap-2 border-t border-white/20 mt-1">
-              <span
-                class="font-sans text-xs uppercase tracking-[0.15em] text-suomisoft font-semibold"
-                data-i18n="courses.centralCourse.priceLabel"
+            <div>
+              <p
+                class="font-nordic font-extrabold text-2xl sm:text-3xl text-white leading-tight mb-1"
+                data-i18n="courses.centralCourse.trialInfo"
               >
-                {centralCourse.priceLabel || "Стоимость"}:
-              </span>
-              <span
-                class="font-nordic font-extrabold text-xl sm:text-2xl text-white"
-                data-i18n="courses.centralCourse.priceValue"
+                {centralCourse.trialInfo}
+              </p>
+              <p
+                class="font-sans text-xs sm:text-sm text-suomisoft/90 font-medium"
               >
-                {centralCourse.priceValue || "35 €"}
-              </span>
-              <span
-                class="font-sans text-xs sm:text-sm text-suomisoft font-medium"
-                data-i18n="courses.centralCourse.pricePeriod"
-              >
-                {centralCourse.pricePeriod || "/ месяц"}
-              </span>
+                Стоимость участия — 35 € в месяц
+              </p>
             </div>
           </div>
 
@@ -346,10 +326,6 @@ const courseSlides = getCourseSlides("ru");
                   </a>
                 </div>
               </div>
-              <span
-                class="text-xs text-mute font-light hidden sm:block shrink-0"
-                >Запись & Вопросы</span
-              >
             </div>
 
             <!-- Email Card -->
@@ -386,10 +362,6 @@ const courseSlides = getCourseSlides("ru");
                   </a>
                 </div>
               </div>
-              <span
-                class="text-xs text-mute font-light hidden sm:block shrink-0"
-                >Официальная почта</span
-              >
             </div>
 
             <!-- Location Card -->
@@ -430,18 +402,15 @@ const courseSlides = getCourseSlides("ru");
                   </span>
                 </div>
               </div>
-              <span
-                class="text-xs text-mute font-light hidden sm:block shrink-0"
-                >«Лампарельс»</span
-              >
             </div>
           </div>
 
           <!-- MAIN CTA ENROLL BUTTON -->
           <div>
-            <button
-              class="enroll-trigger-btn w-full btn-suomi font-nordic text-xs sm:text-sm tracking-wider uppercase font-semibold py-4.5 sm:py-5 px-6 rounded-full inline-flex items-center justify-center gap-3 group shadow-xl text-center"
-              data-course={`Курс актерского мастерства ${centralCourse.studioName}`}
+            <a
+              id="course-enroll-btn"
+              href={`mailto:${centralCourse.email}?subject=${encodeURIComponent("Запись на курс")}`}
+              class="w-full btn-suomi font-nordic text-xs sm:text-sm tracking-wider uppercase font-semibold py-4.5 sm:py-5 px-6 rounded-full inline-flex items-center justify-center gap-3 group shadow-xl text-center cursor-pointer"
             >
               <span data-i18n="courses.enrollBtn">{t.enrollBtn}</span>
               <svg
@@ -453,128 +422,8 @@ const courseSlides = getCourseSlides("ru");
                 stroke="currentColor"
                 stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
               >
-            </button>
+            </a>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ENROLLMENT FORM MODAL -->
-    <div
-      id="enrollment-modal"
-      class="fixed inset-0 z-50 bg-granite/80 backdrop-blur-sm hidden items-center justify-center p-4 transition-all duration-300"
-    >
-      <div
-        class="bg-snow w-full max-w-lg rounded-3xl p-6 sm:p-10 border border-rule shadow-2xl relative transform transition-all max-h-[90vh] overflow-y-auto"
-      >
-        <button
-          id="modal-close"
-          class="absolute top-6 right-6 w-10 h-10 rounded-full border border-rule text-mute hover:text-granite hover:bg-snow2 flex items-center justify-center text-xl transition"
-        >
-          ✕
-        </button>
-
-        <span
-          class="suomi-tag block mb-3"
-          data-i18n="courses.centralCourse.badge">{centralCourse.badge}</span
-        >
-        <h3
-          class="font-nordic font-bold text-2xl text-granite mb-1"
-          data-i18n="courses.centralCourse.trialInfo"
-        >
-          {centralCourse.trialInfo}
-        </h3>
-        <p
-          id="modal-course-name"
-          class="font-sans font-semibold text-suomi text-base mb-6"
-        >
-          {centralCourse.title}
-        </p>
-
-        <form
-          id="enrollment-form"
-          class="space-y-4"
-          onsubmit="event.preventDefault(); handleFormSubmit();"
-        >
-          <div>
-            <label
-              class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1"
-              >Имя</label
-            >
-            <input
-              type="text"
-              required
-              placeholder="Ваше имя"
-              class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm"
-            />
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label
-                class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1"
-                >Телефон / WhatsApp</label
-              >
-              <input
-                type="text"
-                required
-                placeholder="+358..."
-                class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm"
-              />
-            </div>
-            <div>
-              <label
-                class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1"
-                >Email</label
-              >
-              <input
-                type="email"
-                required
-                placeholder="name@domain.fi"
-                class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label
-              class="block font-sans text-[10px] uppercase tracking-wider text-mute mb-1"
-              >Комментарий</label
-            >
-            <textarea
-              rows="3"
-              placeholder="Вопросы или пожелания..."
-              class="w-full bg-snow2 border border-rule rounded-xl px-4 py-3 text-granite focus:outline-none focus:border-suomi font-sans text-sm"
-            ></textarea>
-          </div>
-
-          <div class="pt-2">
-            <button
-              type="submit"
-              class="w-full btn-suomi font-nordic text-xs uppercase tracking-wider font-semibold py-4 rounded-full shadow-lg"
-              data-i18n="courses.enrollBtn"
-            >
-              {t.enrollBtn}
-            </button>
-          </div>
-        </form>
-
-        <div id="form-success-message" class="hidden text-center py-8">
-          <span
-            class="w-16 h-16 bg-suomisoft text-suomi rounded-full inline-flex items-center justify-center text-3xl font-bold mb-4"
-            >✓</span
-          >
-          <h4 class="font-nordic font-bold text-2xl text-granite mb-2">
-            Заявка принята!
-          </h4>
-          <p class="text-xs text-mute font-sans mb-4">
-            Мы свяжемся с вами для подтверждения первого бесплатного занятия.
-          </p>
-          <button
-            id="success-close"
-            class="btn-outline font-nordic text-xs uppercase tracking-wider px-6 py-2.5 rounded-full mt-2"
-            >Закрыть</button
-          >
         </div>
       </div>
     </div>
@@ -631,8 +480,20 @@ const courseSlides = getCourseSlides("ru");
     const nextBtn = document.getElementById("slider-next");
     const thumbItems = Array.from(document.querySelectorAll(".thumb-item"));
     const mainShowcaseBox = document.getElementById("main-showcase-box");
+    const enrollBtn = document.getElementById("course-enroll-btn") as HTMLAnchorElement | null;
 
     if (!showcaseImg) return;
+
+    function updateEnrollLink(lang: Language) {
+      if (!enrollBtn) return;
+      const subjects: Record<Language, string> = {
+        ru: "Запись на курс",
+        fi: "Ilmoittautuminen kurssille",
+        en: "Enrollment in the course",
+      };
+      const subject = encodeURIComponent(subjects[lang] || subjects.ru);
+      enrollBtn.href = `mailto:info@logrus.fi?subject=${subject}`;
+    }
 
     function goToSlide(index: number) {
       currentSlides = getCourseSlides(currentLang);
@@ -671,6 +532,7 @@ const courseSlides = getCourseSlides("ru");
 
     window.addEventListener("languageChange", ((e: CustomEvent) => {
       currentLang = e.detail.lang;
+      updateEnrollLink(currentLang);
       goToSlide(currentIndex);
     }) as EventListener);
 
@@ -740,55 +602,9 @@ const courseSlides = getCourseSlides("ru");
       }
     });
 
-    // Modal enrollment logic
-    const modal = document.getElementById("enrollment-modal");
-    const modalClose = document.getElementById("modal-close");
-    const successClose = document.getElementById("success-close");
-    const courseNameEl = document.getElementById("modal-course-name");
-    const enrollBtns = document.querySelectorAll(".enroll-trigger-btn");
-    const form = document.getElementById("enrollment-form") as HTMLFormElement;
-    const successMsg = document.getElementById("form-success-message");
-
-    enrollBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const courseName =
-          btn.getAttribute("data-course") || "Курс актерского мастерства";
-        if (courseNameEl) courseNameEl.textContent = courseName;
-        if (form) form.classList.remove("hidden");
-        if (successMsg) successMsg.classList.add("hidden");
-        modal?.classList.remove("hidden");
-        modal?.classList.add("flex");
-      });
-    });
-
-    modalClose?.addEventListener("click", () => {
-      modal?.classList.add("hidden");
-      modal?.classList.remove("flex");
-    });
-
-    successClose?.addEventListener("click", () => {
-      modal?.classList.add("hidden");
-      modal?.classList.remove("flex");
-    });
-
-    modal?.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-      }
-    });
-
+    updateEnrollLink(currentLang);
     goToSlide(0);
   }
-
-  (window as any).handleFormSubmit = function () {
-    const form = document.getElementById("enrollment-form");
-    const successMsg = document.getElementById("form-success-message");
-    if (form && successMsg) {
-      form.classList.add("hidden");
-      successMsg.classList.remove("hidden");
-    }
-  };
 
   document.addEventListener("DOMContentLoaded", initCoursesCarousel);
 </script>

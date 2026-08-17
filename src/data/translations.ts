@@ -234,6 +234,8 @@ export interface TranslationSchema {
     reviewsFormSuccessTitle?: string;
     reviewsFormSuccessDesc?: string;
     reviewsEmptyText?: string;
+    reviewsExpandBtn?: string;
+    reviewsCollapseBtn?: string;
   };
   archive?: {
     tag: string;
@@ -432,7 +434,7 @@ export const translations: Record<Language, TranslationSchema> = {
       feature2Desc: 'Всего 90 мест в зале для глубокого погружения и искренней эмоции.',
       feature3Tag: '03 // ФОРМАТ',
       feature3Title: 'Классический стиль',
-      feature3Desc: 'Лаконичное пространство в центре Хельсинки без помпезности.'
+      feature3Desc: 'Традиции психологического театра и сильная драматургия.'
     },
     contacts: {
       heading: 'Tervetuloa <span class="text-suomi font-semibold">· Добро пожаловать.</span>',
@@ -492,9 +494,9 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket4: '4 билета',
       modalSuccessTitle: 'Заявка принята!',
       modalSuccessDesc: 'Администратор кассы свяжется с вами в течение 15 минут для подтверждения мест.',
-      expiredBadge: 'Показ завершен',
+      expiredBadge: 'Архивная постановка',
       expiredTitle: 'Этот спектакль уже состоялся',
-      expiredDesc: 'Показ завершен. Следите за обновлениями афиши, чтобы не пропустить следующие даты.',
+      expiredDesc: 'Архивная постановка. Следите за обновлениями афиши, чтобы не пропустить следующие даты.',
       reviewsTag: 'Отзывы и впечатления',
       reviewsTitle: 'Впечатления зрителей<span class="text-suomi font-extrabold">.</span>',
       reviewsSubtitle: 'Искренние слова, эмоции и отзывы тех, кто разделил с нами магию камерного спектакля в Хельсинки.',
@@ -530,7 +532,9 @@ export const translations: Record<Language, TranslationSchema> = {
       reviewsFormSubmitBtn: 'Опубликовать отзыв',
       reviewsFormSuccessTitle: 'Спасибо за ваш отзыв!',
       reviewsFormSuccessDesc: 'Ваш отзыв успешно сохранен и добавлен на страницу спектакля.',
-      reviewsEmptyText: 'В этой категории пока нет отзывов. Будьте первыми!'
+      reviewsEmptyText: 'В этой категории пока нет отзывов. Будьте первыми!',
+      reviewsExpandBtn: 'Читать полностью',
+      reviewsCollapseBtn: 'Свернуть'
     },
     archive: {
       tag: 'История постановок // Logrus Teatteri',
@@ -726,8 +730,8 @@ export const translations: Record<Language, TranslationSchema> = {
       feature2Title: 'Kamarimuoto',
       feature2Desc: 'Vain 90 paikkaa katsomossa syvää elämystä ja aitoa vuorovaikutusta varten.',
       feature3Tag: '03 // FORMAATTI',
-      feature3Title: 'Skandinaavinen sali',
-      feature3Desc: 'Pelkistetty, tyylikäs tila Helsingin keskustassa ilman mahtipontisuutta.'
+      feature3Title: 'Klassinen tyyli',
+      feature3Desc: 'Psykologisen teatterin perinteet ja vahva dramaturgia.'
     },
     contacts: {
       heading: 'Tervetuloa<span class="text-suomi font-semibold">.</span>',
@@ -787,9 +791,9 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket4: '4 lippua',
       modalSuccessTitle: 'Varaus vastaanotettu!',
       modalSuccessDesc: 'Lippukassan ylläpitäjä ottaa sinuun yhteyttä 15 minuutin kuluessa paikkojen vahvistamiseksi.',
-      expiredBadge: 'Esitys on päättynyt',
+      expiredBadge: 'Arkistoesitys',
       expiredTitle: 'Tämä esitys on jo pidetty',
-      expiredDesc: 'Esitys on päättynyt. Seuraa ohjelmistoa tulevia esityspäiviä varten.',
+      expiredDesc: 'Arkistoesitys. Seuraa ohjelmistoa tulevia esityspäiviä varten.',
       reviewsTag: 'Katsojien arvostelut',
       reviewsTitle: 'Katsojien kokemuksia<span class="text-suomi font-extrabold">.</span>',
       reviewsSubtitle: 'Aitoja sanoja, tunteita ja arvosteluja heiltä, jotka jakoivat kanssamme kamariesityksen taian Helsingissä.',
@@ -825,7 +829,9 @@ export const translations: Record<Language, TranslationSchema> = {
       reviewsFormSubmitBtn: 'Julkaise arvostelu',
       reviewsFormSuccessTitle: 'Kiitos arvostelustasi!',
       reviewsFormSuccessDesc: 'Arvostelusi on tallennettu ja lisätty esityksen sivulle.',
-      reviewsEmptyText: 'Tässä kategoriassa ei ole vielä arvosteluja. Ole ensimmäinen!'
+      reviewsEmptyText: 'Tässä kategoriassa ei ole vielä arvosteluja. Ole ensimmäinen!',
+      reviewsExpandBtn: 'Lue koko arvostelu',
+      reviewsCollapseBtn: 'Näytä vähemmän'
     },
     archive: {
       tag: 'Esityshistoria // Logrus Teatteri',
@@ -1020,9 +1026,9 @@ export const translations: Record<Language, TranslationSchema> = {
       feature2Tag: '02 // ATMOSPHERE',
       feature2Title: 'Chamber Stage',
       feature2Desc: 'Intimate 90-seat hall for deep immersion and genuine emotion.',
-      feature3Tag: '03 // VENUE',
-      feature3Title: 'Nordic Hall',
-      feature3Desc: 'An elegant, streamlined venue in central Helsinki.'
+      feature3Tag: '03 // FORMAT',
+      feature3Title: 'Classical Style',
+      feature3Desc: 'Psychological theatre traditions and strong dramaturgy.'
     },
     contacts: {
       heading: 'Tervetuloa <span class="text-suomi font-semibold">· Welcome.</span>',
@@ -1082,9 +1088,9 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket4: '4 tickets',
       modalSuccessTitle: 'Request Received!',
       modalSuccessDesc: 'The box office administrator will contact you within 15 minutes to confirm your seats.',
-      expiredBadge: 'Performance ended',
+      expiredBadge: 'Past Production',
       expiredTitle: 'This performance has already taken place',
-      expiredDesc: 'The scheduled performance has ended. Follow our repertoire to catch upcoming dates.',
+      expiredDesc: 'Past production. Follow our repertoire to catch upcoming dates.',
       reviewsTag: 'Audience Reviews',
       reviewsTitle: 'Spectator Impressions<span class="text-suomi font-extrabold">.</span>',
       reviewsSubtitle: 'Heartfelt words, emotions, and feedback from those who shared the intimacy of our chamber production in Helsinki.',
@@ -1120,7 +1126,9 @@ export const translations: Record<Language, TranslationSchema> = {
       reviewsFormSubmitBtn: 'Submit Review',
       reviewsFormSuccessTitle: 'Thank you for your review!',
       reviewsFormSuccessDesc: 'Your review has been saved and added to the show page.',
-      reviewsEmptyText: 'No reviews in this category yet. Be the first to share!'
+      reviewsEmptyText: 'No reviews in this category yet. Be the first to share!',
+      reviewsExpandBtn: 'Read full review',
+      reviewsCollapseBtn: 'Show less'
     },
     archive: {
       tag: 'Production History // Logrus Teatteri',

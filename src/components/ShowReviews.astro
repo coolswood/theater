@@ -27,100 +27,22 @@ const reviews: Review[] = show.reviews || [];
 
   <div class="max-w-[1400px] mx-auto relative z-10">
     <!-- Section Header -->
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16 reveal">
-      <div>
-        <span class="suomi-tag mb-3" data-i18n="showPage.reviewsTag">{t.reviewsTag}</span>
-        <h2
-          class="font-nordic font-extrabold text-granite text-3xl sm:text-5xl lg:text-6xl tracking-tight"
-          data-i18n-html="showPage.reviewsTitle"
-          set:html={t.reviewsTitle}
-        />
-        <p
-          class="font-sans text-mute text-base sm:text-lg max-w-2xl mt-4 font-light leading-relaxed"
-          data-i18n="showPage.reviewsSubtitle"
-        >
-          {t.reviewsSubtitle}
-        </p>
-      </div>
-
-      <!-- Action: Open Write Review Modal -->
-      <div class="shrink-0">
-        <button
-          id="open-review-modal-btn"
-          type="button"
-          class="btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-full inline-flex items-center justify-center gap-3 group shadow-md cursor-pointer transition-all duration-300"
-        >
-          <svg class="w-4 h-4 text-white/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-          </svg>
-          <span data-i18n="showPage.reviewsAddBtn">{t.reviewsAddBtn}</span>
-        </button>
-      </div>
+    <div class="mb-12 sm:mb-16 reveal">
+      <span class="suomi-tag mb-3" data-i18n="showPage.reviewsTag">{t.reviewsTag}</span>
+      <h2
+        class="font-nordic font-extrabold text-granite text-3xl sm:text-5xl lg:text-6xl tracking-tight"
+        data-i18n-html="showPage.reviewsTitle"
+        set:html={t.reviewsTitle}
+      />
+      <p
+        class="font-sans text-mute text-base sm:text-lg max-w-2xl mt-4 font-light leading-relaxed"
+        data-i18n="showPage.reviewsSubtitle"
+      >
+        {t.reviewsSubtitle}
+      </p>
     </div>
 
-    <!-- Rating Summary Showcase Bar -->
-    <div
-      class="reveal p-6 sm:p-8 lg:p-10 rounded-3xl bg-white/90 backdrop-blur-md border border-rule shadow-xs mb-10 sm:mb-14 grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
-    >
-      <!-- Left: Big Score & Stars -->
-      <div class="md:col-span-4 flex flex-col sm:flex-row md:flex-col items-start sm:items-center md:items-start gap-4 md:gap-2 border-b md:border-b-0 md:border-r border-rule pb-6 md:pb-0 md:pr-6">
-        <div class="flex items-baseline gap-2">
-          <span class="font-nordic font-extrabold text-4xl sm:text-6xl text-granite tracking-tight" data-i18n="showPage.reviewsScore">
-            {t.reviewsScore}
-          </span>
-          <span class="font-nordic font-semibold text-lg sm:text-xl text-mute" data-i18n="showPage.reviewsScoreOutOf">
-            {t.reviewsScoreOutOf}
-          </span>
-        </div>
-        <div class="flex items-center gap-1.5 text-amber-500">
-          {
-            Array.from({ length: 5 }).map(() => (
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-              </svg>
-            ))
-          }
-        </div>
-        <p class="font-sans text-xs sm:text-sm text-mute font-medium mt-1" data-i18n="showPage.reviewsCountLabel">
-          {t.reviewsCountLabel}
-        </p>
-      </div>
 
-      <!-- Center: Highlights & Recommendation -->
-      <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-        <div class="p-4 rounded-2xl bg-snow2/60 border border-rule/70 flex flex-col justify-between">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span class="font-nordic font-bold text-xs uppercase tracking-wider text-suomi">99%</span>
-          </div>
-          <p class="font-sans font-semibold text-xs sm:text-sm text-granite leading-snug" data-i18n="showPage.reviewsRecommendation">
-            {t.reviewsRecommendation}
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-snow2/60 border border-rule/70 flex flex-col justify-between">
-          <div class="flex items-center gap-2 mb-1">
-            <svg class="w-3.5 h-3.5 text-suomi" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="font-nordic font-bold text-xs uppercase tracking-wider text-suomi">Fienta Verified</span>
-          </div>
-          <p class="font-sans font-semibold text-xs sm:text-sm text-granite leading-snug" data-i18n="showPage.reviewsVerifiedBadge">
-            {t.reviewsVerifiedBadge}
-          </p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-snow2/60 border border-rule/70 flex flex-col justify-between">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="w-2 h-2 rounded-full bg-suomi"></span>
-            <span class="font-nordic font-bold text-xs uppercase tracking-wider text-suomi">Narri Näyttämö</span>
-          </div>
-          <p class="font-sans font-semibold text-xs sm:text-sm text-granite leading-snug">
-            Камерный формат 80 мест
-          </p>
-        </div>
-      </div>
-    </div>
 
     <!-- Filter Category Chips -->
     <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-8 reveal" id="reviews-filters">
@@ -206,47 +128,50 @@ const reviews: Review[] = show.reviews || [];
                 )}
               </div>
 
-              <!-- Rating Stars & Tag -->
-              <div class="flex flex-wrap items-center justify-between gap-2 mb-4 relative z-10">
-                <div class="flex items-center gap-1 text-amber-500">
-                  {Array.from({ length: rev.rating }).map(() => (
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                  ))}
-                </div>
-
-                {rev.tag && (
+              <!-- Review Tag -->
+              {rev.tag && (
+                <div class="mb-4 relative z-10">
                   <span class="font-sans text-xs font-semibold px-3 py-1 rounded-full bg-suomisoft/70 text-suomi border border-suomi/15">
                     {rev.tag}
                   </span>
+                </div>
+              )}
+
+              <!-- Review Text Body with Collapsible Mechanism for Long Text -->
+              <div class="review-text-container mb-6 relative z-10">
+                <blockquote
+                  class={`review-text font-sans text-granite/90 text-sm sm:text-base leading-relaxed font-light ${rev.text.length > 200 ? "review-text-clamped" : ""}`}
+                >
+                  «{rev.text}»
+                </blockquote>
+                {rev.text.length > 200 && (
+                  <button
+                    type="button"
+                    class="review-toggle-btn inline-flex items-center gap-1.5 mt-2.5 text-xs font-semibold text-suomi hover:text-suomidark transition-colors cursor-pointer group/toggle"
+                    data-expanded="false"
+                  >
+                    <span class="toggle-label" data-i18n="showPage.reviewsExpandBtn">
+                      {t.reviewsExpandBtn || "Читать полностью"}
+                    </span>
+                    <svg
+                      class="toggle-icon w-3.5 h-3.5 transform transition-transform duration-300 group-hover/toggle:translate-y-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
                 )}
               </div>
-
-              <!-- Review Text Body -->
-              <blockquote class="font-sans text-granite/90 text-sm sm:text-base leading-relaxed font-light mb-6 relative z-10">
-                «{rev.text}»
-              </blockquote>
             </div>
 
-            <!-- Footer: Date & Helpful Button -->
+            <!-- Footer: Date -->
             <div class="pt-4 border-t border-rule/60 flex items-center justify-between text-xs text-mute relative z-10">
               <time datetime={rev.date} class="font-sans">
                 {rev.date}
               </time>
-
-              <button
-                type="button"
-                class="helpful-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-snow2 transition-colors cursor-pointer text-mute hover:text-suomi group/btn"
-                data-review-id={rev.id}
-                data-likes={rev.likes || 0}
-              >
-                <svg class="w-3.5 h-3.5 text-mute group-hover/btn:text-suomi transition-colors group-hover/btn:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                </svg>
-                <span data-i18n="showPage.reviewsHelpfulBtn">{t.reviewsHelpfulBtn}</span>
-                <span class="helpful-count font-semibold">({rev.likes || 0})</span>
-              </button>
             </div>
           </article>
         ))
@@ -263,221 +188,65 @@ const reviews: Review[] = show.reviews || [];
       </p>
     </div>
   </div>
-
-  <!-- ==================== WRITE REVIEW MODAL DIALOG ==================== -->
-  <div
-    id="review-modal"
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="review-modal-title"
-  >
-    <!-- Backdrop Blur Overlay -->
-    <div
-      id="review-modal-backdrop"
-      class="absolute inset-0 bg-granite/60 backdrop-blur-sm cursor-pointer"
-    >
-    </div>
-
-    <!-- Modal Content Window -->
-    <div
-      class="relative w-full max-w-lg bg-white rounded-3xl p-6 sm:p-10 border border-rule shadow-2xl z-10 max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300"
-      id="review-modal-card"
-    >
-      <!-- Close Button -->
-      <button
-        id="close-review-modal-btn"
-        type="button"
-        class="absolute top-6 right-6 w-9 h-9 rounded-full bg-snow2 hover:bg-rule text-mute hover:text-granite flex items-center justify-center transition-colors cursor-pointer"
-        aria-label="Закрыть"
-      >
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-
-      <!-- Form Container -->
-      <div id="review-form-container">
-        <span class="suomi-tag mb-2" data-i18n="showPage.reviewsTag">{t.reviewsTag}</span>
-        <h3
-          id="review-modal-title"
-          class="font-nordic font-bold text-2xl sm:text-3xl text-granite mb-2"
-          data-i18n="showPage.reviewsModalTitle"
-        >
-          {t.reviewsModalTitle}
-        </h3>
-        <p class="font-sans text-xs sm:text-sm text-mute mb-6" data-i18n="showPage.reviewsModalSubtitle">
-          {t.reviewsModalSubtitle}
-        </p>
-
-        <form id="new-review-form" class="space-y-4 sm:space-y-5">
-          <!-- Rating Star Picker -->
-          <div>
-            <label class="block font-nordic font-bold text-xs uppercase tracking-wider text-granite mb-2" data-i18n="showPage.reviewsFormRatingLabel">
-              {t.reviewsFormRatingLabel} *
-            </label>
-            <div class="flex items-center gap-2">
-              <div class="flex items-center gap-1" id="star-picker">
-                {
-                  [1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      type="button"
-                      class="star-btn w-8 h-8 flex items-center justify-center text-amber-400 hover:scale-125 transition-transform cursor-pointer"
-                      data-star={star}
-                      aria-label={`Оценка ${star}`}
-                    >
-                      <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                      </svg>
-                    </button>
-                  ))
-                }
-              </div>
-              <span id="star-rating-label" class="font-sans text-xs font-semibold text-suomi ml-2">
-                {t.reviewsFormRating5}
-              </span>
-              <input type="hidden" name="rating" id="review-rating-input" value="5" />
-            </div>
-          </div>
-
-          <!-- Author Name -->
-          <div>
-            <label for="rev-name" class="block font-nordic font-bold text-xs uppercase tracking-wider text-granite mb-1.5" data-i18n="showPage.reviewsFormNameLabel">
-              {t.reviewsFormNameLabel} *
-            </label>
-            <input
-              type="text"
-              id="rev-name"
-              name="author"
-              required
-              placeholder={t.reviewsFormNamePlaceholder}
-              class="w-full px-4 py-3 rounded-2xl bg-snow2/60 border border-rule focus:border-suomi focus:bg-white text-granite text-sm outline-hidden transition"
-            />
-          </div>
-
-          <!-- City / Context -->
-          <div>
-            <label for="rev-city" class="block font-nordic font-bold text-xs uppercase tracking-wider text-granite mb-1.5" data-i18n="showPage.reviewsFormCityLabel">
-              {t.reviewsFormCityLabel}
-            </label>
-            <input
-              type="text"
-              id="rev-city"
-              name="city"
-              placeholder={t.reviewsFormCityPlaceholder}
-              class="w-full px-4 py-3 rounded-2xl bg-snow2/60 border border-rule focus:border-suomi focus:bg-white text-granite text-sm outline-hidden transition"
-            />
-          </div>
-
-          <!-- Tag / Highlight -->
-          <div>
-            <label for="rev-tag" class="block font-nordic font-bold text-xs uppercase tracking-wider text-granite mb-1.5" data-i18n="showPage.reviewsFormTagLabel">
-              {t.reviewsFormTagLabel}
-            </label>
-            <input
-              type="text"
-              id="rev-tag"
-              name="tag"
-              placeholder={t.reviewsFormTagPlaceholder}
-              class="w-full px-4 py-3 rounded-2xl bg-snow2/60 border border-rule focus:border-suomi focus:bg-white text-granite text-sm outline-hidden transition"
-            />
-          </div>
-
-          <!-- Review Text -->
-          <div>
-            <label for="rev-text" class="block font-nordic font-bold text-xs uppercase tracking-wider text-granite mb-1.5" data-i18n="showPage.reviewsFormTextLabel">
-              {t.reviewsFormTextLabel} *
-            </label>
-            <textarea
-              id="rev-text"
-              name="text"
-              required
-              rows="4"
-              placeholder={t.reviewsFormTextPlaceholder}
-              class="w-full px-4 py-3 rounded-2xl bg-snow2/60 border border-rule focus:border-suomi focus:bg-white text-granite text-sm outline-hidden transition resize-none"
-            ></textarea>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="pt-3">
-            <button
-              type="submit"
-              class="w-full btn-suomi font-nordic text-xs tracking-wider uppercase font-semibold py-4 rounded-full flex items-center justify-center gap-2 group cursor-pointer shadow-md"
-            >
-              <span data-i18n="showPage.reviewsFormSubmitBtn">{t.reviewsFormSubmitBtn}</span>
-              <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M13 6l6 6-6 6"></path>
-              </svg>
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Success State Screen (shown on submit) -->
-      <div id="review-success-container" class="hidden text-center py-8 space-y-4">
-        <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center">
-          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h4 class="font-nordic font-bold text-2xl text-granite" data-i18n="showPage.reviewsFormSuccessTitle">
-          {t.reviewsFormSuccessTitle}
-        </h4>
-        <p class="font-sans text-sm text-mute max-w-xs mx-auto leading-relaxed" data-i18n="showPage.reviewsFormSuccessDesc">
-          {t.reviewsFormSuccessDesc}
-        </p>
-        <div class="pt-4">
-          <button
-            type="button"
-            id="finish-review-btn"
-            class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-8 py-3.5 rounded-full cursor-pointer"
-            data-i18n="showPage.modalCloseBtn"
-          >
-            {t.modalCloseBtn}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
+<style>
+  .review-text-clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    position: relative;
+  }
+  .review-text-expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+</style>
+
 <script>
+  import { translations, type Language } from '../data/translations';
+
   function setupReviews() {
-    const showId = window.location.pathname.split('/').filter(Boolean).pop() || 'novecento';
-    const storageKey = `logrus_reviews_${showId}`;
-    const likesKey = `logrus_review_likes`;
+    // 1. EXPAND / COLLAPSE LONG REVIEWS
+    document.querySelectorAll<HTMLButtonElement>('.review-toggle-btn').forEach((btn) => {
+      // Remove old event listener clone if re-running on navigation
+      btn.replaceWith(btn.cloneNode(true));
+    });
 
-    // 1. HELPFUL / LIKE BUTTON LOGIC
-    const likedIds: string[] = JSON.parse(localStorage.getItem(likesKey) || '[]');
-
-    function updateLikeButtons() {
-      document.querySelectorAll<HTMLButtonElement>('.helpful-btn').forEach((btn) => {
-        const id = btn.getAttribute('data-review-id');
-        if (id && likedIds.includes(id)) {
-          btn.classList.add('text-suomi', 'font-bold', 'bg-suomisoft/50');
-          btn.classList.remove('text-mute');
-        }
-      });
-    }
-    updateLikeButtons();
-
-    document.querySelectorAll<HTMLButtonElement>('.helpful-btn').forEach((btn) => {
+    document.querySelectorAll<HTMLButtonElement>('.review-toggle-btn').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const id = btn.getAttribute('data-review-id');
-        if (!id) return;
+        const container = btn.closest('.review-text-container');
+        const textEl = container?.querySelector<HTMLElement>('.review-text');
+        const label = btn.querySelector<HTMLElement>('.toggle-label');
+        const icon = btn.querySelector<SVGElement>('.toggle-icon');
+        const isExpanded = btn.getAttribute('data-expanded') === 'true';
 
-        let currentLikes = parseInt(btn.getAttribute('data-likes') || '0', 10);
-        const countSpan = btn.querySelector('.helpful-count');
+        const currentLang = (document.documentElement.lang || 'ru') as Language;
+        const langData = translations[currentLang]?.showPage || translations.ru.showPage;
+        const expandText = langData.reviewsExpandBtn || 'Читать полностью';
+        const collapseText = langData.reviewsCollapseBtn || 'Свернуть';
 
-        if (!likedIds.includes(id)) {
-          likedIds.push(id);
-          localStorage.setItem(likesKey, JSON.stringify(likedIds));
-          currentLikes += 1;
-          btn.setAttribute('data-likes', currentLikes.toString());
-          if (countSpan) countSpan.textContent = `(${currentLikes})`;
-          btn.classList.add('text-suomi', 'font-bold', 'bg-suomisoft/50');
-          btn.classList.remove('text-mute');
+        if (isExpanded) {
+          textEl?.classList.remove('review-text-expanded');
+          textEl?.classList.add('review-text-clamped');
+          btn.setAttribute('data-expanded', 'false');
+          if (label) {
+            label.textContent = expandText;
+            label.setAttribute('data-i18n', 'showPage.reviewsExpandBtn');
+          }
+          if (icon) icon.classList.remove('rotate-180');
+        } else {
+          textEl?.classList.remove('review-text-clamped');
+          textEl?.classList.add('review-text-expanded');
+          btn.setAttribute('data-expanded', 'true');
+          if (label) {
+            label.textContent = collapseText;
+            label.setAttribute('data-i18n', 'showPage.reviewsCollapseBtn');
+          }
+          if (icon) icon.classList.add('rotate-180');
         }
       });
     });
@@ -518,180 +287,6 @@ const reviews: Review[] = show.reviews || [];
           }
         }
       });
-    });
-
-    // 3. MODAL LOGIC (OPEN / CLOSE / SUBMIT)
-    const modal = document.getElementById('review-modal');
-    const modalCard = document.getElementById('review-modal-card');
-    const backdrop = document.getElementById('review-modal-backdrop');
-    const openBtn = document.getElementById('open-review-modal-btn');
-    const closeBtn = document.getElementById('close-review-modal-btn');
-    const finishBtn = document.getElementById('finish-review-btn');
-    const form = document.getElementById('new-review-form') as HTMLFormElement | null;
-    const formContainer = document.getElementById('review-form-container');
-    const successContainer = document.getElementById('review-success-container');
-
-    function openModal() {
-      if (!modal || !modalCard) return;
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-      modalCard.classList.remove('scale-95');
-      modalCard.classList.add('scale-100');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      if (!modal || !modalCard) return;
-      modal.classList.add('opacity-0', 'pointer-events-none');
-      modalCard.classList.add('scale-95');
-      modalCard.classList.remove('scale-100');
-      document.body.style.overflow = '';
-      setTimeout(() => {
-        if (formContainer && successContainer) {
-          formContainer.classList.remove('hidden');
-          successContainer.classList.add('hidden');
-        }
-        form?.reset();
-        setRating(5);
-      }, 300);
-    }
-
-    openBtn?.addEventListener('click', openModal);
-    closeBtn?.addEventListener('click', closeModal);
-    backdrop?.addEventListener('click', closeModal);
-    finishBtn?.addEventListener('click', closeModal);
-
-    // Escape key listener
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal && !modal.classList.contains('pointer-events-none')) {
-        closeModal();
-      }
-    });
-
-    // 4. STAR RATING PICKER IN MODAL
-    const starPicker = document.getElementById('star-picker');
-    const ratingInput = document.getElementById('review-rating-input') as HTMLInputElement | null;
-    const ratingLabel = document.getElementById('star-rating-label');
-
-    const ratingLabelsMap: Record<number, string> = {
-      5: 'Восторг!',
-      4: 'Очень хорошо',
-      3: 'Хорошо',
-      2: 'Нормально',
-      1: 'Не понравилось'
-    };
-
-    function setRating(val: number) {
-      if (ratingInput) ratingInput.value = val.toString();
-      if (ratingLabel) ratingLabel.textContent = ratingLabelsMap[val] || 'Восторг!';
-
-      starPicker?.querySelectorAll<HTMLButtonElement>('.star-btn').forEach((btn) => {
-        const starNum = parseInt(btn.getAttribute('data-star') || '0', 10);
-        if (starNum <= val) {
-          btn.classList.add('text-amber-400');
-          btn.classList.remove('text-gray-300');
-        } else {
-          btn.classList.remove('text-amber-400');
-          btn.classList.add('text-gray-300');
-        }
-      });
-    }
-
-    starPicker?.querySelectorAll<HTMLButtonElement>('.star-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const val = parseInt(btn.getAttribute('data-star') || '5', 10);
-        setRating(val);
-      });
-    });
-
-    // 5. LOCAL REVIEWS SUBMISSION & INJECTION
-    function loadLocalReviews() {
-      const localReviews: any[] = JSON.parse(localStorage.getItem(storageKey) || '[]');
-      const grid = document.getElementById('reviews-grid');
-      if (!grid) return;
-
-      localReviews.forEach((rev) => {
-        if (document.querySelector(`[data-id="${rev.id}"]`)) return;
-
-        const article = document.createElement('article');
-        article.className = 'review-card p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-suomisoft/30 via-white to-white border border-suomi/30 shadow-md flex flex-col justify-between relative overflow-hidden group';
-        article.setAttribute('data-category', rev.tagCategory || 'all');
-        article.setAttribute('data-id', rev.id);
-
-        article.innerHTML = `
-          <div class="absolute -top-3 -right-2 text-7xl font-nordic text-suomi/5 font-black select-none pointer-events-none">“</div>
-          <div>
-            <div class="flex items-start justify-between gap-3 mb-4 relative z-10">
-              <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-suomi to-suomidark text-white font-nordic font-bold flex items-center justify-center text-sm shrink-0 shadow-xs">
-                  ${rev.author.charAt(0)}
-                </div>
-                <div>
-                  <h3 class="font-nordic font-bold text-sm sm:text-base text-granite leading-tight">${rev.author}</h3>
-                  <p class="font-sans text-xs text-mute mt-0.5">${rev.role} ${rev.city ? `· ${rev.city}` : ''}</p>
-                </div>
-              </div>
-              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold tracking-tight shrink-0">
-                <svg class="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-                <span>Новый отзыв</span>
-              </span>
-            </div>
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-4 relative z-10">
-              <div class="flex items-center gap-1 text-amber-500">
-                ${Array.from({ length: rev.rating }).map(() => '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>').join('')}
-              </div>
-              ${rev.tag ? `<span class="font-sans text-xs font-semibold px-3 py-1 rounded-full bg-suomisoft/70 text-suomi border border-suomi/15">${rev.tag}</span>` : ''}
-            </div>
-            <blockquote class="font-sans text-granite/90 text-sm sm:text-base leading-relaxed font-light mb-6 relative z-10">
-              «${rev.text}»
-            </blockquote>
-          </div>
-          <div class="pt-4 border-t border-rule/60 flex items-center justify-between text-xs text-mute relative z-10">
-            <time class="font-sans">${rev.date}</time>
-            <span class="font-sans text-suomi font-semibold">✓ Опубликовано</span>
-          </div>
-        `;
-
-        grid.insertBefore(article, grid.firstChild);
-      });
-    }
-
-    loadLocalReviews();
-
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const author = (formData.get('author') as string)?.trim();
-      const city = (formData.get('city') as string)?.trim() || 'Хельсинки';
-      const text = (formData.get('text') as string)?.trim();
-      const tag = (formData.get('tag') as string)?.trim() || '«Впечатления»';
-      const rating = parseInt(formData.get('rating') as string || '5', 10);
-
-      if (!author || !text) return;
-
-      const newReview = {
-        id: `local-${Date.now()}`,
-        author,
-        role: 'Зритель',
-        city,
-        date: new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }),
-        rating,
-        tag: tag.startsWith('«') ? tag : `«${tag}»`,
-        tagCategory: 'emotions',
-        text,
-        verified: true,
-        likes: 1
-      };
-
-      const existing: any[] = JSON.parse(localStorage.getItem(storageKey) || '[]');
-      existing.unshift(newReview);
-      localStorage.setItem(storageKey, JSON.stringify(existing));
-
-      if (formContainer && successContainer) {
-        formContainer.classList.add('hidden');
-        successContainer.classList.remove('hidden');
-      }
-
-      loadLocalReviews();
     });
   }
 

@@ -1,3 +1,5 @@
+import { CURRENT_YEAR } from '../utils/date';
+
 export type Language = 'ru' | 'fi' | 'en';
 
 export interface TranslationSchema {
@@ -24,6 +26,12 @@ export interface TranslationSchema {
     nextShowValue?: string;
     noUpcomingBadge?: string;
     noUpcomingShows?: string;
+    castingTag?: string;
+    castingTitle?: string;
+    castingRole?: string;
+    castingSubtitle?: string;
+    castingDesc?: string;
+    castingApplyBtn?: string;
   };
   afisha: {
     tag: string;
@@ -103,7 +111,7 @@ export interface TranslationSchema {
       phone: string;
       email: string;
       location: string;
-      schedule: string;
+      schedule?: string;
       closingQuote: string;
       pillars: Array<{
         num: string;
@@ -190,6 +198,42 @@ export interface TranslationSchema {
     expiredBadge?: string;
     expiredTitle?: string;
     expiredDesc?: string;
+    reviewsTag?: string;
+    reviewsTitle?: string;
+    reviewsSubtitle?: string;
+    reviewsRatingLabel?: string;
+    reviewsScore?: string;
+    reviewsScoreOutOf?: string;
+    reviewsRecommendation?: string;
+    reviewsCountLabel?: string;
+    reviewsAddBtn?: string;
+    reviewsVerifiedBadge?: string;
+    reviewsHelpfulBtn?: string;
+    reviewsFilterAll?: string;
+    reviewsFilterEmotions?: string;
+    reviewsFilterActing?: string;
+    reviewsFilterMusic?: string;
+    reviewsFilterAtmosphere?: string;
+    reviewsModalTitle?: string;
+    reviewsModalSubtitle?: string;
+    reviewsFormRatingLabel?: string;
+    reviewsFormRating5?: string;
+    reviewsFormRating4?: string;
+    reviewsFormRating3?: string;
+    reviewsFormRating2?: string;
+    reviewsFormRating1?: string;
+    reviewsFormNameLabel?: string;
+    reviewsFormNamePlaceholder?: string;
+    reviewsFormCityLabel?: string;
+    reviewsFormCityPlaceholder?: string;
+    reviewsFormTextLabel?: string;
+    reviewsFormTextPlaceholder?: string;
+    reviewsFormTagLabel?: string;
+    reviewsFormTagPlaceholder?: string;
+    reviewsFormSubmitBtn?: string;
+    reviewsFormSuccessTitle?: string;
+    reviewsFormSuccessDesc?: string;
+    reviewsEmptyText?: string;
   };
   archive?: {
     tag: string;
@@ -213,8 +257,8 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       countryTag: 'Финляндия · Хельсинки',
       stageTag: 'Русскоязычная камерная сцена',
-      title: 'Русскоязычная драма<br class="hidden sm:inline" /> в&nbsp;северной <span class="text-suomi font-semibold">тишине</span><span class="text-redru">.</span>',
-      description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — прохладная скандинавская эстетика пространства в центре Хельсинки и глубокое уважение к русскоязычной драматической традиции.',
+      title: 'Русскоязычный театр<br class="hidden sm:inline" /> в&nbsp;северной <span class="text-suomi font-semibold">тишине</span><span class="text-redru">.</span>',
+      description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — гармоничное слияние русской и финской театральных школ на сцене Хельсинки.',
       locationLabel: '— Наша локация —',
       locationName: 'Helsinki · Sörnäinen',
       locationDesc: 'Сцена Narri näyttämö (Sörnäisten rantatie 31)',
@@ -225,10 +269,16 @@ export const translations: Record<Language, TranslationSchema> = {
       nextShowLabel: 'Ближайший показ',
       nextShowValue: '«Новеченто» · 13 Августа',
       noUpcomingBadge: 'Репертуар формируется',
-      noUpcomingShows: 'Скоро новые анонсы'
+      noUpcomingShows: 'Скоро новые анонсы',
+      castingTag: 'Кастинг // Открытый набор',
+      castingTitle: 'Ищем актёра',
+      castingRole: 'На роль гопника',
+      castingSubtitle: 'Если ты давно хотел попробовать себя на сцене — сейчас самое время.',
+      castingDesc: 'Ищем молодого парня в новую постановку театра «Логрус». Опыт не обязателен, но приветствуется!',
+      castingApplyBtn: 'Откликнуться на роль'
     },
     afisha: {
-      tag: 'Ожидаемые показы // Октябрь 2026',
+      tag: `Ожидаемые показы // Октябрь ${CURRENT_YEAR}`,
       title: 'Репертуар<span class="text-suomi font-bold">.</span>',
       subtitlesNote: 'Сцена Narri näyttämö в Хельсинки',
       premiereTag: 'Премьера в Хельсинки',
@@ -240,14 +290,14 @@ export const translations: Record<Language, TranslationSchema> = {
       aboutShowBtn: 'О спектакле',
       secondaryPriceLabel: 'Цена',
       secondaryBuyBtn: 'Билеты',
-      noShowsTag: 'Сезон 2026 // Скоро новые даты',
+      noShowsTag: `Сезон ${CURRENT_YEAR} // Скоро новые даты`,
       noShowsTitle: 'Скоро новые премьеры<span class="text-suomi font-bold">.</span>',
       noShowsDesc: 'В данный момент все запланированные показы завершены. Мы готовим новые постановки и откроем бронирование в ближайшее время — следите за анонсами!',
       noShowsCta: 'Узнать об актерских курсах',
       rehearsal: {
         liveBadge: 'За кулисами // Narri näyttämö',
         title: 'За занавесом рождается новый спектакль<span class="text-suomi font-extrabold">.</span>',
-        subtitle: 'Сцена закрыта на репетиции — мы готовим премьеры сезона 2026 в Хельсинки',
+        subtitle: `Сцена закрыта на репетиции — мы готовим премьеры сезона ${CURRENT_YEAR} в Хельсинки`,
         stageNotice: 'Камерная сцена Narri · Репетиции',
         coursesBtn: 'Актерские курсы студии',
         openCurtain: 'Открыть занавес',
@@ -256,10 +306,10 @@ export const translations: Record<Language, TranslationSchema> = {
         hintClose: 'Нажмите, чтобы закрыть занавес',
         lightsBtn: 'Свет софитов',
         backstageQuote: '«На сцене рождается магия новой постановки…»',
-        backstageSub: 'Teatteri Logrus · Репетиционный сезон 2026'
+        backstageSub: `Teatteri Logrus · Репетиционный сезон ${CURRENT_YEAR}`
       },
       pastShowsBanner: {
-        tag: 'Архив постановок // 2026',
+        tag: `Архив постановок // ${CURRENT_YEAR}`,
         title: 'Прошлые спектакли театра',
         desc: 'Погрузитесь в историю постановок, фотохронику и архив спектаклей Teatteri Logrus в Хельсинки',
         btn: 'Смотреть архив спектаклей'
@@ -271,7 +321,7 @@ export const translations: Record<Language, TranslationSchema> = {
           date: '13 Августа',
           stage: 'Sörnäisten rantatie 31 · Narri näyttämö',
           price: 'от 20 €',
-          duration: '1ч 45мин',
+          duration: '2ч 15мин',
           subtitles: 'Русский',
           age: '12+',
           capacity: '80 мест',
@@ -281,7 +331,7 @@ export const translations: Record<Language, TranslationSchema> = {
       }
     },
     courses: {
-      tag: 'Сценическая лаборатория // Набор 2026',
+      tag: `Сценическая лаборатория // Набор ${CURRENT_YEAR}`,
       title: 'Актерские курсы<span class="text-suomi font-extrabold">.</span>',
       subtitle: 'Раскройте свой сценический потенциал, голос и харизму под руководством профессиональных режиссеров в центре Хельсинки.',
       swipeNote: 'Свайп слайдов →',
@@ -332,7 +382,7 @@ export const translations: Record<Language, TranslationSchema> = {
       centralCourse: {
         title: 'Курс актерского мастерства',
         studioName: '«Лампарельс»',
-        badge: 'Набор в группу открыт // Сезон 2026',
+        badge: `Набор в группу открыт // Сезон ${CURRENT_YEAR}`,
         headline: 'Импровизация — это про сцену и про жизнь. Выбирайте, каким будет ваш следующий акт',
         subtitle: 'Актерская студия Logrus Teatteri в Хельсинки',
         description: 'Живое пространство для людей всех возрастов. Учимся работать с партнером, выходить из зоны комфорта и свободно владеть импровизацией.',
@@ -340,7 +390,7 @@ export const translations: Record<Language, TranslationSchema> = {
         trialInfo: 'Первое пробное занятие — БЕСПЛАТНО',
         phone: '+358 45 2656332',
         email: 'info@logrus.fi',
-        location: 'Helsinki · Sörnäinen (Sörnäisten rantatie 31)',
+        location: 'Pohjavedenkatu 5, 00980 Helsinki',
         schedule: 'Очные вечерние занятия · Группы до 15 человек',
         closingQuote: 'Каким будет твой следующий акт — выбираешь ты ✨',
         pillars: [
@@ -368,7 +418,7 @@ export const translations: Record<Language, TranslationSchema> = {
       }
     },
     about: {
-      tag: 'Наша миссия',
+      tag: 'Наш театр',
       title: 'Два мира.<br />Одна драма.<br /><span class="text-suomi font-semibold">Общий диалог.</span>',
       italicQuote: 'Мы объединяем финскую эстетику пространства с глубинным русскоязычным психологическим театром.',
       text: 'Театр «Logrus» — это живое пространство для русскоязычной диаспоры Финляндии и всех, кто ценит европейский подход к классическому и современному драматическому искусству.',
@@ -381,7 +431,7 @@ export const translations: Record<Language, TranslationSchema> = {
       feature2Title: 'Камерный формат',
       feature2Desc: 'Всего 90 мест в зале для глубокого погружения и искренней эмоции.',
       feature3Tag: '03 // ФОРМАТ',
-      feature3Title: 'Скандинавский зал',
+      feature3Title: 'Классический стиль',
       feature3Desc: 'Лаконичное пространство в центре Хельсинки без помпезности.'
     },
     contacts: {
@@ -399,7 +449,7 @@ export const translations: Record<Language, TranslationSchema> = {
       hslRoute: '🚆 HSL Маршрут'
     },
     footer: {
-      copyright: '© 2026 · Logrus Teatteri Helsinki · Финско-русскоязычная сцена',
+      copyright: `© ${CURRENT_YEAR} · Logrus Teatteri Helsinki · Финско-русскоязычная сцена`,
       toTop: '↑ Наверх'
     },
     showPage: {
@@ -444,7 +494,43 @@ export const translations: Record<Language, TranslationSchema> = {
       modalSuccessDesc: 'Администратор кассы свяжется с вами в течение 15 минут для подтверждения мест.',
       expiredBadge: 'Показ завершен',
       expiredTitle: 'Этот спектакль уже состоялся',
-      expiredDesc: 'Показ завершен. Следите за обновлениями афиши, чтобы не пропустить следующие даты.'
+      expiredDesc: 'Показ завершен. Следите за обновлениями афиши, чтобы не пропустить следующие даты.',
+      reviewsTag: 'Отзывы и впечатления',
+      reviewsTitle: 'Впечатления зрителей<span class="text-suomi font-extrabold">.</span>',
+      reviewsSubtitle: 'Искренние слова, эмоции и отзывы тех, кто разделил с нами магию камерного спектакля в Хельсинки.',
+      reviewsRatingLabel: 'Рейтинг спектакля',
+      reviewsScore: '4.9',
+      reviewsScoreOutOf: '/ 5.0',
+      reviewsRecommendation: '99% зрителей рекомендуют',
+      reviewsCountLabel: 'На основе отзывов зрителей',
+      reviewsAddBtn: 'Оставить отзыв',
+      reviewsVerifiedBadge: 'Проверенный билет',
+      reviewsHelpfulBtn: 'Полезно',
+      reviewsFilterAll: 'Все отзывы',
+      reviewsFilterEmotions: 'Эмоции',
+      reviewsFilterActing: 'Игра актеров',
+      reviewsFilterMusic: 'Музыка и звук',
+      reviewsFilterAtmosphere: 'Атмосфера',
+      reviewsModalTitle: 'Поделитесь впечатлениями',
+      reviewsModalSubtitle: 'Ваш отзыв поможет другим зрителям открыть для себя этот спектакль.',
+      reviewsFormRatingLabel: 'Ваша оценка',
+      reviewsFormRating5: 'Восторг!',
+      reviewsFormRating4: 'Очень хорошо',
+      reviewsFormRating3: 'Хорошо',
+      reviewsFormRating2: 'Нормально',
+      reviewsFormRating1: 'Не понравилось',
+      reviewsFormNameLabel: 'Ваше имя',
+      reviewsFormNamePlaceholder: 'Например, Анна',
+      reviewsFormCityLabel: 'Город / Статус',
+      reviewsFormCityPlaceholder: 'Например, Хельсинки · Зритель премьеры',
+      reviewsFormTextLabel: 'Ваш отзыв',
+      reviewsFormTextPlaceholder: 'Расскажите, что вас особенно тронуло, какая сцена или музыка запомнились больше всего...',
+      reviewsFormTagLabel: 'Главная мысль (тег)',
+      reviewsFormTagPlaceholder: 'Например, «До мурашек»',
+      reviewsFormSubmitBtn: 'Опубликовать отзыв',
+      reviewsFormSuccessTitle: 'Спасибо за ваш отзыв!',
+      reviewsFormSuccessDesc: 'Ваш отзыв успешно сохранен и добавлен на страницу спектакля.',
+      reviewsEmptyText: 'В этой категории пока нет отзывов. Будьте первыми!'
     },
     archive: {
       tag: 'История постановок // Logrus Teatteri',
@@ -478,10 +564,16 @@ export const translations: Record<Language, TranslationSchema> = {
       nextShowLabel: 'Seuraava esitys',
       nextShowValue: '«Novecento» · 13. Elokuuta',
       noUpcomingBadge: 'Ohjelmistoa valmistellaan',
-      noUpcomingShows: 'Uusia esityksiä tulossa pian'
+      noUpcomingShows: 'Uusia esityksiä tulossa pian',
+      castingTag: 'Roolitus // Avoin haku',
+      castingTitle: 'Haemme näyttelijää',
+      castingRole: 'Katusällin rooliin',
+      castingSubtitle: 'Jos olet aina halunnut kokeilla siipiäsi näyttämöllä — nyt on oikea hetki.',
+      castingDesc: 'Etsimme nuorta miestä Logrus Teatterin uuteen tuotantoon. Kokemusta ei vaadita, mutta se katsotaan eduksi!',
+      castingApplyBtn: 'Hae rooliin'
     },
     afisha: {
-      tag: 'Tulevat esitykset // Lokakuu 2026',
+      tag: `Tulevat esitykset // Lokakuu ${CURRENT_YEAR}`,
       title: 'Ohjelmisto<span class="text-suomi font-bold">.</span>',
       subtitlesNote: 'Narri näyttämö -näyttämö Helsingissä',
       premiereTag: 'Ensi-ilta Helsingissä',
@@ -493,14 +585,14 @@ export const translations: Record<Language, TranslationSchema> = {
       aboutShowBtn: 'Esityksestä',
       secondaryPriceLabel: 'Hinta',
       secondaryBuyBtn: 'Liput',
-      noShowsTag: 'Kausi 2026 // Uusia päiviä tulossa',
+      noShowsTag: `Kausi ${CURRENT_YEAR} // Uusia päiviä tulossa`,
       noShowsTitle: 'Uusia ensi-iltoja tulossa<span class="text-suomi font-bold">.</span>',
       noShowsDesc: 'Tällä hetkellä kaikki suunnitellut esitykset on pidetty. Valmistelemme uusia tuotantoja ja avaamme lipunmyynnin pian — seuraa ilmoituksia!',
       noShowsCta: 'Tutustu kursseihin',
       rehearsal: {
         liveBadge: 'Esiriipun takana // Narri näyttämö',
         title: 'Esiriipun takana syntyy uusi näytelmä<span class="text-suomi font-extrabold">.</span>',
-        subtitle: 'Näyttämö on suljettu harjoituksia varten — valmistelemme kauden 2026 ensi-iltoja Helsingissä',
+        subtitle: `Näyttämö on suljettu harjoituksia varten — valmistelemme kauden ${CURRENT_YEAR} ensi-iltoja Helsingissä`,
         stageNotice: 'Narri näyttämö · Harjoitukset',
         coursesBtn: 'Teatterin näyttelijänkurssit',
         openCurtain: 'Avaa esirippu',
@@ -509,10 +601,10 @@ export const translations: Record<Language, TranslationSchema> = {
         hintClose: 'Klikkaa sulkeaksesi esirippu',
         lightsBtn: 'Kohdevalot',
         backstageQuote: '«Näyttämöllä syntyy uuden teoksen taika…»',
-        backstageSub: 'Teatteri Logrus · Harjoituskausi 2026'
+        backstageSub: `Teatteri Logrus · Harjoituskausi ${CURRENT_YEAR}`
       },
       pastShowsBanner: {
-        tag: 'Esitysarkisto // 2026',
+        tag: `Esitysarkisto // ${CURRENT_YEAR}`,
         title: 'Teatterin menneet esitykset',
         desc: 'Tutustu Teatteri Logruksen menneisiin tuotantoihin, valokuvadokumentteihin ja esityshistoriaan Helsingissä',
         btn: 'Katso esitysarkisto'
@@ -524,7 +616,7 @@ export const translations: Record<Language, TranslationSchema> = {
           date: '13. Elokuuta',
           stage: 'Narri näyttämö',
           price: 'alk. 20 €',
-          duration: '1t 45min',
+          duration: '2t 15min',
           subtitles: 'Venäjä',
           age: '12+',
           capacity: '80 paikkaa',
@@ -534,7 +626,7 @@ export const translations: Record<Language, TranslationSchema> = {
       }
     },
     courses: {
-      tag: 'Näyttämölaboratorio // Haku 2026',
+      tag: `Näyttämölaboratorio // Haku ${CURRENT_YEAR}`,
       title: 'Näyttelijänkurssit<span class="text-suomi font-semibold">.</span>',
       subtitle: 'Vapauta näyttämöpotentiaalisi, äänesi ja karismasi ammattiohjaajien opastuksella Helsingin keskustassa.',
       swipeNote: 'Pyyhkäise kuvaa →',
@@ -585,7 +677,7 @@ export const translations: Record<Language, TranslationSchema> = {
       centralCourse: {
         title: 'Näyttelijäntyön kurssi',
         studioName: '«Lamparels»',
-        badge: 'Ryhmähaku auki // Kausi 2026',
+        badge: `Ryhmähaku auki // Kausi ${CURRENT_YEAR}`,
         headline: 'Lopeta muiden roolien esittäminen elämässä. On aika näytellä oma roolisi — kirkkaasti ja aidosti!',
         subtitle: 'Logrus Teatterin näyttelijästudio Helsingissä',
         description: 'Kuvittele: astut näyttämölle tai kameran eteen, ja kaikkien katseet kiinnittyvät sinuun. Ääni kantaa varmasti, tunteet välittyvät ja esiintymispelko katoaa.',
@@ -593,7 +685,7 @@ export const translations: Record<Language, TranslationSchema> = {
         trialInfo: 'Ensimmäinen kokeilukerta — ILMAINEN',
         phone: '+358 45 2656332',
         email: 'info@logrus.fi',
-        location: 'Helsinki · Sörnäinen (Sörnäisten rantatie 31)',
+        location: 'Pohjavedenkatu 5, 00980 Helsinki',
         schedule: 'Lähitunnit iltaisin · Enintään 15 henkilön ryhmä',
         closingQuote: 'Paras roolisi on vasta edessä ✨',
         pillars: [
@@ -652,7 +744,7 @@ export const translations: Record<Language, TranslationSchema> = {
       hslRoute: '🚆 HSL-reitti'
     },
     footer: {
-      copyright: '© 2026 · Logrus Teatteri Helsinki · Suomalais-venäläinen näyttämö',
+      copyright: `© ${CURRENT_YEAR} · Logrus Teatteri Helsinki · Suomalais-venäläinen näyttämö`,
       toTop: '↑ Takaisin ylös'
     },
     showPage: {
@@ -697,7 +789,43 @@ export const translations: Record<Language, TranslationSchema> = {
       modalSuccessDesc: 'Lippukassan ylläpitäjä ottaa sinuun yhteyttä 15 minuutin kuluessa paikkojen vahvistamiseksi.',
       expiredBadge: 'Esitys on päättynyt',
       expiredTitle: 'Tämä esitys on jo pidetty',
-      expiredDesc: 'Esitys on päättynyt. Seuraa ohjelmistoa tulevia esityspäiviä varten.'
+      expiredDesc: 'Esitys on päättynyt. Seuraa ohjelmistoa tulevia esityspäiviä varten.',
+      reviewsTag: 'Katsojien arvostelut',
+      reviewsTitle: 'Katsojien kokemuksia<span class="text-suomi font-extrabold">.</span>',
+      reviewsSubtitle: 'Aitoja sanoja, tunteita ja arvosteluja heiltä, jotka jakoivat kanssamme kamariesityksen taian Helsingissä.',
+      reviewsRatingLabel: 'Esityksen arvosana',
+      reviewsScore: '4.9',
+      reviewsScoreOutOf: '/ 5.0',
+      reviewsRecommendation: '99% katsojista suosittelee',
+      reviewsCountLabel: 'Perustuu katsojapalautteeseen',
+      reviewsAddBtn: 'Jätä arvostelu',
+      reviewsVerifiedBadge: 'Vahvistettu lippu',
+      reviewsHelpfulBtn: 'Hyödyllinen',
+      reviewsFilterAll: 'Kaikki',
+      reviewsFilterEmotions: 'Tunteet',
+      reviewsFilterActing: 'Näyttelijäntyö',
+      reviewsFilterMusic: 'Musiikki & ääni',
+      reviewsFilterAtmosphere: 'Tunnelma',
+      reviewsModalTitle: 'Jaa kokemuksesi',
+      reviewsModalSubtitle: 'Arvostelusi auttaa muita katsojia löytämään tämän esityksen.',
+      reviewsFormRatingLabel: 'Arvosanasi',
+      reviewsFormRating5: 'Upea elämys!',
+      reviewsFormRating4: 'Erittäin hyvä',
+      reviewsFormRating3: 'Hyvä',
+      reviewsFormRating2: 'Kohtalainen',
+      reviewsFormRating1: 'En pitänyt',
+      reviewsFormNameLabel: 'Nimesi',
+      reviewsFormNamePlaceholder: 'Esim. Anna',
+      reviewsFormCityLabel: 'Kaupunki / Rooli',
+      reviewsFormCityPlaceholder: 'Esim. Helsinki · Ensi-illan katsoja',
+      reviewsFormTextLabel: 'Arvostelusi',
+      reviewsFormTextPlaceholder: 'Kerro, mikä teki vaikutuksen, mikä kohtaus tai musiikki jäi mieleen...',
+      reviewsFormTagLabel: 'Pääajatus (tunniste)',
+      reviewsFormTagPlaceholder: 'Esim. «Kosketti syvältä»',
+      reviewsFormSubmitBtn: 'Julkaise arvostelu',
+      reviewsFormSuccessTitle: 'Kiitos arvostelustasi!',
+      reviewsFormSuccessDesc: 'Arvostelusi on tallennettu ja lisätty esityksen sivulle.',
+      reviewsEmptyText: 'Tässä kategoriassa ei ole vielä arvosteluja. Ole ensimmäinen!'
     },
     archive: {
       tag: 'Esityshistoria // Logrus Teatteri',
@@ -731,10 +859,16 @@ export const translations: Record<Language, TranslationSchema> = {
       nextShowLabel: 'Next Show',
       nextShowValue: '«Novecento» · August 13',
       noUpcomingBadge: 'Repertoire in preparation',
-      noUpcomingShows: 'New shows coming soon'
+      noUpcomingShows: 'New shows coming soon',
+      castingTag: 'Casting // Open Call',
+      castingTitle: 'Looking for an Actor',
+      castingRole: 'Street Guy / Gopnik Role',
+      castingSubtitle: 'If you ever wanted to try yourself on stage — now is the time.',
+      castingDesc: 'We are looking for a young male actor for our new Logrus Teatteri production. Prior experience is not required but welcome!',
+      castingApplyBtn: 'Apply for Role'
     },
     afisha: {
-      tag: 'Upcoming Shows // October 2026',
+      tag: `Upcoming Shows // October ${CURRENT_YEAR}`,
       title: 'Repertoire<span class="font-dramatic italic font-normal text-suomi">.</span>',
       subtitlesNote: 'Narri näyttämö stage in Helsinki',
       premiereTag: 'Helsinki Premiere',
@@ -746,14 +880,14 @@ export const translations: Record<Language, TranslationSchema> = {
       aboutShowBtn: 'About Show',
       secondaryPriceLabel: 'Price',
       secondaryBuyBtn: 'Tickets',
-      noShowsTag: 'Season 2026 // New dates coming soon',
+      noShowsTag: `Season ${CURRENT_YEAR} // New dates coming soon`,
       noShowsTitle: 'New premieres coming soon<span class="text-suomi font-bold">.</span>',
       noShowsDesc: 'All scheduled performances have ended for now. We are preparing new productions and will open ticket booking soon — stay tuned!',
       noShowsCta: 'Explore acting courses',
       rehearsal: {
         liveBadge: 'Behind the Curtain // Narri näyttämö',
         title: 'A New Production is Born Behind the Curtain<span class="text-suomi font-extrabold">.</span>',
-        subtitle: 'The stage is in rehearsal — preparing our 2026 season premieres in Helsinki',
+        subtitle: `The stage is in rehearsal — preparing our ${CURRENT_YEAR} season premieres in Helsinki`,
         stageNotice: 'Narri Stage · Rehearsal in progress',
         coursesBtn: 'Explore Acting Courses',
         openCurtain: 'Open Curtain',
@@ -762,10 +896,10 @@ export const translations: Record<Language, TranslationSchema> = {
         hintClose: 'Click to close curtain',
         lightsBtn: 'Stage Lights',
         backstageQuote: '«The magic of a new production is coming to life on stage…»',
-        backstageSub: 'Teatteri Logrus · Rehearsal Season 2026'
+        backstageSub: `Teatteri Logrus · Rehearsal Season ${CURRENT_YEAR}`
       },
       pastShowsBanner: {
-        tag: 'Production Archive // 2026',
+        tag: `Production Archive // ${CURRENT_YEAR}`,
         title: 'Past Theatre Productions',
         desc: 'Explore the history of past productions, photo chronicles, and archives of Teatteri Logrus in Helsinki',
         btn: 'Explore Past Shows'
@@ -777,7 +911,7 @@ export const translations: Record<Language, TranslationSchema> = {
           date: '13 August',
           stage: 'Narri näyttämö',
           price: 'from 20 €',
-          duration: '1h 45min',
+          duration: '2h 15min',
           subtitles: 'Russian',
           age: '12+',
           capacity: '80 seats',
@@ -787,7 +921,7 @@ export const translations: Record<Language, TranslationSchema> = {
       }
     },
     courses: {
-      tag: 'Stage Laboratory // 2026 Intake',
+      tag: `Stage Laboratory // ${CURRENT_YEAR} Intake`,
       title: 'Acting Courses<span class="font-dramatic italic font-normal text-suomi">.</span>',
       subtitle: 'Unlock your stage potential, voice, and charisma under professional directors in central Helsinki.',
       swipeNote: 'Swipe slides →',
@@ -838,7 +972,7 @@ export const translations: Record<Language, TranslationSchema> = {
       centralCourse: {
         title: 'Acting Masterclass',
         studioName: '«Lamparels»',
-        badge: 'Group Intake Open // Season 2026',
+        badge: `Group Intake Open // Season ${CURRENT_YEAR}`,
         headline: "Stop playing other people's roles in life. It's time to play your own — brightly and authentically!",
         subtitle: 'Logrus Teatteri Acting Studio in Helsinki',
         description: 'Imagine stepping onto stage or in front of a camera with all eyes on you. Your voice is confident, emotions are genuine, and stage fright disappears.',
@@ -846,7 +980,7 @@ export const translations: Record<Language, TranslationSchema> = {
         trialInfo: 'First Trial Class — FREE',
         phone: '+358 45 2656332',
         email: 'info@logrus.fi',
-        location: 'Helsinki · Sörnäinen (Sörnäisten rantatie 31)',
+        location: 'Pohjavedenkatu 5, 00980 Helsinki',
         schedule: 'In-person evening classes · Up to 15 students',
         closingQuote: 'Your best role is yet to come ✨',
         pillars: [
@@ -905,7 +1039,7 @@ export const translations: Record<Language, TranslationSchema> = {
       hslRoute: '🚆 HSL Route'
     },
     footer: {
-      copyright: '© 2026 · Logrus Teatteri Helsinki · Finnish-Russian Stage',
+      copyright: `© ${CURRENT_YEAR} · Logrus Teatteri Helsinki · Finnish-Russian Stage`,
       toTop: '↑ Back to top'
     },
     showPage: {
@@ -950,7 +1084,43 @@ export const translations: Record<Language, TranslationSchema> = {
       modalSuccessDesc: 'The box office administrator will contact you within 15 minutes to confirm your seats.',
       expiredBadge: 'Performance ended',
       expiredTitle: 'This performance has already taken place',
-      expiredDesc: 'The scheduled performance has ended. Follow our repertoire to catch upcoming dates.'
+      expiredDesc: 'The scheduled performance has ended. Follow our repertoire to catch upcoming dates.',
+      reviewsTag: 'Audience Reviews',
+      reviewsTitle: 'Spectator Impressions<span class="text-suomi font-extrabold">.</span>',
+      reviewsSubtitle: 'Heartfelt words, emotions, and feedback from those who shared the intimacy of our chamber production in Helsinki.',
+      reviewsRatingLabel: 'Show Rating',
+      reviewsScore: '4.9',
+      reviewsScoreOutOf: '/ 5.0',
+      reviewsRecommendation: '99% of audience recommend',
+      reviewsCountLabel: 'Based on verified spectator reviews',
+      reviewsAddBtn: 'Write a Review',
+      reviewsVerifiedBadge: 'Verified Ticket',
+      reviewsHelpfulBtn: 'Helpful',
+      reviewsFilterAll: 'All Reviews',
+      reviewsFilterEmotions: 'Emotions',
+      reviewsFilterActing: 'Acting',
+      reviewsFilterMusic: 'Music & Sound',
+      reviewsFilterAtmosphere: 'Atmosphere',
+      reviewsModalTitle: 'Share Your Experience',
+      reviewsModalSubtitle: 'Your review helps others discover this unique chamber stage production.',
+      reviewsFormRatingLabel: 'Your Rating',
+      reviewsFormRating5: 'Masterpiece!',
+      reviewsFormRating4: 'Very Good',
+      reviewsFormRating3: 'Good',
+      reviewsFormRating2: 'Fair',
+      reviewsFormRating1: 'Did Not Like',
+      reviewsFormNameLabel: 'Your Name',
+      reviewsFormNamePlaceholder: 'e.g. Anna',
+      reviewsFormCityLabel: 'City / Status',
+      reviewsFormCityPlaceholder: 'e.g. Helsinki · Premiere Guest',
+      reviewsFormTextLabel: 'Your Review',
+      reviewsFormTextPlaceholder: 'Share what moved you most, memorable scenes, music, or atmosphere...',
+      reviewsFormTagLabel: 'Key Highlight (tag)',
+      reviewsFormTagPlaceholder: 'e.g. «Goosebumps»',
+      reviewsFormSubmitBtn: 'Submit Review',
+      reviewsFormSuccessTitle: 'Thank you for your review!',
+      reviewsFormSuccessDesc: 'Your review has been saved and added to the show page.',
+      reviewsEmptyText: 'No reviews in this category yet. Be the first to share!'
     },
     archive: {
       tag: 'Production History // Logrus Teatteri',

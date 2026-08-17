@@ -1,5 +1,6 @@
 ---
 import { translations } from "../data/translations";
+import { CURRENT_YEAR } from "../utils/date";
 
 const t = translations.ru.afisha.rehearsal!;
 const banner = translations.ru.afisha.pastShowsBanner!;
@@ -85,7 +86,7 @@ const banner = translations.ru.afisha.pastShowsBanner!;
           class="font-mono text-[11px] text-white/60 tracking-wider uppercase mt-3"
           data-i18n="afisha.rehearsal.backstageSub"
         >
-          {t.backstageSub || "Teatteri Logrus · Репетиционный сезон 2026"}
+          {t.backstageSub || `Teatteri Logrus · Репетиционный сезон ${CURRENT_YEAR}`}
         </p>
       </div>
 

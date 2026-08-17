@@ -68,6 +68,15 @@ const secondaryShows = featuredShow ? shows.filter((s) => s.id !== featuredShow.
                     </svg>
                     <span data-i18n={`afisha.shows.${featuredShow.id}.stage`}>{featuredShow.stage}</span>
                   </span>
+
+                  <a
+                    href={`/shows/${featuredShow.id}#reviews`}
+                    class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-950 font-sans text-xs sm:text-sm font-semibold border border-amber-200 shadow-xs transition hover:scale-105"
+                  >
+                    <span class="text-amber-500 font-bold">★ 4.9</span>
+                    <span class="text-mute">·</span>
+                    <span class="text-granite/80" data-i18n="showPage.reviewsTag">Отзывы</span>
+                  </a>
                 </div>
 
                 <h3

@@ -13,6 +13,20 @@ export interface CastMember {
   role: string;
 }
 
+export interface Review {
+  id: string;
+  author: string;
+  role: string;
+  city?: string;
+  date: string;
+  rating: number;
+  text: string;
+  tag?: string;
+  tagCategory?: 'emotions' | 'acting' | 'music' | 'atmosphere' | 'all';
+  verified?: boolean;
+  likes?: number;
+}
+
 export interface Show {
   id: string;
   number: string;
@@ -40,6 +54,7 @@ export interface Show {
   };
   cast?: CastMember[];
   gallery?: GalleryItem[];
+  reviews?: Review[];
 }
 
 const showPosters: Record<string, {
@@ -165,6 +180,212 @@ export const showCast: Record<string, CastMember[]> = {
   ]
 };
 
+export const showReviews: Record<string, Record<Language, Review[]>> = {
+  'novecento': {
+    ru: [
+      {
+        id: 'rev-1',
+        author: 'Елена Васильева',
+        role: 'Зритель премьеры',
+        city: 'Хельсинки',
+        date: '14 Августа 2026',
+        rating: 5,
+        tag: '«До слез и мурашек»',
+        tagCategory: 'emotions',
+        text: 'Невероятная глубина и атмосфера камерного зала. С первых минут забываешь, где находишься — кажется, что под ногами действительно качается палуба океанского лайнера «Вирджиния». Игра Виталия Лайдинена на разрыв души! Браво!',
+        verified: true,
+        likes: 24
+      },
+      {
+        id: 'rev-2',
+        author: 'Markus Lindqvist',
+        role: 'Зритель / Театральный критик',
+        city: 'Helsinki',
+        date: '13 Августа 2026',
+        rating: 5,
+        tag: '«Магия звука и света»',
+        tagCategory: 'atmosphere',
+        text: 'Удивительно тонкая, красивая постановка на сцене Narri näyttämö. Свет и звук создают эффект полного погружения в безграничный океан. Рекомендую всем ценителям глубокого психологического театра.',
+        verified: true,
+        likes: 19
+      },
+      {
+        id: 'rev-3',
+        author: 'Дмитрий и Анна Соколовы',
+        role: 'Постоянные зрители',
+        city: 'Эспоо',
+        date: '13 Августа 2026',
+        rating: 5,
+        tag: '«Живая музыка и труба»',
+        tagCategory: 'music',
+        text: 'Ходили вдвоем, под сильнейшим впечатлением. Трогательная история о призвании, музыке и выборе человека. Живое звучание трубы Сергея Сивульского и пластика актеров — это настоящая магия!',
+        verified: true,
+        likes: 16
+      },
+      {
+        id: 'rev-4',
+        author: 'София Корхонен',
+        role: 'Культурный обозреватель',
+        city: 'Хельсинки',
+        date: '14 Августа 2026',
+        rating: 5,
+        tag: '«Блестящая актерская игра»',
+        tagCategory: 'acting',
+        text: 'Один из самых сильных камерных спектаклей сезона в Хельсинки. Режиссерская работа Аквиле Рузгите и эмоциональная отдача актерского ансамбля заслуживают высшей оценки.',
+        verified: true,
+        likes: 31
+      },
+      {
+        id: 'rev-5',
+        author: 'Михаил Романов',
+        role: 'Зритель',
+        city: 'Тампере',
+        date: '13 Августа 2026',
+        rating: 5,
+        tag: '«Глубокий след в сердце»',
+        tagCategory: 'emotions',
+        text: 'Специально приехали из Тампере на премьеру и ни секунды не пожалели. Камерность зала позволяет уловить каждый взгляд и каждую эмоцию. Искренний, живой и глубокий театр!',
+        verified: true,
+        likes: 12
+      }
+    ],
+    fi: [
+      {
+        id: 'rev-1',
+        author: 'Elena Vasilieva',
+        role: 'Ensi-illan katsoja',
+        city: 'Helsinki',
+        date: '14. elokuuta 2026',
+        rating: 5,
+        tag: '«Koskettava ja syvällinen»',
+        tagCategory: 'emotions',
+        text: 'Uskomattoman intiimi ja syvä tunnelma kamarisalissa. Heti alusta asti tuntuu kuin seisoisi itse höyrylaivan kannella. Näyttelijöiden heittäytyminen on mykistävää. Bravo!',
+        verified: true,
+        likes: 24
+      },
+      {
+        id: 'rev-2',
+        author: 'Markus Lindqvist',
+        role: 'Teatterin ystävä / Kriitikko',
+        city: 'Helsinki',
+        date: '13. elokuuta 2026',
+        rating: 5,
+        tag: '«Äänen ja valon taikaa»',
+        tagCategory: 'atmosphere',
+        text: 'Upea, visuaalisesti erittäin kaunis esitys Narri näyttämöllä. Valo- ja äänisuunnittelu loivat maagisen tunnelman. Suosittelen lämpimästi kaikille draaman ystäville.',
+        verified: true,
+        likes: 19
+      },
+      {
+        id: 'rev-3',
+        author: 'Dmitri & Anna Sokolov',
+        role: 'Vakiokatsojat',
+        city: 'Espoo',
+        date: '13. elokuuta 2026',
+        rating: 5,
+        tag: '«Elävä musiikki ja trumpetti»',
+        tagCategory: 'music',
+        text: 'Olimme katsomassa yhdessä ja vaikutus kantaa edelleen. Herkkä ja koskettava tarina kutsumuksesta ja musiikista. Trumpetin elävä sointi ja liikekieli olivat silkkaa lumoa!',
+        verified: true,
+        likes: 16
+      },
+      {
+        id: 'rev-4',
+        author: 'Sofia Korhonen',
+        role: 'Kulttuuriblogi',
+        city: 'Helsinki',
+        date: '14. elokuuta 2026',
+        rating: 5,
+        tag: '«Loistava näyttelijäntyö»',
+        tagCategory: 'acting',
+        text: 'Yksi kauden vaikuttavimmista teatterikokemuksista Helsingissä. Ohjaus ja näyttelijäkaartin intensiteetti ansaitsevat täydet pisteet. Vahvaa kamaritaidetta.',
+        verified: true,
+        likes: 31
+      },
+      {
+        id: 'rev-5',
+        author: 'Mihail Romanov',
+        role: 'Katsoja',
+        city: 'Tampere',
+        date: '13. elokuuta 2026',
+        rating: 5,
+        tag: '«Jättää syvän jäljen»',
+        tagCategory: 'emotions',
+        text: 'Matkustimme varta vasten Tampereelta esitykseen emmekä katuneet hetkeäkään. Salin intiimiys tekee jokaisesta katseesta ja tunteesta totta. Aitoa, elävää teatteria!',
+        verified: true,
+        likes: 12
+      }
+    ],
+    en: [
+      {
+        id: 'rev-1',
+        author: 'Elena Vasilieva',
+        role: 'Premiere Attendee',
+        city: 'Helsinki',
+        date: 'August 14, 2026',
+        rating: 5,
+        tag: '«Profound and Touching»',
+        tagCategory: 'emotions',
+        text: 'Incredible depth and intimacy in the chamber hall. From the opening minutes you genuinely feel the roll of the Virginia ocean liner underfoot. The acting is breathtaking!',
+        verified: true,
+        likes: 24
+      },
+      {
+        id: 'rev-2',
+        author: 'Markus Lindqvist',
+        role: 'Theater Enthusiast / Reviewer',
+        city: 'Helsinki',
+        date: 'August 13, 2026',
+        rating: 5,
+        tag: '«Magic of Sound & Light»',
+        tagCategory: 'atmosphere',
+        text: 'A beautifully crafted, poetic production at Narri näyttämö. Light and acoustic design create pure immersion into an endless ocean. Highly recommended for drama lovers.',
+        verified: true,
+        likes: 19
+      },
+      {
+        id: 'rev-3',
+        author: 'Dmitri & Anna Sokolov',
+        role: 'Regular Audience',
+        city: 'Espoo',
+        date: 'August 13, 2026',
+        rating: 5,
+        tag: '«Live Music & Trumpet»',
+        tagCategory: 'music',
+        text: 'We attended together and are still moved days later. A delicate, lyrical story of destiny, music, and courage. The live trumpet and choreography were mesmerizing!',
+        verified: true,
+        likes: 16
+      },
+      {
+        id: 'rev-4',
+        author: 'Sofia Korhonen',
+        role: 'Culture Columnist',
+        city: 'Helsinki',
+        date: 'August 14, 2026',
+        rating: 5,
+        tag: '«Brilliant Acting»',
+        tagCategory: 'acting',
+        text: 'One of the most powerful chamber theater productions in Helsinki this season. The ensemble devotion and direction deserve top marks. Truly resonant art.',
+        verified: true,
+        likes: 31
+      },
+      {
+        id: 'rev-5',
+        author: 'Mikhail Romanov',
+        role: 'Audience Member',
+        city: 'Tampere',
+        date: 'August 13, 2026',
+        rating: 5,
+        tag: '«Left a Lasting Mark»',
+        tagCategory: 'emotions',
+        text: 'Travelled from Tampere specifically for the show and loved every single moment. The intimate format lets you experience every emotion up close. Honest and vivid theater!',
+        verified: true,
+        likes: 12
+      }
+    ]
+  }
+};
+
 export function getShows(lang: Language = 'ru'): Show[] {
   const showDict = translations[lang]?.afisha?.shows || translations.ru.afisha.shows;
   return Object.entries(showDict).map(([id, data]) => ({
@@ -179,6 +400,7 @@ export function getShows(lang: Language = 'ru'): Show[] {
     gallery: showGalleries[id] || showGalleries['novecento'],
     director: showDirectors[id] || showDirectors['novecento'],
     cast: showCast[id] || showCast['novecento'],
+    reviews: (showReviews[id] && showReviews[id][lang]) || showReviews['novecento']?.[lang] || showReviews['novecento']?.ru || [],
     ...data
   }));
 }

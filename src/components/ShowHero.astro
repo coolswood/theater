@@ -2,6 +2,7 @@
 import type { Show } from "../data/shows";
 import { isShowActive } from "../data/shows";
 import { translations } from "../data/translations";
+import { CURRENT_YEAR } from "../utils/date";
 
 interface Props {
   show: Show;
@@ -11,6 +12,7 @@ const { show } = Astro.props;
 const t = translations.ru.showPage;
 const afishaT = translations.ru.afisha;
 const isActive = isShowActive(show);
+const premiereYear = show.dateIso ? new Date(show.dateIso).getFullYear() : CURRENT_YEAR;
 ---
 
 <section
@@ -76,6 +78,16 @@ const isActive = isShowActive(show);
           >
             <span data-i18n={`afisha.shows.${show.id}.age`}>{show.age}</span>
           </span>
+
+          <!-- Audience Rating Link Badge -->
+          <a
+            href="#reviews"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100/80 text-amber-950 font-sans text-xs font-semibold border border-amber-200/80 shadow-xs transition-all duration-200 hover:scale-105"
+          >
+            <span class="text-amber-500 font-bold">★ 4.9</span>
+            <span class="text-mute">·</span>
+            <span class="text-granite/80" data-i18n="showPage.reviewsTag">Отзывы</span>
+          </a>
         </div>
 
         <!-- Title & Subtitle -->
@@ -227,7 +239,7 @@ const isActive = isShowActive(show);
           >
             <span class="text-suomi font-bold">Logrus Teatteri</span>
             <span class="text-mute uppercase tracking-widest"
-              >Premieeri 2026</span
+              >Premieeri {premiereYear}</span
             >
           </div>
         </div>

@@ -22,7 +22,7 @@ export interface CentralCourse {
   phone: string;
   email: string;
   location: string;
-  schedule: string;
+  schedule?: string;
   closingQuote: string;
   pillars: {
     num: string;

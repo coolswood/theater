@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getPastShows, getShows } from '../../data/shows';
 import { translations } from '../../data/translations';
-import { getOrganizationSchema, getBreadcrumbsSchema } from '../../utils/seo';
+import { getOrganizationSchema, getBreadcrumbsSchema, getArchiveSchema } from '../../utils/seo';
 
 const t = translations.ru.archive!;
 const allPastShows = getPastShows('ru');
@@ -16,7 +16,8 @@ const archiveSchemas = [
   getBreadcrumbsSchema([
     { name: 'Главная', url: '/' },
     { name: 'Архив спектаклей', url: '/shows/archive' }
-  ])
+  ]),
+  getArchiveSchema(archiveShowsList)
 ];
 ---
 

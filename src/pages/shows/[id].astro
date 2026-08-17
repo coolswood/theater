@@ -9,6 +9,7 @@ import FullWidthMap from '../../components/FullWidthMap.astro';
 import TicketModal from '../../components/TicketModal.astro';
 import Footer from '../../components/Footer.astro';
 import { shows, getShowById, isShowActive } from '../../data/shows';
+import { getOrganizationSchema, getTheaterEventSchema, getBreadcrumbsSchema, SITE_URL } from '../../utils/seo';
 
 export function getStaticPaths() {
   return shows.map((show) => ({
@@ -24,9 +25,29 @@ if (!show) {
 }
 
 const isActive = isShowActive(show);
+const pageTitle = `Спектакль «${show.title}» в Хельсинки — билеты и афиша | Logrus Teatteri`;
+const pageDescription = `${show.title}${show.subtitle ? ' — ' + show.subtitle : ''}. Русскоязычный спектакль в Хельсинки на сцене Narri näyttämö. Билеты, фотохроника и информация о постановке.`;
+const pageKeywords = `спектакль ${show.title.toLowerCase()}, спектакль ${show.title.toLowerCase()} хельсинки, русский театр хельсинки, афиша спектаклей хельсинки, билеты в театр хельсинки, logrus teatteri, narri nayttamo`;
+
+const pageSchemas = [
+  getOrganizationSchema(),
+  getTheaterEventSchema(show),
+  getBreadcrumbsSchema([
+    { name: 'Главная', url: '/' },
+    { name: 'Афиша', url: '/#afisha' },
+    { name: show.title, url: `/shows/${show.id}` }
+  ])
+];
 ---
 
-<Layout title={`${show.title} — Logrus Teatteri Helsinki`} description={show.description}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  image={show.poster}
+  type="article"
+  keywords={pageKeywords}
+  schema={pageSchemas}
+>
   <Header />
   <main transition:animate="fade">
     <ShowHero show={show} />

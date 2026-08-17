@@ -4,16 +4,27 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getPastShows, getShows } from '../../data/shows';
 import { translations } from '../../data/translations';
+import { getOrganizationSchema, getBreadcrumbsSchema } from '../../utils/seo';
 
 const t = translations.ru.archive!;
 const allPastShows = getPastShows('ru');
 // If no shows are expired, show all shows as archive portfolio
 const archiveShowsList = allPastShows.length > 0 ? allPastShows : getShows('ru');
+
+const archiveSchemas = [
+  getOrganizationSchema(),
+  getBreadcrumbsSchema([
+    { name: 'Главная', url: '/' },
+    { name: 'Архив спектаклей', url: '/shows/archive' }
+  ])
+];
 ---
 
 <Layout
-  title="Архив спектаклей — Teatteri Logrus Helsinki"
-  description="Архив прошлых театральных постановок, премьер и фотохроника спектаклей Teatteri Logrus на сцене Narri näyttämö в Хельсинки."
+  title="Архив спектаклей — Logrus Teatteri Helsinki"
+  description="Архив прошлых театральных постановок, премьер и фотохроника спектаклей русскоязычного театра Logrus Teatteri на сцене Narri näyttämö в Хельсинки."
+  keywords="архив спектаклей хельсинки, прошлые спектакли logrus teatteri, русский театр в хельсинки, история постановок хельсинки, teatteri helsinki"
+  schema={archiveSchemas}
 >
   <Header />
 

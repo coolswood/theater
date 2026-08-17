@@ -257,11 +257,11 @@ export const translations: Record<Language, TranslationSchema> = {
       buyTicket: 'Купить билет'
     },
     hero: {
-      countryTag: 'Финляндия · Хельсинки',
-      stageTag: 'Русскоязычная камерная сцена',
+      countryTag: 'Хельсинки · Эспоо · Вантаа',
+      stageTag: 'Русскоязычный театр и актерская студия',
       title: 'Русскоязычный театр<br class="hidden sm:inline" /> в&nbsp;северной <span class="text-suomi font-semibold">тишине</span><span class="text-redru">.</span>',
-      description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — гармоничное слияние русской и финской театральных школ на сцене Хельсинки.',
-      locationLabel: '— Наша локация —',
+      description: '<span class="text-suomi font-semibold">Logrus Teatteri</span> — русскоязычный камерный театр и курсы актерского мастерства в Хельсинки. Драматические спектакли на русском языке и театральное обучение для жителей Хельсинки, Эспоо и Вантаа.',
+      locationLabel: '— Сценическая площадка —',
       locationName: 'Helsinki · Sörnäinen',
       locationDesc: 'Сцена Narri näyttämö (Sörnäisten rantatie 31)',
       langLabel: 'Язык спектаклей',
@@ -280,9 +280,9 @@ export const translations: Record<Language, TranslationSchema> = {
       castingApplyBtn: 'Откликнуться на роль'
     },
     afisha: {
-      tag: `Ожидаемые показы // Октябрь ${CURRENT_YEAR}`,
-      title: 'Репертуар<span class="text-suomi font-bold">.</span>',
-      subtitlesNote: 'Сцена Narri näyttämö в Хельсинки',
+      tag: `Спектакли в Хельсинки // Сезон ${CURRENT_YEAR}`,
+      title: 'Афиша и репертуар<span class="text-suomi font-bold">.</span>',
+      subtitlesNote: 'Спектакли на русском языке на сцене Narri näyttämö в Хельсинки',
       premiereTag: 'Премьера в Хельсинки',
       durationLabel: 'Время',
       subtitlesLabel: 'Язык',
@@ -293,13 +293,13 @@ export const translations: Record<Language, TranslationSchema> = {
       secondaryPriceLabel: 'Цена',
       secondaryBuyBtn: 'Билеты',
       noShowsTag: `Сезон ${CURRENT_YEAR} // Скоро новые даты`,
-      noShowsTitle: 'Скоро новые премьеры<span class="text-suomi font-bold">.</span>',
+      noShowsTitle: 'Скоро новые спектакли<span class="text-suomi font-bold">.</span>',
       noShowsDesc: 'В данный момент все запланированные показы завершены. Мы готовим новые постановки и откроем бронирование в ближайшее время — следите за анонсами!',
       noShowsCta: 'Узнать об актерских курсах',
       rehearsal: {
         liveBadge: 'За кулисами // Narri näyttämö',
         title: 'За занавесом рождается новый спектакль<span class="text-suomi font-extrabold">.</span>',
-        subtitle: `Сцена закрыта на репетиции — мы готовим премьеры сезона ${CURRENT_YEAR} в Хельсинки`,
+        subtitle: `Сцена закрыта на репетиции — мы готовим спектакли на русском языке сезона ${CURRENT_YEAR} в Хельсинки`,
         stageNotice: 'Камерная сцена Narri · Репетиции',
         coursesBtn: 'Актерские курсы студии',
         openCurtain: 'Открыть занавес',
@@ -313,7 +313,7 @@ export const translations: Record<Language, TranslationSchema> = {
       pastShowsBanner: {
         tag: `Архив постановок // ${CURRENT_YEAR}`,
         title: 'Прошлые спектакли театра',
-        desc: 'Погрузитесь в историю постановок, фотохронику и архив спектаклей Teatteri Logrus в Хельсинки',
+        desc: 'Погрузитесь в историю постановок, фотохронику и архив спектаклей русскоязычного театра Teatteri Logrus в Хельсинки',
         btn: 'Смотреть архив спектаклей'
       },
       shows: {
@@ -332,9 +332,9 @@ export const translations: Record<Language, TranslationSchema> = {
       }
     },
     courses: {
-      tag: `Сценическая лаборатория // Набор ${CURRENT_YEAR}`,
-      title: 'Актерские курсы<span class="text-suomi font-extrabold">.</span>',
-      subtitle: 'Раскройте свой сценический потенциал, голос и харизму под руководством профессиональных режиссеров в центре Хельсинки.',
+      tag: `Театральная студия // Набор ${CURRENT_YEAR}`,
+      title: 'Курсы актерского мастерства<span class="text-suomi font-extrabold">.</span>',
+      subtitle: 'Актерские курсы и театральная студия для взрослых в Хельсинки, Эспоо и Вантаа. Раскрепощение, сценическая речь, импровизация и выход на сцену под руководством профессиональных режиссеров.',
       swipeNote: 'Свайп слайдов →',
       enrollBtn: 'Записаться на курс',
       detailsBtn: 'Подробнее о программе',
@@ -385,55 +385,55 @@ export const translations: Record<Language, TranslationSchema> = {
         studioName: '«Лампарельс»',
         badge: `Набор в группу открыт // Сезон ${CURRENT_YEAR}`,
         headline: 'Импровизация — это про сцену и про жизнь. Выбирайте, каким будет ваш следующий акт',
-        subtitle: 'Актерская студия Logrus Teatteri в Хельсинки',
-        description: 'Живое пространство для людей всех возрастов. Учимся работать с партнером, выходить из зоны комфорта и свободно владеть импровизацией.',
-        targetAudience: 'Для тех, кто мечтает о сцене, и всех, кто хочет общаться раскрепощенно, без стресса и зажимов.',
+        subtitle: 'Театральная студия и актерские курсы для взрослых в Хельсинки',
+        description: 'Практический курс актерского мастерства, сценической речи и импровизации для взрослых любого уровня подготовки. Учимся работать с партнером, снимать психологические и телесные зажимы, развивать ораторские навыки и свободно чувствовать себя на сцене и в жизни.',
+        targetAudience: 'Для взрослых и молодежи из Хельсинки, Эспоо и Вантаа, кто мечтает играть на сцене или хочет развить уверенность, харизму и свободу общения.',
         trialInfo: 'Первое пробное занятие — БЕСПЛАТНО',
         phone: '+358 45 2656332',
         email: 'info@logrus.fi',
-        location: 'Pohjavedenkatu 5, 00980 Helsinki',
+        location: 'Pohjavedenkatu 5, 00980 Helsinki (удобно для жителей Хельсинки, Эспоо и Вантаа)',
         schedule: 'Очные вечерние занятия · Группы до 15 человек',
         closingQuote: 'Каким будет твой следующий акт — выбираешь ты ✨',
         pillars: [
           {
             num: '01',
             title: 'Раскованность & Свобода',
-            desc: 'Снятие телесных зажимов, страха сцены и абсолютное принятие себя.'
+            desc: 'Снятие телесных зажимов, преодоление страха сцены и публичных выступлений.'
           },
           {
             num: '02',
             title: 'Партнерство & Эмпатия',
-            desc: 'Подстройка, отзеркаливание эмоциональных состояний и тонкое чувствование человека.'
+            desc: 'Подстройка, отзеркаливание эмоциональных состояний и тонкое чувствование партнера.'
           },
           {
             num: '03',
-            title: 'Импровизация & Гибкость',
-            desc: 'Навык действовать без страха ошибиться и получать кайф от процесса.'
+            title: 'Импровизация & Речь',
+            desc: 'Сценическая речь, ораторское мастерство, реакция и навык действовать без сценария.'
           },
           {
             num: '04',
             title: 'Роли & Выход на сцену',
-            desc: 'Актерские этюды, живые персонажи и полноценный выпускной показ в центре Хельсинки.'
+            desc: 'Актерские этюды, проработка персонажей и полноценный выпускной спектакль в Хельсинки.'
           }
         ]
       }
     },
     about: {
-      tag: 'Наш театр',
+      tag: 'О театре Logrus',
       title: 'Два мира.<br />Одна драма.<br /><span class="text-suomi font-semibold">Общий диалог.</span>',
-      italicQuote: 'Мы объединяем финскую эстетику пространства с глубинным русскоязычным психологическим театром.',
-      text: 'Театр «Logrus» — это живое пространство для русскоязычной диаспоры Финляндии и всех, кто ценит европейский подход к классическому и современному драматическому искусству.',
+      italicQuote: 'Мы объединяем финскую эстетику пространства с классическим русскоязычным психологическим театром.',
+      text: 'Logrus Teatteri — камерный русскоязычный театр в Хельсинки. Мы создаем спектакли на русском языке и проводим курсы актерского мастерства для русскоязычных жителей Хельсинки, Эспоо, Вантаа и всей Финляндии, соединяя традиции глубокого психологического театра со скандинавской визуальной культурой.',
       mobileFeaturesTitle: 'Особенности театра',
       swipeLabel: 'Свайп →',
       feature1Tag: '01 // ЯЗЫК',
-      feature1Title: 'Русскоязычная речь',
-      feature1Desc: 'Сохранение лучшей школы произношения и актерского мастерства.',
+      feature1Title: 'Спектакли на русском',
+      feature1Desc: 'Драматические постановки, чистое звучание родной речи и классическая школа актерского мастерства.',
       feature2Tag: '02 // АТМОСФЕРА',
-      feature2Title: 'Камерный формат',
-      feature2Desc: 'Камерный зал для глубокого погружения и искренней эмоции.',
-      feature3Tag: '03 // ФОРМАТ',
-      feature3Title: 'Классический стиль',
-      feature3Desc: 'Традиции психологического театра и сильная драматургия.'
+      feature2Title: 'Камерный театр в Хельсинки',
+      feature2Desc: 'Уютный сценический зал Narri näyttämö для глубокого эмоционального контакта зрителей и артистов.',
+      feature3Tag: '03 // ОБУЧЕНИЕ',
+      feature3Title: 'Актерская студия',
+      feature3Desc: 'Курсы актерского мастерства, сценической речи, импровизации и раскрепощения для взрослых.'
     },
     contacts: {
       heading: 'Tervetuloa <span class="text-suomi font-semibold">· Добро пожаловать.</span>',
@@ -446,11 +446,11 @@ export const translations: Record<Language, TranslationSchema> = {
       btnStage: '🎭 Сцена',
       btnSornainen: '🚇 Sörnäinen',
       btnStation: '🚉 Вокзал',
-      locationText: 'Sörnäisten rantatie 31, Narri näyttämö, Helsinki · <strong class="text-suomi font-semibold">5 мин от метро Sörnäinen</strong>',
+      locationText: 'Sörnäisten rantatie 31, Narri näyttämö, Helsinki · <strong class="text-suomi font-semibold">5 мин от метро Sörnäinen (удобный доезд из Эспоо и Вантаа)</strong>',
       hslRoute: '🚆 HSL Маршрут'
     },
     footer: {
-      copyright: `© ${CURRENT_YEAR} · Logrus Teatteri Helsinki · Финско-русскоязычная сцена`,
+      copyright: `© ${CURRENT_YEAR} · Logrus Teatteri Helsinki · Русскоязычный театр в Финляндии`,
       toTop: '↑ Наверх'
     },
     showPage: {

@@ -3,19 +3,20 @@ import { translations } from "../data/translations";
 const t = translations.ru;
 ---
 
-<nav class="sticky top-0 z-40 backdrop-blur-md bg-snow/85 border-b border-rule">
-  <div
-    class="max-w-[1400px] mx-auto px-3 sm:px-10 h-20 flex items-center justify-between"
-  >
+<header class="sticky top-0 z-40 backdrop-blur-md bg-snow/85 border-b border-rule" role="banner">
+  <nav aria-label="Основная навигация" class="max-w-[1400px] mx-auto px-3 sm:px-10 h-20 flex items-center justify-between">
     <!-- Brand Logo -->
     <a
       href="/"
       class="font-nordic text-lg sm:text-xl font-bold tracking-tight text-granite flex items-center gap-2.5 shrink-0"
+      aria-label="Главная страница Logrus Teatteri"
     >
       <img
         src="/logo.png"
-        alt="Logrus Logo"
+        alt="Логотип Logrus Teatteri"
         class="h-8 sm:h-9 w-auto object-contain"
+        width="36"
+        height="36"
       />
       Logrus <span
         class="font-sans text-xs text-mute font-normal uppercase tracking-widest hidden sm:inline"
@@ -24,43 +25,56 @@ const t = translations.ru;
     </a>
 
     <!-- Central Nav Links -->
-    <div
-      class="hidden md:flex items-center gap-8 lg:gap-10 text-xs font-nordic tracking-wider uppercase"
+    <ul
+      class="hidden md:flex items-center gap-8 lg:gap-10 text-xs font-nordic tracking-wider uppercase list-none m-0 p-0"
     >
-      <a href="/#afisha" class="nav-link" data-i18n="nav.afisha"
-        >{t.nav.afisha}</a
-      >
-      <a href="/#courses" class="nav-link" data-i18n="nav.courses"
-        >{t.nav.courses}</a
-      >
-      <a href="/#about" class="nav-link" data-i18n="nav.about">{t.nav.about}</a>
-      <a href="/#contacts" class="nav-link" data-i18n="nav.contacts"
-        >{t.nav.contacts}</a
-      >
-    </div>
+      <li>
+        <a href="/#afisha" class="nav-link" data-i18n="nav.afisha"
+          >{t.nav.afisha}</a
+        >
+      </li>
+      <li>
+        <a href="/#courses" class="nav-link" data-i18n="nav.courses"
+          >{t.nav.courses}</a
+        >
+      </li>
+      <li>
+        <a href="/#about" class="nav-link" data-i18n="nav.about">{t.nav.about}</a>
+      </li>
+      <li>
+        <a href="/#contacts" class="nav-link" data-i18n="nav.contacts"
+          >{t.nav.contacts}</a
+        >
+      </li>
+    </ul>
 
     <!-- Right Controls: Fixed Position Language Switcher & Action Button -->
     <div class="flex items-center gap-2 sm:gap-4 shrink-0">
       <!-- Stationary Language Switcher (Fixed-width buttons) -->
       <div
         class="flex items-center bg-snow2/90 p-1 rounded-full border border-rule font-nordic text-[11px] font-semibold tracking-wider shrink-0"
+        role="group"
+        aria-label="Выбор языка / Kielivalinta / Language selection"
       >
         <button
           data-lang="ru"
           class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer bg-suomi text-white font-bold shadow-sm"
+          aria-label="Русский язык"
           >RU</button
         >
         <button
           data-lang="fi"
           class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer text-mute hover:text-granite hover:bg-snow2"
+          aria-label="Suomeksi"
           >FI</button
         >
         <button
           data-lang="en"
           class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer text-mute hover:text-granite hover:bg-snow2"
+          aria-label="In English"
           >EN</button
         >
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>

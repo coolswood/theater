@@ -26,7 +26,7 @@ const t = translations.ru.contacts;
           >
             {t.cardTitle}
           </h3>
-          <div class="grid sm:grid-cols-1 gap-6">
+          <address class="not-italic grid sm:grid-cols-1 gap-6">
             <div>
               <p
                 class="font-sans text-[10px] uppercase tracking-[0.25em] text-suomi mb-1.5 font-bold"
@@ -49,11 +49,11 @@ const t = translations.ru.contacts;
                 {t.contactTag}
               </p>
               <p class="text-base sm:text-lg text-granite font-medium">
-                +358 45 2656332
+                <a href="tel:+358452656332" class="hover:text-suomi transition-colors">+358 45 2656332</a>
               </p>
-              <p class="text-sm sm:text-base text-mute">info@logrus.fi</p>
+              <a href="mailto:info@logrus.fi" class="text-sm sm:text-base text-mute hover:text-suomi transition-colors">info@logrus.fi</a>
             </div>
-          </div>
+          </address>
         </div>
         <div>
           <div class="mt-8 sm:mt-10 pt-4 sm:pt-6 border-t border-rule">

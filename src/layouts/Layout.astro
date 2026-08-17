@@ -2,27 +2,77 @@
 import { ClientRouter } from 'astro:transitions';
 import "../styles/global.css";
 
+import { getOrganizationSchema, getCourseSchema } from '../utils/seo';
+
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  keywords?: string;
+  canonicalUrl?: string;
+  schema?: Record<string, any> | Record<string, any>[];
 }
 
 const {
-  title = "Logrus Teatteri — Скандинавская сцена · Финский синий (Хельсинки)",
-  description = "Русскоязычный камерный театр в Хельсинки на сцене Narri näyttämö (Sörnäisten rantatie 31). Финская лаконичная эстетика и русскоязычная драматическая традиция.",
+  title = "Logrus Teatteri — Русскоязычный театр и курсы актерского мастерства в Хельсинки",
+  description = "Камерный русскоязычный театр в Хельсинки на сцене Narri näyttämö (Sörnäisten rantatie 31). Спектакли, афиша, билеты, театральная студия и курсы актерского мастерства для взрослых в Хельсинки, Эспоо и Вантаа.",
+  image = "/logo.png",
+  type = "website",
+  keywords = "русский театр хельсинки, театр хельсинки, курсы актерского мастерства хельсинки, актерские курсы эспоо, театральная студия вантаа, спектакли на русском хельсинки, афиша хельсинки, русский театр в финляндии, teatteri helsinki, venäjänkielinen teatteri, acting classes helsinki, logrus teatteri",
+  canonicalUrl,
+  schema = [getOrganizationSchema(), getCourseSchema()],
 } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://teatterilogrus.fi';
+const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
+const structuredData = Array.isArray(schema) ? schema : [schema];
 ---
 
 <!doctype html>
 <html lang="ru">
   <head>
+    <!-- Essential Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Logrus Teatteri" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={canonical} />
     <ClientRouter />
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Logrus Teatteri" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="fi_FI" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Local SEO Geo Meta Tags (Helsinki / Capital Region) -->
+    <meta name="geo.region" content="FI-18" />
+    <meta name="geo.placename" content="Helsinki, Finland" />
+    <meta name="geo.position" content="60.1834;24.9652" />
+    <meta name="ICBM" content="60.1834, 24.9652" />
+
+    <!-- Theme & Icons -->
+    <meta name="theme-color" content="#002F6C" />
+    <meta name="apple-mobile-web-app-title" content="Logrus Teatteri" />
     <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,6 +80,31 @@ const {
       href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    {
+      structuredData.map((schemaObj) => (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(schemaObj)}
+        />
+      ))
+    }
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" is:inline>
+      (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111679649', 'ym');
+
+      ym(111679649, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/111679649" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 
     <!-- Fienta Ticketing Embed Script -->
     <script is:inline>
@@ -61,6 +136,11 @@ const {
 
         document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
         initClientI18n();
+
+        // Track page hit in Yandex.Metrika on view transitions
+        if (typeof (window as any).ym === 'function') {
+          (window as any).ym(111679649, 'hit', window.location.href);
+        }
       }
 
       if (document.readyState === "loading") {

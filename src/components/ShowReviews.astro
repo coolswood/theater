@@ -280,12 +280,15 @@ const reviews: Review[] = show.reviews || [];
 
         if (isExpanded) {
           // Animate collapse
-          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+          const currentHeight = wrapper.offsetHeight;
+          wrapper.style.maxHeight = currentHeight + 'px';
           // Force layout reflow
           wrapper.offsetHeight;
-          wrapper.style.maxHeight = '100px';
+          
           wrapper.classList.remove('is-expanded');
           wrapper.classList.add('is-clamped');
+          wrapper.style.maxHeight = '100px';
+          
           btn.setAttribute('data-expanded', 'false');
           if (label) {
             label.textContent = expandText;
@@ -294,9 +297,16 @@ const reviews: Review[] = show.reviews || [];
           if (icon) icon.classList.remove('rotate-180');
         } else {
           // Animate expand
+          const startHeight = wrapper.offsetHeight;
+          wrapper.style.maxHeight = startHeight + 'px';
+          // Force layout reflow
+          wrapper.offsetHeight;
+
+          const fullHeight = wrapper.scrollHeight;
           wrapper.classList.remove('is-clamped');
           wrapper.classList.add('is-expanded');
-          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+          wrapper.style.maxHeight = fullHeight + 'px';
+
           btn.setAttribute('data-expanded', 'true');
           if (label) {
             label.textContent = collapseText;
@@ -308,7 +318,7 @@ const reviews: Review[] = show.reviews || [];
             if (btn.getAttribute('data-expanded') === 'true') {
               wrapper.style.maxHeight = 'none';
             }
-          }, 450);
+          }, 420);
         }
       });
     });

@@ -10,7 +10,6 @@ interface Props {
 
 const { show } = Astro.props;
 const t = translations.ru.showPage;
-const afishaT = translations.ru.afisha;
 const isActive = isShowActive(show);
 const premiereYear = show.dateIso ? new Date(show.dateIso).getFullYear() : CURRENT_YEAR;
 ---
@@ -73,6 +72,31 @@ const premiereYear = show.dateIso ? new Date(show.dateIso).getFullYear() : CURRE
               </span>
             )
           }
+          {
+            show.duration && (
+              <span
+                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-granite font-sans text-xs font-semibold border border-rule shadow-xs"
+              >
+                <svg class="w-3.5 h-3.5 text-suomi shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span data-i18n={`afisha.shows.${show.id}.duration`}>{show.duration}</span>
+              </span>
+            )
+          }
+          {
+            show.subtitles && (
+              <span
+                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-granite font-sans text-xs font-semibold border border-rule shadow-xs"
+              >
+                <svg class="w-3.5 h-3.5 text-suomi shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                </svg>
+                <span data-i18n={`afisha.shows.${show.id}.subtitles`}>{show.subtitles}</span>
+              </span>
+            )
+          }
           <span
             class="px-3 py-1.5 rounded-full bg-redru/10 text-redru font-sans text-xs font-semibold border border-redru/20"
           >
@@ -99,22 +123,30 @@ const premiereYear = show.dateIso ? new Date(show.dateIso).getFullYear() : CURRE
           {show.title}
         </h1>
         <p
-          class="font-sans font-medium text-mute text-lg sm:text-2xl mb-8"
+          class="font-sans font-medium text-mute text-lg sm:text-2xl mb-6"
           data-i18n={`afisha.shows.${show.id}.subtitle`}
         >
           {show.subtitle}
         </p>
 
+        <!-- Plot Description -->
+        <p
+          class="text-granite/85 text-base sm:text-lg leading-relaxed font-light mb-6"
+          data-i18n={`afisha.shows.${show.id}.description`}
+        >
+          {show.description}
+        </p>
+
         <!-- Quote Block -->
         {
           show.quote && (
-            <blockquote class="relative my-7 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-suomisoft/70 via-white to-snow2/50 border border-rule/80 shadow-xs overflow-hidden group transition-all duration-300 hover:border-suomi/30">
+            <blockquote class="relative my-6 p-6 sm:p-7 rounded-2xl bg-gradient-to-br from-suomisoft/70 via-white to-snow2/50 border border-rule/80 shadow-xs overflow-hidden group transition-all duration-300 hover:border-suomi/30">
               <div class="absolute -top-3 -left-2 text-6xl sm:text-7xl font-nordic text-suomi/10 font-black select-none pointer-events-none leading-none">
                 “
               </div>
               <div class="relative z-10">
                 <p
-                  class="font-sans font-medium italic text-base sm:text-xl text-granite leading-relaxed tracking-tight"
+                  class="font-sans font-medium italic text-base sm:text-lg text-granite leading-relaxed tracking-tight"
                   data-i18n={`afisha.shows.${show.id}.quote`}
                 >
                   {show.quote}
@@ -124,54 +156,9 @@ const premiereYear = show.dateIso ? new Date(show.dateIso).getFullYear() : CURRE
           )
         }
 
-        <!-- Quick Facts Summary Grid -->
-        <div class="grid grid-cols-3 gap-4 py-5 border-y border-rule my-8">
-          <div>
-            <p
-              class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi font-bold mb-1"
-              data-i18n="afisha.durationLabel"
-            >
-              {afishaT.durationLabel}
-            </p>
-            <p
-              class="font-nordic font-bold text-base sm:text-lg text-granite"
-              data-i18n={`afisha.shows.${show.id}.duration`}
-            >
-              {show.duration}
-            </p>
-          </div>
-          <div>
-            <p
-              class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi font-bold mb-1"
-              data-i18n="afisha.subtitlesLabel"
-            >
-              {afishaT.subtitlesLabel}
-            </p>
-            <p
-              class="font-nordic font-bold text-base sm:text-lg text-granite"
-              data-i18n={`afisha.shows.${show.id}.subtitles`}
-            >
-              {show.subtitles}
-            </p>
-          </div>
-          <div>
-            <p
-              class="font-sans text-[10px] uppercase tracking-[0.2em] text-suomi font-bold mb-1"
-            >
-              Места
-            </p>
-            <p
-              class="font-nordic font-bold text-base sm:text-lg text-granite"
-              data-i18n={`afisha.shows.${show.id}.capacity`}
-            >
-              {show.capacity}
-            </p>
-          </div>
-        </div>
-
         <!-- Action CTAs -->
         <div
-          class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
+          class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-8"
         >
           {
             isActive ? (

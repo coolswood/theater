@@ -79,7 +79,7 @@ export interface TranslationSchema {
       duration: string;
       subtitles: string;
       age: string;
-      capacity: string;
+      capacity?: string;
       quote?: string;
       description: string;
     }>;
@@ -326,7 +326,6 @@ export const translations: Record<Language, TranslationSchema> = {
           duration: '2ч 15мин',
           subtitles: 'Русский',
           age: '12+',
-          capacity: '80 мест',
           quote: '«Бесконечное пианино, как бескрайний океан, и человек, нашедший музыку, но не нашедший берег…»',
           description: 'Одинокий рояль. Бескрайний океан. Судьба человека, никогда не ступавшего на берег. История пианиста, родившегося и прожившего всю жизнь на борту океанского лайнера — музыканта, который видел мир сквозь звуки океана и мелодии, не покидая своего инструмента. Моноспектакль о свободе, страхе, музыке и бесконечности между морем и небом.'
         }
@@ -431,7 +430,7 @@ export const translations: Record<Language, TranslationSchema> = {
       feature1Desc: 'Сохранение лучшей школы произношения и актерского мастерства.',
       feature2Tag: '02 // АТМОСФЕРА',
       feature2Title: 'Камерный формат',
-      feature2Desc: 'Всего 90 мест в зале для глубокого погружения и искренней эмоции.',
+      feature2Desc: 'Камерный зал для глубокого погружения и искренней эмоции.',
       feature3Tag: '03 // ФОРМАТ',
       feature3Title: 'Классический стиль',
       feature3Desc: 'Традиции психологического театра и сильная драматургия.'
@@ -472,8 +471,8 @@ export const translations: Record<Language, TranslationSchema> = {
       mapHeading: 'Локация спектакля на карте Хельсинки',
       bookSeatBtn: 'Забронировать билет',
       modalTitle: 'Быстрое бронирование билета',
-      modalDesc: 'Выберите удобное время или свяжитесь с кассой театра для выбора конкретных мест в зале.',
-      modalConfirmBtn: 'Перейти к выбору мест',
+      modalDesc: 'Выберите удобное время или свяжитесь с кассой театра для бронирования.',
+      modalConfirmBtn: 'Перейти к бронированию',
       modalCloseBtn: 'Закрыть',
       aboutPlotTag: 'О сюжете и замысле',
       dramaturgyTitle: 'Драматургия и концепция',
@@ -493,7 +492,7 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket3: '3 билета',
       modalTicket4: '4 билета',
       modalSuccessTitle: 'Заявка принята!',
-      modalSuccessDesc: 'Администратор кассы свяжется с вами в течение 15 минут для подтверждения мест.',
+      modalSuccessDesc: 'Администратор кассы свяжется с вами в течение 15 минут для подтверждения бронирования.',
       expiredBadge: 'Архивная постановка',
       expiredTitle: 'Этот спектакль уже состоялся',
       expiredDesc: 'Архивная постановка. Следите за обновлениями афиши, чтобы не пропустить следующие даты.',
@@ -623,8 +622,7 @@ export const translations: Record<Language, TranslationSchema> = {
           duration: '2t 15min',
           subtitles: 'Venäjä',
           age: '12+',
-          capacity: '80 paikkaa',
-          quote: '«Loputon piano kuin ääretön valtameri, ja ihminen joka löysi musiikin mutta ei rantaa…»',
+          quote: '«Loputon piano kuin ääretön valtameri ja ihminen, joka löysi musiikin, mutta ei rantaa…»',
           description: 'Tarina pianistista, joka syntyi ja eli koko elämänsä valtamerilaivalla. Monodraama vapaudesta, pelosta, musiikista ja äärettömyydestä meren ja taivaan välillä.'
         }
       }
@@ -728,7 +726,7 @@ export const translations: Record<Language, TranslationSchema> = {
       feature1Desc: 'Parhaan lausunta- ja näyttelijäkoulun vaaliminen.',
       feature2Tag: '02 // TUNNELMA',
       feature2Title: 'Kamarimuoto',
-      feature2Desc: 'Vain 90 paikkaa katsomossa syvää elämystä ja aitoa vuorovaikutusta varten.',
+      feature2Desc: 'Intiimi katsomo syvää elämystä ja aitoa vuorovaikutusta varten.',
       feature3Tag: '03 // FORMAATTI',
       feature3Title: 'Klassinen tyyli',
       feature3Desc: 'Psykologisen teatterin perinteet ja vahva dramaturgia.'
@@ -769,8 +767,8 @@ export const translations: Record<Language, TranslationSchema> = {
       mapHeading: 'Esityksen sijainti Helsingin kartalla',
       bookSeatBtn: 'Varaa lippu',
       modalTitle: 'Pikavaraus',
-      modalDesc: 'Valitse sopiva aika tai ota yhteyttä teatterin kassaan valitaksesi paikat salista.',
-      modalConfirmBtn: 'Siirry paikkavalintaan',
+      modalDesc: 'Valitse sopiva aika tai ota yhteyttä teatterin lippukassaan varausta varten.',
+      modalConfirmBtn: 'Siirry varaamaan',
       modalCloseBtn: 'Sulje',
       aboutPlotTag: 'Juonesta ja konseptista',
       dramaturgyTitle: 'Dramaturgia ja konsepti',
@@ -790,7 +788,7 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket3: '3 lippua',
       modalTicket4: '4 lippua',
       modalSuccessTitle: 'Varaus vastaanotettu!',
-      modalSuccessDesc: 'Lippukassan ylläpitäjä ottaa sinuun yhteyttä 15 minuutin kuluessa paikkojen vahvistamiseksi.',
+      modalSuccessDesc: 'Lippukassan ylläpitäjä ottaa sinuun yhteyttä 15 minuutin kuluessa varauksen vahvistamiseksi.',
       expiredBadge: 'Arkistoesitys',
       expiredTitle: 'Tämä esitys on jo pidetty',
       expiredDesc: 'Arkistoesitys. Seuraa ohjelmistoa tulevia esityspäiviä varten.',
@@ -917,11 +915,10 @@ export const translations: Record<Language, TranslationSchema> = {
           date: '13 August',
           stage: 'Narri näyttämö',
           price: 'from 20 €',
-          duration: '2h 15min',
+          duration: '2h 15m',
           subtitles: 'Russian',
           age: '12+',
-          capacity: '80 seats',
-          quote: '«An endless piano like the boundless ocean, and a man who found music but never found the shore…»',
+          quote: '«An endless piano like a boundless ocean, and a soul who found music but never sought the shore…»',
           description: 'The story of a pianist born and raised aboard an ocean liner — a musician who saw the world through ocean sounds and melodies. A monodrama about freedom, fear, music, and infinity between sea and sky.'
         }
       }
@@ -1025,7 +1022,7 @@ export const translations: Record<Language, TranslationSchema> = {
       feature1Desc: 'Preserving the finest tradition of pronunciation and acting.',
       feature2Tag: '02 // ATMOSPHERE',
       feature2Title: 'Chamber Stage',
-      feature2Desc: 'Intimate 90-seat hall for deep immersion and genuine emotion.',
+      feature2Desc: 'Intimate hall for deep immersion and genuine emotion.',
       feature3Tag: '03 // FORMAT',
       feature3Title: 'Classical Style',
       feature3Desc: 'Psychological theatre traditions and strong dramaturgy.'
@@ -1065,9 +1062,9 @@ export const translations: Record<Language, TranslationSchema> = {
       venueSectionTitle: 'Venue Location',
       mapHeading: 'Show Location on Helsinki Map',
       bookSeatBtn: 'Book Ticket',
-      modalTitle: 'Quick Seat Booking',
-      modalDesc: 'Select preferred showtime or contact box office for specific seat choices.',
-      modalConfirmBtn: 'Proceed to Seat Selection',
+      modalTitle: 'Quick Booking',
+      modalDesc: 'Select preferred showtime or contact box office to book your tickets.',
+      modalConfirmBtn: 'Proceed to Booking',
       modalCloseBtn: 'Close',
       aboutPlotTag: 'About Plot & Concept',
       dramaturgyTitle: 'Dramaturgy & Concept',
@@ -1087,7 +1084,7 @@ export const translations: Record<Language, TranslationSchema> = {
       modalTicket3: '3 tickets',
       modalTicket4: '4 tickets',
       modalSuccessTitle: 'Request Received!',
-      modalSuccessDesc: 'The box office administrator will contact you within 15 minutes to confirm your seats.',
+      modalSuccessDesc: 'The box office administrator will contact you within 15 minutes to confirm your booking.',
       expiredBadge: 'Past Production',
       expiredTitle: 'This performance has already taken place',
       expiredDesc: 'Past production. Follow our repertoire to catch upcoming dates.',

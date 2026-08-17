@@ -39,7 +39,7 @@ export interface Show {
   duration: string;
   subtitles: string;
   age: string;
-  capacity: string;
+  capacity?: string;
   poster: string;
   fientaUrl?: string;
   isFeatured?: boolean;

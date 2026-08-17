@@ -1,0 +1,83 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import ShowHero from '../../../components/ShowHero.astro';
+import ShowGallery from '../../../components/ShowGallery.astro';
+import ShowDetails from '../../../components/ShowDetails.astro';
+import ShowReviews from '../../../components/ShowReviews.astro';
+import FullWidthMap from '../../../components/FullWidthMap.astro';
+import TicketModal from '../../../components/TicketModal.astro';
+import Footer from '../../../components/Footer.astro';
+import { shows, getShowById, isShowActive } from '../../../data/shows';
+import type { Language } from '../../../data/translations';
+import { getLocalizedPath } from '../../../utils/i18n';
+import {
+  getShowPageMeta,
+  getOrganizationSchema,
+  getTheaterEventSchema,
+  getBreadcrumbsSchema
+} from '../../../utils/seo';
+
+export function getStaticPaths() {
+  const locales: Language[] = ['fi', 'en'];
+  const paths: { params: { lang: Language; id: string } }[] = [];
+
+  for (const lang of locales) {
+    for (const show of shows) {
+      paths.push({
+        params: { lang, id: show.id }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, id } = Astro.params as { lang: Language; id: string };
+const show = getShowById(id, lang);
+
+if (!show) {
+  return Astro.redirect(getLocalizedPath('/#afisha', lang));
+}
+
+const isActive = isShowActive(show);
+const meta = getShowPageMeta(show, lang);
+
+const breadcrumbNames = {
+  fi: { home: 'Etusivu', afisha: 'Ohjelmisto' },
+  en: { home: 'Home', afisha: 'Repertoire' },
+  ru: { home: 'Главная', afisha: 'Афиша' }
+};
+const bNames = breadcrumbNames[lang] || breadcrumbNames.ru;
+
+const pageSchemas = [
+  getOrganizationSchema(lang),
+  getTheaterEventSchema(show, lang),
+  getBreadcrumbsSchema([
+    { name: bNames.home, url: '/' },
+    { name: bNames.afisha, url: '/#afisha' },
+    { name: show.title, url: `/shows/${show.id}` }
+  ], lang)
+];
+---
+
+<Layout
+  lang={lang}
+  title={meta.title}
+  description={meta.description}
+  image={show.poster}
+  type="article"
+  keywords={meta.keywords}
+  schema={pageSchemas}
+>
+  <Header lang={lang} />
+  <main transition:animate="fade">
+    <ShowHero show={show} lang={lang} />
+    <ShowGallery gallery={show.gallery || []} lang={lang} />
+    <ShowDetails show={show} lang={lang} />
+    <ShowReviews show={show} lang={lang} />
+    {isActive && <FullWidthMap lang={lang} />}
+    {isActive && <TicketModal show={show} lang={lang} />}
+  </main>
+  <Footer lang={lang} />
+</Layout>

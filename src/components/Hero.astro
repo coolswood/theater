@@ -1,10 +1,28 @@
 ---
-import { translations } from "../data/translations";
+import { translations, type Language } from "../data/translations";
 import { getNearestUpcomingShow } from "../data/shows";
 import { CURRENT_YEAR } from "../utils/date";
 
-const t = translations.ru.hero;
-const nearestShow = getNearestUpcomingShow("ru");
+interface Props {
+  lang?: Language;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = translations[lang]?.hero || translations.ru.hero;
+const nearestShow = getNearestUpcomingShow(lang);
+
+const castingEmailSubjects: Record<Language, string> = {
+  ru: "Кастинг в театр Logrus",
+  fi: "Roolitus / Logrus Teatteri",
+  en: "Casting / Logrus Teatteri"
+};
+const castingEmailBodies: Record<Language, string> = {
+  ru: "Здравствуйте! Хочу принять участие в кастинге на роль в театре «Логрус».",
+  fi: "Hei! Haluan osallistua Logrus Teatterin roolihakuun.",
+  en: "Hello! I would like to apply for the casting call at Logrus Teatteri."
+};
+const castingSubject = encodeURIComponent(castingEmailSubjects[lang] || castingEmailSubjects.ru);
+const castingBody = encodeURIComponent(castingEmailBodies[lang] || castingEmailBodies.ru);
 ---
 
 <section
@@ -17,7 +35,7 @@ const nearestShow = getNearestUpcomingShow("ru");
   <div class="max-w-[1400px] mx-auto relative z-10">
     <!-- Top Metadata Bar -->
     <div class="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 sm:mb-8 reveal">
-      <span class="suomi-tag font-semibold" data-i18n="hero.countryTag"
+      <span class="suomi-tag font-semibold"
         >{t.countryTag}</span
       >
       <span class="text-rule">/</span>
@@ -25,7 +43,7 @@ const nearestShow = getNearestUpcomingShow("ru");
         class="font-sans text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-mute flex items-center gap-2"
       >
         <span class="w-2 h-2 rounded-full bg-redru inline-block"></span>
-        <span data-i18n="hero.stageTag">{t.stageTag}</span>
+        <span>{t.stageTag}</span>
       </span>
 
       <!-- Architectural Coordinates Tag -->
@@ -38,7 +56,6 @@ const nearestShow = getNearestUpcomingShow("ru");
     <!-- Main Dynamic Hero Title -->
     <h1
       class="font-nordic font-semibold text-granite leading-[1.08] text-[7.8vw] sm:text-[5.5vw] lg:text-[5rem] xl:text-[5.6rem] tracking-tight reveal mb-8"
-      data-i18n-html="hero.title"
       set:html={t.title}
     />
 
@@ -50,7 +67,6 @@ const nearestShow = getNearestUpcomingShow("ru");
       <div class="lg:col-span-7 flex flex-col justify-between space-y-8">
         <p
           class="text-lg sm:text-2xl text-granite/90 leading-relaxed font-light max-w-2xl"
-          data-i18n-html="hero.description"
           set:html={t.description}
         />
 
@@ -62,7 +78,7 @@ const nearestShow = getNearestUpcomingShow("ru");
                 href="#afisha"
                 class="btn-suomi inline-flex items-center gap-3 px-6 py-3.5 rounded-xl font-sans text-sm font-semibold tracking-wide shadow-sm group"
               >
-                <span data-i18n="hero.afishaBtn">{t.afishaBtn || "Смотреть афишу"}</span>
+                <span>{t.afishaBtn || "Смотреть афишу"}</span>
                 <svg
                   class="w-4 h-4 arrow shrink-0 transform group-hover:translate-y-0.5 transition-transform"
                   width="16"
@@ -80,7 +96,7 @@ const nearestShow = getNearestUpcomingShow("ru");
                 href="#courses"
                 class="btn-suomi inline-flex items-center gap-3 px-6 py-3.5 rounded-xl font-sans text-sm font-semibold tracking-wide shadow-sm group"
               >
-                <span data-i18n="courses.tag">Актерские курсы</span>
+                <span>{translations[lang]?.courses?.centralCourse?.title || "Актерские курсы"}</span>
                 <svg
                   class="w-4 h-4 arrow shrink-0 transform group-hover:translate-y-0.5 transition-transform"
                   width="16"
@@ -100,14 +116,14 @@ const nearestShow = getNearestUpcomingShow("ru");
             href="#about"
             class="btn-outline inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-sans text-sm font-medium tracking-wide"
           >
-            <span data-i18n="hero.aboutBtn">{t.aboutBtn || "О театре"}</span>
+            <span>{t.aboutBtn || "О театре"}</span>
           </a>
         </div>
       </div>
 
       <!-- Casting / Hiring Announcement Glassmorphism Card -->
       <div class="lg:col-span-5 flex">
-        <aside aria-label="Кастинг в театр" class="w-full p-6 sm:p-7 rounded-2xl hero-card-glass flex flex-col justify-between border border-rule/90 relative overflow-hidden group">
+        <aside aria-label={t.castingTag || "Кастинг в театр"} class="w-full p-6 sm:p-7 rounded-2xl hero-card-glass flex flex-col justify-between border border-rule/90 relative overflow-hidden group">
           <!-- Subtle decorative red accent glow -->
           <div class="absolute -top-16 -right-16 w-36 h-36 bg-redru/10 rounded-full blur-2xl pointer-events-none group-hover:bg-redru/20 transition-all"></div>
 
@@ -116,7 +132,7 @@ const nearestShow = getNearestUpcomingShow("ru");
             <div class="flex items-center justify-between gap-3 mb-4">
               <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-redru/10 text-redru text-[11px] font-bold font-sans uppercase tracking-wider border border-redru/20">
                 <span class="w-2 h-2 rounded-full bg-redru animate-pulse"></span>
-                <span data-i18n="hero.castingTag">{t.castingTag || "Кастинг // Открытый набор"}</span>
+                <span>{t.castingTag || "Кастинг // Открытый набор"}</span>
               </span>
 
               <span class="font-sans text-[11px] text-mute font-medium">Logrus {CURRENT_YEAR}</span>
@@ -124,23 +140,23 @@ const nearestShow = getNearestUpcomingShow("ru");
 
             <!-- Title & Role Badge -->
             <div class="mb-3">
-              <h2 class="font-nordic font-extrabold text-2xl sm:text-3xl text-granite leading-tight" data-i18n="hero.castingTitle">
+              <h2 class="font-nordic font-extrabold text-2xl sm:text-3xl text-granite leading-tight">
                 {t.castingTitle || "Ищем актёра"}
               </h2>
               <div class="mt-2 inline-block">
-                <span class="inline-flex items-center px-3 py-1 rounded-lg bg-granite text-white font-nordic text-xs font-bold uppercase tracking-wider shadow-xs" data-i18n="hero.castingRole">
+                <span class="inline-flex items-center px-3 py-1 rounded-lg bg-granite text-white font-nordic text-xs font-bold uppercase tracking-wider shadow-xs">
                   {t.castingRole || "На роль гопника"}
                 </span>
               </div>
             </div>
 
             <!-- Subtitle Pitch -->
-            <p class="font-sans text-xs sm:text-sm font-semibold text-suomi mb-2.5 leading-snug" data-i18n="hero.castingSubtitle">
+            <p class="font-sans text-xs sm:text-sm font-semibold text-suomi mb-2.5 leading-snug">
               {t.castingSubtitle || "Если ты давно хотел попробовать себя на сцене — сейчас самое время."}
             </p>
 
             <!-- Main Description -->
-            <p class="font-sans text-xs sm:text-sm text-granite/80 font-light leading-relaxed mb-5" data-i18n="hero.castingDesc">
+            <p class="font-sans text-xs sm:text-sm text-granite/80 font-light leading-relaxed mb-5">
               {t.castingDesc || "Ищем молодого парня в новую постановку театра «Логрус». Опыт не обязателен, но приветствуется!"}
             </p>
           </div>
@@ -149,7 +165,7 @@ const nearestShow = getNearestUpcomingShow("ru");
           <div class="pt-4 border-t border-rule/80 space-y-3">
             <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-sans">
               <a
-                href="mailto:info@logrus.fi?subject=Кастинг%20на%20роль%20гопника"
+                href={`mailto:info@logrus.fi?subject=${castingSubject}`}
                 class="inline-flex items-center gap-2 text-granite hover:text-suomi font-medium transition-colors"
               >
                 <svg class="w-3.5 h-3.5 text-suomi shrink-0" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -170,10 +186,10 @@ const nearestShow = getNearestUpcomingShow("ru");
             </div>
 
             <a
-              href="mailto:info@logrus.fi?subject=Кастинг%20на%20роль%20гопника&body=Здравствуйте!%20Хочу%20принять%20участие%20в%20кастинге%20на%20роль."
+              href={`mailto:info@logrus.fi?subject=${castingSubject}&body=${castingBody}`}
               class="w-full btn-suomi py-2.5 px-4 rounded-xl font-nordic text-[11px] uppercase tracking-wider font-semibold inline-flex items-center justify-center gap-2 group/btn shadow-xs cursor-pointer"
             >
-              <span data-i18n="hero.castingApplyBtn">{t.castingApplyBtn || "Откликнуться на роль"}</span>
+              <span>{t.castingApplyBtn || "Откликнуться на роль"}</span>
               <svg class="w-3.5 h-3.5 arrow shrink-0" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>

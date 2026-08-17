@@ -1,19 +1,38 @@
 ---
-import { translations } from "../data/translations";
-const t = translations.ru;
+import { translations, type Language } from "../data/translations";
+import { getLocalizedPath } from "../utils/i18n";
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = translations[lang] || translations.ru;
+
+const currentPath = Astro.url.pathname;
+const ruPath = getLocalizedPath(currentPath, 'ru');
+const fiPath = getLocalizedPath(currentPath, 'fi');
+const enPath = getLocalizedPath(currentPath, 'en');
+
+const afishaHref = getLocalizedPath('/#afisha', lang);
+const coursesHref = getLocalizedPath('/#courses', lang);
+const aboutHref = getLocalizedPath('/#about', lang);
+const contactsHref = getLocalizedPath('/#contacts', lang);
+const homeHref = getLocalizedPath('/', lang);
+const navAriaLabel = lang === 'fi' ? 'Päävalikko' : (lang === 'en' ? 'Main navigation' : 'Основная навигация');
 ---
 
 <header class="sticky top-0 z-40 backdrop-blur-md bg-snow/85 border-b border-rule" role="banner">
-  <nav aria-label="Основная навигация" class="max-w-[1400px] mx-auto px-3 sm:px-10 h-20 flex items-center justify-between">
+  <nav aria-label={navAriaLabel} class="max-w-[1400px] mx-auto px-3 sm:px-10 h-20 flex items-center justify-between">
     <!-- Brand Logo -->
     <a
-      href="/"
+      href={homeHref}
       class="font-nordic text-lg sm:text-xl font-bold tracking-tight text-granite flex items-center gap-2.5 shrink-0"
-      aria-label="Главная страница Logrus Teatteri"
+      aria-label="Logrus Teatteri"
     >
       <img
         src="/logo.png"
-        alt="Логотип Logrus Teatteri"
+        alt="Logrus Teatteri"
         class="h-8 sm:h-9 w-8 sm:w-9 object-contain"
         width="36"
         height="36"
@@ -29,50 +48,67 @@ const t = translations.ru;
       class="hidden md:flex items-center gap-8 lg:gap-10 text-xs font-nordic tracking-wider uppercase list-none m-0 p-0"
     >
       <li>
-        <a href="/#afisha" class="nav-link" data-i18n="nav.afisha"
+        <a href={afishaHref} class="nav-link"
           >{t.nav.afisha}</a
         >
       </li>
       <li>
-        <a href="/#courses" class="nav-link" data-i18n="nav.courses"
+        <a href={coursesHref} class="nav-link"
           >{t.nav.courses}</a
         >
       </li>
       <li>
-        <a href="/#about" class="nav-link" data-i18n="nav.about">{t.nav.about}</a>
+        <a href={aboutHref} class="nav-link">{t.nav.about}</a>
       </li>
       <li>
-        <a href="/#contacts" class="nav-link" data-i18n="nav.contacts"
+        <a href={contactsHref} class="nav-link"
           >{t.nav.contacts}</a
         >
       </li>
     </ul>
 
-    <!-- Right Controls: Fixed Position Language Switcher & Action Button -->
+    <!-- Right Controls: Stationary Language Switcher (Links for Crawlers & Instant Transitions) -->
     <div class="flex items-center gap-2 sm:gap-4 shrink-0">
-      <!-- Stationary Language Switcher (Fixed-width buttons) -->
       <div
         class="flex items-center bg-snow2/90 p-1 rounded-full border border-rule font-nordic text-[11px] font-semibold tracking-wider shrink-0"
         role="group"
         aria-label="Выбор языка / Kielivalinta / Language selection"
       >
-        <button
-          data-lang="ru"
-          class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer bg-suomi text-white font-bold shadow-sm"
+        <a
+          href={ruPath}
+          class:list={[
+            "lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200",
+            lang === "ru"
+              ? "bg-suomi text-white font-bold shadow-sm pointer-events-none"
+              : "text-mute hover:text-granite hover:bg-snow2",
+          ]}
           aria-label="RU — Русский язык"
-          >RU</button
+          aria-current={lang === "ru" ? "page" : undefined}
+          >RU</a
         >
-        <button
-          data-lang="fi"
-          class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer text-mute hover:text-granite hover:bg-snow2"
+        <a
+          href={fiPath}
+          class:list={[
+            "lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200",
+            lang === "fi"
+              ? "bg-suomi text-white font-bold shadow-sm pointer-events-none"
+              : "text-mute hover:text-granite hover:bg-snow2",
+          ]}
           aria-label="FI — Suomeksi"
-          >FI</button
+          aria-current={lang === "fi" ? "page" : undefined}
+          >FI</a
         >
-        <button
-          data-lang="en"
-          class="lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200 cursor-pointer text-mute hover:text-granite hover:bg-snow2"
+        <a
+          href={enPath}
+          class:list={[
+            "lang-btn w-8 sm:w-9 h-7 inline-flex items-center justify-center rounded-full uppercase transition-all duration-200",
+            lang === "en"
+              ? "bg-suomi text-white font-bold shadow-sm pointer-events-none"
+              : "text-mute hover:text-granite hover:bg-snow2",
+          ]}
           aria-label="EN — In English"
-          >EN</button
+          aria-current={lang === "en" ? "page" : undefined}
+          >EN</a
         >
       </div>
     </div>

@@ -9,7 +9,12 @@ import FullWidthMap from '../../components/FullWidthMap.astro';
 import TicketModal from '../../components/TicketModal.astro';
 import Footer from '../../components/Footer.astro';
 import { shows, getShowById, isShowActive } from '../../data/shows';
-import { getOrganizationSchema, getTheaterEventSchema, getBreadcrumbsSchema, SITE_URL } from '../../utils/seo';
+import {
+  getShowPageMeta,
+  getOrganizationSchema,
+  getTheaterEventSchema,
+  getBreadcrumbsSchema
+} from '../../utils/seo';
 
 export function getStaticPaths() {
   return shows.map((show) => ({
@@ -17,46 +22,45 @@ export function getStaticPaths() {
   }));
 }
 
+const lang = 'ru';
 const { id } = Astro.params;
-const show = getShowById(id as string);
+const show = getShowById(id as string, lang);
 
 if (!show) {
   return Astro.redirect('/#afisha');
 }
 
 const isActive = isShowActive(show);
-const pageTitle = `Спектакль «${show.title}» в Хельсинки — билеты и афиша | Logrus Teatteri`;
-const pageDescription = `${show.title}${show.subtitle ? ' — ' + show.subtitle : ''}. Русскоязычный спектакль в Хельсинки на сцене Narri näyttämö. Билеты, фотохроника и информация о постановке.`;
-const pageKeywords = `спектакль ${show.title.toLowerCase()}, спектакль ${show.title.toLowerCase()} хельсинки, русский театр хельсинки, афиша спектаклей хельсинки, билеты в театр хельсинки, logrus teatteri, narri nayttamo`;
+const meta = getShowPageMeta(show, lang);
 
 const pageSchemas = [
-  getOrganizationSchema(),
-  getTheaterEventSchema(show),
+  getOrganizationSchema(lang),
+  getTheaterEventSchema(show, lang),
   getBreadcrumbsSchema([
     { name: 'Главная', url: '/' },
     { name: 'Афиша', url: '/#afisha' },
     { name: show.title, url: `/shows/${show.id}` }
-  ])
+  ], lang)
 ];
 ---
 
 <Layout
-  title={pageTitle}
-  description={pageDescription}
+  lang={lang}
+  title={meta.title}
+  description={meta.description}
   image={show.poster}
   type="article"
-  keywords={pageKeywords}
+  keywords={meta.keywords}
   schema={pageSchemas}
 >
-  <Header />
+  <Header lang={lang} />
   <main transition:animate="fade">
-    <ShowHero show={show} />
-    <ShowGallery gallery={show.gallery || []} />
-    <ShowDetails show={show} />
-    <ShowReviews show={show} />
-    {isActive && <FullWidthMap />}
-    {isActive && <TicketModal show={show} />}
+    <ShowHero show={show} lang={lang} />
+    <ShowGallery gallery={show.gallery || []} lang={lang} />
+    <ShowDetails show={show} lang={lang} />
+    <ShowReviews show={show} lang={lang} />
+    {isActive && <FullWidthMap lang={lang} />}
+    {isActive && <TicketModal show={show} lang={lang} />}
   </main>
-  <Footer />
+  <Footer lang={lang} />
 </Layout>
-

@@ -1,6 +1,12 @@
 ---
-import { translations } from "../data/translations";
-const t = translations.ru.footer;
+import { translations, type Language } from "../data/translations";
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = translations[lang]?.footer || translations.ru.footer;
 ---
 
 <footer class="border-t border-rule py-8 sm:py-12 bg-snow2/30">

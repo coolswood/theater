@@ -1,13 +1,14 @@
 ---
 import type { GalleryItem } from "../data/shows";
-import { translations } from "../data/translations";
+import { translations, type Language } from "../data/translations";
 
 interface Props {
   gallery: GalleryItem[];
+  lang?: Language;
 }
 
-const { gallery = [] } = Astro.props;
-const t = translations.ru.showPage;
+const { gallery = [], lang = "ru" } = Astro.props;
+const t = translations[lang]?.showPage || translations.ru.showPage;
 
 // Balanced aspect ratios for a clean, aligned mosaic
 const mosaicAspectsRow1 = [
@@ -34,6 +35,12 @@ const row2Base = [
 
 const row1Items = [...gallery, ...gallery, ...gallery, ...gallery];
 const row2Items = [...row2Base, ...row2Base, ...row2Base, ...row2Base];
+
+function getAltText(index: number) {
+  if (lang === 'fi') return `Kuva esityksestä #${index + 1}`;
+  if (lang === 'en') return `Show photo #${index + 1}`;
+  return `Кадр со спектакля #${index + 1}`;
+}
 ---
 
 <section
@@ -89,7 +96,7 @@ const row2Items = [...row2Base, ...row2Base, ...row2Base, ...row2Base];
                 >
                   <img
                     src={item.src}
-                    alt={`Кадр со спектакля #${uniqueIndex + 1}`}
+                    alt={getAltText(uniqueIndex)}
                     class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                     draggable="false"
@@ -138,7 +145,7 @@ const row2Items = [...row2Base, ...row2Base, ...row2Base, ...row2Base];
                 >
                   <img
                     src={item.src}
-                    alt={`Кадр со спектакля #${uniqueIndex + 1}`}
+                    alt={getAltText(uniqueIndex)}
                     class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                     draggable="false"
@@ -181,7 +188,7 @@ const row2Items = [...row2Base, ...row2Base, ...row2Base, ...row2Base];
             <div class="w-full overflow-hidden relative bg-granite/5">
               <img
                 src={item.src}
-                alt={`Кадр со спектакля #${idx + 1}`}
+                alt={getAltText(idx)}
                 class="w-full h-auto object-cover block transition-transform duration-700 ease-out group-hover:scale-104"
                 loading="lazy"
               />

@@ -159,25 +159,59 @@ export const showGalleries: Record<string, GalleryItem[]> = {
   ]
 };
 
-export const showDirectors: Record<string, { name: string; role: string; quote: string }> = {
+export const showDirectors: Record<string, Record<Language, { name: string; role: string; quote: string }>> = {
   'novecento': {
-    name: 'Аквиле Рузгите',
-    role: 'Режиссер-постановщик',
-    quote: '«Мы искали язык, на котором можно рассказать о человеке, который выбрал бесконечность внутри клавиш вместо бесконечности внешнего мира»'
+    ru: {
+      name: 'Аквиле Рузгите',
+      role: 'Режиссер-постановщик',
+      quote: '«Мы искали язык, на котором можно рассказать о человеке, который выбрал бесконечность внутри клавиш вместо бесконечности внешнего мира»'
+    },
+    fi: {
+      name: 'Akvile Ruzgytė',
+      role: 'Ohjaaja',
+      quote: '”Etsimme kieltä kertoaksemme ihmisestä, joka valitsi äärettömyyden pianon koskettimien sisällä ulkomaailman äärettömyyden sijaan”'
+    },
+    en: {
+      name: 'Akvile Ruzgytė',
+      role: 'Stage Director',
+      quote: '“We searched for a language to tell the story of a man who chose infinity within piano keys instead of the infinity of the outside world”'
+    }
   }
 };
 
-export const showCast: Record<string, CastMember[]> = {
-  'novecento': [
-    { name: 'Сергей Сивульский', role: 'Трубач' },
-    { name: 'Виталий Лайдинен', role: 'Пианист, Новеченто' },
-    { name: 'Наталья Силевиц', role: 'Американская дама, танцовщица' },
-    { name: 'Ольга Хилтунен', role: 'Голос небес' },
-    { name: 'Анастасия Угрюмова-Техников', role: 'Танцовщица, хореограф (DanceSport Studio)' },
-    { name: 'Александр Казаков & Кирило Петунин', role: 'Художники по свету и звуку' },
-    { name: 'Анна Веселова & Дарья Волкова', role: 'Сценография и костюмы' },
-    { name: 'Адриана Иванова, Анна Веселова, Дарья Волкова', role: 'Маркетинг и координация' }
-  ]
+export const showCast: Record<string, Record<Language, CastMember[]>> = {
+  'novecento': {
+    ru: [
+      { name: 'Сергей Сивульский', role: 'Трубач' },
+      { name: 'Виталий Лайдинен', role: 'Пианист, Новеченто' },
+      { name: 'Наталья Силевиц', role: 'Американская дама, танцовщица' },
+      { name: 'Ольга Хилтунен', role: 'Голос небес' },
+      { name: 'Анастасия Угрюмова-Техников', role: 'Танцовщица, хореограф (DanceSport Studio)' },
+      { name: 'Александр Казаков & Кирило Петунин', role: 'Художники по свету и звуку' },
+      { name: 'Анна Веселова & Дарья Волкова', role: 'Сценография и костюмы' },
+      { name: 'Адриана Иванова, Анна Веселова, Дарья Волкова', role: 'Маркетинг и координация' }
+    ],
+    fi: [
+      { name: 'Sergei Sivulski', role: 'Trumpetisti' },
+      { name: 'Vitali Laidinen', role: 'Pianisti, Novecento' },
+      { name: 'Natalia Silevits', role: 'Amerikkalainen nainen, tanssija' },
+      { name: 'Olga Hiltunen', role: 'Taivaan ääni' },
+      { name: 'Anastasia Ugrjumova-Tehnikov', role: 'Tanssija, koreografi (DanceSport Studio)' },
+      { name: 'Aleksandr Kazakov & Kirilo Petunin', role: 'Valo- ja äänisuunnittelijat' },
+      { name: 'Anna Veselova & Daria Volkova', role: 'Lavastus ja puvustus' },
+      { name: 'Adriana Ivanova, Anna Veselova, Daria Volkova', role: 'Markkinointi ja koordinointi' }
+    ],
+    en: [
+      { name: 'Sergei Sivulski', role: 'Trumpeter' },
+      { name: 'Vitaly Laidinen', role: 'Pianist, Novecento' },
+      { name: 'Natalia Silevits', role: 'American Lady, Dancer' },
+      { name: 'Olga Hiltunen', role: 'Voice of Heaven' },
+      { name: 'Anastasia Ugryumova-Tehnikov', role: 'Dancer, Choreographer (DanceSport Studio)' },
+      { name: 'Aleksandr Kazakov & Kirilo Petunin', role: 'Light & Sound Designers' },
+      { name: 'Anna Veselova & Daria Volkova', role: 'Set & Costume Design' },
+      { name: 'Adriana Ivanova, Anna Veselova, Daria Volkova', role: 'Marketing & Coordination' }
+    ]
+  }
 };
 
 export const showReviews: Record<string, Record<Language, Review[]>> = {
@@ -467,8 +501,8 @@ export function getShows(lang: Language = 'ru'): Show[] {
     dateIso: showPosters[id]?.dateIso,
     expiresAt: showPosters[id]?.expiresAt,
     gallery: showGalleries[id] || showGalleries['novecento'],
-    director: showDirectors[id] || showDirectors['novecento'],
-    cast: showCast[id] || showCast['novecento'],
+    director: showDirectors[id]?.[lang] || showDirectors[id]?.ru || showDirectors['novecento']?.[lang] || showDirectors['novecento']?.ru,
+    cast: showCast[id]?.[lang] || showCast[id]?.ru || showCast['novecento']?.[lang] || showCast['novecento']?.ru,
     reviews: (showReviews[id] && showReviews[id][lang]) || showReviews['novecento']?.[lang] || showReviews['novecento']?.ru || [],
     ...data
   }));

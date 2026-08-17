@@ -9,6 +9,14 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://teatterilogrus.fi',
   adapter: vercel(),
+  i18n: {
+    defaultLocale: 'ru',
+    locales: ['ru', 'fi', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
   build: {
     inlineStylesheets: 'always',
   },

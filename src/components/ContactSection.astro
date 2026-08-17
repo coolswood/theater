@@ -1,6 +1,12 @@
 ---
-import { translations } from "../data/translations";
-const t = translations.ru.contacts;
+import { translations, type Language } from "../data/translations";
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = translations[lang]?.contacts || translations.ru.contacts;
 ---
 
 <section

@@ -1,13 +1,14 @@
 ---
 import type { Show } from "../data/shows";
-import { translations } from "../data/translations";
+import { translations, type Language } from "../data/translations";
 
 interface Props {
   show: Show;
+  lang?: Language;
 }
 
-const { show } = Astro.props;
-const t = translations.ru.showPage;
+const { show, lang = "ru" } = Astro.props;
+const t = translations[lang]?.showPage || translations.ru.showPage;
 ---
 
 <div

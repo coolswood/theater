@@ -1,13 +1,14 @@
 ---
 import type { Show } from "../data/shows";
-import { translations } from "../data/translations";
+import { translations, type Language } from "../data/translations";
 
 interface Props {
   show: Show;
+  lang?: Language;
 }
 
-const { show } = Astro.props;
-const t = translations.ru.showPage;
+const { show, lang = "ru" } = Astro.props;
+const t = translations[lang]?.showPage || translations.ru.showPage;
 
 function getInitials(name: string) {
   return name
@@ -111,7 +112,7 @@ function getInitials(name: string) {
         ) : (
           <div class="p-8 rounded-3xl bg-white border border-rule text-center">
             <p class="text-sm text-mute font-sans">
-              Информация о составе обновляется.
+              {lang === 'fi' ? 'Kokoonpanotietoja päivitetään.' : (lang === 'en' ? 'Cast information is being updated.' : 'Информация о составе обновляется.')}
             </p>
           </div>
         )

@@ -1,10 +1,24 @@
 ---
 import { getCentralCourse, getCourseSlides } from "../data/courses";
-import { translations } from "../data/translations";
+import { translations, type Language } from "../data/translations";
 
-const t = translations.ru.courses;
-const centralCourse = getCentralCourse("ru");
-const courseSlides = getCourseSlides("ru");
+interface Props {
+  lang?: Language;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = translations[lang]?.courses || translations.ru.courses;
+const centralCourse = getCentralCourse(lang);
+const courseSlides = getCourseSlides(lang);
+
+const targetAudienceLabel = lang === 'fi' ? 'Kenelle kurssi on suunnattu' : (lang === 'en' ? 'Target Audience' : 'Для кого этот курс');
+const trialPriceLabel = lang === 'fi' ? 'Kuukausimaksu — 35 € / kk' : (lang === 'en' ? 'Tuition fee — 35 € / month' : 'Стоимость участия — 35 € в месяц');
+const phoneLabel = lang === 'fi' ? 'Puhelin / WhatsApp' : (lang === 'en' ? 'Phone / WhatsApp' : 'Телефон / WhatsApp');
+const locationLabel = lang === 'fi' ? 'Sijainti' : (lang === 'en' ? 'Location' : 'Локация');
+const zoomTitle = lang === 'fi' ? 'Suurenna kuva' : (lang === 'en' ? 'Enlarge photo' : 'Увеличить фото');
+const prevPhotoLabel = lang === 'fi' ? 'Edellinen kuva' : (lang === 'en' ? 'Previous photo' : 'Предыдущее фото');
+const nextPhotoLabel = lang === 'fi' ? 'Seuraava kuva' : (lang === 'en' ? 'Next photo' : 'Следующее фото');
+const defaultEmailSubject = lang === 'fi' ? 'Ilmoittautuminen kurssille' : (lang === 'en' ? 'Course Enrollment' : 'Запись на курс');
 ---
 
 <section
@@ -108,8 +122,9 @@ const courseSlides = getCourseSlides("ru");
               <button
                 id="showcase-zoom-btn"
                 type="button"
-                class="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-granite/70 backdrop-blur-md text-white flex items-center justify-center hover:bg-suomi transition-all duration-300 shadow-md"
-                title="Увеличить фото"
+                class="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-granite/70 backdrop-blur-md text-white flex items-center justify-center hover:bg-suomi transition-all duration-300 shadow-md cursor-pointer"
+                title={zoomTitle}
+                aria-label={zoomTitle}
               >
                 <svg
                   class="w-4 h-4 shrink-0"
@@ -150,8 +165,8 @@ const courseSlides = getCourseSlides("ru");
                 <div class="flex items-center gap-2 shrink-0 pt-1">
                   <button
                     id="slider-prev"
-                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-rule bg-snow text-granite flex items-center justify-center hover:bg-suomi hover:text-white transition-all shadow-sm"
-                    aria-label="Предыдущее фото"
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-rule bg-snow text-granite flex items-center justify-center hover:bg-suomi hover:text-white transition-all shadow-sm cursor-pointer"
+                    aria-label={prevPhotoLabel}
                   >
                     <svg
                       class="w-3.5 h-3.5 shrink-0"
@@ -165,8 +180,8 @@ const courseSlides = getCourseSlides("ru");
                   </button>
                   <button
                     id="slider-next"
-                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-rule bg-snow text-granite flex items-center justify-center hover:bg-suomi hover:text-white transition-all shadow-sm"
-                    aria-label="Следующее фото"
+                    class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-rule bg-snow text-granite flex items-center justify-center hover:bg-suomi hover:text-white transition-all shadow-sm cursor-pointer"
+                    aria-label={nextPhotoLabel}
                   >
                     <svg
                       class="w-3.5 h-3.5 shrink-0"
@@ -203,7 +218,7 @@ const courseSlides = getCourseSlides("ru");
                     courseSlides.map((slide, index) => (
                       <button
                         type="button"
-                        class="thumb-item shrink-0 w-14 h-14 sm:w-18 sm:h-18 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-300 relative group/thumb focus:outline-none"
+                        class="thumb-item shrink-0 w-14 h-14 sm:w-18 sm:h-18 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-300 relative group/thumb focus:outline-none cursor-pointer"
                         data-index={index}
                         title={slide.title}
                       >
@@ -259,7 +274,7 @@ const courseSlides = getCourseSlides("ru");
             >
               <span
                 class="font-sans text-xs uppercase tracking-[0.2em] text-suomi font-bold block"
-                >Для кого этот курс</span
+                >{targetAudienceLabel}</span
               >
               <p
                 class="text-sm sm:text-base text-granite/90 font-light leading-relaxed"
@@ -288,7 +303,7 @@ const courseSlides = getCourseSlides("ru");
               <p
                 class="font-sans text-xs sm:text-sm text-suomisoft/90 font-medium"
               >
-                Стоимость участия — 35 € в месяц
+                {trialPriceLabel}
               </p>
             </div>
           </div>
@@ -321,7 +336,7 @@ const courseSlides = getCourseSlides("ru");
                 <div>
                   <span
                     class="text-suomi uppercase tracking-[0.2em] font-bold text-[10px] sm:text-xs block mb-0.5"
-                    >Телефон / WhatsApp</span
+                    >{phoneLabel}</span
                   >
                   <a
                     href={`tel:${centralCourse.phone.replace(/\s+/g, "")}`}
@@ -401,7 +416,7 @@ const courseSlides = getCourseSlides("ru");
                 <div>
                   <span
                     class="text-suomi uppercase tracking-[0.2em] font-bold text-[10px] sm:text-xs block mb-0.5"
-                    >Локация</span
+                    >{locationLabel}</span
                   >
                   <span
                     class="font-nordic font-bold text-sm sm:text-base text-granite block leading-snug"
@@ -418,7 +433,7 @@ const courseSlides = getCourseSlides("ru");
           <div>
             <a
               id="course-enroll-btn"
-              href={`mailto:${centralCourse.email}?subject=${encodeURIComponent("Запись на курс")}`}
+              href={`mailto:${centralCourse.email}?subject=${encodeURIComponent(defaultEmailSubject)}`}
               class="w-full btn-suomi font-nordic text-xs sm:text-sm tracking-wider uppercase font-semibold py-4.5 sm:py-5 px-6 rounded-full inline-flex items-center justify-center gap-3 group shadow-xl text-center cursor-pointer"
             >
               <span data-i18n="courses.enrollBtn">{t.enrollBtn}</span>
@@ -444,7 +459,8 @@ const courseSlides = getCourseSlides("ru");
     >
       <button
         id="lightbox-close"
-        class="absolute top-6 right-6 text-white text-3xl hover:text-suomisoft transition"
+        class="absolute top-6 right-6 text-white text-3xl hover:text-suomisoft transition cursor-pointer"
+        aria-label="Close"
         >✕</button
       >
       <div class="max-w-4xl max-h-[85vh] relative">
@@ -467,11 +483,11 @@ const courseSlides = getCourseSlides("ru");
 <!-- CAROUSEL SCRIPT -->
 <script>
   import { getCourseSlides } from "../data/courses";
-  import { translations, type Language } from "../data/translations";
+  import type { Language } from "../data/translations";
 
   function initCoursesCarousel() {
     let currentLang: Language =
-      (localStorage.getItem("logrus_lang") as Language) || "ru";
+      (document.documentElement.lang as Language) || "ru";
     let currentSlides = getCourseSlides(currentLang);
     let currentIndex = 0;
 
@@ -498,7 +514,7 @@ const courseSlides = getCourseSlides("ru");
       const subjects: Record<Language, string> = {
         ru: "Запись на курс",
         fi: "Ilmoittautuminen kurssille",
-        en: "Enrollment in the course",
+        en: "Course Enrollment",
       };
       const subject = encodeURIComponent(subjects[lang] || subjects.ru);
       enrollBtn.href = `mailto:info@logrus.fi?subject=${subject}`;
@@ -519,7 +535,7 @@ const courseSlides = getCourseSlides("ru");
         if (showcaseLocation) showcaseLocation.textContent = data.location;
         if (showcaseTitle) showcaseTitle.textContent = data.title;
         if (showcaseSubtitle) showcaseSubtitle.textContent = data.subtitle;
-        if (showcaseQuote) showcaseQuote.textContent = data.quote;
+        if (showcaseQuote) showcaseQuote.textContent = data.quote || '';
         if (currentNumEl) currentNumEl.textContent = `0${currentIndex + 1}`;
         if (progressEl)
           progressEl.style.width = `${((currentIndex + 1) / totalSlides) * 100}%`;
@@ -538,12 +554,6 @@ const courseSlides = getCourseSlides("ru");
         }
       });
     }
-
-    window.addEventListener("languageChange", ((e: CustomEvent) => {
-      currentLang = e.detail.lang;
-      updateEnrollLink(currentLang);
-      goToSlide(currentIndex);
-    }) as EventListener);
 
     prevBtn?.addEventListener("click", () => goToSlide(currentIndex - 1));
     nextBtn?.addEventListener("click", () => goToSlide(currentIndex + 1));
@@ -615,5 +625,11 @@ const courseSlides = getCourseSlides("ru");
     goToSlide(0);
   }
 
-  document.addEventListener("DOMContentLoaded", initCoursesCarousel);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCoursesCarousel);
+  } else {
+    initCoursesCarousel();
+  }
+
+  document.addEventListener("astro:page-load", initCoursesCarousel);
 </script>

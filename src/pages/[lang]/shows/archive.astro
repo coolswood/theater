@@ -1,28 +1,42 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { getPastShows, getShows } from '../../data/shows';
-import { translations } from '../../data/translations';
-import { getLocalizedPath } from '../../utils/i18n';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getPastShows, getShows } from '../../../data/shows';
+import { translations, type Language } from '../../../data/translations';
+import { getLocalizedPath } from '../../../utils/i18n';
 import {
   getArchivePageMeta,
   getOrganizationSchema,
   getBreadcrumbsSchema,
   getArchiveSchema
-} from '../../utils/seo';
+} from '../../../utils/seo';
 
-const lang = 'ru';
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'fi' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: Language };
 const t = translations[lang]?.archive || translations.ru.archive!;
 const allPastShows = getPastShows(lang);
 const archiveShowsList = allPastShows.length > 0 ? allPastShows : getShows(lang);
 const meta = getArchivePageMeta(lang);
 
+const breadcrumbNames = {
+  fi: { home: 'Etusivu', archive: 'Esitysarkisto' },
+  en: { home: 'Home', archive: 'Show Archive' },
+  ru: { home: 'Главная', archive: 'Архив спектаклей' }
+};
+const bNames = breadcrumbNames[lang] || breadcrumbNames.ru;
+
 const archiveSchemas = [
   getOrganizationSchema(lang),
   getBreadcrumbsSchema([
-    { name: 'Главная', url: '/' },
-    { name: 'Архив спектаклей', url: '/shows/archive' }
+    { name: bNames.home, url: '/' },
+    { name: bNames.archive, url: '/shows/archive' }
   ], lang),
   getArchiveSchema(archiveShowsList, lang)
 ];
@@ -99,13 +113,13 @@ const backToAfishaUrl = getLocalizedPath('/#afisha', lang);
                     </span>
 
                     {show.duration && (
-                      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-granite font-sans text-xs font-medium border border-rule shadow-xs">
+                      <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-granite font-sans text-xs font-medium border border-rule shadow-xs">
                         <span>{show.duration}</span>
                       </span>
                     )}
 
                     {show.subtitles && (
-                      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-granite font-sans text-xs font-medium border border-rule shadow-xs">
+                      <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-granite font-sans text-xs font-medium border border-rule shadow-xs">
                         <span>{show.subtitles}</span>
                       </span>
                     )}
@@ -163,7 +177,7 @@ const backToAfishaUrl = getLocalizedPath('/#afisha', lang);
                     href={getLocalizedPath(`/shows/${show.id}#gallery`, lang)}
                     class="btn-outline font-nordic text-xs tracking-wider uppercase font-semibold px-5 py-3.5 rounded-full"
                   >
-                    {translations[lang]?.showPage?.galleryBtn || "Галерея снимков"}
+                    {translations[lang]?.showPage?.galleryBtn || (lang === 'fi' ? "Kuvagalleria" : "Photo Gallery")}
                   </a>
                 </div>
               </div>

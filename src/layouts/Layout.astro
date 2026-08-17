@@ -1,8 +1,9 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import "../styles/global.css";
-
+import type { Language } from '../data/translations';
 import { getOrganizationSchema, getCourseSchema } from '../utils/seo';
+import { getAlternateHreflangLinks } from '../utils/i18n';
 
 interface Props {
   title?: string;
@@ -12,26 +13,36 @@ interface Props {
   keywords?: string;
   canonicalUrl?: string;
   schema?: Record<string, any> | Record<string, any>[];
+  lang?: Language;
 }
 
 const {
+  lang = "ru",
   title = "Logrus Teatteri — Русскоязычный театр и курсы актерского мастерства в Хельсинки",
   description = "Камерный русскоязычный театр в Хельсинки на сцене Narri näyttämö (Sörnäisten rantatie 31). Спектакли, афиша, билеты, театральная студия и курсы актерского мастерства для взрослых в Хельсинки, Эспоо и Вантаа.",
   image = "/logo.png",
   type = "website",
   keywords = "русский театр хельсинки, театр хельсинки, курсы актерского мастерства хельсинки, актерские курсы эспоо, театральная студия вантаа, спектакли на русском хельсинки, афиша хельсинки, русский театр в финляндии, teatteri helsinki, venäjänkielinen teatteri, acting classes helsinki, logrus teatteri",
   canonicalUrl,
-  schema = [getOrganizationSchema(), getCourseSchema()],
+  schema = [getOrganizationSchema(lang), getCourseSchema(lang)],
 } = Astro.props;
 
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://teatterilogrus.fi';
 const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
 const structuredData = Array.isArray(schema) ? schema : [schema];
+const alternateHreflangs = getAlternateHreflangLinks(Astro.url.pathname, siteUrl);
+
+const localeMap: Record<Language, { current: string; alternates: string[] }> = {
+  ru: { current: 'ru_RU', alternates: ['fi_FI', 'en_US'] },
+  fi: { current: 'fi_FI', alternates: ['ru_RU', 'en_US'] },
+  en: { current: 'en_US', alternates: ['ru_RU', 'fi_FI'] }
+};
+const { current: currentLocale, alternates: alternateLocales } = localeMap[lang] || localeMap.ru;
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang={lang}>
   <head>
     <!-- Essential Meta Tags -->
     <meta charset="UTF-8" />
@@ -42,6 +53,14 @@ const structuredData = Array.isArray(schema) ? schema : [schema];
     <meta name="author" content="Logrus Teatteri" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href={canonical} />
+
+    <!-- Hreflang Multi-language Alternate Links for Search Engines -->
+    {
+      alternateHreflangs.map((link) => (
+        <link rel="alternate" hreflang={link.lang} href={link.href} />
+      ))
+    }
+
     <ClientRouter />
 
     <!-- Open Graph / Facebook -->
@@ -51,9 +70,12 @@ const structuredData = Array.isArray(schema) ? schema : [schema];
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:locale:alternate" content="fi_FI" />
-    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale" content={currentLocale} />
+    {
+      alternateLocales.map((loc) => (
+        <meta property="og:locale:alternate" content={loc} />
+      ))
+    }
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -133,8 +155,6 @@ const structuredData = Array.isArray(schema) ? schema : [schema];
     <slot />
 
     <script>
-      import { initClientI18n } from "../utils/i18n";
-
       function setupPage() {
         const io = new IntersectionObserver(
           (entries) => {
@@ -149,7 +169,6 @@ const structuredData = Array.isArray(schema) ? schema : [schema];
         );
 
         document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
-        initClientI18n();
 
         // Track page hit in Yandex.Metrika on view transitions
         if (typeof (window as any).ym === 'function') {

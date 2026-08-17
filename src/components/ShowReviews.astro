@@ -49,7 +49,7 @@ const reviews: Review[] = show.reviews || [];
       <button
         type="button"
         data-filter="all"
-        class="review-filter-btn active px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 bg-suomi text-white shadow-xs cursor-pointer"
+        class="review-filter-btn active px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 cursor-pointer"
       >
         <span data-i18n="showPage.reviewsFilterAll">{t.reviewsFilterAll}</span>
         <span class="ml-1 opacity-80" id="filter-count-all">({reviews.length})</span>
@@ -57,28 +57,28 @@ const reviews: Review[] = show.reviews || [];
       <button
         type="button"
         data-filter="emotions"
-        class="review-filter-btn px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 bg-white text-mute hover:text-granite border border-rule hover:border-suomi/40 cursor-pointer"
+        class="review-filter-btn px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 cursor-pointer"
       >
         <span data-i18n="showPage.reviewsFilterEmotions">{t.reviewsFilterEmotions}</span>
       </button>
       <button
         type="button"
         data-filter="acting"
-        class="review-filter-btn px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 bg-white text-mute hover:text-granite border border-rule hover:border-suomi/40 cursor-pointer"
+        class="review-filter-btn px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 cursor-pointer"
       >
         <span data-i18n="showPage.reviewsFilterActing">{t.reviewsFilterActing}</span>
       </button>
       <button
         type="button"
         data-filter="music"
-        class="review-filter-btn px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 bg-white text-mute hover:text-granite border border-rule hover:border-suomi/40 cursor-pointer"
+        class="review-filter-btn px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 cursor-pointer"
       >
         <span data-i18n="showPage.reviewsFilterMusic">{t.reviewsFilterMusic}</span>
       </button>
       <button
         type="button"
         data-filter="atmosphere"
-        class="review-filter-btn px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 bg-white text-mute hover:text-granite border border-rule hover:border-suomi/40 cursor-pointer"
+        class="review-filter-btn px-4 sm:px-5 py-2 rounded-full font-nordic text-xs tracking-wider uppercase font-semibold transition-all duration-200 cursor-pointer"
       >
         <span data-i18n="showPage.reviewsFilterAtmosphere">{t.reviewsFilterAtmosphere}</span>
       </button>
@@ -137,13 +137,15 @@ const reviews: Review[] = show.reviews || [];
                 </div>
               )}
 
-              <!-- Review Text Body with Collapsible Mechanism for Long Text -->
-              <div class="review-text-container mb-6 relative z-10">
-                <blockquote
-                  class={`review-text font-sans text-granite/90 text-sm sm:text-base leading-relaxed font-light ${rev.text.length > 200 ? "review-text-clamped" : ""}`}
+              <!-- Review Text Body with Smooth Expand Animation -->
+              <div class="mb-6 relative z-10">
+                <div
+                  class={`review-text-wrapper ${rev.text.length > 200 ? "is-clamped" : ""}`}
                 >
-                  «{rev.text}»
-                </blockquote>
+                  <blockquote class="review-text font-sans text-granite/90 text-sm sm:text-base leading-relaxed font-light">
+                    «{rev.text}»
+                  </blockquote>
+                </div>
                 {rev.text.length > 200 && (
                   <button
                     type="button"
@@ -191,17 +193,64 @@ const reviews: Review[] = show.reviews || [];
 </section>
 
 <style>
-  .review-text-clamped {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    position: relative;
+  /* Filter Category Chips Styling & State Management */
+  .review-filter-btn {
+    background-color: #ffffff;
+    color: #626b73;
+    border: 1px solid rgba(22, 25, 29, 0.12);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   }
-  .review-text-expanded {
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
+  .review-filter-btn:hover {
+    color: #16191d;
+    background-color: #f7f9fb;
+    border-color: rgba(0, 53, 128, 0.3);
+  }
+  .review-filter-btn.active {
+    background-color: #003580 !important;
+    color: #ffffff !important;
+    border-color: #003580 !important;
+    box-shadow: 0 4px 12px rgba(0, 53, 128, 0.25) !important;
+  }
+  .review-filter-btn.active:hover {
+    background-color: #002b66 !important;
+    color: #ffffff !important;
+    border-color: #002b66 !important;
+  }
+  .review-filter-btn.active span {
+    color: #ffffff !important;
+  }
+
+  /* Smooth Review Text Expansion Animation with Fade Gradient */
+  .review-text-wrapper {
+    position: relative;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .review-text-wrapper.is-clamped {
+    max-height: 100px;
+  }
+  .review-text-wrapper.is-clamped::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 42px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.98) 100%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+  }
+  .review-text-wrapper.is-expanded {
+    /* Height will transition dynamically to scrollHeight then 'none' */
+  }
+  .review-text-wrapper.is-expanded::after {
+    opacity: 0;
+  }
+
+  /* Toggle Icon Smooth Rotation */
+  .toggle-icon {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 </style>
 
@@ -209,17 +258,17 @@ const reviews: Review[] = show.reviews || [];
   import { translations, type Language } from '../data/translations';
 
   function setupReviews() {
-    // 1. EXPAND / COLLAPSE LONG REVIEWS
+    // 1. EXPAND / COLLAPSE LONG REVIEWS WITH SMOOTH ANIMATION
     document.querySelectorAll<HTMLButtonElement>('.review-toggle-btn').forEach((btn) => {
-      // Remove old event listener clone if re-running on navigation
       btn.replaceWith(btn.cloneNode(true));
     });
 
     document.querySelectorAll<HTMLButtonElement>('.review-toggle-btn').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const container = btn.closest('.review-text-container');
-        const textEl = container?.querySelector<HTMLElement>('.review-text');
+        const wrapper = btn.previousElementSibling as HTMLElement | null;
+        if (!wrapper) return;
+
         const label = btn.querySelector<HTMLElement>('.toggle-label');
         const icon = btn.querySelector<SVGElement>('.toggle-icon');
         const isExpanded = btn.getAttribute('data-expanded') === 'true';
@@ -230,8 +279,13 @@ const reviews: Review[] = show.reviews || [];
         const collapseText = langData.reviewsCollapseBtn || 'Свернуть';
 
         if (isExpanded) {
-          textEl?.classList.remove('review-text-expanded');
-          textEl?.classList.add('review-text-clamped');
+          // Animate collapse
+          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+          // Force layout reflow
+          wrapper.offsetHeight;
+          wrapper.style.maxHeight = '100px';
+          wrapper.classList.remove('is-expanded');
+          wrapper.classList.add('is-clamped');
           btn.setAttribute('data-expanded', 'false');
           if (label) {
             label.textContent = expandText;
@@ -239,14 +293,22 @@ const reviews: Review[] = show.reviews || [];
           }
           if (icon) icon.classList.remove('rotate-180');
         } else {
-          textEl?.classList.remove('review-text-clamped');
-          textEl?.classList.add('review-text-expanded');
+          // Animate expand
+          wrapper.classList.remove('is-clamped');
+          wrapper.classList.add('is-expanded');
+          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
           btn.setAttribute('data-expanded', 'true');
           if (label) {
             label.textContent = collapseText;
             label.setAttribute('data-i18n', 'showPage.reviewsCollapseBtn');
           }
           if (icon) icon.classList.add('rotate-180');
+
+          setTimeout(() => {
+            if (btn.getAttribute('data-expanded') === 'true') {
+              wrapper.style.maxHeight = 'none';
+            }
+          }, 450);
         }
       });
     });
@@ -261,12 +323,10 @@ const reviews: Review[] = show.reviews || [];
         const filter = btn.getAttribute('data-filter') || 'all';
 
         filterButtons.forEach((b) => {
-          b.classList.remove('bg-suomi', 'text-white', 'shadow-xs', 'active');
-          b.classList.add('bg-white', 'text-mute', 'border-rule');
+          b.classList.remove('active');
         });
 
-        btn.classList.add('bg-suomi', 'text-white', 'shadow-xs', 'active');
-        btn.classList.remove('bg-white', 'text-mute', 'border-rule');
+        btn.classList.add('active');
 
         let visibleCount = 0;
         cards.forEach((card) => {

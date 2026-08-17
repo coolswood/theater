@@ -32,18 +32,18 @@ export interface CentralCourse {
 }
 
 const slideImages: Record<string, string> = {
-  'slide-1': '/images/courses/lamparel-1.jpg',
-  'slide-2': '/images/courses/lamparel-2.jpg',
-  'slide-3': '/images/courses/lamparel-3.jpg',
-  'slide-4': '/images/courses/lamparel-4.jpg',
-  'slide-5': '/images/courses/lamparel-5.jpg'
+  'slide-1': '/images/courses/lamparel-1.webp',
+  'slide-2': '/images/courses/lamparel-2.webp',
+  'slide-3': '/images/courses/lamparel-3.webp',
+  'slide-4': '/images/courses/lamparel-4.webp',
+  'slide-5': '/images/courses/lamparel-5.webp'
 };
 
 export function getCourseSlides(lang: Language = 'ru'): CourseSlide[] {
   const slidesData = translations[lang]?.courses?.slides || translations.ru.courses.slides;
   return slidesData.map(slide => ({
     ...slide,
-    image: slideImages[slide.id] || '/images/courses/rehearsal-1.jpg'
+    image: slideImages[slide.id] || '/images/courses/rehearsal-1.webp'
   }));
 }
 

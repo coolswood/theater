@@ -81,77 +81,77 @@ export const showGalleries: Record<string, GalleryItem[]> = {
   'novecento': [
     {
       id: 'nov-1',
-      src: '/images/shows/novecento/novecento-1.jpg',
+      src: '/images/shows/novecento/novecento-1.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-2',
-      src: '/images/shows/novecento/novecento-2.jpg',
+      src: '/images/shows/novecento/novecento-2.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-3',
-      src: '/images/shows/novecento/novecento-3.jpg',
+      src: '/images/shows/novecento/novecento-3.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-4',
-      src: '/images/shows/novecento/novecento-4.jpg',
+      src: '/images/shows/novecento/novecento-4.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-5',
-      src: '/images/shows/novecento/novecento-5.jpg',
+      src: '/images/shows/novecento/novecento-5.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-6',
-      src: '/images/shows/novecento/novecento-6.jpg',
+      src: '/images/shows/novecento/novecento-6.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-7',
-      src: '/images/shows/novecento/novecento-7.jpg',
+      src: '/images/shows/novecento/novecento-7.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-8',
-      src: '/images/shows/novecento/novecento-8.jpg',
+      src: '/images/shows/novecento/novecento-8.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-9',
-      src: '/images/shows/novecento/novecento-9.jpg',
+      src: '/images/shows/novecento/novecento-9.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-10',
-      src: '/images/shows/novecento/novecento-10.jpg',
+      src: '/images/shows/novecento/novecento-10.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''
     },
     {
       id: 'nov-11',
-      src: '/images/shows/novecento/novecento-11.jpg',
+      src: '/images/shows/novecento/novecento-11.webp',
       caption: '',
       category: 'stage',
       categoryLabel: ''

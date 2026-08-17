@@ -44,6 +44,10 @@ const secondaryShows = featuredShow ? shows.filter((s) => s.id !== featuredShow.
                   src={featuredShow.poster}
                   alt={featuredShow.title}
                   class="poster w-full h-auto max-h-[75vh] object-contain rounded-xl shadow-sm"
+                  width="600"
+                  height="850"
+                  loading="eager"
+                  fetchpriority="high"
                 />
               </div>
 
@@ -208,6 +212,9 @@ const secondaryShows = featuredShow ? shows.filter((s) => s.id !== featuredShow.
                         src={show.poster}
                         alt={show.title}
                         class="poster w-full h-auto max-h-[400px] object-contain rounded-xl"
+                        width="400"
+                        height="560"
+                        loading="lazy"
                       />
                     </div>
                     <div class="md:w-7/12 p-4 sm:p-12 flex flex-col justify-between">

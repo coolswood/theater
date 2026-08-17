@@ -29,7 +29,7 @@ const archiveSchemas = [
 >
   <Header />
 
-  <main class="min-h-screen pb-24 sm:pb-36">
+  <main class="min-h-screen pb-24 sm:pb-36" transition:animate="fade">
     {/* Page Header */}
     <section class="pt-12 sm:pt-20 pb-10 sm:pb-16 px-4 sm:px-10 border-b border-rule bg-gradient-to-b from-snow via-snow2/40 to-snow">
       <div class="max-w-[1400px] mx-auto">
@@ -75,6 +75,9 @@ const archiveSchemas = [
                   src={show.poster}
                   alt={show.title}
                   class="w-full h-auto max-h-[480px] object-contain rounded-xl shadow-md transition-transform duration-500 group-hover:scale-[1.02]"
+                  width="400"
+                  height="560"
+                  loading="lazy"
                 />
               </div>
 

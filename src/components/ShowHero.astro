@@ -222,6 +222,10 @@ const premiereYear = show.dateIso ? new Date(show.dateIso).getFullYear() : CURRE
               src={show.poster}
               alt={show.title}
               class="w-full h-auto max-h-[65vh] object-contain rounded-xl transform transition-transform duration-700 group-hover:scale-102"
+              width="500"
+              height="700"
+              loading="eager"
+              fetchpriority="high"
             />
           </div>
           <div

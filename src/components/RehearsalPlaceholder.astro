@@ -360,22 +360,22 @@ const archiveUrl = getLocalizedPath('/shows/archive', lang);
   }
 
   /* ==================== REALISTIC GATHERING / ACCORDION MOTION ==================== */
-  #curtain-stage-container.curtain-opened .curtain-wing-left {
-    transform: translateX(-86%) scaleX(0.26) skewY(-2deg);
+  :global(#curtain-stage-container.curtain-opened) .curtain-wing-left {
+    transform: translateX(-86%) scaleX(0.26) skewY(-2deg) !important;
     filter: brightness(0.88);
   }
 
-  #curtain-stage-container.curtain-opened .curtain-wing-right {
-    transform: translateX(86%) scaleX(0.26) skewY(2deg);
+  :global(#curtain-stage-container.curtain-opened) .curtain-wing-right {
+    transform: translateX(86%) scaleX(0.26) skewY(2deg) !important;
     filter: brightness(0.88);
   }
 
   /* Tiebacks Movement when Opened */
-  #curtain-stage-container.curtain-opened #tieback-left {
-    transform: translateY(-50%) scale(1.1) rotate(-10deg);
+  :global(#curtain-stage-container.curtain-opened) #tieback-left {
+    transform: translateY(-50%) scale(1.1) rotate(-10deg) !important;
   }
-  #curtain-stage-container.curtain-opened #tieback-right {
-    transform: translateY(-50%) scale(1.1) rotate(10deg);
+  :global(#curtain-stage-container.curtain-opened) #tieback-right {
+    transform: translateY(-50%) scale(1.1) rotate(10deg) !important;
   }
 
   /* Gentle Curtain Breathing Ripple on Container Hover */
@@ -431,42 +431,47 @@ const archiveUrl = getLocalizedPath('/shows/archive', lang);
 <script>
   import { translations, type Language } from "../data/translations";
 
-  let isCurtainOpen = false;
-
   function initGrandCurtain() {
     const stage = document.getElementById("curtain-stage-container");
     const curtainHintText = document.getElementById("curtain-hint-text");
+    if (!stage) return;
 
     function getCurrentLang(): Language {
       return (document.documentElement.lang as Language) || "ru";
     }
 
-    function updateLabels() {
+    function updateLabels(isOpen: boolean) {
       const lang = getCurrentLang();
       const r = translations[lang]?.afisha?.rehearsal || translations.ru.afisha.rehearsal!;
 
-      if (isCurtainOpen) {
-        if (curtainHintText) curtainHintText.textContent = r.hintClose || "Нажмите, чтобы закрыть занавес";
+      if (curtainHintText) {
+        curtainHintText.textContent = isOpen
+          ? (r.hintClose || "Нажмите, чтобы закрыть занавес")
+          : (r.hintOpen || "Нажмите, чтобы открыть занавес");
+      }
+      stage?.setAttribute(
+        "title",
+        isOpen
+          ? (r.hintClose || "Нажмите, чтобы закрыть занавес")
+          : (r.hintOpen || "Нажмите, чтобы открыть занавес")
+      );
+    }
+
+    function toggleCurtain(e?: Event) {
+      if (e) e.preventDefault();
+      const willBeOpen = !stage?.classList.contains("curtain-opened");
+      if (willBeOpen) {
+        stage?.classList.add("curtain-opened");
       } else {
-        if (curtainHintText) curtainHintText.textContent = r.hintOpen || "Нажмите, чтобы открыть занавес";
+        stage?.classList.remove("curtain-opened");
       }
+      updateLabels(willBeOpen);
     }
 
-    function setCurtainState(open: boolean) {
-      isCurtainOpen = open;
-      if (stage) {
-        if (isCurtainOpen) {
-          stage.classList.add("curtain-opened");
-        } else {
-          stage.classList.remove("curtain-opened");
-        }
-      }
-      updateLabels();
-    }
+    // Direct onclick property prevents duplicate event listener stacking
+    stage.onclick = toggleCurtain;
 
-    stage?.addEventListener("click", () => setCurtainState(!isCurtainOpen));
-
-    updateLabels();
+    updateLabels(stage.classList.contains("curtain-opened"));
   }
 
   if (document.readyState === "loading") {

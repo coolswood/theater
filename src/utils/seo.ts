@@ -264,7 +264,8 @@ export function getTheaterEventSchema(show: Show, lang: Language = 'ru') {
     ? show.poster
     : `${SITE_URL}${show.poster.startsWith('/') ? '' : '/'}${show.poster}`;
 
-  const numericPrice = show.price ? show.price.replace(/[^0-9.,]/g, '').replace(',', '.') : undefined;
+  const priceMatch = show.price ? show.price.match(/\d+([.,]\d+)?/) : null;
+  const numericPrice = priceMatch ? priceMatch[0].replace(',', '.') : '25';
 
   const performers = show.cast && show.cast.length > 0
     ? show.cast.map((c) => ({
@@ -323,7 +324,7 @@ export function getTheaterEventSchema(show: Show, lang: Language = 'ru') {
     duration: show.duration ? (show.duration.includes('2') ? 'PT2H' : 'PT1H30M') : undefined,
     location: {
       '@type': 'PerformingArtsTheater',
-      name: show.stage || 'Narri näyttämö',
+      name: 'Narri näyttämö',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Sörnäisten rantatie 31',

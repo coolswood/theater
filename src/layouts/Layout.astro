@@ -96,25 +96,34 @@ const { current: currentLocale, alternates: alternateLocales } = localeMap[lang]
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preload Critical Local Fonts (Eliminates Google Fonts Render-Blocking & Font-Flash) -->
     <link
       rel="preload"
       as="font"
       type="font/woff2"
       crossorigin
-      href="https://fonts.gstatic.com/s/unbounded/v12/Yq6W-LOTXCb04q32xlpwu8ZfvRIkSQ.woff2"
+      href="/fonts/unbounded-cyrillic.woff2"
     />
     <link
       rel="preload"
       as="font"
       type="font/woff2"
       crossorigin
-      href="https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2"
+      href="/fonts/unbounded-latin.woff2"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="/fonts/plus-jakarta-sans-cyrillic.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="/fonts/plus-jakarta-sans-latin.woff2"
     />
 
     <!-- Schema.org JSON-LD Structured Data -->
@@ -128,16 +137,18 @@ const { current: currentLocale, alternates: alternateLocales } = localeMap[lang]
       ))
     }
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" is:inline defer>
-      (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111679649', 'ym');
+    <!-- Yandex.Metrika counter (non-blocking) -->
+    <script type="text/javascript" is:inline>
+      window.addEventListener('DOMContentLoaded', function() {
+        (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111679649', 'ym');
 
-      ym(111679649, 'init', {ssr:true, webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+        ym(111679649, 'init', {ssr:true, webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+      });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/111679649" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->

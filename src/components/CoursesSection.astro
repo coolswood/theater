@@ -111,6 +111,10 @@ const defaultEmailSubject = lang === 'fi' ? 'Ilmoittautuminen kurssille' : (lang
                 src={courseSlides[0].image}
                 alt={courseSlides[0].title}
                 class="w-full h-full object-cover transition-all duration-700 ease-out transform group-hover/frame:scale-105"
+                width="680"
+                height="425"
+                loading="lazy"
+                decoding="async"
               />
 
               <div
@@ -226,6 +230,10 @@ const defaultEmailSubject = lang === 'fi' ? 'Ilmoittautuminen kurssille' : (lang
                           src={slide.image}
                           alt={slide.title}
                           class="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-300"
+                          width="72"
+                          height="72"
+                          loading="lazy"
+                          decoding="async"
                         />
                         <div class="absolute inset-0 bg-granite/40 group-hover/thumb:bg-transparent transition-colors" />
                         <span class="absolute bottom-1 right-1 font-sans text-[9px] sm:text-[10px] font-bold text-white bg-granite/80 px-1 rounded">

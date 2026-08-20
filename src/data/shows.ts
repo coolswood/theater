@@ -67,7 +67,7 @@ const showPosters: Record<string, {
   expiresAt?: string;
 }> = {
   'novecento': {
-    poster: 'https://teatterilogrus.fi/wp-content/uploads/2026/07/fienta.jpg',
+    poster: '/images/shows/novecento/novecento-1.webp',
     isFeatured: true,
     number: '01',
     time: '19:00',

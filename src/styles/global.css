@@ -1,3 +1,4 @@
+@import "./fonts.css";
 @import "tailwindcss";
 
 @theme {
@@ -9,7 +10,7 @@
   --color-suomi: #003580;
   --color-suomidark: #00245a;
   --color-suomisoft: #e8f0fe;
-  --color-redru: #d63b3b;
+  --color-redru: #c52222;
   --color-birch: #f7f3ed;
 
   --font-nordic: 'Unbounded', sans-serif;
@@ -52,6 +53,7 @@ body {
   background-color: #f8f9fa;
   color: #16191d;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size-adjust: from-font;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -59,6 +61,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
   word-break: break-word;
+  font-size-adjust: from-font;
 }
 
 .bg-nordic-grid {

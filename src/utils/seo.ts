@@ -163,7 +163,7 @@ export function getOrganizationSchema(lang: Language = 'ru') {
     knowsLanguage: ['ru', 'fi', 'en'],
     priceRange: '€€',
     sameAs: [
-      'https://www.instagram.com/logrus_theatre/',
+      'https://www.instagram.com/teat.rus/',
       'https://fienta.com/o/logrus'
     ]
   };

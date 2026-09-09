@@ -32,6 +32,7 @@ export interface TranslationSchema {
     castingSubtitle?: string;
     castingDesc?: string;
     castingApplyBtn?: string;
+    castingUrl?: string;
   };
   afisha: {
     tag: string;
@@ -142,6 +143,9 @@ export interface TranslationSchema {
     cardTitle: string;
     addressTag: string;
     contactTag: string;
+    orgTag: string;
+    orgValue: string;
+    orgSub: string;
     socialsTag: string;
     mapTag: string;
     mapTitle: string;
@@ -153,6 +157,7 @@ export interface TranslationSchema {
   };
   footer: {
     copyright: string;
+    association: string;
     toTop: string;
   };
   showPage: {
@@ -272,12 +277,13 @@ export const translations: Record<Language, TranslationSchema> = {
       nextShowValue: '«Новеченто» · 13 Августа',
       noUpcomingBadge: 'Репертуар формируется',
       noUpcomingShows: 'Скоро новые анонсы',
-      castingTag: 'Кастинг // Открытый набор',
-      castingTitle: 'Ищем актёра',
-      castingRole: 'На роль гопника',
-      castingSubtitle: 'Если ты давно хотел попробовать себя на сцене — сейчас самое время.',
-      castingDesc: 'Ищем молодого парня в новую постановку театра «Логрус». Опыт не обязателен, но приветствуется!',
-      castingApplyBtn: 'Откликнуться на роль'
+      castingTag: 'Практика // TE-palvelut',
+      castingTitle: 'Ищем практиканта',
+      castingRole: 'Практика от TE-toimisto',
+      castingSubtitle: 'Официальная трудовая практика в сфере культуры и театра.',
+      castingDesc: 'Реальный сценический опыт в подготовке постановок, работе с костюмами и сценическим оборудованием (свет и звук) с получением официального подтверждения/сертификата.',
+      castingApplyBtn: 'Узнать подробнее',
+      castingUrl: 'https://www.logrus.fi/projects'
     },
     afisha: {
       tag: `Спектакли в Хельсинки // Сезон ${CURRENT_YEAR}`,
@@ -440,6 +446,9 @@ export const translations: Record<Language, TranslationSchema> = {
       cardTitle: 'Контакты',
       addressTag: 'Особые данные / Адрес',
       contactTag: 'Связь',
+      orgTag: 'Организация / Y-tunnus',
+      orgValue: 'Logrus ry · 2040144-2',
+      orgSub: 'Некоммерческая культурная ассоциация с 2006 года',
       socialsTag: 'Социальные сети',
       mapTag: 'Интерактивная карта',
       mapTitle: 'Как нас найти',
@@ -451,6 +460,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     footer: {
       copyright: `© ${CURRENT_YEAR} · Logrus Teatteri Helsinki · Русскоязычный театр в Финляндии`,
+      association: 'Театр «Логрус» действует при поддержке и на базе культурной ассоциации Logrus ry (Y-tunnus 2040144-2).',
       toTop: '↑ Наверх'
     },
     showPage: {
@@ -568,12 +578,13 @@ export const translations: Record<Language, TranslationSchema> = {
       nextShowValue: '«Novecento» · 13. Elokuuta',
       noUpcomingBadge: 'Ohjelmistoa valmistellaan',
       noUpcomingShows: 'Uusia esityksiä tulossa pian',
-      castingTag: 'Roolitus // Avoin haku',
-      castingTitle: 'Haemme näyttelijää',
-      castingRole: 'Katusällin rooliin',
-      castingSubtitle: 'Jos olet aina halunnut kokeilla siipiäsi näyttämöllä — nyt on oikea hetki.',
-      castingDesc: 'Etsimme nuorta miestä Logrus Teatterin uuteen tuotantoon. Kokemusta ei vaadita, mutta se katsotaan eduksi!',
-      castingApplyBtn: 'Hae rooliin'
+      castingTag: 'Harjoittelu // TE-palvelut',
+      castingTitle: 'Etsimme harjoittelijaa',
+      castingRole: 'Harjoittelu TE-toimiston kautta',
+      castingSubtitle: 'Virallinen työkokeilu ja harjoittelu kulttuuri- ja teatterialalla.',
+      castingDesc: 'Käytännön kokemusta esitysten valmistelusta, puvustuksesta sekä näyttämötekniikasta virallisella työtodistuksella.',
+      castingApplyBtn: 'Lue lisää ja hae',
+      castingUrl: 'https://www.logrus.fi/fi/projects'
     },
     afisha: {
       tag: `Tulevat esitykset // Lokakuu ${CURRENT_YEAR}`,
@@ -736,6 +747,9 @@ export const translations: Record<Language, TranslationSchema> = {
       cardTitle: 'Yhteystiedot',
       addressTag: 'Osoite',
       contactTag: 'Yhteydenotot',
+      orgTag: 'Yhdistys & Y-tunnus',
+      orgValue: 'Logrus ry · 2040144-2',
+      orgSub: 'Rekisteröity kulttuuriyhdistys vuodesta 2006',
       socialsTag: 'Sosiaalinen media',
       mapTag: 'Interaktiivinen kartta',
       mapTitle: 'Kuinka löydät meidät',
@@ -747,6 +761,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     footer: {
       copyright: `© ${CURRENT_YEAR} · Logrus Teatteri Helsinki · Suomalais-venäläinen näyttämö`,
+      association: 'Teatteri Logrus on rekisteröidyn kulttuuriyhdistys Logrus ry:n (Y-tunnus 2040144-2) toimintamuoto vuodesta 2006.',
       toTop: '↑ Takaisin ylös'
     },
     showPage: {
@@ -864,12 +879,13 @@ export const translations: Record<Language, TranslationSchema> = {
       nextShowValue: '«Novecento» · August 13',
       noUpcomingBadge: 'Repertoire in preparation',
       noUpcomingShows: 'New shows coming soon',
-      castingTag: 'Casting // Open Call',
-      castingTitle: 'Looking for an Actor',
-      castingRole: 'Street Guy / Gopnik Role',
-      castingSubtitle: 'If you ever wanted to try yourself on stage — now is the time.',
-      castingDesc: 'We are looking for a young male actor for our new Logrus Teatteri production. Prior experience is not required but welcome!',
-      castingApplyBtn: 'Apply for Role'
+      castingTag: 'Internship // TE Services',
+      castingTitle: 'Looking for an Intern',
+      castingRole: 'Internship via TE Office',
+      castingSubtitle: 'Official work trial and internship in the cultural and theater sector.',
+      castingDesc: 'Hands-on experience in production preparation, costuming, and stage technology with an official certificate.',
+      castingApplyBtn: 'Learn More & Apply',
+      castingUrl: 'https://www.logrus.fi/en/projects'
     },
     afisha: {
       tag: `Upcoming Shows // October ${CURRENT_YEAR}`,
@@ -1032,6 +1048,9 @@ export const translations: Record<Language, TranslationSchema> = {
       cardTitle: 'Contacts',
       addressTag: 'Address',
       contactTag: 'Contact',
+      orgTag: 'Association & Business ID',
+      orgValue: 'Logrus ry · 2040144-2',
+      orgSub: 'Registered non-profit cultural association since 2006',
       socialsTag: 'Social Media',
       mapTag: 'Interactive Map',
       mapTitle: 'How to Find Us',
@@ -1043,6 +1062,7 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     footer: {
       copyright: `© ${CURRENT_YEAR} · Logrus Teatteri Helsinki · Finnish-Russian Stage`,
+      association: 'Teatteri Logrus is a cultural project of the non-profit association Logrus ry (Business ID 2040144-2).',
       toTop: '↑ Back to top'
     },
     showPage: {

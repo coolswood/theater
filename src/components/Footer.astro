@@ -10,33 +10,75 @@ const t = translations[lang]?.footer || translations.ru.footer;
 ---
 
 <footer class="border-t border-rule py-8 sm:py-12 bg-snow2/30">
-  <div
-    class="max-w-[1400px] mx-auto px-3 sm:px-10 flex flex-col sm:flex-row items-center justify-between gap-6"
-  >
+  <div class="max-w-[1400px] mx-auto px-3 sm:px-10 flex flex-col gap-6">
     <div
-      class="font-nordic text-lg font-bold tracking-tight text-granite flex items-center gap-2.5"
+      class="flex flex-col sm:flex-row items-center justify-between gap-6"
     >
-      <img
-        src="/logo-96.webp"
-        alt="Logrus Logo"
-        class="h-8 w-8 object-contain shrink-0"
-        width="32"
-        height="32"
-        loading="lazy"
-        decoding="async"
-      />
-      Logrus Teatteri
+      <div
+        class="font-nordic text-lg font-bold tracking-tight text-granite flex items-center gap-2.5"
+      >
+        <img
+          src="/logo-96.webp"
+          alt="Logrus Logo"
+          class="h-8 w-8 object-contain shrink-0"
+          width="32"
+          height="32"
+          loading="lazy"
+          decoding="async"
+        />
+        Logrus Teatteri
+      </div>
+      <p
+        class="font-sans text-mute text-xs text-center sm:text-left"
+        data-i18n="footer.copyright"
+      >
+        {t.copyright}
+      </p>
+      <div class="flex items-center gap-5 shrink-0">
+        <a
+          href="https://www.instagram.com/teat.rus/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-sans text-mute hover:text-granite text-xs inline-flex items-center gap-1.5 transition"
+          aria-label="Instagram @teat.rus"
+        >
+          <svg
+            class="w-3.5 h-3.5 text-suomi shrink-0"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          <span>Instagram</span>
+        </a>
+        <a
+          href="#top"
+          class="font-sans text-mute hover:text-suomi text-xs uppercase tracking-[0.2em] transition"
+          data-i18n="footer.toTop">{t.toTop}</a
+        >
+      </div>
     </div>
-    <p
-      class="font-sans text-mute text-xs text-center sm:text-left"
-      data-i18n="footer.copyright"
+
+    <div
+      class="border-t border-rule/60 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left"
     >
-      {t.copyright}
-    </p>
-    <a
-      href="#top"
-      class="font-sans text-mute hover:text-suomi text-xs uppercase tracking-[0.2em] transition"
-      data-i18n="footer.toTop">{t.toTop}</a
-    >
+      <p
+        class="font-sans text-mute text-xs max-w-3xl leading-relaxed"
+        data-i18n="footer.association"
+      >
+        {t.association}
+      </p>
+      <span
+        class="inline-flex items-center px-2.5 py-1 rounded-md bg-white/80 border border-rule font-mono text-[11px] text-mute shrink-0 tracking-wider shadow-2xs"
+      >
+        Y-tunnus: 2040144-2
+      </span>
+    </div>
   </div>
 </footer>

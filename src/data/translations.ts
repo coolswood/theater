@@ -33,6 +33,20 @@ export interface TranslationSchema {
     castingDesc?: string;
     castingApplyBtn?: string;
     castingUrl?: string;
+    vacancy?: {
+      tag: string;
+      titlePrefix: string;
+      titleHighlight: string;
+      role: string;
+      intro: string;
+      invite: string;
+      note: string;
+      signoff: string;
+      contactLabel: string;
+      applyBtn: string;
+      phone: string;
+      email: string;
+    };
   };
   afisha: {
     tag: string;
@@ -283,7 +297,21 @@ export const translations: Record<Language, TranslationSchema> = {
       castingSubtitle: 'Официальная трудовая практика в сфере культуры и театра.',
       castingDesc: 'Реальный сценический опыт в подготовке постановок, работе с костюмами и сценическим оборудованием (свет и звук) с получением официального подтверждения/сертификата.',
       castingApplyBtn: 'Узнать подробнее',
-      castingUrl: 'https://www.logrus.fi/projects'
+      castingUrl: 'https://www.logrus.fi/projects',
+      vacancy: {
+        tag: 'Вакансия // Команда',
+        titlePrefix: 'ИЩЕМ',
+        titleHighlight: 'СЦЕНОГРАФА',
+        role: 'Сценография · Декорации · Реквизит',
+        intro: 'Приглашаем в нашу команду творческого и мотивированного человека, которому интересно работать над созданием сценического пространства, декораций и реквизита для новой современной драматической постановки на русском языке.',
+        invite: 'Если вам близок театр и хочется воплотить свои идеи на сцене — будем рады знакомству!',
+        note: 'Опыт приветствуется, но не обязателен. Главное — интерес, желание творить и работать вместе!',
+        signoff: 'Ждём вас в Театре Logrus!',
+        contactLabel: 'СВЯЗЬ:',
+        applyBtn: 'Откликнуться на вакансию',
+        phone: '045 2656332',
+        email: 'info@logrus.fi'
+      }
     },
     afisha: {
       tag: `Спектакли в Хельсинки // Сезон ${CURRENT_YEAR}`,
@@ -584,7 +612,21 @@ export const translations: Record<Language, TranslationSchema> = {
       castingSubtitle: 'Virallinen työkokeilu ja harjoittelu kulttuuri- ja teatterialalla.',
       castingDesc: 'Käytännön kokemusta esitysten valmistelusta, puvustuksesta sekä näyttämötekniikasta virallisella työtodistuksella.',
       castingApplyBtn: 'Lue lisää ja hae',
-      castingUrl: 'https://www.logrus.fi/fi/projects'
+      castingUrl: 'https://www.logrus.fi/fi/projects',
+      vacancy: {
+        tag: 'Avoin haku // Tiimiin',
+        titlePrefix: 'ETSIMME',
+        titleHighlight: 'LAVASTAJAA',
+        role: 'Näyttämötila · Lavastus · Rekvisiitta',
+        intro: 'Kutsumme tiimiimme luovan ja motivoituneen tekijän, joka on kiinnostunut näyttämötilan, lavastuksen ja rekvisiitan luomisesta uuteen venäjänkieliseen nykydraamatuotantoon.',
+        invite: 'Jos teatteri on lähellä sydäntäsi ja haluat toteuttaa ideoitasi näyttämöllä — olemme iloisia voidessamme tutustua!',
+        note: 'Kokemus katsotaan eduksi, mutta ei ole välttämätöntä. Tärkeintä on kiinnostus, luomisen palo ja halu tehdä työtä yhdessä!',
+        signoff: 'Odotamme sinua Logrus Teatteriin!',
+        contactLabel: 'YHTEYDENOTTO:',
+        applyBtn: 'Hae tehtävään',
+        phone: '045 2656332',
+        email: 'info@logrus.fi'
+      }
     },
     afisha: {
       tag: `Tulevat esitykset // Lokakuu ${CURRENT_YEAR}`,
@@ -885,7 +927,21 @@ export const translations: Record<Language, TranslationSchema> = {
       castingSubtitle: 'Official work trial and internship in the cultural and theater sector.',
       castingDesc: 'Hands-on experience in production preparation, costuming, and stage technology with an official certificate.',
       castingApplyBtn: 'Learn More & Apply',
-      castingUrl: 'https://www.logrus.fi/en/projects'
+      castingUrl: 'https://www.logrus.fi/en/projects',
+      vacancy: {
+        tag: 'Open Call // Team',
+        titlePrefix: 'LOOKING FOR A',
+        titleHighlight: 'SCENOGRAPHER',
+        role: 'Stage Space · Set Design · Props',
+        intro: 'We invite a creative and motivated person to our team who is interested in designing stage spaces, sets, and props for a new contemporary drama production in Russian.',
+        invite: 'If theater inspires you and you want to bring your ideas to life on stage — we would be thrilled to meet you!',
+        note: 'Experience is welcome, but not required. What matters most is passion, curiosity, and teamwork!',
+        signoff: 'We look forward to welcoming you to Logrus Teatteri!',
+        contactLabel: 'CONTACT:',
+        applyBtn: 'Apply for Position',
+        phone: '045 2656332',
+        email: 'info@logrus.fi'
+      }
     },
     afisha: {
       tag: `Upcoming Shows // October ${CURRENT_YEAR}`,
